@@ -226,7 +226,7 @@ export default function AnalyticsPage() {
           </motion.div>
 
           {/* Tab container */}
-          <div className="rounded-3xl overflow-hidden" style={{ backgroundColor: "#dde4f0" }}>
+          <div className="rounded-2xl overflow-hidden bg-highlight">
             {/* Tab bar */}
             <div className="flex justify-center pt-8 pb-6 px-6">
               <div className="inline-flex bg-white rounded-full p-1 gap-1 shadow-sm">
@@ -507,7 +507,7 @@ export default function AnalyticsPage() {
       </section>
 
       {/* ════════ STATS BAR ════════ */}
-      <section ref={statsRef} className="py-12" style={{ backgroundColor: "#dde4f0" }}>
+      <section ref={statsRef} className="py-16 bg-highlight">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => (

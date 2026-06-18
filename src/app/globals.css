@@ -17,6 +17,7 @@
   --color-accent:       #f97316;   /* orange-500 — hover accents */
   --color-section:      #f0f0f0;   /* light gray — section backgrounds */
   --color-card:         #ffffff;   /* white cards */
+  --color-highlight:    #dde4f0;   /* blue-tinted light — stats/newsletter bg */
 }
 
 @media (prefers-color-scheme: dark) {

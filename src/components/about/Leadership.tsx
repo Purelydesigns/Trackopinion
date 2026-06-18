@@ -73,11 +73,7 @@ export default function Leadership() {
                   <motion.div
                     whileHover={{ y: -6 }}
                     transition={{ duration: 0.3 }}
-                    className="rounded-2xl overflow-hidden"
-                    style={{
-                      backgroundColor: "#0d1b3e",
-                      boxShadow: "0 4px 16px rgba(13,27,62,0.2)",
-                    }}
+                    className="rounded-2xl overflow-hidden bg-primary shadow-lg"
                   >
                     {/* Circular photo */}
                     <div className="flex justify-center pt-8 pb-4">

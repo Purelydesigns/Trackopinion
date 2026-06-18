@@ -16,7 +16,7 @@ const solutions = [
   {
     label: "Global Panel",
     icon: Globe,
-    href: "/solutions/global-panel",
+    href: "/contact-us",
     desc: "Reach respondents across 50+ countries",
     color: "bg-blue-50 text-blue-600",
     children: [],
@@ -24,27 +24,27 @@ const solutions = [
   {
     label: "Research Services",
     icon: FlaskConical,
-    href: "/solutions/research-services",
+    href: "/contact-us",
     desc: "Full-service qualitative & quantitative research",
     color: "bg-purple-50 text-purple-600",
     children: [
-      { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/solutions/research-services/qualitative"        },
-      { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative"       },
-      { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/research-services/survey-programming"  },
-      { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/solutions/research-services/translation"        },
-      { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/research-services/reporting-analytics"},
+      { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/contact-us" },
+      { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/contact-us" },
+      { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/scrip8" },
+      { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/contact-us" },
+      { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/analytics" },
     ],
   },
   {
     label: "Enterprise Solution",
     icon: Building2,
-    href: "/solutions/enterprise-solution",
+    href: "/contact-us",
     desc: "Strategic insights for large-scale businesses",
     color: "bg-orange-50 text-orange-600",
     children: [
-      { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",   href: "/solutions/enterprise-solution/product-concept"        },
-      { label: "Customer Loyalty Measurement",          icon: ShieldCheck, desc: "Measure & grow retention",       href: "/solutions/enterprise-solution/customer-loyalty"        },
-      { label: "Brand Tracker Study",                   icon: TrendingUp,  desc: "Track brand health over time",   href: "/solutions/enterprise-solution/brand-tracker"           },
+      { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",  href: "/contact-us" },
+      { label: "Customer Loyalty Measurement",          icon: ShieldCheck, desc: "Measure & grow retention",      href: "/contact-us" },
+      { label: "Brand Tracker Study",                   icon: TrendingUp,  desc: "Track brand health over time",  href: "/contact-us" },
     ],
   },
   {
@@ -58,7 +58,7 @@ const solutions = [
   {
     label: "Healthcare Research",
     icon: HeartPulse,
-    href: "/solutions/healthcare-research",
+    href: "/solutions/healthcare",
     desc: "Medical & pharma audience research",
     color: "bg-red-50 text-red-600",
     children: [],
@@ -74,20 +74,20 @@ const solutions = [
 ];
 
 const navLinks = [
-  { label: "HOME",         href: "/"                },
-  { label: "ABOUT US",     href: "/about"            },
-  { label: "RESOURCES",    href: "/resources" },
-  { label: "CAREER",       href: "/career"           },
-  { label: "CONTACT US",   href: "/contact"          },
+  { label: "HOME",         href: "/"               },
+  { label: "ABOUT US",     href: "/about"           },
+  { label: "RESOURCES",    href: "/resources"},
+  { label: "CAREER",       href: "/career"          },
+  { label: "CONTACT US",   href: "/contact-us"      },
 ];
 
 const pathToLabel: Record<string, string> = {
   "/":                 "HOME",
   "/about":            "ABOUT US",
-  "/featured-updates": "RESOURCES",
+  "/resources": "RESOURCES",
   "/resources":        "RESOURCES",
   "/career":           "CAREER",
-  "/contact":          "CONTACT US",
+  "/contact-us":       "CONTACT US",
 };
 
 export default function Navbar() {
@@ -287,7 +287,7 @@ export default function Navbar() {
                   <div className="border-t border-gray-100 px-6 py-3 flex items-center justify-between bg-gray-50/50">
                     <p className="text-xs text-gray-400">Need a tailored solution?</p>
                     <Link
-                      href="/contact"
+                      href="/contact-us"
                       onClick={() => setDropOpen(false)}
                       className="text-xs font-bold text-accent hover:text-orange-600 flex items-center gap-1 transition-colors"
                     >
@@ -302,7 +302,7 @@ export default function Navbar() {
 
           <li><Link href="/resources" className={linkCls("RESOURCES")}>RESOURCES</Link></li>
           <li><Link href="/career" className={linkCls("CAREER")}>CAREER</Link></li>
-          <li><Link href="/contact" className={linkCls("CONTACT US")}>CONTACT US</Link></li>
+          <li><Link href="/contact-us" className={linkCls("CONTACT US")}>CONTACT US</Link></li>
         </ul>
 
         {/* ── Bell + Hamburger group ── */}
@@ -470,9 +470,9 @@ export default function Navbar() {
             </div>
 
             {[
-              { label: "RESOURCES",   href: "/featured-updates" },
+              { label: "RESOURCES",   href: "/resources" },
               { label: "CAREER",      href: "/career"           },
-              { label: "CONTACT US",  href: "/contact"          },
+              { label: "CONTACT US",  href: "/contact-us"       },
             ].map((link) => (
               <Link
                 key={link.label}

@@ -203,7 +203,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
         <div className="flex justify-center mt-6">
           <Link
             href="/contact"
-            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-primary-hover transition-all duration-300 shadow hover:-translate-y-0.5"
+            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-accent transition-all duration-300 shadow hover:-translate-y-0.5"
           >
             KNOW MORE
           </Link>

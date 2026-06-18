@@ -27,7 +27,7 @@ export default function WhyBusinesses() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section">
+    <section className="bg-section py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-stretch" ref={ref}>
 
@@ -36,9 +36,9 @@ export default function WhyBusinesses() {
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl p-10"
+            className="bg-white rounded-2xl p-8"
           >
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-8 leading-snug">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-8 leading-snug">
               Why businesses turn to Track Opinion
             </h2>
             <div className="space-y-7">
@@ -67,9 +67,9 @@ export default function WhyBusinesses() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-primary rounded-3xl p-10 text-white flex flex-col justify-between min-h-[420px]"
+            className="bg-primary rounded-2xl p-8 text-white flex flex-col justify-between min-h-[420px]"
           >
-            <h3 className="text-xl sm:text-2xl font-bold leading-snug">
+            <h3 className="text-2xl sm:text-3xl font-extrabold leading-snug">
               Redefine Excellence<br />in Market Research
             </h3>
 

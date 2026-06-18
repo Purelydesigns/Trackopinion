@@ -16,7 +16,7 @@ export default function NewsletterSubscribe() {
   };
 
   return (
-    <section className="py-14" style={{ backgroundColor: "#dde4f0" }}>
+    <section className="py-16 bg-highlight">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           ref={ref}

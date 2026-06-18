@@ -15,11 +15,11 @@ export default function VisionMission() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="bg-white rounded-3xl shadow-sm p-12 md:p-20 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16"
+          className="bg-white rounded-2xl shadow-sm p-8 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16"
         >
           {/* Our Vision */}
           <div className="relative">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-6 text-center">
               Our Vision
             </h2>
             <p className="text-gray-600 text-base leading-8 text-center">
@@ -33,7 +33,7 @@ export default function VisionMission() {
 
           {/* Our Mission */}
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-6 text-center">
               Our Mission
             </h2>
             <p className="text-gray-600 text-base leading-8 text-center">

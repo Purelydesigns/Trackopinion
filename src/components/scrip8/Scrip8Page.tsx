@@ -100,7 +100,7 @@ export default function Scrip8Page() {
       <section className="bg-white min-h-[560px] flex items-center relative overflow-hidden">
         <div
           className="absolute bottom-0 left-0 w-64 h-64 opacity-20 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, #1a1a4e 1px, transparent 1px)", backgroundSize: "18px 18px" }}
+          style={{ backgroundImage: "radial-gradient(circle, var(--color-primary) 1px, transparent 1px)", backgroundSize: "18px 18px" }}
         />
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-12 items-center py-20">
           <motion.div {...fadeUp(0)}>
@@ -159,7 +159,7 @@ export default function Scrip8Page() {
       <TrustedBy heading="Real Clientele with 500+ Brands" navPrefix="scrip8" showWorldTagline={false} containerPadding="px-6" />
 
       {/* ════════ STATS ════════ */}
-      <section ref={statsRef} className="py-16" style={{ backgroundColor: "#dde4f0" }}>
+      <section ref={statsRef} className="py-16 bg-highlight">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.h2 {...fadeUp()} className="text-2xl sm:text-3xl font-bold uppercase text-primary mb-12">
             Script Survey

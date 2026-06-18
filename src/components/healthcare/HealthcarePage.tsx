@@ -227,7 +227,7 @@ export default function HealthcarePage() {
     <main className="bg-white">
 
       {/* ════════ HERO BANNER — same as About Us ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[600px] lg:h-[760px] flex items-center overflow-hidden">
+      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative w-full max-w-7xl mx-auto px-6">
@@ -267,7 +267,7 @@ export default function HealthcarePage() {
       {/* ════════ MAP CARD ════════ */}
       <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-gray-100 rounded-3xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
+          <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">30+ countries in our global reach</h2>
               <p className="text-gray-500 text-base max-w-2xl mx-auto leading-7">
