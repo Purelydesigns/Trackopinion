@@ -16,7 +16,7 @@ const pins = [
   { name: "Australia", code: "au", coordinates: [134, -25] as [number, number] },
 ];
 
-export default function GlobalReach() {
+export default function GlobalReach({ hideHeading = false, cardMode = false }: { hideHeading?: boolean; cardMode?: boolean }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [active, setActive] = useState<number | null>(null);
@@ -69,17 +69,18 @@ export default function GlobalReach() {
     }, 4000);
   };
 
-  return (
-    <section className="bg-section py-16 overflow-hidden">
+  const inner = (
+    <>
+      {/* Sentinel for useInView — must have layout size for IntersectionObserver */}
+      <div ref={ref} style={{ height: 1, width: "100%", marginBottom: -1 }} aria-hidden />
 
       {/* Heading inside container */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className={cardMode ? "" : "max-w-7xl mx-auto px-6"}>
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-6"
+          className={`text-center mb-6 ${hideHeading ? "hidden" : ""}`}
         >
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
             Global Reach
@@ -92,10 +93,11 @@ export default function GlobalReach() {
       </div>
 
       {/* Map inside container */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className={cardMode ? "" : "max-w-7xl mx-auto px-6"}>
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
-        animate={inView ? { opacity: 1, scale: 1 } : {}}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.2 }}
         className="w-full"
       >
@@ -197,15 +199,24 @@ export default function GlobalReach() {
       </div>
 
       {/* Know more button inside container */}
-      <div className="flex justify-center mt-6">
-        <Link
-          href="/contact"
-          className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-primary-hover transition-all duration-300 shadow hover:-translate-y-0.5"
-        >
-          KNOW MORE
-        </Link>
-      </div>
+      {!cardMode && (
+        <div className="flex justify-center mt-6">
+          <Link
+            href="/contact"
+            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-primary-hover transition-all duration-300 shadow hover:-translate-y-0.5"
+          >
+            KNOW MORE
+          </Link>
+        </div>
+      )}
+    </>
+  );
 
+  if (cardMode) return inner;
+
+  return (
+    <section className="bg-section py-16 overflow-hidden">
+      {inner}
     </section>
   );
 }
