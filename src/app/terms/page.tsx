@@ -12,23 +12,23 @@ export const metadata: Metadata = {
 /* ── Reusable components ── */
 function SectionBadge({ text }: { text: string }) {
   return (
-    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-semibold px-4 py-2 rounded-lg mb-5 mt-8">
+    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-bold px-4 py-2 rounded-lg mb-6 mt-10">
       {text}
     </div>
   );
 }
 
 function Para({ children }: { children: React.ReactNode }) {
-  return <p className="text-gray-600 text-sm leading-8 mb-4">{children}</p>;
+  return <p className="text-gray-900 text-base leading-8 mb-3 font-medium">{children}</p>;
 }
 
 function CheckItem({ label, children }: { label?: string; children: React.ReactNode }) {
   return (
-    <li className="flex gap-4 items-start py-3">
-      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-0.5">
+    <li className="flex gap-4 items-start py-1.5">
+      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-1">
         <Check className="w-3 h-3 text-primary" strokeWidth={3} />
       </span>
-      <span className="text-gray-700 text-sm leading-7">
+      <span className="text-gray-900 text-base leading-8 font-medium">
         {label && <strong className="text-gray-900 font-bold">{label} </strong>}
         {children}
       </span>
@@ -40,9 +40,9 @@ export default function TermsPage() {
   return (
     <main>
       {/* ── Dark navy header ── */}
-      <div className="bg-primary py-16">
+      <div className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">Terms of Service</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">Terms of Service</h1>
         </div>
       </div>
 
@@ -53,14 +53,14 @@ export default function TermsPage() {
           <div>
 
             {/* Updated date */}
-            <p className="font-bold text-gray-900 text-sm mb-6">Updated Date: 02-06-2026</p>
+            <p className="font-bold text-gray-900 text-base mb-8">Updated Date: 02-06-2026</p>
 
             {/* Intro */}
             <Para>
               Please read the following Terms of Use carefully. Track Opinion, including its
               subsidiaries and affiliates (&quot;Track Opinion&quot;), requires that all visitors to the
               website available at{" "}
-              <Link href="https://trackopinion.com/" className="text-blue-600 underline hover:text-blue-800">
+              <Link href="https://trackopinion.com/" className="text-accent underline hover:text-orange-700">
                 https://trackopinion.com/
               </Link>{" "}
               (the &quot;Platform&quot;) adhere to the following Terms of Use. By accessing and using

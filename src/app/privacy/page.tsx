@@ -12,23 +12,23 @@ export const metadata: Metadata = {
 /* ── Reusable components ── */
 function SectionBadge({ text }: { text: string }) {
   return (
-    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-semibold px-4 py-2 rounded-lg mb-5 mt-8">
+    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-bold px-4 py-2 rounded-lg mb-6 mt-10">
       {text}
     </div>
   );
 }
 
 function Para({ children }: { children: React.ReactNode }) {
-  return <p className="text-gray-600 text-sm leading-8 mb-4">{children}</p>;
+  return <p className="text-gray-900 text-base leading-8 mb-3 font-medium">{children}</p>;
 }
 
 function CheckItem({ label, children }: { label?: string; children: React.ReactNode }) {
   return (
-    <li className="flex gap-4 items-start py-3">
-      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-0.5">
+    <li className="flex gap-4 items-start py-1.5">
+      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-1">
         <Check className="w-3 h-3 text-primary" strokeWidth={3} />
       </span>
-      <span className="text-gray-700 text-sm leading-7">
+      <span className="text-gray-900 text-base leading-8 font-medium">
         {label && <strong className="text-gray-900 font-bold">{label} </strong>}
         {children}
       </span>
@@ -40,9 +40,9 @@ export default function PrivacyPage() {
   return (
     <main>
       {/* ── Dark navy header ── */}
-      <div className="bg-primary py-16">
+      <div className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">Privacy Policy</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">Privacy Policy</h1>
         </div>
       </div>
 
@@ -53,13 +53,13 @@ export default function PrivacyPage() {
             <div>
 
               {/* Updated date */}
-              <p className="font-bold text-gray-900 text-sm mb-6">Updated Date: 02-06-2026</p>
+              <p className="font-bold text-gray-900 text-base mb-8">Updated Date: 02-06-2026</p>
 
               {/* ── Intro ── */}
               <Para>
                 Welcome to Track Opinion Research Private Limited, operating under the name Track
                 Opinion. We appreciate your use of our platform available at{" "}
-                <Link href="https://trackopinion.com/" className="text-blue-600 underline hover:text-blue-800">
+                <Link href="https://trackopinion.com/" className="text-accent underline hover:text-orange-700">
                   https://trackopinion.com
                 </Link>{" "}
                 (&quot;Platform&quot;) and value your privacy. This Privacy Policy (&quot;Policy&quot;) outlines how
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
                 necessary. Please be aware that we do not notify users of Policy reviews, so we
                 encourage you to visit this page frequently to stay informed about any changes. This
                 Policy should be read in conjunction with our{" "}
-                <Link href="/terms" className="text-gray-900 underline hover:text-blue-600">
+                <Link href="/terms" className="text-accent underline hover:text-orange-700">
                   Terms of Use
                 </Link>{" "}
                 and other applicable policies.
