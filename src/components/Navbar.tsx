@@ -84,7 +84,6 @@ const navLinks = [
 const pathToLabel: Record<string, string> = {
   "/":                 "HOME",
   "/about":            "ABOUT US",
-  "/resources": "RESOURCES",
   "/resources":        "RESOURCES",
   "/career":           "CAREER",
   "/contact-us":       "CONTACT US",
