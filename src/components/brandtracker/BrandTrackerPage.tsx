@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -127,7 +127,7 @@ function MockupCompetitorMap() {
   );
 }
 
-const mockupMap: Record<string, () => JSX.Element> = {
+const mockupMap: Record<string, () => React.ReactElement> = {
   health: MockupBrandHealth,
   wave: MockupWaveChart,
   competitor: MockupCompetitorMap,
