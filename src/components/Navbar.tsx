@@ -28,8 +28,8 @@ const solutions = [
     desc: "Full-service qualitative & quantitative research",
     color: "bg-purple-50 text-purple-600",
     children: [
-      { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/contact-us" },
-      { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/contact-us" },
+      { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/solutions/research-services/qualitative"  },
+      { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative" },
       { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/scrip8" },
       { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/contact-us" },
       { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/analytics" },
@@ -131,7 +131,7 @@ export default function Navbar() {
   const linkCls = (label: string) =>
     `text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
       active === label
-        ? "text-[#1a1a4e] border-b-2 border-[#1a1a4e] pb-0.5"
+        ? "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
         : "text-gray-600 hover:text-[#1a1a4e]"
     }`;
 
@@ -158,7 +158,7 @@ export default function Navbar() {
               onClick={() => setDropOpen((p) => !p)}
               className={`cursor-pointer flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
                 active === "SOLUTIONS"
-                  ? "text-[#1a1a4e] border-b-2 border-[#1a1a4e] pb-0.5"
+                  ? "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
                   : "text-gray-600 hover:text-[#1a1a4e]"
               }`}
             >
