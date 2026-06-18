@@ -38,7 +38,6 @@ export default function FeaturedUpdatesPage() {
       />
       <main>
         <FeaturedList />
-        <NewsletterSubscribe />
       </main>
     </>
   );

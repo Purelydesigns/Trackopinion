@@ -7,43 +7,43 @@ import Link from "next/link";
 
 const updates = [
   {
-    id: 1,
+    slug: "david-solomon-europe-opportunity-to-seize",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "David Solomon, Goldman Sachs Chairman and CEO, on how Europe has an opportunity to seize",
     date: "24.03.2026",
   },
   {
-    id: 2,
+    slug: "john-waldron-navigating-uncertain-time",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "How Goldman Sachs' John Waldron is navigating 'a more uncertain time'",
     date: "24.03.2026",
   },
   {
-    id: 3,
+    slug: "goldman-sachs-bernstein-strategic-decisions-conference",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "Goldman Sachs to Speak at Bernstein's 41st Annual Strategic Decisions Conference",
     date: "24.03.2026",
   },
   {
-    id: 4,
+    slug: "john-waldron-navigating-uncertain-time-2",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "How Goldman Sachs' John Waldron is navigating 'a more uncertain time'",
     date: "24.03.2026",
   },
   {
-    id: 5,
+    slug: "first-quarter-2025-pillar-3-disclosures",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "First Quarter 2025 Pillar 3 Disclosures",
     date: "24.03.2026",
   },
   {
-    id: 6,
+    slug: "first-quarter-2025-liquidity-coverage-ratio",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "First Quarter 2025 Liquidity Coverage Ratio Disclosure",
     date: "24.03.2026",
   },
   {
-    id: 7,
+    slug: "first-quarter-2025-form-10-q",
     tags: ["Loyalty", "Fiduciary and Consulting"],
     title: "First Quarter 2025 Form 10-Q",
     date: "24.03.2026",
@@ -55,37 +55,35 @@ export default function FeaturedList() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <div className="bg-[#111827]">
+    <div className="bg-primary">
 
-      {/* ── Dark navy header ── */}
-      <div className="bg-[#0d1b3e]">
-        <div className="max-w-7xl mx-auto px-6 py-14 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
-          >
-            Featured Updates
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-            className="text-white/60 text-sm tracking-wide"
-          >
-            Insights, Breakthroughs, and Updates Shaping our Industry and Beyond
-          </motion.p>
-        </div>
+      {/* ── Dark navy header with heading + subheading ── */}
+      <div className="max-w-7xl mx-auto px-6 py-14 text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl md:text-3xl font-bold text-white mb-3"
+        >
+          Featured Updates
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-white/60 text-base"
+        >
+          Insights, Breakthroughs, and Updates Shaping our Industry and Beyond
+        </motion.p>
       </div>
 
-      {/* ── White card — full width, rounded top only ── */}
+      {/* ── White card ── */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="w-full bg-white rounded-t-[2.5rem] shadow-2xl overflow-hidden"
+        className="bg-white rounded-t-[2.5rem]"
       >
         <div className="max-w-7xl mx-auto px-6">
 
@@ -103,7 +101,7 @@ export default function FeaturedList() {
               <div className="flex-1 min-w-0">
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="bg-[#0d1b3e] text-white text-xs font-semibold px-3 py-1 rounded-md">
+                  <span className="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-md">
                     {item.tags[0]}
                   </span>
                   <span className="bg-gray-100 text-gray-600 text-xs font-semibold px-3 py-1 rounded-md border border-gray-200">
@@ -126,8 +124,8 @@ export default function FeaturedList() {
 
               {/* Right — circle arrow button → navigates to detail page */}
               <Link
-                href={`/featured-updates/${item.id}`}
-                className="shrink-0 w-12 h-12 rounded-full bg-[#0d1b3e] hover:bg-orange-500 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md"
+                href={`/featured-updates/${item.slug}`}
+                className="shrink-0 w-12 h-12 rounded-full bg-primary hover:bg-accent flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md"
               >
                 <ArrowRight className="w-5 h-5 text-white" />
               </Link>
@@ -141,8 +139,8 @@ export default function FeaturedList() {
                 key={n}
                 className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
                   n === 1
-                    ? "bg-[#0d1b3e] text-white shadow"
-                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-orange-500 hover:text-white hover:border-orange-500"
+                    ? "bg-primary text-white shadow"
+                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-accent hover:text-white hover:border-accent"
                 }`}
               >
                 {n}

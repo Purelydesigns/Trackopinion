@@ -3,68 +3,72 @@
 import { motion } from "framer-motion";
 import { Calendar, Share2, Check } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 /* ── Image Carousel using Swiper ── */
 const images = [
-  { bg: "bg-slate-200",  emoji: "🏛️" },
-  { bg: "bg-blue-100",   emoji: "👥" },
-  { bg: "bg-amber-100",  emoji: "🌆" },
-  { bg: "bg-green-100",  emoji: "📊" },
-  { bg: "bg-purple-100", emoji: "🤝" },
+  "https://picsum.photos/seed/conference1/800/500",
+  "https://picsum.photos/seed/meeting2/800/500",
+  "https://picsum.photos/seed/event3/800/500",
+  "https://picsum.photos/seed/seminar4/800/500",
+  "https://picsum.photos/seed/workshop5/800/500",
 ];
 
 function ImageCarousel() {
   return (
-    /* Fixed height wrapper — prevents page reflow when active slide changes */
-    <div className="w-full h-[300px] relative">
+    <div className="w-full relative pb-10 overflow-hidden">
       <Swiper
-        modules={[EffectCoverflow, Pagination, Autoplay]}
-        effect="coverflow"
+        modules={[Pagination, Autoplay]}
         grabCursor
         centeredSlides
         loop
-        slidesPerView={1.6}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 120,
-          modifier: 2.5,
-          slideShadows: false,
-        }}
+        slidesPerView={1.1}
+        spaceBetween={16}
         pagination={{
           clickable: true,
           renderBullet: (_index: number, className: string) =>
             `<span class="${className} custom-bullet"></span>`,
         }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
         breakpoints={{
-          768:  { slidesPerView: 2.2 },
-          1024: { slidesPerView: 2.8 },
+          640:  { slidesPerView: 1.8, spaceBetween: 16 },
+          1024: { slidesPerView: 2.1, spaceBetween: 20 },
         }}
-        style={{ height: "100%" }}
-        className="w-full h-full pb-10"
+        className="w-full featured-carousel"
+        style={{ alignItems: "flex-end" }}
       >
-        {images.map((img, i) => (
-          <SwiperSlide key={i} style={{ height: "100%", display: "flex", alignItems: "center" }}>
+        {images.map((src, i) => (
+          <SwiperSlide key={i} style={{ height: "380px", display: "flex", alignItems: "center" }}>
             {({ isActive }) => (
               <div
-                className={`${img.bg} rounded-2xl flex items-center justify-center shadow-md w-full transition-all duration-500 ${
-                  isActive ? "h-[240px] opacity-100 scale-100" : "h-[180px] opacity-60 scale-95"
-                }`}
+                className="overflow-hidden rounded-2xl transition-all duration-500 w-full"
+                style={{
+                  height: isActive ? "380px" : "300px",
+                  boxShadow: isActive
+                    ? "0 8px 30px rgba(0,0,0,0.18)"
+                    : "0 2px 10px rgba(0,0,0,0.08)",
+                  opacity: isActive ? 1 : 0.85,
+                }}
               >
-                <span className="text-8xl">{img.emoji}</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={`Slide ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             )}
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Custom pagination dots styled via global CSS */}
       <style>{`
+        .featured-carousel {
+          overflow: hidden !important;
+          padding-bottom: 2.5rem !important;
+        }
         .custom-bullet {
           display: inline-block;
           width: 10px;
@@ -73,11 +77,15 @@ function ImageCarousel() {
           border-radius: 9999px;
           opacity: 1;
           transition: all 0.3s;
+          margin: 0 4px !important;
         }
         .swiper-pagination-bullet-active.custom-bullet {
-          width: 16px;
+          width: 24px;
           background: #f97316;
           border-radius: 9999px;
+        }
+        .swiper-pagination {
+          bottom: 0 !important;
         }
       `}</style>
     </div>
