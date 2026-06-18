@@ -157,7 +157,7 @@ export default function Navbar() {
           <li ref={dropRef} className="relative">
             <button
               onClick={() => setDropOpen((p) => !p)}
-              className={`flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
+              className={`cursor-pointer flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
                 active === "SOLUTIONS"
                   ? "text-[#1a1a4e] border-b-2 border-[#1a1a4e] pb-0.5"
                   : "text-gray-600 hover:text-[#1a1a4e]"
@@ -310,7 +310,7 @@ export default function Navbar() {
         <div ref={bellRef} className="relative">
           <button
             onClick={() => setBellOpen((p) => !p)}
-            className="relative p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+            className="cursor-pointer relative p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
           >
             <Bell className={`w-5 h-5 transition-colors ${bellOpen ? "text-[#1a1a4e]" : "text-gray-600"}`} />
             <span className="absolute top-0.5 right-0.5 bg-[#1a1a4e] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">

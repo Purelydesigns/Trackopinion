@@ -15,35 +15,49 @@ const logos = [
   { name: "Netflix2", text: "text-[#E50914] font-extrabold",          label: "NETFLIX" },
 ];
 
-export default function TrustedBy() {
+export default function TrustedBy({
+  heading = "Trusted By",
+  navPrefix = "trusted",
+  showWorldTagline = true,
+  containerPadding = "px-8 sm:px-16",
+}: {
+  heading?: string;
+  navPrefix?: string;
+  showWorldTagline?: boolean;
+  containerPadding?: string;
+}) {
+  const prevId = `${navPrefix}-prev`;
+  const nextId = `${navPrefix}-next`;
+
   return (
     <section className="bg-section py-16">
 
       {/* ── Heading ── */}
       <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-10">
-        Trusted By
+        {heading}
       </h2>
 
       {/* ── Slider ── */}
-      <div className="max-w-7xl mx-auto px-8 sm:px-16 relative [overflow-x:clip]">
+      <div className="max-w-7xl mx-auto px-6 relative">
 
         <button
-          id="trusted-prev"
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+          id={prevId}
+          className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
 
         <button
-          id="trusted-next"
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+          id={nextId}
+          className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
         >
           <ArrowRight className="w-5 h-5" />
         </button>
 
+        <div className={`${containerPadding} [overflow-x:clip]`}>
         <Swiper
           modules={[Navigation, Autoplay]}
-          navigation={{ prevEl: "#trusted-prev", nextEl: "#trusted-next" }}
+          navigation={{ prevEl: `#${prevId}`, nextEl: `#${nextId}` }}
           autoplay={{ delay: 2000, disableOnInteraction: false }}
           loop
           centeredSlides
@@ -75,10 +89,11 @@ export default function TrustedBy() {
             </SwiperSlide>
           ))}
         </Swiper>
+        </div>
       </div>
 
       {/* ── World tagline ── */}
-      <div className="mt-12 relative overflow-hidden bg-section">
+      {showWorldTagline && <div className="mt-12 relative overflow-hidden bg-section">
         <img
           src="/images/map.png"
           alt=""
@@ -94,7 +109,7 @@ export default function TrustedBy() {
             <br /> with translation facilities.
           </p>
         </div>
-      </div>
+      </div>}
 
     </section>
   );

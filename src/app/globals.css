@@ -39,3 +39,16 @@ body {
 .trusted-swiper .swiper-wrapper {
   overflow: visible !important;
 }
+
+/* Resources slider pagination dots */
+.resources-swiper .swiper-pagination-bullet {
+  background: #cbd5e1;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+}
+.resources-swiper .swiper-pagination-bullet-active {
+  background: var(--color-accent);
+  width: 28px;
+  border-radius: 9999px;
+}
