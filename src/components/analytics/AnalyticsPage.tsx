@@ -206,7 +206,7 @@ export default function AnalyticsPage() {
       <section className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Analytics and Reporting</h1>
-          <p className="text-white/70 text-base">From Opinions to Decisions with Clarity</p>
+          <p className="text-white/90 text-base font-medium">From Opinions to Decisions with Clarity</p>
         </div>
       </section>
 
@@ -220,7 +220,7 @@ export default function AnalyticsPage() {
               <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-primary">Numbers that Lead to Strategies</h2>
               <span className="text-accent text-xl">●</span>
             </div>
-            <p className="text-gray-500 text-base max-w-2xl mx-auto leading-7">
+            <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
               Learn your audience&apos;s opinions in depth through complex and elaborate methods like focus group interviews, diary studies, and online surveys with open-ended questions.
             </p>
           </motion.div>
@@ -267,7 +267,7 @@ export default function AnalyticsPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 text-base mb-1">{f.title}</h3>
-                      <p className="text-gray-500 text-sm leading-6">{f.desc}</p>
+                      <p className="text-gray-900 text-base leading-8 font-medium">{f.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -407,7 +407,7 @@ export default function AnalyticsPage() {
                   <span className="text-white text-2xl font-black">{step.num}</span>
                 </div>
                 <h3 className="text-white font-bold text-base mb-2">{step.title}</h3>
-                <p className="text-white/60 text-sm leading-6">{step.desc}</p>
+                <p className="text-white/80 text-base leading-8 font-medium">{step.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -426,7 +426,7 @@ export default function AnalyticsPage() {
               >
                 <IconBox />
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{card.title}</h3>
-                <p className="text-gray-500 text-base leading-7">{card.desc}</p>
+                <p className="text-gray-900 text-base leading-8 font-medium">{card.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -440,7 +440,7 @@ export default function AnalyticsPage() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">
               Benefits of Track Opinion&apos;s Analytics and Reporting Services
             </h2>
-            <p className="text-gray-500 text-base">Track Opinion&apos;s reporting and analytics service in India and the global market has manifold benefits</p>
+            <p className="text-gray-900 text-base font-medium">Track Opinion&apos;s reporting and analytics service in India and the global market has manifold benefits</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {benefits.slice(0, 6).map((b, i) => (
@@ -453,7 +453,7 @@ export default function AnalyticsPage() {
                   {b.icon}
                 </div>
                 <h3 className="text-white font-bold text-base mb-3">{b.title}</h3>
-                <p className="text-white/60 text-sm leading-6">{b.desc}</p>
+                <p className="text-white/80 text-base leading-8 font-medium">{b.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -469,7 +469,7 @@ export default function AnalyticsPage() {
                   {b.icon}
                 </div>
                 <h3 className="text-white font-bold text-base mb-3">{b.title}</h3>
-                <p className="text-white/60 text-sm leading-6">{b.desc}</p>
+                <p className="text-white/80 text-base leading-8 font-medium">{b.desc}</p>
               </motion.div>
             ))}
           </div>

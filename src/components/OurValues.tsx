@@ -30,7 +30,7 @@ export default function OurValues() {
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
             Our Values
           </h2>
-          <p className="text-sm sm:text-base text-gray-500 mt-2">What drives us every day</p>
+          <p className="text-base text-gray-900 font-medium mt-2">What drives us every day</p>
         </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">

@@ -69,7 +69,7 @@ export default function SuccessStories() {
               </h3>
 
               {/* Excerpt */}
-              <p className="text-gray-500 text-base leading-7">
+              <p className="text-gray-900 text-base leading-8 font-medium">
                 {story.excerpt}
               </p>
             </motion.div>

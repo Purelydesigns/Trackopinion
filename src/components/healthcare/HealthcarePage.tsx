@@ -270,7 +270,7 @@ export default function HealthcarePage() {
           <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">30+ countries in our global reach</h2>
-              <p className="text-gray-500 text-base max-w-2xl mx-auto leading-7">
+              <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
                 Panel members available in all major countries and continents for healthcare market research. Partnership with local panel providers increases our bandwidth and diversifies online market research.
               </p>
             </div>
@@ -294,7 +294,7 @@ export default function HealthcarePage() {
               >
                 <IconBox />
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{cap.title}</h3>
-                <p className="text-gray-500 text-base leading-7">{cap.desc}</p>
+                <p className="text-gray-900 text-base leading-8 font-medium">{cap.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -311,7 +311,7 @@ export default function HealthcarePage() {
           />
           <div className="absolute bottom-0 left-0 right-0 bg-primary/90 py-5 px-8 text-center">
             <p className="text-white font-bold text-lg mb-1">711k Healthcare professionals</p>
-            <p className="text-white/70 text-sm">
+            <p className="text-white/90 text-base font-medium">
               Elevate your research experience to new heights with our comprehensive solutions, cutting-edge methodologies, and unwavering commitment
             </p>
           </div>
@@ -389,7 +389,7 @@ export default function HealthcarePage() {
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.22 }}
-                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-7 whitespace-pre-line"
+                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-8 font-medium whitespace-pre-line"
                   >
                     {faq.a}
                   </motion.div>
@@ -405,7 +405,7 @@ export default function HealthcarePage() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">Our HCP&apos;s Panel Book</h2>
-            <p className="text-gray-500 text-base max-w-xl mx-auto leading-7">
+            <p className="text-gray-900 text-base max-w-xl mx-auto leading-8 font-medium">
               For a comprehensive breakdown, complete the form below to receive your free Healthcare Professionals Panel Book
             </p>
           </motion.div>

@@ -73,7 +73,7 @@ function AccordionItem({
       <div style={{ height }} className="overflow-hidden transition-[height] duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
         <div ref={contentRef}>
           <div className="px-6 pb-5 pt-0">
-            <p className="text-gray-600 text-base leading-7">
+            <p className="text-gray-900 text-base leading-8 font-medium">
               {item.content}
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function WhatWeDo() {
         <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-2 uppercase">
           What We Do
         </h2>
-        <p className="text-center text-gray-500 text-sm sm:text-base mb-10">
+        <p className="text-center text-gray-900 text-base font-medium mb-10">
           Empowering Decision Making with Track Opinion
         </p>
 

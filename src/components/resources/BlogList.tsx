@@ -114,7 +114,7 @@ export default function BlogList() {
         transition={{ duration: 0.5 }}
         className="bg-white rounded-t-[2.5rem]"
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="max-w-7xl mx-auto px-6">
 
           {filtered.length === 0 ? (
             <div className="py-24 text-center text-gray-400 text-sm">
@@ -143,7 +143,7 @@ export default function BlogList() {
                     {post.title}
                   </h2>
 
-                  <p className="text-gray-500 text-sm leading-7 mb-6 line-clamp-4">
+                  <p className="text-gray-900 text-base leading-8 font-medium mb-6 line-clamp-4">
                     {post.excerpt}
                   </p>
 

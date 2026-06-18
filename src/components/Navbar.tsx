@@ -42,9 +42,9 @@ const solutions = [
     desc: "Strategic insights for large-scale businesses",
     color: "bg-orange-50 text-orange-600",
     children: [
-      { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",  href: "/contact-us" },
+      { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",  href: "/solutions/product-concept-and-ad-testing" },
       { label: "Customer Loyalty Measurement",          icon: ShieldCheck, desc: "Measure & grow retention",      href: "/contact-us" },
-      { label: "Brand Tracker Study",                   icon: TrendingUp,  desc: "Track brand health over time",  href: "/contact-us" },
+      { label: "Brand Image Study",                     icon: TrendingUp,  desc: "Track brand health over time",  href: "/solutions/brand-image-study" },
     ],
   },
   {

@@ -231,7 +231,7 @@ export default function ResearchPageLayout({
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">{factsHeading}</h2>
             <span className="text-accent text-xl">●</span>
           </div>
-          <p className="mt-4 text-gray-500 text-base max-w-3xl mx-auto leading-7">{factsDesc}</p>
+          <p className="mt-4 text-gray-900 text-base max-w-3xl mx-auto leading-8 font-medium">{factsDesc}</p>
           <div className="mt-6 border-b-2 border-gray-200" />
         </div>
       </section>
@@ -255,7 +255,7 @@ export default function ResearchPageLayout({
                     <h3 className="text-lg font-bold text-gray-900">{sec.heading}</h3>
                   </div>
                   {sec.paragraphs.map((p, j) => (
-                    <p key={j} className="text-gray-500 text-base leading-8 mb-4">{p}</p>
+                    <p key={j} className="text-gray-900 text-base leading-8 font-medium mb-4">{p}</p>
                   ))}
                 </motion.div>
                 {/* Mockup */}
@@ -280,7 +280,7 @@ export default function ResearchPageLayout({
               >
                 <IconBox />
                 <h3 className="text-base font-bold text-gray-900 mb-3">{cap.title}</h3>
-                <p className="text-gray-500 text-sm leading-7">{cap.desc}</p>
+                <p className="text-gray-900 text-base leading-8 font-medium">{cap.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -302,7 +302,7 @@ export default function ResearchPageLayout({
                 </div>
                 <p className="text-white font-extrabold uppercase text-sm tracking-wider mb-1">{step.title}</p>
                 <p className="text-accent text-sm font-semibold underline mb-3">{step.subtitle}</p>
-                <p className="text-white/65 text-sm leading-7">{step.desc}</p>
+                <p className="text-white/80 text-base leading-8 font-medium">{step.desc}</p>
               </motion.div>
             ))}
           </div>

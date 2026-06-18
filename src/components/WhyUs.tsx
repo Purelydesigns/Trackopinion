@@ -50,7 +50,7 @@ export default function WhyUs() {
         <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-2">
           Why Us?
         </h2>
-        <p className="text-sm sm:text-base text-gray-500">Our Online Panel Stats</p>
+        <p className="text-base text-gray-900 font-medium">Our Online Panel Stats</p>
       </motion.div>
 
       {/* ── Stats bar ── */}
@@ -66,7 +66,7 @@ export default function WhyUs() {
               <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="text-white/70 text-sm tracking-wide">{stat.label}</p>
+              <p className="text-white/90 text-base font-medium tracking-wide">{stat.label}</p>
             </motion.div>
           ))}
         </div>

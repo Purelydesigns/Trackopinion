@@ -55,7 +55,7 @@ export default function WhyBusinesses() {
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 mb-1 text-base">{title}</p>
-                    <p className="text-gray-500 text-sm leading-7">{desc}</p>
+                    <p className="text-gray-900 text-base leading-8 font-medium">{desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -80,7 +80,7 @@ export default function WhyBusinesses() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold leading-tight">4.9/5</p>
-                  <p className="text-white/60 text-sm mt-1">Clients rate professionals on Upwork</p>
+                  <p className="text-white/80 text-base font-medium mt-1">Clients rate professionals on Upwork</p>
                 </div>
               </div>
 
@@ -90,7 +90,7 @@ export default function WhyBusinesses() {
                 </div>
                 <div>
                   <p className="text-xl font-bold leading-tight">Award winner</p>
-                  <p className="text-white/60 text-sm mt-1">2021 Best Software Awards</p>
+                  <p className="text-white/80 text-base font-medium mt-1">2021 Best Software Awards</p>
                 </div>
               </div>
             </div>

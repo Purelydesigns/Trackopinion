@@ -1,11 +1,31 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 import TrustedBy from "@/components/TrustedBy";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
+
+/* ── CountUp ── */
+function CountUp({ end, suffix = "", decimals = 0 }: { end: number; suffix?: string; decimals?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const steps = 60;
+    const inc = end / steps;
+    const timer = setInterval(() => {
+      start += inc;
+      if (start >= end) { setCount(end); clearInterval(timer); }
+      else setCount(start);
+    }, 1800 / steps);
+    return () => clearInterval(timer);
+  }, [inView, end]);
+  return <span ref={ref}>{count.toFixed(decimals)}{suffix}</span>;
+}
 
 /* ── Data ── */
 const steps = [
@@ -107,7 +127,7 @@ export default function Scrip8Page() {
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-5">
               Online Surveys Simplified
             </h1>
-            <p className="text-gray-500 text-sm sm:text-base leading-8 mb-8 max-w-md">
+            <p className="text-gray-900 text-base leading-8 font-medium mb-8 max-w-md">
               Know what your users want. Create online surveys and share them with ease. Mobile-based and result-oriented. Apt to unearth real-time data and hidden insights.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -148,7 +168,7 @@ export default function Scrip8Page() {
                   <span className="text-white text-2xl font-black">{step.num}</span>
                 </div>
                 <h3 className="text-white font-bold text-base mb-3">{step.title}</h3>
-                <p className="text-white/70 text-sm leading-7">{step.desc}</p>
+                <p className="text-white/80 text-base leading-8 font-medium">{step.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -172,8 +192,15 @@ export default function Scrip8Page() {
                 animate={statsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.1 * i, duration: 0.5 }}
               >
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{s.value}</div>
-                <div className="text-gray-600 text-sm font-medium">{s.label}</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                  {(() => {
+                    const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
+                    const suffix = s.value.replace(/[0-9.]/g, "");
+                    const decimals = s.value.includes(".") ? 1 : 0;
+                    return <CountUp end={num} suffix={suffix} decimals={decimals} />;
+                  })()}
+                </div>
+                <div className="text-gray-900 text-base font-medium">{s.label}</div>
               </motion.div>
             ))}
           </div>
@@ -190,7 +217,7 @@ export default function Scrip8Page() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">
               Affordable Pricing Plans
             </h2>
-            <p className="text-gray-500 text-base">Best for medium business owners, startups who need landing pages for their business.</p>
+            <p className="text-gray-900 text-base font-medium">Best for medium business owners, startups who need landing pages for their business.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             {plans.map((plan, i) => (
@@ -274,7 +301,7 @@ export default function Scrip8Page() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">
               Mastering Responses
             </h2>
-            <p className="text-gray-500 text-base">Mere minutes to create your survey. Just seconds to collect and analyze your responses.</p>
+            <p className="text-gray-900 text-base font-medium">Mere minutes to create your survey. Just seconds to collect and analyze your responses.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feat, i) => (
@@ -287,7 +314,7 @@ export default function Scrip8Page() {
                   <Sparkles className="w-5 h-5 text-accent" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{feat.title}</h3>
-                <p className="text-gray-700 text-base leading-7">{feat.desc}</p>
+                <p className="text-gray-900 text-base leading-8 font-medium">{feat.desc}</p>
               </motion.div>
             ))}
           </div>

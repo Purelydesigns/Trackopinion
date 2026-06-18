@@ -87,7 +87,7 @@ export default function Testimonials() {
                     ))}
                   </div>
                   {/* Review */}
-                  <p className="text-gray-600 text-base leading-7 mb-6">{t.review}</p>
+                  <p className="text-gray-900 text-base leading-8 font-medium mb-6">{t.review}</p>
                   {/* Name */}
                   <p className="font-bold text-primary text-base">{t.name}</p>
                 </div>

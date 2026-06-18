@@ -190,7 +190,7 @@ export default function CatiPage() {
             </h2>
             <span className="text-accent text-xl">●</span>
           </div>
-          <p className="mt-4 text-gray-500 text-base max-w-2xl mx-auto leading-7">
+          <p className="mt-4 text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
             Software driven calls for user feedback. Quality data with swift turnaround, anytime, from anywhere. That&apos;s what computer aided telephone interviews brings.
           </p>
           <div className="mt-6 border-b-2 border-gray-200" />
@@ -203,7 +203,7 @@ export default function CatiPage() {
           <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">CATI Reach</h2>
-              <p className="text-gray-500 text-base max-w-2xl mx-auto leading-7">
+              <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
                 CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions.
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function CatiPage() {
                   {cap.icon}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-3">{cap.title}</h3>
-                <p className="text-gray-500 text-sm leading-7">{cap.desc}</p>
+                <p className="text-gray-900 text-base leading-8 font-medium">{cap.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -261,7 +261,7 @@ export default function CatiPage() {
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.22 }}
-                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-7"
+                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-8 font-medium"
                   >
                     {faq.a}
                   </motion.div>
@@ -279,7 +279,7 @@ export default function CatiPage() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">
               Get in Touch to Execute a CATI Project
             </h2>
-            <p className="text-gray-500 text-base max-w-2xl mx-auto leading-7">
+            <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
               Generate valuable insights about your users, market, and brand. Seek online feedback affiliated with CATI for speedy quantitative market research solutions.
             </p>
           </motion.div>
