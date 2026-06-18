@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const posts = [
   {
-    id: 1,
+    slug: "how-qualitative-research-uncovers-patient-emotions",
     date: "24.03.2026",
     category: "Healthcare",
     title: "How Qualitative Research Uncovers the Real Emotions Behind Patient Experiences",
@@ -17,7 +17,7 @@ const posts = [
     img: "https://picsum.photos/seed/healthcare/640/400",
   },
   {
-    id: 2,
+    slug: "pharma-market-research-insights",
     date: "24.03.2026",
     category: "Pharma",
     title: "How Qualitative Research Uncovers the Real Emotions Behind Patient Experiences",
@@ -26,7 +26,7 @@ const posts = [
     img: "https://picsum.photos/seed/pharma/640/400",
   },
   {
-    id: 3,
+    slug: "technology-research-trends-2026",
     date: "24.03.2026",
     category: "Technology",
     title: "How Qualitative Research Uncovers the Real Emotions Behind Patient Experiences",
@@ -35,7 +35,7 @@ const posts = [
     img: "https://picsum.photos/seed/tech/640/400",
   },
   {
-    id: 4,
+    slug: "fmcg-consumer-behaviour-study",
     date: "24.03.2026",
     category: "FMCG",
     title: "How Qualitative Research Uncovers the Real Emotions Behind Patient Experiences",
@@ -44,7 +44,7 @@ const posts = [
     img: "https://picsum.photos/seed/fmcg/640/400",
   },
   {
-    id: 5,
+    slug: "global-market-research-methodologies",
     date: "24.03.2026",
     category: "Research",
     title: "How Qualitative Research Uncovers the Real Emotions Behind Patient Experiences",
@@ -59,10 +59,9 @@ export default function BlogList() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
-  const filtered = posts.filter(
-    (p) =>
-      p.title.toLowerCase().includes(query.toLowerCase()) ||
-      p.category.toLowerCase().includes(query.toLowerCase())
+  const filtered = posts.filter((p) =>
+    p.title.toLowerCase().includes(query.toLowerCase()) ||
+    p.category.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
@@ -124,7 +123,7 @@ export default function BlogList() {
           ) : (
             filtered.map((post, i) => (
               <motion.article
-                key={post.id}
+                key={post.slug}
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.08 * i, duration: 0.45 }}
@@ -149,7 +148,7 @@ export default function BlogList() {
                   </p>
 
                   <Link
-                    href={`/resources/${post.id}`}
+                    href={`/resources/${post.slug}`}
                     className="flex items-center gap-3 text-sm font-semibold text-gray-600 group-hover:text-accent transition-colors duration-300 w-fit"
                   >
                     <span className="w-8 h-px bg-gray-400 inline-block group-hover:bg-accent transition-colors duration-300" />

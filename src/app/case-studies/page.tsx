@@ -38,7 +38,6 @@ export default function CaseStudiesPage() {
       />
       <main>
         <CaseStudiesList />
-        <NewsletterSubscribe />
       </main>
     </>
   );

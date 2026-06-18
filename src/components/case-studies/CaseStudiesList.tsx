@@ -75,46 +75,44 @@ export default function CaseStudiesList() {
   );
 
   return (
-    <div className="bg-[#111827]">
+    <div className="bg-primary">
 
       {/* ── Dark navy header bar ── */}
-      <div className="bg-[#0d1b3e]">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="relative flex items-center justify-center">
 
-            {/* Title */}
-            <motion.h1
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl md:text-3xl font-bold text-white"
-            >
-              Case Studies
-            </motion.h1>
+          {/* Centered title */}
+          <motion.h1
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl md:text-3xl font-bold text-white"
+          >
+            Case Studies
+          </motion.h1>
 
-            {/* Search + filter */}
-            <motion.div
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex items-center gap-3 w-full sm:w-auto"
-            >
-              <div className="flex items-center bg-white rounded-xl px-4 py-3 gap-3 w-full sm:w-64 shadow-sm">
-                <Search className="w-4 h-4 text-gray-400 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  className="bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none w-full"
-                />
-              </div>
-              <button className="w-11 h-11 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center hover:bg-white/20 transition shrink-0">
-                <SlidersHorizontal className="w-4 h-4 text-white/80" />
-              </button>
-            </motion.div>
+          {/* Search + filter — absolute right */}
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="absolute right-0 flex items-center gap-3"
+          >
+            <div className="flex items-center bg-white rounded-xl px-4 py-3 gap-3 w-52 shadow-sm">
+              <Search className="w-4 h-4 text-gray-400 shrink-0" />
+              <input
+                type="text"
+                placeholder="Search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none w-full"
+              />
+            </div>
+            <button className="w-11 h-11 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center hover:bg-white/20 transition shrink-0">
+              <SlidersHorizontal className="w-4 h-4 text-white/80" />
+            </button>
+          </motion.div>
 
-          </div>
         </div>
       </div>
 
@@ -124,7 +122,7 @@ export default function CaseStudiesList() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="w-full bg-white rounded-t-[2.5rem] shadow-2xl overflow-hidden"
+        className="bg-white rounded-t-[2.5rem]"
       >
         <div className="max-w-7xl mx-auto px-6">
 
@@ -139,6 +137,7 @@ export default function CaseStudiesList() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.08 * i, duration: 0.45 }}
+                onClick={() => setModalOpen(true)}
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 className={`grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 py-10 cursor-pointer transition-all duration-300 ${

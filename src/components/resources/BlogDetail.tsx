@@ -224,17 +224,17 @@ export default function BlogDetail() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section className="bg-[#dde4f0] py-14">
+      <section className="py-14" style={{ backgroundColor: "#dde4f0" }}>
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             {...fadeUp}
             className="flex flex-col md:flex-row items-center justify-between gap-8"
           >
-            <div className="max-w-xl">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="flex-1">
+              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 Willing to Conduct a Customer Satisfaction Study?
-              </h2>
-              <p className="text-gray-600 text-sm leading-7">
+              </h3>
+              <p className="text-gray-500 text-base leading-8">
                 If you&apos;re willing to know how satisfied your users are, worry not.
                 You can partner with a market research firm like Track Opinion. We
                 have over 15 years of experience in various domains. We conduct
@@ -242,12 +242,14 @@ export default function BlogDetail() {
                 qualitative and quantitative reviews.
               </p>
             </div>
-            <Link
-              href="/contact"
-              className="shrink-0 bg-[#0d1b3e] hover:bg-orange-500 text-white font-bold px-10 py-5 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5 whitespace-nowrap"
-            >
-              Contact Us
-            </Link>
+            <div className="shrink-0">
+              <Link
+                href="/contact"
+                className="bg-primary hover:bg-accent text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+              >
+                Contact Us
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
