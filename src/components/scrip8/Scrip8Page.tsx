@@ -117,7 +117,7 @@ export default function Scrip8Page() {
     <main className="bg-white">
 
       {/* ════════ HERO ════════ */}
-      <section className="bg-white min-h-[560px] flex items-center relative overflow-hidden">
+      <section className="-mt-[76px] bg-white min-h-[560px] flex items-center relative overflow-hidden pt-[76px]">
         <div
           className="absolute bottom-0 left-0 w-64 h-64 opacity-20 pointer-events-none"
           style={{ backgroundImage: "radial-gradient(circle, var(--color-primary) 1px, transparent 1px)", backgroundSize: "18px 18px" }}
@@ -131,7 +131,7 @@ export default function Scrip8Page() {
               Know what your users want. Create online surveys and share them with ease. Mobile-based and result-oriented. Apt to unearth real-time data and hidden insights.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact-us" className="cursor-pointer bg-primary hover:bg-accent text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-300 text-sm">
+              <Link href="/contact-us" className="cursor-pointer bg-primary hover:bg-primary text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-300 text-sm">
                 Get Started
               </Link>
               <button className="cursor-pointer border-2 border-primary text-primary font-semibold px-8 py-3.5 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm">
@@ -204,7 +204,7 @@ export default function Scrip8Page() {
               </motion.div>
             ))}
           </div>
-          <Link href="/contact-us" className="cursor-pointer inline-block bg-primary hover:bg-accent text-white font-bold px-10 py-3.5 rounded-lg uppercase tracking-widest text-sm transition-colors duration-300">
+          <Link href="/contact-us" className="cursor-pointer inline-block bg-primary hover:bg-primary text-white font-bold px-10 py-3.5 rounded-lg uppercase tracking-widest text-sm transition-colors duration-300">
             Get Started
           </Link>
         </div>
@@ -242,7 +242,7 @@ export default function Scrip8Page() {
 
                 <div className="relative flex flex-col flex-1 p-10">
                   {plan.featured && (
-                    <span className="absolute top-5 right-5 bg-accent text-white text-xs font-bold px-4 py-1.5 rounded-full">
+                    <span className="absolute top-5 right-5 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full">
                       Most Popular
                     </span>
                   )}
@@ -264,7 +264,7 @@ export default function Scrip8Page() {
                     {plan.features.map((f, j) => (
                       <li key={j} className="flex items-center gap-3 text-sm">
                         <Check
-                          className={`w-4 h-4 shrink-0 ${plan.featured ? "text-accent" : "text-primary"}`}
+                          className={`w-4 h-4 shrink-0 ${plan.featured ? "text-primary" : "text-primary"}`}
                           strokeWidth={2.5}
                         />
                         <span className={plan.featured ? "text-white" : "text-gray-700"}>{f}</span>
@@ -283,7 +283,7 @@ export default function Scrip8Page() {
                   <button className={`cursor-pointer w-full py-3.5 rounded-full font-bold text-sm transition-colors duration-300 ${
                     plan.featured
                       ? "bg-white text-primary hover:bg-gray-100"
-                      : "bg-primary text-white hover:bg-accent"
+                      : "bg-primary text-white hover:bg-primary"
                   }`}>
                     Purchase Now
                   </button>
@@ -310,8 +310,8 @@ export default function Scrip8Page() {
                 {...fadeUp(0.08 * i)}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
               >
-                <div className="w-12 h-12 rounded-full border-2 border-accent/40 flex items-center justify-center mb-5">
-                  <Sparkles className="w-5 h-5 text-accent" />
+                <div className="w-12 h-12 rounded-full border-2 border-primary/40 flex items-center justify-center mb-5">
+                  <Sparkles className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{feat.title}</h3>
                 <p className="text-gray-900 text-base leading-8 font-medium">{feat.desc}</p>

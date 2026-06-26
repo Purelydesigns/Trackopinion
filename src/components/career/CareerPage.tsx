@@ -25,13 +25,13 @@ function JobRow({ job }: { job: JobEntry }) {
       <div className="flex gap-3 shrink-0">
         <Link
           href={`/career/${job.slug}`}
-          className="cursor-pointer px-6 py-2.5 rounded-lg border border-accent text-accent text-sm font-semibold hover:bg-orange-50 transition-colors duration-200"
+          className="cursor-pointer px-6 py-2.5 rounded-lg border border-primary text-primary text-sm font-semibold hover:bg-blue-50 transition-colors duration-200"
         >
           Details
         </Link>
         <Link
           href={`/career/${job.slug}#apply`}
-          className="cursor-pointer px-6 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-accent transition-colors duration-200"
+          className="cursor-pointer px-6 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary transition-colors duration-200"
         >
           Apply
         </Link>
@@ -55,8 +55,8 @@ export default function CareerPage() {
   return (
     <main>
       {/* ── Banner ── */}
-      <div className="bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="-mt-[76px] bg-primary py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}

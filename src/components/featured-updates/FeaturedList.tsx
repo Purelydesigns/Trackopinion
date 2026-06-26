@@ -55,10 +55,10 @@ export default function FeaturedList() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <div className="bg-primary">
+    <div className="-mt-[76px] bg-primary">
 
       {/* ── Dark navy header with heading + subheading ── */}
-      <div className="max-w-7xl mx-auto px-6 py-14 text-center">
+      <div className="max-w-7xl mx-auto px-6 py-14 pt-[calc(76px+3.5rem)] text-center">
         <motion.h1
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ export default function FeaturedList() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-base font-bold text-gray-900 mb-3 leading-snug group-hover:text-orange-500 transition-colors duration-300">
+                <h2 className="text-base font-bold text-gray-900 mb-3 leading-snug group-hover:text-primary transition-colors duration-300">
                   {item.title}
                 </h2>
 
@@ -118,14 +118,14 @@ export default function FeaturedList() {
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-gray-400" />
                   <span className="text-sm text-gray-400">{item.date}</span>
-                  <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-blue-50 shrink-0" />
                 </div>
               </div>
 
               {/* Right — circle arrow button → navigates to detail page */}
               <Link
                 href={`/featured-updates/${item.slug}`}
-                className="shrink-0 w-12 h-12 rounded-full bg-primary hover:bg-accent flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md"
+                className="shrink-0 w-12 h-12 rounded-full bg-primary hover:bg-primary flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md"
               >
                 <ArrowRight className="w-5 h-5 text-white" />
               </Link>
@@ -140,7 +140,7 @@ export default function FeaturedList() {
                 className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
                   n === 1
                     ? "bg-primary text-white shadow"
-                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-accent hover:text-white hover:border-accent"
+                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-primary hover:text-white hover:border-primary"
                 }`}
               >
                 {n}

@@ -23,7 +23,7 @@ const cases = [
     excerpt:
       "A leading global beverage brewing company sought to enhance their logistics reliability and operational efficiency across their supply chain. The goal was to reduce manual intervention, accelerate anomaly resolution, and enable real-time visibility across the brewery-to-distribution center network through an Agentic AI–powered alert generation and resolution platform.",
     emoji: "💊",
-    bg: "bg-orange-50",
+    bg: "bg-blue-50",
   },
   {
     id: 3,
@@ -151,7 +151,7 @@ export default function CaseStudiesList() {
                   <div className="flex items-center gap-2 mb-4">
                     <Calendar className="w-4 h-4 text-gray-400" />
                     <span className="text-sm text-gray-400">{item.date}</span>
-                    <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-blue-50 shrink-0" />
                   </div>
 
                   {/* Flip wrapper */}
@@ -189,7 +189,7 @@ export default function CaseStudiesList() {
                         </p>
                         <button
                           onClick={() => setModalOpen(true)}
-                          className="flex items-center gap-3 text-sm font-semibold text-gray-700 hover:text-orange-500 transition-colors duration-300 mt-3"
+                          className="flex items-center gap-3 text-sm font-semibold text-gray-700 hover:text-primary transition-colors duration-300 mt-3"
                         >
                           <span className="w-8 h-px bg-gray-500 inline-block shrink-0" />
                           Read More
@@ -235,7 +235,7 @@ export default function CaseStudiesList() {
                 className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
                   n === 1
                     ? "bg-[#0d1b3e] text-white shadow"
-                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-orange-500 hover:text-white hover:border-orange-500"
+                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-blue-50 hover:text-white hover:border-primary"
                 }`}
               >
                 {n}

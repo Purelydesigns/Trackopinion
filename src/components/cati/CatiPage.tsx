@@ -11,7 +11,7 @@ const capabilities = [
     title: "Gather, Not Manage",
     desc: "Call recordings and intuitive interfaces help agents facilitate respondents' answers and focus on their cadence without managing the incoming feedback and advanced training.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 8 C10 8 8 14 8 18 C8 26 16 30 16 30 C16 30 22 34 30 30" />
         <circle cx="34" cy="28" r="6" />
         <path d="M20 8 C26 8 28 14 28 18" />
@@ -25,7 +25,7 @@ const capabilities = [
     title: "Time Zones",
     desc: "No worry about calling your respondents at an ungodly hour. Allow CATI to manage various timezones based on your users' demographics.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="16" />
         <path d="M24 8 V24 L32 32" />
         <path d="M8 24 H40" strokeDasharray="3 3" />
@@ -37,7 +37,7 @@ const capabilities = [
     title: "Data Security",
     desc: "With strong firewalls and secure file sharing, your call records and user data are in safe hands. No distortion, no leaks, no loss. Complete data integrity.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 6 L38 12 V24 C38 33 31 40 24 42 C17 40 10 33 10 24 V12 Z" />
         <path d="M18 24 L22 28 L30 20" />
       </svg>
@@ -47,7 +47,7 @@ const capabilities = [
     title: "Turnaround Efficiency",
     desc: "Save over 30% of your time by commissioning a CATI project with us and still get qualitative market research data.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="16" />
         <path d="M24 14 V24 L30 30" />
         <path d="M14 8 L10 4 M34 8 L38 4" />
@@ -59,7 +59,7 @@ const capabilities = [
     title: "Predictive Dialing",
     desc: "CATI software helps establish an automatic call connection between the first available agent and your respondent.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 8 C14 8 10 10 10 16 C10 30 18 38 32 38 C38 38 40 34 40 34 L34 28 L28 30 C28 30 26 28 22 24 C18 20 16 18 16 18 L18 12 Z" />
         <path d="M30 8 C34 8 40 14 40 20" />
         <path d="M30 14 C32 14 36 18 36 20" />
@@ -70,7 +70,7 @@ const capabilities = [
     title: "Agent Assist",
     desc: "Chat with your interviewers, broadcast messages to an individual or all, and hand-hold them through the initial phase by setting program rules.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="16" r="8" />
         <path d="M10 40 C10 32 16 28 24 28 C32 28 38 32 38 40" />
         <path d="M30 20 L36 14 M36 14 L42 20 M36 14 V28" />
@@ -157,7 +157,7 @@ export default function CatiPage() {
     <main className="bg-white">
 
       {/* ════════ HERO — video banner ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
+      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative w-full max-w-7xl mx-auto px-6">
@@ -184,11 +184,11 @@ export default function CatiPage() {
       <section className="bg-white pt-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
               Erase Complexities from Data Collection with CATI
             </h2>
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
           </div>
           <p className="mt-4 text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
             Software driven calls for user feedback. Quality data with swift turnaround, anytime, from anywhere. That&apos;s what computer aided telephone interviews brings.
@@ -225,7 +225,7 @@ export default function CatiPage() {
                 {...fadeUp(0.08 * i)}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5">
                   {cap.icon}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-3">{cap.title}</h3>
@@ -240,7 +240,7 @@ export default function CatiPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
-            <p className="text-accent font-semibold uppercase text-sm mb-2">FAQs</p>
+            <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
           </motion.div>
           <div className="space-y-3">
@@ -291,7 +291,7 @@ export default function CatiPage() {
               <p className="text-gray-500 text-sm max-w-sm">Thank you! Our team will get back to you shortly to discuss your CATI project.</p>
               <button
                 onClick={() => { setSubmitted(false); setFields({ name: "", company: "", location: "", email: "", jobTitle: "", projectLocation: "", description: "", message: "" }); setFileName(""); setCaptcha(false); }}
-                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-accent transition-colors"
+                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary transition-colors"
               >
                 Submit Another
               </button>
@@ -367,7 +367,7 @@ export default function CatiPage() {
                 <label className="block text-sm font-semibold text-gray-900 mb-3">Project Upload</label>
                 <div
                   onClick={() => fileRef.current?.click()}
-                  className="cursor-pointer border-2 border-dashed border-gray-200 rounded-2xl p-10 flex flex-col items-center justify-center gap-3 hover:border-accent transition-colors"
+                  className="cursor-pointer border-2 border-dashed border-gray-200 rounded-2xl p-10 flex flex-col items-center justify-center gap-3 hover:border-primary transition-colors"
                 >
                   <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center">
                     <Upload className="w-6 h-6 text-gray-400" />
@@ -402,7 +402,7 @@ export default function CatiPage() {
 
               {/* Submit */}
               <div className="flex justify-center">
-                <button type="submit" className="cursor-pointer bg-primary hover:bg-accent text-white font-bold px-14 py-3.5 rounded-xl transition-colors duration-300 text-sm flex items-center gap-2">
+                <button type="submit" className="cursor-pointer bg-primary hover:bg-primary text-white font-bold px-14 py-3.5 rounded-xl transition-colors duration-300 text-sm flex items-center gap-2">
                   Request A Proposal <span className="text-base">»</span>
                 </button>
               </div>

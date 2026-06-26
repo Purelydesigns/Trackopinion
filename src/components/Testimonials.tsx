@@ -52,14 +52,14 @@ export default function Testimonials() {
 
           <button
             id="testimonial-prev"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
 
           <button
             id="testimonial-next"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
           >
             <ArrowRight className="w-5 h-5" />
           </button>
@@ -83,7 +83,7 @@ export default function Testimonials() {
                   {/* Stars */}
                   <div className="flex gap-1 mb-5">
                     {Array.from({ length: t.rating }).map((_, s) => (
-                      <Star key={s} className="w-5 h-5 fill-accent text-accent" />
+                      <Star key={s} className="w-5 h-5 fill-primary text-primary" />
                     ))}
                   </div>
                   {/* Review */}

@@ -138,11 +138,11 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
           {pins.map((pin, i) => (
             <Marker key={i} coordinates={pin.coordinates}>
               <g onClick={() => handleClick(i)} style={{ cursor: "pointer" }}>
-                <circle r={6} fill="#f97316" opacity={0.3}>
+                <circle r={6} fill="var(--color-primary)" opacity={0.3}>
                   <animate attributeName="r"       from="5"  to="12" dur="1.6s" repeatCount="indefinite" />
                   <animate attributeName="opacity" from="0.3" to="0" dur="1.6s" repeatCount="indefinite" />
                 </circle>
-                <circle r={5} fill="#f97316" stroke="#fff" strokeWidth={1.5} />
+                <circle r={5} fill="var(--color-primary)" stroke="#fff" strokeWidth={1.5} />
               </g>
 
               {active === i && (
@@ -174,7 +174,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
                         flexShrink: 0,
                       }}
                     />
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#f97316" }}>
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--color-primary)" }}>
                       {pin.name}
                     </span>
                     {/* Arrow */}
@@ -203,7 +203,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
         <div className="flex justify-center mt-6">
           <Link
             href="/contact"
-            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-accent transition-all duration-300 shadow hover:-translate-y-0.5"
+            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-primary transition-all duration-300 shadow hover:-translate-y-0.5"
           >
             KNOW MORE
           </Link>

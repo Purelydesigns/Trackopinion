@@ -6,25 +6,22 @@ import { motion, useInView } from "framer-motion";
 
 const stories = [
   {
-    category: "Avertisisng",
-    categoryColor: "bg-orange-100 text-orange-600",
-    title: "Signs YourAPP Spying On You",
+    category: "Advertising",
+    title: "How a Global Brand Doubled Campaign ROI with Concept Testing",
     excerpt:
-      "Samsung is the second most popular manufacturer of smartphones in the world, with a market share of 28.19% compared to Apple's 28.43% as...",
+      "By testing three creative directions with 1,200 target consumers across five markets, our client refined messaging before launch — saving 40% of media spend.",
   },
   {
     category: "FMCG",
-    categoryColor: "bg-blue-100 text-blue-600",
-    title: "Signs YourAPP Spying On You",
+    title: "Unlocking 3 New Market Opportunities for an FMCG Giant",
     excerpt:
-      "Samsung is the second most popular manufacturer of smartphones in the world, with a market share of 28.19% compared to Apple's 28.43% as...",
+      "A 12-market segmentation study identified three high-value consumer clusters — unlocking $200M in addressable revenue for our client.",
   },
   {
     category: "Automobile",
-    categoryColor: "bg-purple-100 text-purple-600",
-    title: "Signs YourAPP Spying On You",
+    title: "EV Purchase Intent Tracker Across 8 Key Markets",
     excerpt:
-      "Samsung is the second most popular manufacturer of smartphones in the world, with a market share of 28.19% compared to Apple's 28.43% as...",
+      "A quarterly tracking study monitoring EV consideration, barriers and brand preference among 4,800 auto-intenders across three consecutive waves.",
   },
 ];
 
@@ -43,8 +40,9 @@ export default function SuccessStories() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
+          <p className="text-primary text-sm font-bold uppercase tracking-widest mb-2">Compilation of Our Success Stories</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-primary">
-            Compilation of Our Success Stories
+            Research that moved the needle
           </h2>
         </motion.div>
 
@@ -55,23 +53,38 @@ export default function SuccessStories() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 * i, duration: 0.5 }}
-              whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.10)" }}
-              className="bg-white rounded-2xl shadow-md p-8 cursor-pointer"
+              whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(13,27,62,0.12)" }}
+              className="bg-white rounded-2xl shadow-sm overflow-hidden cursor-pointer flex flex-col"
             >
-              {/* Category */}
-              <span className={`inline-block text-xs font-bold rounded-full px-3 py-1 mb-4 ${story.categoryColor}`}>
-                {story.category}
-              </span>
+              {/* Thick navy top bar */}
+              <div className="h-1.5 bg-primary rounded-t-2xl" />
 
-              {/* Title */}
-              <h3 className="text-primary font-bold text-lg leading-snug mb-4">
-                {story.title}
-              </h3>
+              <div className="p-7 flex flex-col flex-1">
+                {/* Category */}
+                <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">
+                  {story.category}
+                </p>
 
-              {/* Excerpt */}
-              <p className="text-gray-900 text-base leading-8 font-medium">
-                {story.excerpt}
-              </p>
+                {/* Title */}
+                <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">
+                  {story.title}
+                </h3>
+
+                {/* Excerpt */}
+                <p className="text-gray-600 text-sm leading-7 font-medium flex-1 mb-6">
+                  {story.excerpt}
+                </p>
+
+                {/* Footer */}
+                <div className="border-t border-gray-200 pt-4">
+                  <Link
+                    href="/case-studies"
+                    className="text-primary text-sm font-bold hover:gap-2 flex items-center gap-1 transition-all duration-200"
+                  >
+                    Read case study →
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -171,8 +171,8 @@ function FieldError({ msg }: { msg: string }) {
 
 function IconBox() {
   return (
-    <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5 shrink-0">
-      <svg viewBox="0 0 24 24" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="9" r="3.5" />
         <path d="M18 20c0-3.314-2.686-6-6-6s-6 2.686-6 6" />
         <path d="M17 7a2 2 0 110-4 2 2 0 010 4M7 7a2 2 0 110-4 2 2 0 010 4" strokeDasharray="2 2" />
@@ -227,7 +227,7 @@ export default function HealthcarePage() {
     <main className="bg-white">
 
       {/* ════════ HERO BANNER — same as About Us ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
+      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative w-full max-w-7xl mx-auto px-6">
@@ -254,11 +254,11 @@ export default function HealthcarePage() {
       <section className="bg-white pt-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
               Dig Deeper into Patient&apos;s and Practitioners Experience
             </h2>
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
           </div>
           <div className="mt-6 border-b-2 border-gray-200" />
         </div>
@@ -366,7 +366,7 @@ export default function HealthcarePage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
-            <p className="text-accent font-semibold uppercase text-sm mb-2">FAQs</p>
+            <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
           </motion.div>
           <div className="space-y-3">
@@ -419,7 +419,7 @@ export default function HealthcarePage() {
               </p>
               <button
                 onClick={() => { setSubmitted(false); setFields({ name: "", company: "", designation: "", email: "" }); setFileName(""); setCaptcha(false); }}
-                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-accent transition-colors"
+                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary transition-colors"
               >
                 Submit Another
               </button>
@@ -472,7 +472,7 @@ export default function HealthcarePage() {
 
               {/* Submit */}
               <div className="flex justify-center">
-                <button type="submit" className="cursor-pointer bg-primary hover:bg-accent text-white font-bold px-12 py-3.5 rounded-xl transition-colors duration-300 text-sm flex items-center gap-2">
+                <button type="submit" className="cursor-pointer bg-primary hover:bg-primary text-white font-bold px-12 py-3.5 rounded-xl transition-colors duration-300 text-sm flex items-center gap-2">
                   Submit <span className="text-base">»</span>
                 </button>
               </div>

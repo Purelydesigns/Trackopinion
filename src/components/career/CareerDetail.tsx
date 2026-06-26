@@ -81,8 +81,8 @@ export default function CareerDetail({ job }: { job: Job }) {
   return (
     <main>
       {/* ── Banner ── */}
-      <div className="bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="-mt-[76px] bg-primary py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,7 +155,7 @@ export default function CareerDetail({ job }: { job: Job }) {
                   </p>
                   <Link
                     href="/career"
-                    className="cursor-pointer mt-4 px-8 py-3 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-accent transition-colors"
+                    className="cursor-pointer mt-4 px-8 py-3 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary transition-colors"
                   >
                     ← Back to Jobs
                   </Link>
@@ -262,7 +262,7 @@ export default function CareerDetail({ job }: { job: Job }) {
                     </Link>
                     <button
                       type="submit"
-                      className="cursor-pointer bg-primary hover:bg-accent text-white font-semibold px-10 py-3.5 rounded-lg transition-colors duration-300 text-sm"
+                      className="cursor-pointer bg-primary hover:bg-primary text-white font-semibold px-10 py-3.5 rounded-lg transition-colors duration-300 text-sm"
                     >
                       Send your Resume »
                     </button>

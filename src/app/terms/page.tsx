@@ -40,8 +40,8 @@ export default function TermsPage() {
   return (
     <main>
       {/* ── Dark navy header ── */}
-      <div className="bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="-mt-[76px] bg-primary py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <h1 className="text-2xl md:text-3xl font-bold text-white">Terms of Service</h1>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function TermsPage() {
               Please read the following Terms of Use carefully. Track Opinion, including its
               subsidiaries and affiliates (&quot;Track Opinion&quot;), requires that all visitors to the
               website available at{" "}
-              <Link href="https://trackopinion.com/" className="text-accent underline hover:text-orange-700">
+              <Link href="https://trackopinion.com/" className="text-primary underline hover:text-primary">
                 https://trackopinion.com/
               </Link>{" "}
               (the &quot;Platform&quot;) adhere to the following Terms of Use. By accessing and using

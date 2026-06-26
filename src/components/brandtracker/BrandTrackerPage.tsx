@@ -43,7 +43,7 @@ function MockupBrandHealth() {
       <div className="bg-white rounded-2xl shadow-lg p-6 w-72 space-y-4">
         <div className="flex items-center justify-between">
           <p className="font-bold text-gray-900 text-base">Brand Health Score</p>
-          <span className="text-accent font-black text-xl">82%</span>
+          <span className="text-primary font-black text-xl">82%</span>
         </div>
         <div className="space-y-2">
           {[
@@ -139,7 +139,7 @@ const capabilities = [
     title: "Brand Awareness Tracking",
     desc: "Monitor prompted and unprompted brand recall across geographies and audience segments. Understand how your advertising and PR investments translate into top-of-mind awareness.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <ellipse cx="24" cy="24" rx="20" ry="12" />
         <circle cx="24" cy="24" r="5" />
         <circle cx="24" cy="24" r="2" fill="currentColor" stroke="none" />
@@ -150,7 +150,7 @@ const capabilities = [
     title: "Brand Perception Study",
     desc: "Map consumer perceptions of your brand on key attributes — quality, trust, innovation, value — and compare against competitors to identify positioning strengths and gaps.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 36c0-8 4-14 12-16 8 2 12 8 12 16" />
         <line x1="24" y1="20" x2="24" y2="10" />
         <circle cx="24" cy="8" r="3" />
@@ -163,7 +163,7 @@ const capabilities = [
     title: "Campaign Effectiveness",
     desc: "Measure the before-and-after impact of marketing campaigns on awareness, message recall, and purchase intent. Prove ROI and optimize spend allocation for future waves.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="6 34 16 22 24 28 34 14 42 18" />
         <polyline points="34 14 42 14 42 22" />
         <line x1="6" y1="42" x2="42" y2="42" />
@@ -174,7 +174,7 @@ const capabilities = [
     title: "Customer Loyalty Index",
     desc: "Gauge loyalty and advocacy levels through NPS, repurchase intent, and brand love metrics. Identify at-risk segments before churn impacts revenue.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 40 C12 32 6 24 6 16a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 8-6 16-18 24z" />
       </svg>
     ),
@@ -183,7 +183,7 @@ const capabilities = [
     title: "Audience Segmentation",
     desc: "Dissect tracker results by demographics, psychographics, and purchase behavior to uncover which audiences are most and least engaged with your brand.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="16" cy="18" r="6" />
         <circle cx="32" cy="18" r="6" />
         <path d="M6 40c0-6 4-10 10-10h4" />
@@ -196,7 +196,7 @@ const capabilities = [
     title: "Competitor Share of Voice",
     desc: "Track competitor brand recall and sentiment alongside your own data. Spot category shifts early and respond faster than the market expects.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 8 L8 40 L40 40" />
         <rect x="12" y="28" width="6" height="12" rx="1" />
         <rect x="22" y="18" width="6" height="22" rx="1" />
@@ -287,7 +287,7 @@ const faqs = [
 const resources = [
   { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality", gradient: "from-blue-400 to-indigo-500" },
   { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research", gradient: "from-orange-300 to-rose-400" },
+  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research", gradient: "from-blue-200 to-blue-400" },
   { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies", gradient: "from-teal-400 to-cyan-600" },
   { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects", gradient: "from-violet-500 to-purple-700" },
 ];
@@ -299,7 +299,7 @@ export default function BrandTrackerPage() {
     <main className="bg-white">
 
       {/* ════════ BANNER — video, same as About Us ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
+      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video
           src="/video/banner.mp4"
           autoPlay loop muted playsInline
@@ -333,9 +333,9 @@ export default function BrandTrackerPage() {
       <section className="bg-white pt-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">Track Your Brand&#39;s Pulse in Real Time</h2>
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
           </div>
           <p className="mt-4 text-gray-900 text-base max-w-3xl mx-auto leading-8 font-medium">
             Brand equity is not built overnight — and it doesn&#39;t erode overnight either. But when it does shift, you need to know immediately. Track Opinion&#39;s Brand Image Study delivers consistent, wave-based measurement so your decisions are always anchored in current reality, not last year&#39;s data.
@@ -354,8 +354,8 @@ export default function BrandTrackerPage() {
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${!isLeft ? "md:[direction:rtl]" : ""}`}>
                 <motion.div {...fadeUp(0)} className="[direction:ltr]">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0">
-                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="8" r="4" /><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none" /><path d="M5 20c0-4 3-6 7-6s7 2 7 6" />
                       </svg>
                     </div>
@@ -387,7 +387,7 @@ export default function BrandTrackerPage() {
                 {...fadeUp(0.08 * i)}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5 shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
                   {cap.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{cap.title}</h3>
@@ -402,7 +402,7 @@ export default function BrandTrackerPage() {
       <section className="bg-primary py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div {...fadeUp()}>
-            <p className="text-accent font-bold uppercase text-sm tracking-widest mb-3">Project Management</p>
+            <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">Project Management</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-12">A dedicated team available around the clock</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -412,7 +412,7 @@ export default function BrandTrackerPage() {
                   <span className="text-white text-2xl font-black">{step.num}</span>
                 </div>
                 <p className="text-white font-extrabold uppercase text-sm tracking-wider mb-1">{step.title}</p>
-                <p className="text-accent text-sm font-semibold underline mb-3">{step.subtitle}</p>
+                <p className="text-primary text-sm font-semibold underline mb-3">{step.subtitle}</p>
                 <p className="text-white/80 text-base leading-8 font-medium">{step.desc}</p>
               </motion.div>
             ))}
@@ -526,7 +526,7 @@ export default function BrandTrackerPage() {
             <div className="shrink-0">
               <Link
                 href="/contact-us"
-                className="bg-primary hover:bg-accent text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+                className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Contact Us
               </Link>

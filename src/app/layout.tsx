@@ -93,7 +93,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${montserrat.className} min-h-full flex flex-col`}>
         <Navbar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 pt-[76px]">{children}</div>
         <Footer />
       </body>
     </html>

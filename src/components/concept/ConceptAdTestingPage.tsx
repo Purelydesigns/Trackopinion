@@ -42,7 +42,7 @@ const capabilities = [
     title: "Concept Testing",
     desc: "Test your product idea at an early stage in development. Avoid expensive setbacks by obtaining users' input before investing in marketing, ads, and sales.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
         <path d="M20 32v2a4 4 0 0 0 8 0v-2" />
         <line x1="24" y1="6" x2="24" y2="2" />
@@ -57,7 +57,7 @@ const capabilities = [
     title: "Ad Testing",
     desc: "Dodge expensive marketing failures. Test your advert design with a handful of sample users and tweak your ad before you actually launch it.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
         <path d="M32 18c3 1.5 5 4 5 6s-2 4.5-5 6" />
         <path d="M14 32v8" />
@@ -68,7 +68,7 @@ const capabilities = [
     title: "Relaunch Testing",
     desc: "Planning to relaunch a product or service? Find a panel that suits your target audience, and test your remodeled product, design, idea, or packaging.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M40 24a16 16 0 1 1-3.5-10" />
         <polyline points="40 10 40 24 26 24" />
       </svg>
@@ -78,7 +78,7 @@ const capabilities = [
     title: "GTM Strategy",
     desc: "Define your go-to-market approach by testing the concept and ads. Learn what resonated with potential users and what needs tweaking before marketing.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 44 L24 20 L38 8 L38 32 Z" />
         <path d="M24 20 L10 14 L24 8" />
         <line x1="10" y1="14" x2="10" y2="38" />
@@ -91,7 +91,7 @@ const capabilities = [
     title: "Risk Mitigation",
     desc: "Testing your product at the early stages of ideation, designing, and development helps you curb potential risks and failure points and plan for mitigation.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 4L6 12v14c0 10 8 18 18 20 10-2 18-10 18-20V12Z" />
         <polyline points="16 24 21 29 32 18" />
       </svg>
@@ -101,7 +101,7 @@ const capabilities = [
     title: "Market Fit",
     desc: "Know what the industry needs to fill the existing gaps. Use the feedback from concept testing research and make your product more fit for the users.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="20" />
         <circle cx="24" cy="24" r="12" />
         <circle cx="24" cy="24" r="4" />
@@ -181,7 +181,7 @@ const faqs = [
 const resources = [
   { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality", gradient: "from-blue-400 to-indigo-500" },
   { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research", gradient: "from-orange-300 to-rose-400" },
+  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research", gradient: "from-blue-200 to-blue-400" },
   { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies", gradient: "from-teal-400 to-cyan-600" },
   { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects", gradient: "from-violet-500 to-purple-700" },
 ];
@@ -193,7 +193,7 @@ export default function ConceptAdTestingPage() {
     <main className="bg-white">
 
       {/* ════════ BANNER — video, same as About Us ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
+      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video
           src="/video/banner.mp4"
           autoPlay loop muted playsInline
@@ -234,7 +234,7 @@ export default function ConceptAdTestingPage() {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
               >
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5 shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
                   {cap.icon}
                 </div>
                 {/* Heading — larger */}
@@ -252,8 +252,8 @@ export default function ConceptAdTestingPage() {
         <section key={i} className="bg-white py-10">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div {...fadeUp()} className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="24" cy="16" r="8" /><circle cx="24" cy="16" r="3" /><path d="M10 40 C10 31 38 31 38 40" />
                 </svg>
               </div>
@@ -273,7 +273,7 @@ export default function ConceptAdTestingPage() {
       <section className="bg-primary py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div {...fadeUp()}>
-            <p className="text-accent font-bold uppercase text-sm tracking-widest mb-3">
+            <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">
               Unique Product Concept Testing and Creative Ad Testing Methods
             </p>
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-12 max-w-2xl mx-auto leading-snug">
@@ -400,7 +400,7 @@ export default function ConceptAdTestingPage() {
             <div className="shrink-0">
               <Link
                 href="/contact-us"
-                className="bg-primary hover:bg-accent text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+                className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Contact Us
               </Link>

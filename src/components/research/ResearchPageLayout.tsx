@@ -83,7 +83,7 @@ function MockupCards() {
         <div className="absolute left-0 top-4 w-52 h-52 bg-white/70 rounded-2xl shadow p-4 opacity-70">
           <p className="font-bold text-gray-700 text-base">Research</p>
           <p className="text-gray-400 text-xs mt-1">Analysis & Research....</p>
-          <p className="text-accent text-xs font-semibold mt-1 underline">Results</p>
+          <p className="text-primary text-xs font-semibold mt-1 underline">Results</p>
           <div className="mt-3 h-16 flex items-end gap-1">
             {[30, 50, 35, 65, 45, 70, 40].map((h, i) => (
               <div key={i} className="flex-1 bg-green-300/60 rounded-sm" style={{ height: `${h}%` }} />
@@ -93,13 +93,13 @@ function MockupCards() {
         <div className="absolute right-0 top-4 w-52 h-52 bg-white/70 rounded-2xl shadow p-4 opacity-70">
           <p className="font-bold text-gray-700 text-base">Research</p>
           <p className="text-gray-400 text-xs mt-1">Analysis & Research....</p>
-          <p className="text-accent text-xs font-semibold mt-1 underline">Results</p>
+          <p className="text-primary text-xs font-semibold mt-1 underline">Results</p>
         </div>
         {/* Front card */}
         <div className="absolute left-1/2 -translate-x-1/2 top-0 w-52 bg-white rounded-2xl shadow-xl p-4 z-10">
           <p className="font-bold text-gray-900 text-base">Research</p>
           <p className="text-gray-400 text-xs mt-1">Analysis & Research....</p>
-          <p className="text-accent text-xs font-semibold mt-1 underline">Results</p>
+          <p className="text-primary text-xs font-semibold mt-1 underline">Results</p>
           <div className="mt-3 h-20 flex items-end gap-1">
             {[40, 65, 30, 80, 50, 90, 45, 70].map((h, i) => (
               <div key={i} className="flex-1 bg-green-400/70 rounded-sm" style={{ height: `${h}%` }} />
@@ -121,7 +121,7 @@ function MockupCircles() {
           { label: "Influences",     offset: "ml-[-20px]" },
         ].map(({ label, offset }, i) => (
           <div key={i} className={`w-28 h-28 rounded-full border-4 border-dashed border-white/60 bg-[#c8d2e8] flex items-center justify-center ${offset}`}>
-            <span className="text-accent font-bold text-sm text-center leading-tight whitespace-pre-line">{label}</span>
+            <span className="text-primary font-bold text-sm text-center leading-tight whitespace-pre-line">{label}</span>
           </div>
         ))}
       </div>
@@ -150,8 +150,8 @@ const fadeUp = (delay = 0) => ({
 
 function IconBox() {
   return (
-    <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5 shrink-0">
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="16" r="8" />
         <circle cx="24" cy="16" r="3" />
         <path d="M10 40 C10 31 38 31 38 40" />
@@ -185,7 +185,7 @@ function CountUp({ end, suffix = "", decimals = 0 }: { end: number; suffix?: str
 const resources = [
   { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality",       gradient: "from-blue-400 to-indigo-500" },
   { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?",                          gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research",              gradient: "from-orange-300 to-rose-400" },
+  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research",              gradient: "from-blue-200 to-blue-400" },
   { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies",                        gradient: "from-teal-400 to-cyan-600" },
   { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects",          gradient: "from-violet-500 to-purple-700" },
 ];
@@ -202,8 +202,8 @@ export default function ResearchPageLayout({
     <main className="bg-white">
 
       {/* ════════ BANNER ════════ */}
-      <section className="bg-primary py-16">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <section className="-mt-[76px] bg-primary py-16">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -227,9 +227,9 @@ export default function ResearchPageLayout({
       <section className="bg-white pt-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">{factsHeading}</h2>
-            <span className="text-accent text-xl">●</span>
+            <span className="text-primary text-xl">●</span>
           </div>
           <p className="mt-4 text-gray-900 text-base max-w-3xl mx-auto leading-8 font-medium">{factsDesc}</p>
           <div className="mt-6 border-b-2 border-gray-200" />
@@ -247,8 +247,8 @@ export default function ResearchPageLayout({
                 {/* Text */}
                 <motion.div {...fadeUp(0)} className="[direction:ltr]">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0">
-                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="8" r="4" /><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none" /><path d="M5 20c0-4 3-6 7-6s7 2 7 6" />
                       </svg>
                     </div>
@@ -291,7 +291,7 @@ export default function ResearchPageLayout({
       <section className="bg-primary py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div {...fadeUp()}>
-            <p className="text-accent font-bold uppercase text-sm tracking-widest mb-3">{stepsHeading}</p>
+            <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">{stepsHeading}</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-12">{stepsSubheading}</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -301,7 +301,7 @@ export default function ResearchPageLayout({
                   <span className="text-white text-2xl font-black">{step.num}</span>
                 </div>
                 <p className="text-white font-extrabold uppercase text-sm tracking-wider mb-1">{step.title}</p>
-                <p className="text-accent text-sm font-semibold underline mb-3">{step.subtitle}</p>
+                <p className="text-primary text-sm font-semibold underline mb-3">{step.subtitle}</p>
                 <p className="text-white/80 text-base leading-8 font-medium">{step.desc}</p>
               </motion.div>
             ))}

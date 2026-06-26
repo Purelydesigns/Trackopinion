@@ -76,7 +76,7 @@ export default function WhyBusinesses() {
             <div className="space-y-7 mt-auto">
               <div className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                  <Star className="w-5 h-5 text-accent fill-accent" />
+                  <Star className="w-5 h-5 text-primary fill-primary" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold leading-tight">4.9/5</p>
@@ -86,7 +86,7 @@ export default function WhyBusinesses() {
 
               <div className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                  <Moon className="w-5 h-5 text-accent" />
+                  <Moon className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-xl font-bold leading-tight">Award winner</p>

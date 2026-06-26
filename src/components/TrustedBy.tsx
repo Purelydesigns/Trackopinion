@@ -42,14 +42,14 @@ export default function TrustedBy({
 
         <button
           id={prevId}
-          className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+          className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
 
         <button
           id={nextId}
-          className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-accent transition-colors duration-200 shadow-md"
+          className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
         >
           <ArrowRight className="w-5 h-5" />
         </button>

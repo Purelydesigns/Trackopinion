@@ -172,7 +172,7 @@ export default function SpecializedSectors() {
                   className="flex flex-col items-center gap-3"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.12, backgroundColor: "#f97316" }}
+                    whileHover={{ scale: 1.12 }}
                     className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-300 border-4 border-section"
                   >
                     {sector.icon}

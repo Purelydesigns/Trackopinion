@@ -65,10 +65,10 @@ export default function BlogList() {
   );
 
   return (
-    <div className="bg-primary">
+    <div className="-mt-[76px] bg-primary">
 
       {/* ── Dark navy header ── */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 pt-[calc(76px+2rem)]">
         <div className="relative flex items-center justify-center">
 
           {/* Centered title */}
@@ -136,10 +136,10 @@ export default function BlogList() {
                   <div className="flex items-center gap-2 mb-4">
                     <Calendar className="w-4 h-4 text-gray-400" />
                     <span className="text-sm text-gray-400">{post.date}</span>
-                    <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
                   </div>
 
-                  <h2 className="text-lg font-bold text-gray-900 mb-4 leading-snug group-hover:text-accent transition-colors duration-300">
+                  <h2 className="text-lg font-bold text-gray-900 mb-4 leading-snug group-hover:text-primary transition-colors duration-300">
                     {post.title}
                   </h2>
 
@@ -149,9 +149,9 @@ export default function BlogList() {
 
                   <Link
                     href={`/resources/${post.slug}`}
-                    className="flex items-center gap-3 text-sm font-semibold text-gray-600 group-hover:text-accent transition-colors duration-300 w-fit"
+                    className="flex items-center gap-3 text-sm font-semibold text-gray-600 group-hover:text-primary transition-colors duration-300 w-fit"
                   >
-                    <span className="w-8 h-px bg-gray-400 inline-block group-hover:bg-accent transition-colors duration-300" />
+                    <span className="w-8 h-px bg-gray-400 inline-block group-hover:bg-primary transition-colors duration-300" />
                     Read More
                   </Link>
                 </div>
@@ -180,7 +180,7 @@ export default function BlogList() {
                 className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
                   n === 1
                     ? "bg-primary text-white shadow"
-                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-accent hover:text-white hover:border-accent"
+                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-primary hover:text-white hover:border-primary"
                 }`}
               >
                 {n}

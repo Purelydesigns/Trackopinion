@@ -14,8 +14,7 @@
   /* ── Brand colors ── */
   --color-primary:      #0d1b3e;   /* navy — buttons, headings, active states */
   --color-primary-hover: #162550;  /* navy hover */
-  --color-accent:       #f97316;   /* orange-500 — hover accents */
-  --color-section:      #f0f0f0;   /* light gray — section backgrounds */
+  --color-section:      #fbf9f6;   /* warm off-white — section backgrounds */
   --color-card:         #ffffff;   /* white cards */
   --color-highlight:    #dde4f0;   /* blue-tinted light — stats/newsletter bg */
 }

@@ -126,17 +126,17 @@ const benefits = [
 const techStack = [
   {
     title: "Survey Programming tools",
-    icon: <Database className="w-7 h-7 text-accent" />,
+    icon: <Database className="w-7 h-7 text-primary" />,
     tools: ["Scrip8", "Decipher", "SurveyMonkey"],
   },
   {
     title: "Data Processing & Analysis",
-    icon: <BarChart2 className="w-7 h-7 text-accent" />,
+    icon: <BarChart2 className="w-7 h-7 text-primary" />,
     tools: ["SAS", "SPSS", "Tableau", "Manuscript Excel", "Zoho", "Quantum", "Pandas", "MySQL"],
   },
   {
     title: "Data Reporting and Visualization",
-    icon: <Zap className="w-7 h-7 text-accent" />,
+    icon: <Zap className="w-7 h-7 text-primary" />,
     tools: ["Tableau", "Power BI", "Google Analytics"],
   },
 ];
@@ -179,8 +179,8 @@ function CountUp({ end, decimals, suffix, inView }: { end: number; decimals: num
 /* ── Icon box ── */
 function IconBox() {
   return (
-    <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-4 shrink-0">
-      <svg viewBox="0 0 24 24" className="w-7 h-7 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4 shrink-0">
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="8" r="4" />
         <path d="M12 12v2m0 0a5 5 0 015 5H7a5 5 0 015-5z" />
         <path d="M18 8.5a2 2 0 110-4 2 2 0 010 4M6 8.5a2 2 0 110-4 2 2 0 010 4" strokeDasharray="2 2" />
@@ -203,8 +203,8 @@ export default function AnalyticsPage() {
     <main className="bg-white">
 
       {/* ════════ BANNER ════════ */}
-      <section className="bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <section className="-mt-[76px] bg-primary py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Analytics and Reporting</h1>
           <p className="text-white/90 text-base font-medium">From Opinions to Decisions with Clarity</p>
         </div>
@@ -216,9 +216,9 @@ export default function AnalyticsPage() {
           {/* Heading */}
           <motion.div {...fadeUp()} className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="text-accent text-xl">●</span>
+              <span className="text-primary text-xl">●</span>
               <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-primary">Numbers that Lead to Strategies</h2>
-              <span className="text-accent text-xl">●</span>
+              <span className="text-primary text-xl">●</span>
             </div>
             <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
               Learn your audience&apos;s opinions in depth through complex and elaborate methods like focus group interviews, diary studies, and online surveys with open-ended questions.
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
                     className="flex gap-4"
                   >
                     <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
-                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <circle cx="12" cy="9" r="3.5" />
                         <path d="M18 20c0-3.314-2.686-6-6-6s-6 2.686-6 6" />
                         <path d="M17 7a2 2 0 110-4 2 2 0 010 4M7 7a2 2 0 110-4 2 2 0 010 4" strokeDasharray="2 2" />
@@ -449,7 +449,7 @@ export default function AnalyticsPage() {
                 {...fadeUp(0.08 * i)}
                 className="bg-primary rounded-2xl p-8 flex flex-col"
               >
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 text-accent">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 text-primary">
                   {b.icon}
                 </div>
                 <h3 className="text-white font-bold text-base mb-3">{b.title}</h3>
@@ -465,7 +465,7 @@ export default function AnalyticsPage() {
                 {...fadeUp(0.08 * i)}
                 className="bg-primary rounded-2xl p-8 flex flex-col"
               >
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 text-accent">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 text-primary">
                   {b.icon}
                 </div>
                 <h3 className="text-white font-bold text-base mb-3">{b.title}</h3>
@@ -551,9 +551,9 @@ export default function AnalyticsPage() {
             {[
               { color: "from-blue-100 to-blue-300",    bg: "#e0eaff", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality" },
               { color: "from-violet-400 to-gray-800",  bg: "#6d7cad", title: "Why Your Market Research Needs Custom Survey Programming?" },
-              { color: "from-orange-200 to-rose-300",  bg: "#f4c8b0", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research" },
+              { color: "from-blue-200 to-blue-400",  bg: "#f4c8b0", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research" },
               { color: "from-teal-300 to-cyan-600",    bg: "#81d4e0", title: "How Online Surveys Are Reshaping Consumer Insights in 2026" },
-              { color: "from-amber-200 to-orange-400", bg: "#f9d8a0", title: "Understanding Panellist Fatigue and How to Overcome It" },
+              { color: "from-blue-100 to-blue-200", bg: "#f9d8a0", title: "Understanding Panellist Fatigue and How to Overcome It" },
             ].map((post, i) => (
               <SwiperSlide key={i}>
                 <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 h-full">

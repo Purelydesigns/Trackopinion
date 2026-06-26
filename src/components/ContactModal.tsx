@@ -95,7 +95,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-white/80 text-sm font-semibold mb-2">
-                        First Name<span className="text-orange-400">*</span>
+                        First Name<span className="text-primary">*</span>
                       </label>
                       <input
                         type="text"
@@ -104,12 +104,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         placeholder="First Name"
                         value={form.firstName}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-orange-400 transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-blue-100 transition-colors duration-300"
                       />
                     </div>
                     <div>
                       <label className="block text-white/80 text-sm font-semibold mb-2">
-                        Last Name<span className="text-orange-400">*</span>
+                        Last Name<span className="text-primary">*</span>
                       </label>
                       <input
                         type="text"
@@ -118,7 +118,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         placeholder="Last Name"
                         value={form.lastName}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-orange-400 transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-blue-100 transition-colors duration-300"
                       />
                     </div>
                   </div>
@@ -135,12 +135,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         placeholder="Name"
                         value={form.mobile}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-orange-400 transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-blue-100 transition-colors duration-300"
                       />
                     </div>
                     <div>
                       <label className="block text-white/80 text-sm font-semibold mb-2">
-                        Company Name<span className="text-orange-400">*</span>
+                        Company Name<span className="text-primary">*</span>
                       </label>
                       <input
                         type="text"
@@ -149,7 +149,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         placeholder="Company Name"
                         value={form.company}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-orange-400 transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-blue-100 transition-colors duration-300"
                       />
                     </div>
                   </div>
@@ -165,14 +165,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       placeholder="Let us know how we can help you?"
                       value={form.message}
                       onChange={handleChange}
-                      className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-orange-400 transition-colors duration-300 resize-none"
+                      className="w-full bg-transparent border-b border-white/30 text-white text-sm py-2 placeholder:text-white/30 outline-none focus:border-blue-100 transition-colors duration-300 resize-none"
                     />
                   </div>
 
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="bg-white text-primary font-bold text-sm px-8 py-3 rounded-lg hover:bg-accent hover:text-white transition-all duration-300 flex items-center gap-2"
+                    className="bg-white text-primary font-bold text-sm px-8 py-3 rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2"
                   >
                     Submit <span className="text-base">»</span>
                   </button>

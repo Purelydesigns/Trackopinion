@@ -40,8 +40,8 @@ export default function PrivacyPage() {
   return (
     <main>
       {/* ── Dark navy header ── */}
-      <div className="bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="-mt-[76px] bg-primary py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
           <h1 className="text-2xl md:text-3xl font-bold text-white">Privacy Policy</h1>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
               <Para>
                 Welcome to Track Opinion Research Private Limited, operating under the name Track
                 Opinion. We appreciate your use of our platform available at{" "}
-                <Link href="https://trackopinion.com/" className="text-accent underline hover:text-orange-700">
+                <Link href="https://trackopinion.com/" className="text-primary underline hover:text-primary">
                   https://trackopinion.com
                 </Link>{" "}
                 (&quot;Platform&quot;) and value your privacy. This Privacy Policy (&quot;Policy&quot;) outlines how
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
                 necessary. Please be aware that we do not notify users of Policy reviews, so we
                 encourage you to visit this page frequently to stay informed about any changes. This
                 Policy should be read in conjunction with our{" "}
-                <Link href="/terms" className="text-accent underline hover:text-orange-700">
+                <Link href="/terms" className="text-primary underline hover:text-primary">
                   Terms of Use
                 </Link>{" "}
                 and other applicable policies.
@@ -89,7 +89,7 @@ export default function PrivacyPage() {
                 By sharing your personal data with us, you gain access to targeted research
                 opportunities, contribute to product and service enhancements. If you have any
                 inquiries about our privacy practices or this Policy, please reach out to us at{" "}
-                <Link href="mailto:updates@trackopinion.com" className="text-accent underline hover:text-orange-700">
+                <Link href="mailto:updates@trackopinion.com" className="text-primary underline hover:text-primary">
                   updates@trackopinion.com.
                 </Link>
               </Para>
@@ -332,7 +332,7 @@ export default function PrivacyPage() {
               <Para>
                 If you believe that we have inadvertently collected personal information from a
                 child without proper consent, please contact us at{" "}
-                <Link href="mailto:updates@trackopinion.com" className="text-accent underline hover:text-orange-700">
+                <Link href="mailto:updates@trackopinion.com" className="text-primary underline hover:text-primary">
                   updates@trackopinion.com,
                 </Link>{" "}
                 and we will take immediate action to remove such information from our records.
@@ -378,7 +378,7 @@ export default function PrivacyPage() {
                 <CheckItem label="Right to Erasure:">
                   Under certain conditions, you have the right to request the erasure of your
                   personal data from our Platform. Please contact us at{" "}
-                  <Link href="mailto:updates@trackopinion.com" className="text-accent underline hover:text-orange-700">
+                  <Link href="mailto:updates@trackopinion.com" className="text-primary underline hover:text-primary">
                     updates@trackopinion.com
                   </Link>{" "}
                   to make this request.
@@ -435,7 +435,7 @@ export default function PrivacyPage() {
                 If you have any questions about this Policy or our practices, please contact us at:
               </Para>
               <Para>
-                <Link href="mailto:updates@trackopinion.com" className="text-accent underline hover:text-orange-700">
+                <Link href="mailto:updates@trackopinion.com" className="text-primary underline hover:text-primary">
                   updates@trackopinion.com
                 </Link>
               </Para>
@@ -445,7 +445,7 @@ export default function PrivacyPage() {
               <Para>
                 If you have any questions, concerns, or requests regarding this Policy or Track
                 Opinion&apos;s privacy practices, please contact us at{" "}
-                <Link href="mailto:updates@trackopinion.com" className="text-accent underline hover:text-orange-700">
+                <Link href="mailto:updates@trackopinion.com" className="text-primary underline hover:text-primary">
                   updates@trackopinion.com.
                 </Link>{" "}
                 We will be glad to assist you and address any issues promptly.

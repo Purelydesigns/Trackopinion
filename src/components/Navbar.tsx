@@ -40,7 +40,7 @@ const solutions = [
     icon: Building2,
     href: "/contact-us",
     desc: "Strategic insights for large-scale businesses",
-    color: "bg-orange-50 text-orange-600",
+    color: "bg-blue-50 text-primary",
     children: [
       { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",  href: "/solutions/product-concept-and-ad-testing" },
       { label: "Customer Loyalty Measurement",          icon: ShieldCheck, desc: "Measure & grow retention",      href: "/solutions/customer-loyalty-measurement" },
@@ -128,23 +128,29 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const isTransparent = !scrolled;
+
   const linkCls = (label: string) =>
     `text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
       active === label
-        ? "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
-        : "text-gray-600 hover:text-[#1a1a4e]"
+        ? isTransparent
+          ? "text-white [box-shadow:0_2px_0_0_white]"
+          : "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
+        : isTransparent
+          ? "text-white/90 hover:text-white"
+          : "text-gray-600 hover:text-[#1a1a4e]"
     }`;
 
   const hovered   = solutions[hoveredIdx];
   const HovIcon   = hovered?.icon ?? Globe;
 
   return (
-    <nav className={`bg-section sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 w-full z-50 py-3 px-6 transition-all duration-300">
+      <div className={`max-w-7xl mx-auto px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
 
         {/* ── Logo ── */}
         <Link href="/">
-          <img src="/logo.png" alt="Track Opinion" className="h-11 w-auto object-contain" />
+          <img src="/logo.png" alt="Track Opinion" className="h-14 w-auto object-contain transition-all duration-300" style={isTransparent ? { filter: "brightness(0) invert(1)" } : {}} />
         </Link>
 
         {/* ── Desktop Nav ── */}
@@ -158,8 +164,12 @@ export default function Navbar() {
               onClick={() => setDropOpen((p) => !p)}
               className={`cursor-pointer flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
                 active === "SOLUTIONS"
-                  ? "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
-                  : "text-gray-600 hover:text-[#1a1a4e]"
+                  ? isTransparent
+                    ? "text-white [box-shadow:0_2px_0_0_white]"
+                    : "text-[#1a1a4e] [box-shadow:0_2px_0_0_#1a1a4e]"
+                  : isTransparent
+                    ? "text-white/90 hover:text-white"
+                    : "text-gray-600 hover:text-[#1a1a4e]"
               }`}
             >
               SOLUTIONS
@@ -168,7 +178,7 @@ export default function Navbar() {
 
             {/* ── Mega-menu panel ── */}
             <div
-              className={`absolute top-[calc(100%+14px)] left-1/2 -translate-x-[45%] w-[760px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden transition-all duration-250 origin-top ${
+              className={`absolute top-[calc(100%+10px)] left-1/2 -translate-x-[45%] w-[760px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden transition-all duration-250 origin-top ${
                 dropOpen
                   ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
                   : "opacity-0 scale-[0.97] -translate-y-2 pointer-events-none"
@@ -206,7 +216,7 @@ export default function Navbar() {
                           </p>
                         </div>
                         {item.children.length > 0 && (
-                          <ChevronRight className={`w-4 h-4 shrink-0 ml-1 ${isActive ? "text-white" : "text-orange-400"}`} />
+                          <ChevronRight className={`w-4 h-4 shrink-0 ml-1 ${isActive ? "text-white" : "text-primary"}`} />
                         )}
                       </button>
                     );
@@ -229,7 +239,7 @@ export default function Navbar() {
                       <Link
                         href={hovered?.href ?? "/solutions"}
                         onClick={() => setDropOpen(false)}
-                        className="ml-auto flex items-center gap-1 text-xs font-semibold text-accent hover:text-orange-600 transition-colors"
+                        className="ml-auto flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary transition-colors"
                       >
                         Explore <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
@@ -253,12 +263,12 @@ export default function Navbar() {
                                 <CIcon className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors duration-200" />
                               </span>
                               <div>
-                                <p className="text-sm font-semibold text-gray-800 group-hover:text-accent transition-colors duration-150 leading-tight">
+                                <p className="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors duration-150 leading-tight">
                                   {child.label}
                                 </p>
                                 <p className="text-xs text-gray-400 mt-0.5">{child.desc}</p>
                               </div>
-                              <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-orange-400 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-150" />
+                              <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-primary ml-auto opacity-0 group-hover:opacity-100 transition-all duration-150" />
                             </Link>
                           );
                         })}
@@ -274,7 +284,7 @@ export default function Navbar() {
                         <Link
                           href={hovered?.href ?? "/solutions"}
                           onClick={() => setDropOpen(false)}
-                          className="inline-flex items-center gap-2 bg-primary hover:bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full transition-colors duration-200"
+                          className="inline-flex items-center gap-2 bg-primary hover:bg-primary text-white text-xs font-semibold px-5 py-2 rounded-full transition-colors duration-200"
                         >
                           Learn More <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
@@ -288,7 +298,7 @@ export default function Navbar() {
                     <Link
                       href="/contact-us"
                       onClick={() => setDropOpen(false)}
-                      className="text-xs font-bold text-accent hover:text-orange-600 flex items-center gap-1 transition-colors"
+                      className="text-xs font-bold text-primary hover:text-primary flex items-center gap-1 transition-colors"
                     >
                       Talk to an expert <ArrowRight className="w-3 h-3" />
                     </Link>
@@ -309,10 +319,10 @@ export default function Navbar() {
         <div ref={bellRef} className="relative">
           <button
             onClick={() => setBellOpen((p) => !p)}
-            className="cursor-pointer relative p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+            className={`cursor-pointer relative p-2 rounded-full border-2 transition-all duration-200 ${bellOpen ? "bg-white border-white" : isTransparent ? "border-white/60 hover:border-white bg-white/10" : "border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50"}`}
           >
-            <Bell className={`w-5 h-5 transition-colors ${bellOpen ? "text-[#1a1a4e]" : "text-gray-600"}`} />
-            <span className="absolute top-0.5 right-0.5 bg-[#1a1a4e] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+            <Bell className={`w-4 h-4 transition-colors ${bellOpen ? "text-[#1a1a4e]" : isTransparent ? "text-white" : "text-gray-600"}`} strokeWidth={bellOpen ? 2.5 : 1.8} />
+            <span className={`absolute -top-1.5 -right-1.5 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ${isTransparent ? "bg-primary ring-white/20" : "bg-[#1a1a4e] ring-white"}`}>
               0
             </span>
           </button>
@@ -348,7 +358,7 @@ export default function Navbar() {
               <span className="text-xs text-gray-400">Stay tuned for updates</span>
               <button
                 onClick={() => setBellOpen(false)}
-                className="text-xs font-semibold text-accent hover:text-orange-600 transition-colors"
+                className="text-xs font-semibold text-primary hover:text-primary transition-colors"
               >
                 Dismiss
               </button>
@@ -361,9 +371,9 @@ export default function Navbar() {
           className="xl:hidden flex flex-col gap-1.5 p-1"
           onClick={() => setMenuOpen(true)}
         >
-          <span className="w-6 h-0.5 bg-gray-600 rounded-full transition-all" />
-          <span className="w-5 h-0.5 bg-gray-600 rounded-full transition-all" />
-          <span className="w-6 h-0.5 bg-gray-600 rounded-full transition-all" />
+          <span className={`w-6 h-0.5 rounded-full transition-all ${isTransparent ? "bg-white" : "bg-gray-600"}`} />
+          <span className={`w-5 h-0.5 rounded-full transition-all ${isTransparent ? "bg-white" : "bg-gray-600"}`} />
+          <span className={`w-6 h-0.5 rounded-full transition-all ${isTransparent ? "bg-white" : "bg-gray-600"}`} />
         </button>
         </div>
       </div>
@@ -412,7 +422,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={`flex items-center px-4 py-3 text-sm font-semibold transition-colors ${
                   active === link.label
-                    ? "text-primary font-bold border-l-4 border-accent pl-3"
+                    ? "text-primary font-bold border-l-4 border-primary pl-3"
                     : "text-black hover:text-primary hover:bg-white/30 hover:rounded-xl"
                 }`}
               >
@@ -431,7 +441,7 @@ export default function Navbar() {
               </button>
 
               <div className={`overflow-hidden transition-all duration-300 ${mobileDropOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
-                <div className="ml-3 border-l-2 border-accent pl-3 mt-1 flex flex-col gap-1">
+                <div className="ml-3 border-l-2 border-primary pl-3 mt-1 flex flex-col gap-1">
                   {solutions.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -439,7 +449,7 @@ export default function Navbar() {
                         <Link
                           href={item.href}
                           onClick={() => { setMobileDropOpen(false); setMenuOpen(false); }}
-                          className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold text-black hover:bg-white/30 hover:text-accent transition-colors"
+                          className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold text-black hover:bg-white/30 hover:text-primary transition-colors"
                         >
                           <span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${item.color}`}>
                             <Icon className="w-3.5 h-3.5" />
@@ -453,7 +463,7 @@ export default function Navbar() {
                                 <Link
                                   href={child.href}
                                   onClick={() => { setMobileDropOpen(false); setMenuOpen(false); }}
-                                  className="block px-3 py-1.5 text-sm text-black hover:text-accent transition-colors"
+                                  className="block px-3 py-1.5 text-sm text-black hover:text-primary transition-colors"
                                 >
                                   › {child.label}
                                 </Link>
@@ -479,7 +489,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={`flex items-center px-4 py-3 text-sm font-semibold transition-colors ${
                   active === link.label
-                    ? "text-primary font-bold border-l-4 border-accent pl-3"
+                    ? "text-primary font-bold border-l-4 border-primary pl-3"
                     : "text-black hover:text-primary hover:bg-white/30 hover:rounded-xl"
                 }`}
               >

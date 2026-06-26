@@ -133,7 +133,7 @@ function SharePopover({ title }: { title: string }) {
               <span className="text-xs text-gray-500 truncate flex-1">{url}</span>
               <button
                 onClick={copyLink}
-                className="text-xs font-bold text-primary hover:text-accent shrink-0 transition"
+                className="text-xs font-bold text-primary hover:text-primary shrink-0 transition"
               >
                 {copied ? "Copied!" : "Copy"}
               </button>
@@ -254,11 +254,11 @@ export default function FeaturedDetail() {
   };
 
   return (
-    <main className="bg-white">
+    <main className="-mt-[76px] bg-white">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ── Article header ── */}
-        <motion.div {...fadeUp} className="pt-12 pb-6">
+        <motion.div {...fadeUp} className="pt-[calc(76px+3rem)] pb-6">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
             {TITLE}
           </h1>

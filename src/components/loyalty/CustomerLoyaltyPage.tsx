@@ -42,7 +42,7 @@ const capabilities = [
     title: "Customer Loyalty",
     desc: "Measure how loyal your regular customers are by analyzing their repeat purchases and buying journeys. Bank on your positives.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 38 C24 38 8 28 8 18 C8 12 12 8 18 8 C21 8 24 11 24 11 C24 11 27 8 30 8 C36 8 40 12 40 18 C40 28 24 38 24 38Z" />
         <path d="M18 22 L22 26 L30 18" />
       </svg>
@@ -52,7 +52,7 @@ const capabilities = [
     title: "Emerging Trends",
     desc: "Spot the trends within and across the segments—market and social conditions that cause churn, promote loyalty, and encourage prospects to move ahead.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="6 36 16 24 24 30 38 12" />
         <polyline points="32 12 38 12 38 18" />
         <line x1="6" y1="42" x2="42" y2="42" />
@@ -63,7 +63,7 @@ const capabilities = [
     title: "NPS",
     desc: "Know how many customers refer your brand and products to the world by analyzing the Net Promoter Score. One crucial marker no business should miss.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="18" />
         <path d="M24 6 L24 12 M24 36 L24 42 M6 24 L12 24 M36 24 L42 24" />
         <path d="M16 20 L20 24 L28 16" />
@@ -75,7 +75,7 @@ const capabilities = [
     title: "In-Depth Analysis",
     desc: "Learn the why behind your NPS — what motivates users to like your brand and stick to it, or the facts behind the dissatisfaction and complaints.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="22" cy="22" r="14" />
         <line x1="32" y1="32" x2="42" y2="42" />
         <line x1="16" y1="22" x2="28" y2="22" />
@@ -87,7 +87,7 @@ const capabilities = [
     title: "Find Champions",
     desc: "Convert customers into patrons who refer your brands in their circles or social media. Engage with them personally and honor their commitment.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="16" r="7" />
         <path d="M10 40 C10 31 38 31 38 40" />
         <path d="M34 10 L36 14 L40 14 L37 17 L38 21 L34 19 L30 21 L31 17 L28 14 L32 14 Z" />
@@ -98,7 +98,7 @@ const capabilities = [
     title: "Customer Retention",
     desc: "Incentivize your potential ambassadors the right way. Reward them with vouchers or cash, share premium content, and provide early access to exclusive deals.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M40 24 C40 32 33 40 24 42 C15 40 8 32 8 24 V12 L24 6 L40 12 Z" />
         <path d="M24 18 V26" />
         <circle cx="24" cy="30" r="1.5" fill="currentColor" stroke="none" />
@@ -178,7 +178,7 @@ const faqs = [
 const resources = [
   { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality", gradient: "from-blue-400 to-indigo-500" },
   { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-orange-300 to-rose-400" },
+  { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-blue-200 to-blue-400" },
   { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies", gradient: "from-teal-400 to-cyan-600" },
   { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects", gradient: "from-violet-500 to-purple-700" },
 ];
@@ -190,7 +190,7 @@ export default function CustomerLoyaltyPage() {
     <main className="bg-white">
 
       {/* ════════ BANNER ════════ */}
-      <section className="relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
+      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video
           src="/video/banner.mp4"
           autoPlay loop muted playsInline
@@ -230,7 +230,7 @@ export default function CustomerLoyaltyPage() {
                 {...fadeUp(0.08 * i)}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-5 shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
                   {cap.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{cap.title}</h3>
@@ -246,8 +246,8 @@ export default function CustomerLoyaltyPage() {
         <section key={i} className="bg-white py-6">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div {...fadeUp()} className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M24 38 C24 38 8 28 8 18 C8 12 12 8 18 8 C21 8 24 11 24 11 C24 11 27 8 30 8 C36 8 40 12 40 18 C40 28 24 38 24 38Z" />
                 </svg>
               </div>
@@ -267,7 +267,7 @@ export default function CustomerLoyaltyPage() {
       <section className="bg-highlight py-16">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
-            <p className="text-accent font-bold uppercase text-sm tracking-widest mb-3">
+            <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">
               Use Customer Loyalty Analysis Right
             </p>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 max-w-2xl mx-auto leading-snug">
@@ -285,7 +285,7 @@ export default function CustomerLoyaltyPage() {
                   {step.num}
                 </span>
                 <div className="relative pt-10">
-                  <p className="text-accent font-extrabold uppercase text-sm tracking-wider mb-3">{step.title}</p>
+                  <p className="text-primary font-extrabold uppercase text-sm tracking-wider mb-3">{step.title}</p>
                   <p className="text-gray-900 text-base leading-8 font-medium">{step.desc}</p>
                 </div>
               </motion.div>
@@ -319,7 +319,7 @@ export default function CustomerLoyaltyPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-10">
-            <p className="text-accent font-semibold uppercase text-sm mb-2">FAQs</p>
+            <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
           </motion.div>
           <div className="space-y-3">
@@ -401,7 +401,7 @@ export default function CustomerLoyaltyPage() {
             <div className="shrink-0">
               <Link
                 href="/contact-us"
-                className="bg-primary hover:bg-accent text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+                className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Contact Us
               </Link>
