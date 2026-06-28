@@ -32,6 +32,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Marquee animation for Scrip8 logo row */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* Allow shadows on TrustedBy Swiper slides to show without clipping */
 .trusted-swiper.swiper {
   overflow: visible !important;
