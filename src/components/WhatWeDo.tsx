@@ -118,7 +118,7 @@ export default function WhatWeDo() {
 
   return (
     <section className="bg-section py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1536px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* ── Left: heading + accordion ── */}

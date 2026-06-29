@@ -197,7 +197,7 @@ export default function CustomerLoyaltyPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full max-w-7xl mx-auto px-6">
+        <div className="relative w-full max-w-[1536px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -222,7 +222,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {capabilities.map((cap, i) => (
               <motion.div
@@ -244,7 +244,7 @@ export default function CustomerLoyaltyPage() {
       {/* ════════ CONTENT SECTIONS ════════ */}
       {contentSections.map((sec, i) => (
         <section key={i} className="bg-white py-6">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-[1536px] mx-auto px-6">
             <motion.div {...fadeUp()} className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                 <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -265,7 +265,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ USE LOYALTY ANALYSIS RIGHT — Steps (bg-highlight) ════════ */}
       <section className="bg-highlight py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">
               Use Customer Loyalty Analysis Right
@@ -296,7 +296,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ STATS ════════ */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => {
               const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
@@ -317,7 +317,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ FAQs ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-10">
             <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
@@ -353,7 +353,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ RESOURCES SLIDER ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
           </motion.div>
@@ -385,7 +385,7 @@ export default function CustomerLoyaltyPage() {
 
       {/* ════════ CTA ════════ */}
       <section className="py-14 bg-highlight">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div
             {...fadeUp()}
             className="flex flex-col md:flex-row items-center justify-between gap-8"

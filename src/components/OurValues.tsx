@@ -91,7 +91,7 @@ export default function OurValues() {
 
   return (
     <section className="bg-section py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1536px] mx-auto px-6">
 
         <motion.div
           ref={ref}

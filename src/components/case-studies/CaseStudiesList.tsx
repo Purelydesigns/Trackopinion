@@ -78,7 +78,7 @@ export default function CaseStudiesList() {
     <div className="bg-primary">
 
       {/* ── Dark navy header bar ── */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-[1536px] mx-auto px-6 py-8">
         <div className="relative flex items-center justify-center">
 
           {/* Centered title */}
@@ -124,7 +124,7 @@ export default function CaseStudiesList() {
         transition={{ duration: 0.5 }}
         className="bg-white rounded-t-[2.5rem]"
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
 
           {filtered.length === 0 ? (
             <div className="py-24 text-center text-gray-400 text-sm">

@@ -254,7 +254,7 @@ const logos = ["facebook", "amazon", "Airtel", "Philips", "Google", "NETFLIX", "
 const problems = [
   {
     icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/><path d="M16 11v6m3-3h-6"/>
       </svg>
     ),
@@ -264,7 +264,7 @@ const problems = [
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
       </svg>
     ),
@@ -274,7 +274,7 @@ const problems = [
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
       </svg>
     ),
@@ -395,15 +395,22 @@ export default function Scrip8Page() {
       {/* ════════ HERO ════════ */}
       <section className="-mt-[76px] bg-primary min-h-[600px] lg:min-h-[700px] flex items-center relative overflow-hidden pt-[76px]">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        {/* Bottom fade to white */}
+        <div className="absolute bottom-0 left-0 right-0 h-38 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 50%, #ffffff 100%)" }} />
 
-        <div className="relative w-full max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-20 pb-38 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div {...fadeUp(0)}>
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-green-400" /> Powered by AI Analytics
+              <span className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-white text-xs font-semibold px-4 py-2.5 rounded-full backdrop-blur-sm">
+                <span className="relative flex w-2.5 h-2.5 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full w-2.5 h-2.5 bg-green-400" />
+                </span>
+                Powered by AI Analytics
               </span>
-              <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full">
-                ★★★★★ G2 Leader 2025
+              <span className="inline-flex items-center gap-2.5 bg-transparent border border-white/20 text-white text-xs font-semibold px-4 py-2.5 rounded-full backdrop-blur-sm">
+                <span className="flex gap-0.5 text-amber-400 leading-none">★★★★★</span>
+                G2 Leader 2025
               </span>
             </div>
 
@@ -456,20 +463,20 @@ export default function Scrip8Page() {
       </section>
 
       {/* ════════ STATS ════════ */}
-      <section ref={statsRef} className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 divide-x divide-gray-100">
+      <section ref={statsRef} className="bg-white border-y border-gray-100">
+        <div className="max-w-[1536px] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           {stats.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={statsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 * i, duration: 0.5 }}
-              className="py-10 text-center px-4"
+              className={`py-10 text-center px-6 ${i < stats.length - 1 ? "border-r border-gray-100" : ""}`}
             >
-              <p className="text-3xl font-black text-primary mb-1">
+              <p className="text-4xl font-black text-accent mb-2 tracking-tight">
                 <CountUp end={parseFloat(s.value)} />{s.suffix}
               </p>
-              <p className="text-xs text-gray-500 font-medium">{s.label}</p>
+              <p className="text-sm text-gray-500 font-medium tracking-wide">{s.label}</p>
             </motion.div>
           ))}
         </div>
@@ -477,9 +484,9 @@ export default function Scrip8Page() {
 
       {/* ════════ THE PROBLEM ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">The Problem</p>
+            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">The Problem</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
               Traditional surveys are{" "}
               <span className="italic font-normal text-primary">holding you back</span>
@@ -491,13 +498,28 @@ export default function Scrip8Page() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {problems.map((p, i) => (
-              <motion.div key={i} {...fadeUp(0.1 * i)} whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(13,27,62,0.10)" }} transition={{ duration: 0.25 }} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5">
-                  {p.icon}
+              <motion.div
+                key={i}
+                {...fadeUp(0.1 * i)}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(26,111,232,0.10)", borderColor: "rgba(26,111,232,0.4)" }}
+                transition={{ duration: 0.25 }}
+                className="group bg-white rounded-2xl p-8 shadow-sm border border-gray-100 cursor-pointer relative overflow-hidden"
+              >
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(26,111,232,0.07) 0%, rgba(221,228,240,0.10) 45%, rgba(255,255,255,0) 75%)" }} />
+
+                {/* Icon — red by default, accent blue on hover */}
+                <div className="relative w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5 group-hover:bg-highlight transition-colors duration-300">
+                  <span className="text-red-500 group-hover:text-accent transition-colors duration-300">
+                    {p.icon}
+                  </span>
                 </div>
+
                 <h3 className="text-base font-bold text-gray-900 mb-3">{p.title}</h3>
                 <p className="text-gray-500 text-sm leading-7 mb-5">{p.desc}</p>
-                <div className="flex items-start gap-2 text-primary text-sm font-semibold">
+
+                {/* Divider + fix */}
+                <div className="border-t border-gray-200 pt-4 flex items-start gap-2 text-accent text-sm font-semibold">
                   <Check className="w-4 h-4 mt-0.5 shrink-0" strokeWidth={2.5} />
                   {p.fix}
                 </div>
@@ -510,7 +532,7 @@ export default function Scrip8Page() {
       {/* ════════ FEATURE STEPS ════════ */}
       {featureSteps.map((step, i) => (
         <section key={i} className={`${step.bg} py-20`}>
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-[1536px] mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
               {/* Mockup — always first in DOM (shows first on mobile), reordered on desktop for non-flip */}
@@ -521,20 +543,22 @@ export default function Scrip8Page() {
               {/* Text — always second in DOM, reordered to first column on desktop for non-flip */}
               <motion.div {...fadeUp(0)} className={step.flip ? "" : "lg:order-first"}>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-7 h-7 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">{step.num}</span>
-                  <span className="text-primary text-xs font-bold uppercase tracking-widest">{step.label}</span>
+                  <span className="w-7 h-7 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center">{step.num}</span>
+                  <span className="text-accent text-xs font-bold uppercase tracking-widest">{step.label}</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-4">{step.title}</h2>
                 <p className="text-gray-500 text-base leading-7 mb-6">{step.desc}</p>
                 <ul className="space-y-3 mb-8">
                   {step.checks.map((c, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-gray-700">
-                      <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" strokeWidth={2.5} />
+                    <li key={j} className="flex items-center gap-3 text-sm text-gray-700">
+                      <span className="w-6 h-6 rounded-md bg-highlight flex items-center justify-center shrink-0">
+                        <Check className="w-3.5 h-3.5 text-accent" strokeWidth={2.5} />
+                      </span>
                       {c}
                     </li>
                   ))}
                 </ul>
-                <Link href="/contact-us" className="text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                <Link href="/contact-us" className="text-accent font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all duration-200">
                   {step.cta} →
                 </Link>
               </motion.div>
@@ -549,9 +573,9 @@ export default function Scrip8Page() {
         {/* Subtle dot grid */}
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="relative max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-highlight text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
+            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Intelligence built into every step</h2>
             <p className="text-white/60 text-base max-w-xl mx-auto leading-7">
               Scrip8&apos;s AI layer doesn&apos;t just analyse data — it helps you design better surveys, predict drop-off, and surface insights you&apos;d otherwise miss entirely.
@@ -560,13 +584,15 @@ export default function Scrip8Page() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {aiFeatures.map((f, i) => (
-              <motion.div key={i} {...fadeUp(0.1 * i)} whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.25)" }} transition={{ duration: 0.25 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 cursor-pointer">
+              <motion.div key={i} {...fadeUp(0.1 * i)} whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.18)" }} transition={{ duration: 0.3 }} className="group bg-white/5 border border-white/10 rounded-2xl p-8 cursor-pointer relative overflow-hidden backdrop-blur-sm">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(26,111,232,0.06) 40%, rgba(0,0,0,0) 70%)" }} />
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5">
                   {f.icon}
                 </div>
                 <h3 className="text-white font-bold text-lg mb-3">{f.title}</h3>
                 <p className="text-white/60 text-sm leading-7 mb-5">{f.desc}</p>
-                <span className={`inline-block ${f.tagColor} text-white text-xs font-bold px-3 py-1.5 rounded-full`}>
+                <span className="inline-flex items-center gap-1.5 border border-green-500/60 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full bg-green-500/10">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
                   {f.tag}
                 </span>
               </motion.div>
@@ -577,9 +603,9 @@ export default function Scrip8Page() {
 
       {/* ════════ EVERYTHING INCLUDED ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Everything Included</p>
+            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Everything Included</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
               Mastering responses at{" "}
               <span className="italic font-normal text-primary">every scale</span>
@@ -592,37 +618,37 @@ export default function Scrip8Page() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
                 title: "Quick Response Capture",
                 desc: "Design quick, versatile surveys with emotions and Likert scales. Add skip logic, sections, and page breaks for smooth traversal. Share in one click and track responses live.",
                 highlight: false,
               },
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2" strokeLinecap="round"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2" strokeLinecap="round"/></svg>,
                 title: "Mobile-First Design",
                 desc: "Every survey is optimized for phones and tablets automatically. Your respondents can answer from any device, any time — without pinching, zooming, or frustration.",
                 highlight: true,
               },
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
                 title: "24 × 7 Expert Support",
                 desc: "Get help from Scrip8's design and research experts anytime. Whether it's survey logic, methodology advice, or report interpretation — we're available round the clock.",
                 highlight: false,
               },
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
                 title: "Full Brand Personalization",
                 desc: "Apply your logo, brand colors, custom fonts, and domain to every survey. White-label the entire respondent experience — from invite email to thank-you page.",
                 highlight: false,
               },
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
                 title: "Enterprise-Grade Security",
                 desc: "GDPR, HIPAA, ISO 27001, and SOC 2 Type II compliant. All data is encrypted in transit and at rest. Role-based access, SSO, and audit logs for enterprise teams.",
                 highlight: true,
               },
               {
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>,
+                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>,
                 title: "Shareable Visual Reports",
                 desc: "Generate branded reports as PDF, Excel, or interactive dashboards. Share a live link with stakeholders so they can filter and explore data — no login required.",
                 highlight: false,
@@ -631,15 +657,19 @@ export default function Scrip8Page() {
               <motion.div
                 key={i}
                 {...fadeUp(0.08 * i)}
-                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(13,27,62,0.10)", borderTopColor: "#0d1b3e" }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(13,27,62,0.10)", borderColor: "rgba(13,27,62,0.15)" }}
                 transition={{ duration: 0.25 }}
-                className="rounded-2xl p-8 relative overflow-hidden cursor-pointer bg-white shadow-sm border border-gray-100 border-t-2"
-                style={{ borderTopColor: "transparent" }}
+                className="group rounded-2xl p-7 relative overflow-hidden cursor-pointer bg-white shadow-sm border border-gray-100"
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${f.highlight ? "bg-primary" : "bg-highlight"}`}>
-                  {f.icon}
+                {/* Top border — animates left to right on hover */}
+                <div className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full bg-accent transition-all duration-500 ease-out rounded-t-2xl" />
+
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-blue-50 group-hover:bg-accent transition-colors duration-300">
+                  <span className="text-accent group-hover:text-white transition-colors duration-300">
+                    {f.icon}
+                  </span>
                 </div>
-                <h3 className="text-gray-900 font-bold text-base mb-3">{f.title}</h3>
+                <h3 className="text-primary font-bold text-base mb-3">{f.title}</h3>
                 <p className="text-gray-500 text-sm leading-7">{f.desc}</p>
               </motion.div>
             ))}
@@ -649,10 +679,10 @@ export default function Scrip8Page() {
 
       {/* ════════ CUSTOMER STORIES ════════ */}
       <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
+              <p className="text-accent text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
               <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
                 Real results from{" "}
                 <span className="italic font-normal text-primary">real research teams</span>
@@ -667,6 +697,7 @@ export default function Scrip8Page() {
             {[
               {
                 tag: "FMCG · Product Research",
+                watermark: "FMCG",
                 company: "Hindustan Consumer Brands",
                 context: "Needed faster consumer feedback loops for new product launches across 12 Indian cities",
                 stats: [{ val: "42%", label: "Higher response rate vs. prior tool" }, { val: "3×", label: "Faster insight delivery" }],
@@ -674,6 +705,7 @@ export default function Scrip8Page() {
               },
               {
                 tag: "Healthcare · Patient Experience",
+                watermark: "HEALTH",
                 company: "MedReach Diagnostics",
                 context: "Tracking patient satisfaction across 40 clinic locations with inconsistent data collection methods",
                 stats: [{ val: "89%", label: "Survey completion rate" }, { val: "67%", label: "Improvement in data quality" }],
@@ -681,6 +713,7 @@ export default function Scrip8Page() {
               },
               {
                 tag: "SaaS · Product-Market Fit",
+                watermark: "TECH",
                 company: "Velo Technologies",
                 context: "Early-stage startup needed fast, affordable PMF research without a dedicated research team",
                 stats: [{ val: "50%", label: "Lower research cost vs. agency" }, { val: "8 hrs", label: "From survey to final report" }],
@@ -688,24 +721,29 @@ export default function Scrip8Page() {
               },
             ].map((s, i) => (
               <motion.div key={i} {...fadeUp(0.1 * i)} whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(13,27,62,0.12)" }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm flex flex-col cursor-pointer">
-                {/* Dark top */}
-                <div className="bg-primary p-6">
+                {/* Dark top with watermark */}
+                <div className="bg-primary p-6 relative overflow-hidden">
+                  {/* Watermark — bottom-right */}
+                  <span className="absolute -bottom-3 -right-2 text-[56px] font-black text-white/[0.06] select-none leading-none pointer-events-none uppercase tracking-tight">
+                    {s.watermark}
+                  </span>
                   <span className="inline-block bg-white/15 text-white/90 text-[10px] font-semibold px-3 py-1.5 rounded-full mb-4">{s.tag}</span>
                   <h3 className="text-white font-black text-lg mb-2">{s.company}</h3>
                   <p className="text-white/60 text-sm leading-6">{s.context}</p>
                 </div>
                 {/* Light bottom */}
                 <div className="bg-white p-6 flex flex-col flex-1">
-                  <div className="grid grid-cols-2 gap-4 mb-5">
+                  {/* Stats row — centered with vertical divider */}
+                  <div className="flex mb-6">
                     {s.stats.map((st, j) => (
-                      <div key={j}>
-                        <p className="text-2xl font-black text-primary">{st.val}</p>
-                        <p className="text-[11px] text-gray-400 leading-snug mt-0.5">{st.label}</p>
+                      <div key={j} className={`flex-1 flex flex-col items-center justify-center py-2 px-3 text-center ${j < s.stats.length - 1 ? "border-r border-gray-200" : ""}`}>
+                        <p className="text-2xl font-black text-accent leading-none mb-1">{st.val}</p>
+                        <p className="text-[11px] text-gray-400 leading-snug">{st.label}</p>
                       </div>
                     ))}
                   </div>
                   <p className="text-gray-500 text-sm italic leading-7 flex-1 mb-5">{s.quote}</p>
-                  <Link href="/case-studies" className="text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                  <Link href="/case-studies" className="text-accent font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                     Read case study →
                   </Link>
                 </div>
@@ -717,7 +755,7 @@ export default function Scrip8Page() {
 
       {/* ════════ COMPLIANCE STRIP ════════ */}
       <section className="bg-section py-8 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-center gap-4">
+        <div className="max-w-[1536px] mx-auto px-6 flex flex-wrap items-center justify-center gap-4">
           <span className="text-gray-500 text-sm font-semibold mr-2">Certified &amp; Compliant:</span>
           {["GDPR", "ISO 27001", "SOC 2 Type II", "HIPAA Ready", "CCPA Compliant"].map((b) => (
             <span key={b} className="inline-flex items-center gap-2 border border-gray-200 bg-white text-gray-700 text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
@@ -731,8 +769,7 @@ export default function Scrip8Page() {
       {/* ════════ PRICING ════════ */}
       <PricingSection />
 
-      {/* ════════ FAQ ════════ */}
-      <FaqSection />
+
 
       {/* ════════ FINAL CTA ════════ */}
       <CtaSection />
@@ -740,105 +777,6 @@ export default function Scrip8Page() {
       <NewsletterSubscribe />
 
     </main>
-  );
-}
-
-/* ── FAQ ── */
-const faqs = [
-  {
-    q: "How long does it take to create my first survey?",
-    a: "Most users launch their first survey in under 5 minutes. Choose from 50+ ready-made templates, or start from scratch with our drag-and-drop builder. No training or technical skills required.",
-  },
-  {
-    q: "Can I use Scrip8 on mobile devices?",
-    a: "Yes. Scrip8 is fully mobile-optimised for both survey builders and respondents. Every survey auto-adapts to any screen size without pinching or zooming.",
-  },
-  {
-    q: "Is my data secure and GDPR compliant?",
-    a: "Absolutely. Scrip8 is GDPR, HIPAA, ISO 27001, and SOC 2 Type II compliant. All data is encrypted in transit and at rest, and you control data residency.",
-  },
-  {
-    q: "Can I integrate Scrip8 with our existing tools?",
-    a: "Yes. Scrip8 integrates with Salesforce, HubSpot, Slack, Google Sheets, Zapier, and 100+ tools via native connectors or our REST API.",
-  },
-  {
-    q: "What happens after my 7-day free trial ends?",
-    a: "You'll be asked to choose a plan. If you don't upgrade, your account moves to a read-only state — your data is safe and you can export it at any time.",
-  },
-  {
-    q: "Do you offer custom enterprise pricing?",
-    a: "Yes. For teams needing custom response limits, dedicated infrastructure, SSO, or white-glove onboarding, contact our sales team for a tailored quote.",
-  },
-];
-
-function FaqSection() {
-  const [open, setOpen] = useState<number | null>(0);
-
-  return (
-    <section className="bg-section py-20">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 items-start">
-
-        {/* Left */}
-        <motion.div {...fadeUp(0)}>
-          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">FAQ</p>
-          <h2 className="text-3xl font-black text-gray-900 leading-tight mb-4">
-            Questions? We&apos;ve got<br />answers.
-          </h2>
-          <p className="text-gray-500 text-sm leading-7 mb-8">
-            Everything you need to know about Scrip8 before getting started. Can&apos;t find what you&apos;re looking for?
-          </p>
-          <Link
-            href="/contact-us"
-            className="inline-flex items-center gap-2 bg-primary text-white font-bold px-7 py-4 rounded-lg hover:bg-primary-hover transition-all duration-300 text-sm"
-          >
-            Ask our team →
-          </Link>
-
-          {/* Mini stats */}
-          <div className="grid grid-cols-2 gap-3 mt-10">
-            {[
-              { val: "5 min", label: "Average setup time" },
-              { val: "24/7",  label: "Expert support" },
-              { val: "7 days", label: "Free trial" },
-              { val: "0",     label: "Credit card required" },
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-                <p className="text-xl font-black text-primary">{s.val}</p>
-                <p className="text-xs text-gray-400 mt-0.5">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Right — accordion */}
-        <motion.div {...fadeUp(0.1)} className="space-y-3">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${open === i ? "border-primary/30 shadow-md" : "border-gray-100 shadow-sm"}`}
-            >
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
-              >
-                <span className="text-sm font-semibold text-gray-900">{faq.q}</span>
-                <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${open === i ? "bg-primary text-white" : "bg-gray-100 text-gray-500"}`}>
-                  <svg viewBox="0 0 16 16" className={`w-4 h-4 transition-transform duration-300 ${open === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M4 6l4 4 4-4"/>
-                  </svg>
-                </span>
-              </button>
-              {open === i && (
-                <div className="px-6 pb-5">
-                  <p className="text-sm text-gray-500 leading-7">{faq.a}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </motion.div>
-
-      </div>
-    </section>
   );
 }
 
@@ -931,9 +869,9 @@ function PricingSection() {
 
   return (
     <section className="bg-white py-24">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1536px] mx-auto px-6">
         <motion.div {...fadeUp()} className="text-center mb-10">
-          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
+          <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
             Simple, transparent{" "}
             <span className="italic font-normal text-primary">pricing</span>
@@ -966,14 +904,16 @@ function PricingSection() {
                 {...fadeUp(0.1 * i)}
                 whileHover={{ y: -8, boxShadow: plan.highlight ? "0 24px 50px rgba(13,27,62,0.35)" : "0 20px 40px rgba(13,27,62,0.12)" }}
                 transition={{ duration: 0.25 }}
-                className={`relative rounded-2xl overflow-hidden cursor-pointer ${plan.highlight ? "bg-primary shadow-2xl" : "bg-white border border-gray-200 shadow-sm"}`}
+                className={`relative rounded-2xl cursor-pointer ${plan.highlight ? "bg-primary shadow-2xl" : "bg-white border border-gray-200 shadow-sm"}`}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                    <span className="bg-primary text-white text-xs font-bold px-5 py-1.5 rounded-full block">Most Popular</span>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                    <span className="text-white text-xs font-bold px-6 py-2 rounded-full block whitespace-nowrap shadow-lg" style={{ background: "linear-gradient(135deg, #3b82f6 0%, #1a6fe8 60%, #1558c0 100%)" }}>
+                      Most Popular
+                    </span>
                   </div>
                 )}
-                <div className="p-8 pt-10">
+                <div className={`p-8 ${plan.highlight ? "pt-12" : "pt-8"}`}>
                   <p className={`text-xs font-bold uppercase tracking-widest mb-4 ${plan.highlight ? "text-white/60" : "text-gray-400"}`}>{plan.name}</p>
                   <div className="flex items-end gap-1 mb-3">
                     <span className={`text-lg font-bold ${plan.highlight ? "text-white/80" : "text-gray-500"}`}>$</span>

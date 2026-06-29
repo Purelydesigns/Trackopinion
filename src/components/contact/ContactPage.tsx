@@ -101,7 +101,7 @@ export default function ContactPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full max-w-7xl mx-auto px-6 pt-[76px]">
+        <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-[76px]">
           <p className="text-white/60 text-sm font-medium mb-6">
             Home / <span className="text-white">Contact Us</span>
           </p>
@@ -125,7 +125,7 @@ export default function ContactPage() {
 
       {/* ── Connect section ── */}
       <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="max-w-[1536px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
           {/* Left */}
           <motion.div {...fadeUp}>
@@ -266,7 +266,7 @@ export default function ContactPage() {
 
       {/* ── Our Offices ── */}
       <section className="bg-gray-50 pb-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.h2
             {...fadeUp}
             className="text-2xl md:text-3xl font-black uppercase text-gray-900 text-center mb-10"

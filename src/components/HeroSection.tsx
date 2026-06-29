@@ -22,7 +22,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/45" />
 
       {/* ── Content ── */}
-      <div className="relative w-full max-w-7xl mx-auto px-6 pt-20">
+      <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-20">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}

@@ -82,7 +82,7 @@ export default function CareerDetail({ job }: { job: Job }) {
     <main>
       {/* ── Banner ── */}
       <div className="-mt-[76px] bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
+        <div className="max-w-[1536px] mx-auto px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export default function CareerDetail({ job }: { job: Job }) {
       {/* ── Content ── */}
       <div className="bg-[#111827]">
         <div className="bg-white rounded-t-[2.5rem]">
-          <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="max-w-[1536px] mx-auto px-6 py-12">
 
             {/* Title + tags + date */}
             <motion.div {...fadeUp} className="mb-8 pb-6 border-b border-gray-100">

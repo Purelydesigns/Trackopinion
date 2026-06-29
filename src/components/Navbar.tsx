@@ -146,11 +146,15 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 py-3 px-6 transition-all duration-300">
-      <div className={`max-w-7xl mx-auto px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
+      <div className={`max-w-[1536px] mx-auto px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
 
         {/* ── Logo ── */}
         <Link href="/">
-          <img src="/logo.png" alt="Track Opinion" className="h-14 w-auto object-contain transition-all duration-300" style={isTransparent ? { filter: "brightness(0) invert(1)" } : {}} />
+          <img
+            src={isTransparent ? "/logo-white.png" : "/logo.png"}
+            alt="Track Opinion"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         {/* ── Desktop Nav ── */}
@@ -400,7 +404,7 @@ export default function Navbar() {
         >
           {/* Drawer header */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/30 bg-white/30">
-            <img src="/logo.png" alt="Track Opinion" className="h-11 w-auto object-contain" />
+            <img src="/logo.png" alt="Track Opinion" className="h-10 w-auto object-contain transition-none" />
             <button
               onClick={() => setMenuOpen(false)}
               className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-gray-800 transition-colors border border-white/30"

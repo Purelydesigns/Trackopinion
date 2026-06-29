@@ -41,18 +41,18 @@ export default function Footer() {
     <footer>
       {/* ── Main footer ── */}
       <div className="bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-6 py-14">
+        <div className="max-w-[1536px] mx-auto px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1.4fr] gap-10">
 
           {/* Brand col */}
           <div>
             <div className="mb-6">
               <Image
-                src="/logo.png"
+                src="/logo-white.png"
                 alt="Track Opinion"
                 width={180}
                 height={52}
-                className="h-11 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain"
               />
             </div>
             <p className="text-white/60 text-sm leading-7 mb-8 max-w-[260px]">
@@ -114,7 +114,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-[1536px] mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/50 text-sm">
             © 2026 <span className="font-bold text-white">TrackOpinion</span> | All Rights Reserved
           </p>

@@ -41,7 +41,7 @@ export default function PrivacyPage() {
     <main>
       {/* ── Dark navy header ── */}
       <div className="-mt-[76px] bg-primary py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center pt-[76px]">
+        <div className="max-w-[1536px] mx-auto px-6 text-center pt-[76px]">
           <h1 className="text-2xl md:text-3xl font-bold text-white">Privacy Policy</h1>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
       {/* ── Dark wrapper so rounded-top corners are visible ── */}
       <div className="bg-[#111827]">
         <div className="bg-white rounded-t-[2.5rem] shadow-2xl">
-          <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="max-w-[1536px] mx-auto px-6 py-12">
             <div>
 
               {/* Updated date */}

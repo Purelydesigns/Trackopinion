@@ -306,7 +306,7 @@ export default function BrandTrackerPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full max-w-7xl mx-auto px-6">
+        <div className="relative w-full max-w-[1536px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -331,7 +331,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ FACTS HEADING ════════ */}
       <section className="bg-white pt-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-[1536px] mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">Track Your Brand&#39;s Pulse in Real Time</h2>
@@ -350,7 +350,7 @@ export default function BrandTrackerPage() {
         const isLeft = sec.side === "left";
         return (
           <section key={i} className="bg-white py-16">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-[1536px] mx-auto px-6">
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${!isLeft ? "md:[direction:rtl]" : ""}`}>
                 <motion.div {...fadeUp(0)} className="[direction:ltr]">
                   <div className="flex items-center gap-3 mb-4">
@@ -376,7 +376,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-primary">What We Measure</h2>
           </motion.div>
@@ -400,7 +400,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ PROJECT MANAGEMENT ════════ */}
       <section className="bg-primary py-16">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-[1536px] mx-auto px-6 text-center">
           <motion.div {...fadeUp()}>
             <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">Project Management</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-12">A dedicated team available around the clock</h2>
@@ -422,7 +422,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ STATS ════════ */}
       <section className="py-16 bg-highlight">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => {
               const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
@@ -443,7 +443,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ FAQs — dark content, privacy style ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">FAQs</h2>
           </motion.div>
@@ -478,7 +478,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ RESOURCES SLIDER ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
           </motion.div>
@@ -510,7 +510,7 @@ export default function BrandTrackerPage() {
 
       {/* ════════ CTA ════════ */}
       <section className="py-14 bg-highlight">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div
             {...fadeUp()}
             className="flex flex-col md:flex-row items-center justify-between gap-8"

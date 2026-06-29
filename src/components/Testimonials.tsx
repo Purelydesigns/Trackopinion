@@ -42,7 +42,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="bg-section py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1536px] mx-auto px-6">
 
         <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-10">
           What Our Client Say

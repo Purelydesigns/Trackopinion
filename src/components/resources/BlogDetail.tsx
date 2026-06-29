@@ -211,7 +211,7 @@ export default function BlogDetail() {
     <main>
       {/* ── Article header ── */}
       <section className="-mt-[76px] bg-white pt-14 pb-0 pt-[calc(76px+3.5rem)]">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.h1
             {...fadeUp}
             className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight max-w-4xl"
@@ -232,7 +232,7 @@ export default function BlogDetail() {
 
       {/* ── Article body ── */}
       <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-6 max-w-4xl space-y-12">
+        <div className="max-w-[1536px] mx-auto px-6 max-w-4xl space-y-12">
 
           {/* Section 1 */}
           <motion.div {...fadeUp}>
@@ -358,7 +358,7 @@ export default function BlogDetail() {
 
       {/* ── CTA Banner ── */}
       <section className="py-14 bg-highlight">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1536px] mx-auto px-6">
           <motion.div
             {...fadeUp}
             className="flex flex-col md:flex-row items-center justify-between gap-8"
