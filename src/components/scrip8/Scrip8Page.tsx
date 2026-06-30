@@ -491,7 +491,7 @@ export default function Scrip8Page() {
               Traditional surveys are{" "}
               <span className="italic font-normal text-primary">holding you back</span>
             </h2>
-            <p className="text-gray-500 text-base max-w-xl mx-auto leading-7">
+            <p className="text-base leading-8 font-medium text-gray-900 max-w-xl mx-auto">
               Low response rates, slow results, and complex tools shouldn&apos;t be the norm. Scrip8 was built to fix all three — from the ground up.
             </p>
           </motion.div>
@@ -516,7 +516,7 @@ export default function Scrip8Page() {
                 </div>
 
                 <h3 className="text-base font-bold text-gray-900 mb-3">{p.title}</h3>
-                <p className="text-gray-500 text-sm leading-7 mb-5">{p.desc}</p>
+                <p className="text-base leading-8 font-medium text-gray-900 mb-5">{p.desc}</p>
 
                 {/* Divider + fix */}
                 <div className="border-t border-gray-200 pt-4 flex items-start gap-2 text-accent text-sm font-semibold">
@@ -547,10 +547,10 @@ export default function Scrip8Page() {
                   <span className="text-accent text-xs font-bold uppercase tracking-widest">{step.label}</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-4">{step.title}</h2>
-                <p className="text-gray-500 text-base leading-7 mb-6">{step.desc}</p>
+                <p className="text-base leading-8 font-medium text-gray-900 mb-6">{step.desc}</p>
                 <ul className="space-y-3 mb-8">
                   {step.checks.map((c, j) => (
-                    <li key={j} className="flex items-center gap-3 text-sm text-gray-700">
+                    <li key={j} className="flex items-center gap-3 text-base font-medium text-gray-900">
                       <span className="w-6 h-6 rounded-md bg-highlight flex items-center justify-center shrink-0">
                         <Check className="w-3.5 h-3.5 text-accent" strokeWidth={2.5} />
                       </span>
@@ -577,7 +577,7 @@ export default function Scrip8Page() {
           <motion.div {...fadeUp()} className="text-center mb-14">
             <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Intelligence built into every step</h2>
-            <p className="text-white/60 text-base max-w-xl mx-auto leading-7">
+            <p className="text-white/70 text-base max-w-xl mx-auto leading-8 font-medium">
               Scrip8&apos;s AI layer doesn&apos;t just analyse data — it helps you design better surveys, predict drop-off, and surface insights you&apos;d otherwise miss entirely.
             </p>
           </motion.div>
@@ -590,7 +590,7 @@ export default function Scrip8Page() {
                   {f.icon}
                 </div>
                 <h3 className="text-white font-bold text-lg mb-3">{f.title}</h3>
-                <p className="text-white/60 text-sm leading-7 mb-5">{f.desc}</p>
+                <p className="text-white/70 text-base leading-8 font-medium mb-5">{f.desc}</p>
                 <span className="inline-flex items-center gap-1.5 border border-green-500/60 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full bg-green-500/10">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
                   {f.tag}
@@ -610,7 +610,7 @@ export default function Scrip8Page() {
               Mastering responses at{" "}
               <span className="italic font-normal text-primary">every scale</span>
             </h2>
-            <p className="text-gray-500 text-base max-w-xl mx-auto leading-7">
+            <p className="text-base leading-8 font-medium text-gray-900 max-w-xl mx-auto">
               Mere minutes to create your survey. Seconds to collect responses. Instant AI analysis. Here&apos;s what makes Scrip8 the platform teams keep choosing.
             </p>
           </motion.div>
@@ -670,7 +670,7 @@ export default function Scrip8Page() {
                   </span>
                 </div>
                 <h3 className="text-primary font-bold text-base mb-3">{f.title}</h3>
-                <p className="text-gray-500 text-sm leading-7">{f.desc}</p>
+                <p className="text-base leading-8 font-medium text-gray-900">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -742,7 +742,7 @@ export default function Scrip8Page() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-gray-500 text-sm italic leading-7 flex-1 mb-5">{s.quote}</p>
+                  <p className="text-gray-900 text-base italic leading-8 font-medium flex-1 mb-5">{s.quote}</p>
                   <Link href="/case-studies" className="text-accent font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                     Read case study →
                   </Link>
@@ -876,7 +876,7 @@ function PricingSection() {
             Simple, transparent{" "}
             <span className="italic font-normal text-primary">pricing</span>
           </h2>
-          <p className="text-gray-500 text-base max-w-md mx-auto leading-7">
+          <p className="text-base leading-8 font-medium text-gray-900 max-w-md mx-auto">
             Start free. Scale when you&apos;re ready. No hidden fees, no surprise overages.
           </p>
         </motion.div>
@@ -920,10 +920,10 @@ function PricingSection() {
                     <span className={`text-5xl font-black leading-none ${plan.highlight ? "text-white" : "text-gray-900"}`}>{price}</span>
                     <span className={`text-sm mb-1 ${plan.highlight ? "text-white/60" : "text-gray-400"}`}>/month</span>
                   </div>
-                  <p className={`text-sm leading-6 mb-6 pb-6 border-b ${plan.highlight ? "text-white/60 border-white/10" : "text-gray-500 border-gray-100"}`}>{plan.desc}</p>
+                  <p className={`leading-8 mb-6 pb-6 border-b ${plan.highlight ? "text-sm text-white/60 border-white/10" : "text-base font-medium text-gray-900 border-gray-100"}`}>{plan.desc}</p>
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((f, j) => (
-                      <li key={j} className={`flex items-start gap-2.5 text-sm ${plan.highlight ? "text-white/80" : "text-gray-700"}`}>
+                      <li key={j} className={`flex items-start gap-2.5 ${plan.highlight ? "text-sm text-white/80" : "text-base font-medium text-gray-900"}`}>
                         <Check className={`w-4 h-4 mt-0.5 shrink-0 ${plan.highlight ? "text-white/70" : "text-primary"}`} strokeWidth={2.5} />
                         {f}
                       </li>
