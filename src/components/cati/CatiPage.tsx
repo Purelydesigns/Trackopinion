@@ -268,7 +268,7 @@ export default function CatiPage() {
                 )}
 
                 {/* Step number circle */}
-                <div className="relative z-10 w-20 h-20 rounded-full border-2 border-accent/30 bg-white group-hover:bg-accent group-hover:border-accent flex items-center justify-center mb-4 shadow-sm transition-all duration-300">
+                <div className="relative z-10 w-20 h-20 rounded-full border-2 border-accent/30 bg-white group-hover:bg-accent group-hover:border-accent group-hover:-translate-y-3 flex items-center justify-center mb-4 shadow-sm transition-all duration-300">
                   <span className="text-2xl font-black text-accent group-hover:text-white transition-colors duration-300">{step.num}</span>
                 </div>
 
@@ -286,7 +286,7 @@ export default function CatiPage() {
       </section>
 
       {/* ════════ OUR CAPABILITIES ════════ */}
-      <section className="bg-section py-20">
+      <section className="py-20">
         <div className="max-w-[1536px] mx-auto px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -317,7 +317,7 @@ export default function CatiPage() {
                 {/* Hover gradient overlay — top-left blue fading to transparent */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(26,111,232,0.07) 0%, rgba(221,228,240,0.10) 45%, rgba(255,255,255,0) 75%)" }} />
 
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 group-hover:bg-transparent flex items-center justify-center mb-5 transition-all duration-300 relative overflow-hidden group-hover:-rotate-12 group-hover:scale-110">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 group-hover:bg-transparent flex items-center justify-center mb-5 transition-all duration-300 relative overflow-hidden  group-hover:scale-110">
                   {/* Gradient overlay on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" style={{ background: "linear-gradient(135deg, #3b82f6 0%, #1a6fe8 60%, #1558c0 100%)" }} />
                   <span className="relative z-10 text-accent group-hover:text-white transition-colors duration-300 inline-flex">
@@ -333,7 +333,7 @@ export default function CatiPage() {
       </section>
 
       {/* ════════ CONTACT FORM ════════ */}
-      <section className="bg-white py-20">
+      <section className="bg-section py-20">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div {...fadeUp()} className="rounded-3xl p-10 sm:p-12" style={{ background: "linear-gradient(145deg, #0d2147 0%, #0d1b3e 60%, #091530 100%)" }}>
 
