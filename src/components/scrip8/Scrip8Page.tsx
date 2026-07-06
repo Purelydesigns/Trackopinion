@@ -796,7 +796,7 @@ function CtaSection() {
           Start in under 5 minutes
         </span>
 
-        <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+        <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight mb-6">
           Start building surveys that<br />
           <span className="text-white/70">actually get answered.</span>
         </h2>

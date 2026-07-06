@@ -119,7 +119,7 @@ export default function CatiPage() {
       {/* ════════ HERO ════════ */}
       <section className="-mt-[76px] pt-[76px] relative overflow-hidden min-h-[600px] flex items-center">
         {/* Video background */}
-        <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+        <video src="/video/banner_recolored.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         {/* Gradient overlay — dark navy left fading to transparent right */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,27,62,0.95) 0%, rgba(26,47,94,0.80) 20%, rgba(26,82,118,0.55) 40%, rgba(174,214,241,0.25) 70%, rgba(255,255,255,0.05) 100%)" }} />
         <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-16 pb-28">
