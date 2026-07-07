@@ -27,7 +27,7 @@ export default function WhyBusinesses() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-16">
+    <section className="bg-section py-10">
       <div className="site-container px-6">
         <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-stretch" ref={ref}>
 
@@ -55,7 +55,7 @@ export default function WhyBusinesses() {
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 mb-1 text-base">{title}</p>
-                    <p className="text-gray-900 text-base leading-8 font-medium">{desc}</p>
+                    <p className="text-gray-600 text-base leading-8 font-medium">{desc}</p>
                   </div>
                 </motion.div>
               ))}

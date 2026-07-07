@@ -93,7 +93,7 @@ export default function Testimonials() {
                       <t.icon className="w-7 h-7 text-primary" strokeWidth={1.6} />
                     </div>
                     {/* Review */}
-                    <p className="text-gray-600 text-sm leading-7 font-medium flex-1 mb-6">{t.review}</p>
+                    <p className="text-gray-600 text-base leading-8 font-medium flex-1 mb-6">{t.review}</p>
                     {/* Name */}
                     <div className="border-t border-gray-200 pt-4">
                       <p className="font-bold text-primary text-sm">{t.name}</p>

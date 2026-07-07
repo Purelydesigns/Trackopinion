@@ -85,7 +85,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
             Global Reach
           </h2>
-          <p className="text-gray-900 text-base leading-8 font-medium max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base leading-8 font-medium mb-10 max-w-2xl mx-auto">
             Take your research experience to a higher level with 4.5 million
             active panel members worldwide and our team's caliber and expertise.
           </p>
@@ -215,7 +215,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
   if (cardMode) return inner;
 
   return (
-    <section className="bg-section py-16 overflow-hidden">
+    <section className="bg-section py-10 overflow-hidden">
       {inner}
     </section>
   );

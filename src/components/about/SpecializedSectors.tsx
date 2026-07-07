@@ -132,7 +132,7 @@ export default function SpecializedSectors() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-16" ref={ref}>
+    <section className="bg-section py-10" ref={ref}>
       <div className="site-container px-6">
 
         <motion.div

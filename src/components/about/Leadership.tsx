@@ -23,7 +23,7 @@ export default function Leadership() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-16">
+    <section className="bg-section py-10">
       <div className="site-container px-6">
 
         <motion.div
@@ -66,7 +66,7 @@ export default function Leadership() {
               768:  { slidesPerView: 3, spaceBetween: 20 },
               1024: { slidesPerView: 4, spaceBetween: 24 },
             }}
-            className="!py-8 !px-2"
+            className="!pt-2 !pb-8 !px-2"
           >
             {leaders.map((leader, i) => (
               <SwiperSlide key={i}>

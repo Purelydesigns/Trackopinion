@@ -8,7 +8,7 @@ export default function VisionMission() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-16">
+    <section className="bg-section py-10">
       <div className="site-container px-6">
         <motion.div
           ref={ref}
@@ -22,7 +22,7 @@ export default function VisionMission() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-6 text-center">
               Our Vision
             </h2>
-            <p className="text-gray-900 text-base leading-8 font-medium text-center">
+            <p className="text-gray-600 text-base leading-8 font-medium text-center">
               To become a global leader in innovative market research, offering
               the most effective strategic insights that are technology-driven,
               feasible, and reliable
@@ -36,7 +36,7 @@ export default function VisionMission() {
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-6 text-center">
               Our Mission
             </h2>
-            <p className="text-gray-900 text-base leading-8 font-medium text-center">
+            <p className="text-gray-600 text-base leading-8 font-medium text-center">
               To deliver timely services while ensuring quality through the
               usage of cutting-edge technology, allowing clients to make
               pertinent and informed decisions

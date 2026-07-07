@@ -63,7 +63,7 @@ export default function SuccessStories() {
                   <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">
                     {story.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-7 font-medium flex-1 mb-6">
+                  <p className="text-gray-600 text-base leading-8 font-medium flex-1 mb-6">
                     {story.excerpt}
                   </p>
                   <div className="border-t border-gray-200 pt-4">

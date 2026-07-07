@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SiteCard from "@/components/ui/SiteCard";
 
 const values = [
   {
     label: "Honesty",
     icon: (
       /* All-seeing eye with rays — truth that shines in all directions */
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <ellipse cx="24" cy="24" rx="17" ry="10" />
         <circle cx="24" cy="24" r="5" />
         <circle cx="24" cy="24" r="2" fill="currentColor" stroke="none" />
@@ -27,7 +28,7 @@ const values = [
     label: "Customer Obsession",
     icon: (
       /* Heart with ECG pulse running through it — beating for the customer */
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 40 C24 40 6 28 6 17 C6 11 10.5 7 16 7 C19.5 7 22.5 9 24 11 C25.5 9 28.5 7 32 7 C37.5 7 42 11 42 17 C42 28 24 40 24 40Z" />
         <polyline points="10,24 15,24 18,18 21,30 25,20 28,26 31,24 38,24" strokeWidth="1.6" />
       </svg>
@@ -37,7 +38,7 @@ const values = [
     label: "Think Young",
     icon: (
       /* Head silhouette with a constellation/star-map inside — curious, imaginative mind */
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 34 C10 30 8 25 8 20 C8 12 15 6 24 6 C33 6 40 12 40 20 C40 25 38 30 34 34 L34 42 L14 42 Z" />
         <circle cx="20" cy="18" r="1.5" fill="currentColor" stroke="none" />
         <circle cx="28" cy="15" r="1.5" fill="currentColor" stroke="none" />
@@ -57,7 +58,7 @@ const values = [
     label: "Ownership",
     icon: (
       /* Hand holding a flag planted on a circle/globe — claiming it, owning the outcome */
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M10 38 C10 38 10 30 16 26 L20 24 L20 14" />
         <path d="M20 14 L34 18 L20 22 Z" fill="currentColor" fillOpacity="0.15" />
         <path d="M20 14 L34 18 L20 22" />
@@ -72,7 +73,7 @@ const values = [
     label: "Perseverance",
     icon: (
       /* Seed cracking through stone and growing upward — unstoppable growth */
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <line x1="24" y1="42" x2="24" y2="20" />
         <path d="M24 20 C24 20 24 12 32 8 C32 16 26 18 24 20Z" fill="currentColor" fillOpacity="0.15" />
         <path d="M24 20 C24 20 24 12 32 8 C32 16 26 18 24 20" />
@@ -113,18 +114,19 @@ export default function OurValues() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 * i, duration: 0.5 }}
-              whileHover={{ y: -8, boxShadow: "0 16px 40px rgba(13,27,62,0.12)", scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="bg-white rounded-2xl shadow-sm p-5 md:p-8 flex flex-col items-center justify-center text-center cursor-pointer"
             >
-              <motion.div
-                whileHover={{ rotate: [0, -10, 10, -6, 6, 0], scale: 1.15 }}
-                transition={{ duration: 0.5 }}
-                className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-4"
-              >
-                {icon}
-              </motion.div>
-              <p className="text-sm md:text-base font-semibold text-gray-800 text-center whitespace-nowrap">{label}</p>
+              <SiteCard>
+                <div className="p-5 md:p-8 flex flex-col items-center justify-center text-center">
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, -6, 6, 0], scale: 1.15 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4"
+                  >
+                    {icon}
+                  </motion.div>
+                  <p className="text-sm md:text-base font-semibold text-gray-800 text-center whitespace-nowrap">{label}</p>
+                </div>
+              </SiteCard>
             </motion.div>
           ))}
         </div>

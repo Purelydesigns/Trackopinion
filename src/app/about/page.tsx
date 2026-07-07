@@ -55,7 +55,6 @@ export default function AboutPage() {
         <WhyBusinesses />
         <Testimonials />
         <Certifications />
-        <NewsletterSubscribe />
       </main>
     </>
   );
