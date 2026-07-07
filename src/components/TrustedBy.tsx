@@ -30,7 +30,7 @@ export default function TrustedBy({
   const nextId = `${navPrefix}-next`;
 
   return (
-    <section className="bg-section py-16">
+    <section className="bg-section py-12">
 
       {/* ── Heading ── */}
       <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-10">
