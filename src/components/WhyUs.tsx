@@ -38,7 +38,7 @@ export default function WhyUs() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-section py-16" ref={ref}>
+    <section className="bg-section" ref={ref}>
 
       {/* ── Heading ── */}
       <motion.div

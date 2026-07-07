@@ -230,7 +230,7 @@ export default function HealthcarePage() {
       <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
         <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
-        <div className="relative w-full max-w-[1536px] mx-auto px-6">
+        <div className="relative w-full site-container px-6">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -252,7 +252,7 @@ export default function HealthcarePage() {
 
       {/* ════════ DIG DEEPER HEADING ════════ */}
       <section className="bg-white pt-12">
-        <div className="max-w-[1536px] mx-auto px-6 text-center">
+        <div className="site-container px-6 text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
@@ -266,7 +266,7 @@ export default function HealthcarePage() {
 
       {/* ════════ MAP CARD ════════ */}
       <section className="bg-white py-12">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">30+ countries in our global reach</h2>
@@ -281,7 +281,7 @@ export default function HealthcarePage() {
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Our Capabilities</h2>
           </motion.div>
@@ -302,7 +302,7 @@ export default function HealthcarePage() {
       </section>
 
       {/* ════════ 711K BANNER ════════ */}
-      <section className="max-w-[1536px] mx-auto px-6 pb-16">
+      <section className="site-container px-6 pb-16">
         <motion.div {...fadeUp()} className="relative rounded-2xl overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=1200&q=80"
@@ -320,7 +320,7 @@ export default function HealthcarePage() {
 
       {/* ════════ WHO'S IN OUR PANEL ════════ */}
       <section className="bg-gray-50 py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Who&apos;s in Our Panel?</h2>
           </motion.div>
@@ -364,7 +364,7 @@ export default function HealthcarePage() {
 
       {/* ════════ FAQS ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
@@ -402,7 +402,7 @@ export default function HealthcarePage() {
 
       {/* ════════ PANEL BOOK FORM — Career Detail style ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">Our HCP&apos;s Panel Book</h2>
             <p className="text-gray-900 text-base max-w-xl mx-auto leading-8 font-medium">

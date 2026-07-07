@@ -17,7 +17,7 @@ export default function NewsletterSubscribe() {
 
   return (
     <section className="py-16 bg-highlight">
-      <div className="max-w-[1536px] mx-auto px-6">
+      <div className="site-container px-6">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}

@@ -118,20 +118,19 @@ export default function WhatWeDo() {
 
   return (
     <section className="bg-section py-16">
-      <div className="max-w-[1536px] mx-auto px-6">
+      <div className="site-container px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* ── Left: heading + accordion ── */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-primary block" />
               <p className="text-primary text-xs font-bold uppercase tracking-widest">What We Do</p>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
               Empowering Decision<br />
               Making with{" "}
-              <span className="italic font-normal text-primary">Track Opinion</span>
+              <span className="font-normal">Track Opinion</span>
             </h2>
 
             <p className="text-gray-600 text-base leading-8 font-medium mb-10">

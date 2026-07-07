@@ -68,7 +68,7 @@ export default function BlogList() {
     <div className="-mt-[76px] bg-primary">
 
       {/* ── Dark navy header ── */}
-      <div className="max-w-[1536px] mx-auto px-6 py-8 pt-[calc(76px+2rem)]">
+      <div className="site-container px-6 py-8 pt-[calc(76px+2rem)]">
         <div className="relative flex items-center justify-center">
 
           {/* Centered title */}
@@ -114,7 +114,7 @@ export default function BlogList() {
         transition={{ duration: 0.5 }}
         className="bg-white rounded-t-[2.5rem]"
       >
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
 
           {filtered.length === 0 ? (
             <div className="py-24 text-center text-gray-400 text-sm">

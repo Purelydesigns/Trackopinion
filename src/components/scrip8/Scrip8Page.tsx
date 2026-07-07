@@ -398,7 +398,7 @@ export default function Scrip8Page() {
         {/* Bottom fade to white */}
         <div className="absolute bottom-0 left-0 right-0 h-38 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 50%, #ffffff 100%)" }} />
 
-        <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-20 pb-38 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="relative w-full site-container px-6 pt-20 pb-38 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div {...fadeUp(0)}>
             <div className="flex flex-wrap gap-3 mb-6">
               <span className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-white text-xs font-semibold px-4 py-2.5 rounded-full backdrop-blur-sm">
@@ -464,7 +464,7 @@ export default function Scrip8Page() {
 
       {/* ════════ STATS ════════ */}
       <section ref={statsRef} className="bg-white border-y border-gray-100">
-        <div className="max-w-[1536px] mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+        <div className="site-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           {stats.map((s, i) => (
             <motion.div
               key={i}
@@ -484,7 +484,7 @@ export default function Scrip8Page() {
 
       {/* ════════ THE PROBLEM ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">The Problem</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
@@ -532,7 +532,7 @@ export default function Scrip8Page() {
       {/* ════════ FEATURE STEPS ════════ */}
       {featureSteps.map((step, i) => (
         <section key={i} className={`${step.bg} py-20`}>
-          <div className="max-w-[1536px] mx-auto px-6">
+          <div className="site-container px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
               {/* Mockup — always first in DOM (shows first on mobile), reordered on desktop for non-flip */}
@@ -573,7 +573,7 @@ export default function Scrip8Page() {
         {/* Subtle dot grid */}
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
-        <div className="relative max-w-[1536px] mx-auto px-6">
+        <div className="relative site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Intelligence built into every step</h2>
@@ -603,7 +603,7 @@ export default function Scrip8Page() {
 
       {/* ════════ EVERYTHING INCLUDED ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Everything Included</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
@@ -679,7 +679,7 @@ export default function Scrip8Page() {
 
       {/* ════════ CUSTOMER STORIES ════════ */}
       <section className="bg-white py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="flex items-end justify-between mb-12">
             <div>
               <p className="text-accent text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
@@ -755,7 +755,7 @@ export default function Scrip8Page() {
 
       {/* ════════ COMPLIANCE STRIP ════════ */}
       <section className="bg-section py-8 border-y border-gray-100">
-        <div className="max-w-[1536px] mx-auto px-6 flex flex-wrap items-center justify-center gap-4">
+        <div className="site-container px-6 flex flex-wrap items-center justify-center gap-4">
           <span className="text-gray-500 text-sm font-semibold mr-2">Certified &amp; Compliant:</span>
           {["GDPR", "ISO 27001", "SOC 2 Type II", "HIPAA Ready", "CCPA Compliant"].map((b) => (
             <span key={b} className="inline-flex items-center gap-2 border border-gray-200 bg-white text-gray-700 text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
@@ -869,7 +869,7 @@ function PricingSection() {
 
   return (
     <section className="bg-white py-24">
-      <div className="max-w-[1536px] mx-auto px-6">
+      <div className="site-container px-6">
         <motion.div {...fadeUp()} className="text-center mb-10">
           <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">

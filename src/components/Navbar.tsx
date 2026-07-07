@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Bell, ChevronDown, Globe, FlaskConical, Building2,
+  ChevronDown, Globe, FlaskConical, Building2,
   PhoneCall, HeartPulse, FileCode2, ArrowRight,
   BarChart3, Users, Layers, Languages, PieChart,
   ShieldCheck, Microscope, TrendingUp,
@@ -98,9 +98,7 @@ export default function Navbar() {
   const [hoveredIdx, setHoveredIdx]         = useState(1);
   const [scrolled, setScrolled]             = useState(false);
   const [mobileDropOpen, setMobileDropOpen] = useState(false);
-  const [bellOpen, setBellOpen]             = useState(false);
   const dropRef                             = useRef<HTMLLIElement>(null);
-  const bellRef                             = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -118,15 +116,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (bellRef.current && !bellRef.current.contains(e.target as Node)) {
-        setBellOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
 
   const isTransparent = !scrolled;
 
@@ -146,7 +135,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full z-50 py-3 px-6 transition-all duration-300">
-      <div className={`max-w-[1536px] mx-auto px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
+      <div className={`site-container px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
 
         {/* ── Logo ── */}
         <Link href="/">
@@ -320,55 +309,6 @@ export default function Navbar() {
 
         {/* ── Bell + Hamburger group ── */}
         <div className="flex items-center gap-2">
-        <div ref={bellRef} className="relative">
-          <button
-            onClick={() => setBellOpen((p) => !p)}
-            className={`cursor-pointer relative p-2 rounded-full border-2 transition-all duration-200 ${bellOpen ? "bg-white border-white" : isTransparent ? "border-white/60 hover:border-white bg-white/10" : "border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50"}`}
-          >
-            <Bell className={`w-4 h-4 transition-colors ${bellOpen ? "text-[#1a1a4e]" : isTransparent ? "text-white" : "text-gray-600"}`} strokeWidth={bellOpen ? 2.5 : 1.8} />
-            <span className={`absolute -top-1.5 -right-1.5 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ${isTransparent ? "bg-primary ring-white/20" : "bg-[#1a1a4e] ring-white"}`}>
-              0
-            </span>
-          </button>
-
-          {/* Notification panel */}
-          <div className={`absolute right-0 top-[calc(100%+10px)] w-[290px] sm:w-[320px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-200 origin-top-right ${
-            bellOpen
-              ? "opacity-100 scale-100 pointer-events-auto"
-              : "opacity-0 scale-95 pointer-events-none"
-          }`}>
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-              <div className="flex items-center gap-2">
-                <Bell className="w-4 h-4 text-primary" />
-                <span className="text-sm font-bold text-primary">Notifications</span>
-              </div>
-              <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">0 new</span>
-            </div>
-
-            {/* Empty state */}
-            <div className="flex flex-col items-center justify-center py-10 px-6 text-center">
-              <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-3">
-                <Bell className="w-6 h-6 text-gray-300" />
-              </div>
-              <p className="text-sm font-semibold text-gray-500 mb-1">No notifications yet</p>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                We&apos;ll notify you when something important happens.
-              </p>
-            </div>
-
-            {/* Footer */}
-            <div className="border-t border-gray-100 px-5 py-3 bg-gray-50/50 flex items-center justify-between">
-              <span className="text-xs text-gray-400">Stay tuned for updates</span>
-              <button
-                onClick={() => setBellOpen(false)}
-                className="text-xs font-semibold text-primary hover:text-primary transition-colors"
-              >
-                Dismiss
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* ── Mobile hamburger ── */}
         <button

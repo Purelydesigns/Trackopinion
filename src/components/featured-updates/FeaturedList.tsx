@@ -58,7 +58,7 @@ export default function FeaturedList() {
     <div className="-mt-[76px] bg-primary">
 
       {/* ── Dark navy header with heading + subheading ── */}
-      <div className="max-w-[1536px] mx-auto px-6 py-14 pt-[calc(76px+3.5rem)] text-center">
+      <div className="site-container px-6 py-14 pt-[calc(76px+3.5rem)] text-center">
         <motion.h1
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function FeaturedList() {
         transition={{ duration: 0.5 }}
         className="bg-white rounded-t-[2.5rem]"
       >
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
 
           {updates.map((item, i) => (
             <motion.div

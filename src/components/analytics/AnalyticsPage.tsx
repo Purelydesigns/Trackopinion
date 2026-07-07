@@ -204,7 +204,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ BANNER ════════ */}
       <section className="-mt-[76px] bg-primary py-8">
-        <div className="max-w-[1536px] mx-auto px-6 text-center pt-[76px]">
+        <div className="site-container px-6 text-center pt-[76px]">
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Analytics and Reporting</h1>
           <p className="text-white/90 text-base font-medium">From Opinions to Decisions with Clarity</p>
         </div>
@@ -212,7 +212,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ NUMBERS THAT LEAD — Tabbed ════════ */}
       <section className="bg-white pt-16 pb-0">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           {/* Heading */}
           <motion.div {...fadeUp()} className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -393,7 +393,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ LIFECYCLE ════════ */}
       <section className="bg-primary py-16 mt-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-white mb-3">
               Lifecycle of an Analytics Project
@@ -416,7 +416,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ FEATURE CARDS (2×2) ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featureCards.map((card, i) => (
               <motion.div
@@ -435,7 +435,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ BENEFITS ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">
               Benefits of Track Opinion&apos;s Analytics and Reporting Services
@@ -478,7 +478,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ TECH STACK ════════ */}
       <section className="bg-gray-50 py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
               Tech-Stack We Use for Analytics and Reporting
@@ -508,7 +508,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ STATS BAR ════════ */}
       <section ref={statsRef} className="py-16 bg-highlight">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => (
               <motion.div
@@ -529,7 +529,7 @@ export default function AnalyticsPage() {
 
       {/* ════════ RESOURCES / BLOG SLIDER ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
               Explore Our Resources

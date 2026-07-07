@@ -75,7 +75,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
       <div ref={ref} style={{ height: 1, width: "100%", marginBottom: -1 }} aria-hidden />
 
       {/* Heading inside container */}
-      <div className={cardMode ? "" : "max-w-[1536px] mx-auto px-6"}>
+      <div className={cardMode ? "" : "site-container px-6"}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -93,7 +93,7 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
       </div>
 
       {/* Map inside container */}
-      <div className={cardMode ? "" : "max-w-[1536px] mx-auto px-6"}>
+      <div className={cardMode ? "" : "site-container px-6"}>
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}

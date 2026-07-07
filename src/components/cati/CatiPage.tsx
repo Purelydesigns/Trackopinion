@@ -122,7 +122,7 @@ export default function CatiPage() {
         <video src="/video/banner_recolored.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         {/* Gradient overlay — dark navy left fading to transparent right */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,27,62,0.95) 0%, rgba(26,47,94,0.80) 20%, rgba(26,82,118,0.55) 40%, rgba(174,214,241,0.25) 70%, rgba(255,255,255,0.05) 100%)" }} />
-        <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-16 pb-28">
+        <div className="relative w-full site-container px-6 pt-16 pb-28">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -175,7 +175,7 @@ export default function CatiPage() {
 
       {/* ════════ ERASE COMPLEXITIES HEADING ════════ */}
       <section className="bg-white pt-12">
-        <div className="max-w-[1536px] mx-auto px-6 text-center">
+        <div className="site-container px-6 text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
@@ -192,7 +192,7 @@ export default function CatiPage() {
 
       {/* ════════ MAP CARD ════════ */}
       <section className="bg-white py-12">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">CATI Reach</h2>
@@ -207,7 +207,7 @@ export default function CatiPage() {
 
       {/* ════════ HOW CATI WORKS ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
@@ -287,7 +287,7 @@ export default function CatiPage() {
 
       {/* ════════ OUR CAPABILITIES ════════ */}
       <section className="py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="h-px w-8 bg-accent block" />

@@ -22,7 +22,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/45" />
 
       {/* ── Content ── */}
-      <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-20">
+      <div className="relative w-full site-container px-6 pt-20">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -31,7 +31,7 @@ export default function HeroSection() {
         >
           {/* Pill label */}
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white" />
             <span className="text-white text-xs font-semibold uppercase tracking-widest">
               Global Market Research · Est. 2009
             </span>
@@ -40,7 +40,7 @@ export default function HeroSection() {
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.2] mb-6">
             Welcome to<br />
-            <span className="italic font-normal text-white">Track Opinion</span><br />
+            <span className="font-normal">Track Opinion</span><br />
             Delivering Insights
           </h1>
 

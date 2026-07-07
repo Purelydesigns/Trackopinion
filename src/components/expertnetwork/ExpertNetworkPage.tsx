@@ -200,7 +200,7 @@ export default function ExpertNetworkPage() {
       <section className="-mt-[76px] pt-[76px] relative overflow-hidden min-h-[600px] flex items-center">
         <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,27,62,0.95) 0%, rgba(26,47,94,0.80) 20%, rgba(26,82,118,0.55) 40%, rgba(174,214,241,0.25) 70%, rgba(255,255,255,0.05) 100%)" }} />
-        <div className="relative w-full max-w-[1536px] mx-auto px-6 pt-16 pb-28">
+        <div className="relative w-full site-container px-6 pt-16 pb-28">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -263,7 +263,7 @@ export default function ExpertNetworkPage() {
 
       {/* ════════ GLOBAL COVERAGE ════════ */}
       <section className="py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="h-px w-8 bg-accent block" />
@@ -316,7 +316,7 @@ export default function ExpertNetworkPage() {
 
       {/* ════════ WHO WE SERVE ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="h-px w-8 bg-accent block" />
@@ -409,7 +409,7 @@ export default function ExpertNetworkPage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(26,111,232,0.12) 0%, transparent 70%)" }} />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(26,111,232,0.08) 0%, transparent 70%)" }} />
 
-        <div className="relative max-w-[1536px] mx-auto px-6">
+        <div className="relative site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="h-px w-8 bg-accent block" />
@@ -677,7 +677,7 @@ export default function ExpertNetworkPage() {
 
       {/* ════════ PANEL BOOK / TESTIMONIALS ════════ */}
       <section className="bg-section py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="h-px w-8 bg-accent block" />
@@ -760,7 +760,7 @@ export default function ExpertNetworkPage() {
 
       {/* ════════ REGISTER AS AN EXPERT ════════ */}
       <section className="py-20">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
 
             {/* ── LEFT — heading + feature rows ── */}

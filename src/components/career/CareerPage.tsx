@@ -56,7 +56,7 @@ export default function CareerPage() {
     <main>
       {/* ── Banner ── */}
       <div className="-mt-[76px] bg-primary py-8">
-        <div className="max-w-[1536px] mx-auto px-6 text-center pt-[76px]">
+        <div className="site-container px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function CareerPage() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-t-[2.5rem]"
         >
-          <div className="max-w-[1536px] mx-auto px-6 py-10">
+          <div className="site-container px-6 py-10">
 
             {/* Search */}
             <div className="flex items-center gap-3 border-b border-gray-200 pb-3 mb-8">

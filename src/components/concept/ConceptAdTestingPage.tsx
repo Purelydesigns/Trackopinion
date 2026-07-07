@@ -200,7 +200,7 @@ export default function ConceptAdTestingPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full max-w-[1536px] mx-auto px-6">
+        <div className="relative w-full site-container px-6">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -225,7 +225,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {capabilities.map((cap, i) => (
               <motion.div
@@ -250,7 +250,7 @@ export default function ConceptAdTestingPage() {
       {/* ════════ CONTENT SECTIONS — Terms page para style ════════ */}
       {contentSections.map((sec, i) => (
         <section key={i} className="bg-white py-10">
-          <div className="max-w-[1536px] mx-auto px-6">
+          <div className="site-container px-6">
             <motion.div {...fadeUp()} className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                 <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -271,7 +271,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ METHODS (bg-primary) ════════ */}
       <section className="bg-primary py-16">
-        <div className="max-w-[1536px] mx-auto px-6 text-center">
+        <div className="site-container px-6 text-center">
           <motion.div {...fadeUp()}>
             <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">
               Unique Product Concept Testing and Creative Ad Testing Methods
@@ -296,7 +296,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ STATS ════════ */}
       <section className="py-16 bg-highlight">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => {
               const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
@@ -317,7 +317,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ FAQs — dark content, privacy/terms style ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">FAQs</h2>
           </motion.div>
@@ -352,7 +352,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ RESOURCES SLIDER ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
           </motion.div>
@@ -384,7 +384,7 @@ export default function ConceptAdTestingPage() {
 
       {/* ════════ CTA ════════ */}
       <section className="py-14 bg-highlight">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div
             {...fadeUp()}
             className="flex flex-col md:flex-row items-center justify-between gap-8"

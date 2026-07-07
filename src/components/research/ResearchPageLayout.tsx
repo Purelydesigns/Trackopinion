@@ -203,7 +203,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ BANNER ════════ */}
       <section className="-mt-[76px] bg-primary py-16">
-        <div className="max-w-[1536px] mx-auto px-6 text-center pt-[76px]">
+        <div className="site-container px-6 text-center pt-[76px]">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,7 +225,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ FACTS HEADING ════════ */}
       <section className="bg-white pt-12">
-        <div className="max-w-[1536px] mx-auto px-6 text-center">
+        <div className="site-container px-6 text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="text-primary text-xl">●</span>
             <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">{factsHeading}</h2>
@@ -242,7 +242,7 @@ export default function ResearchPageLayout({
         const isLeft = sec.side === "left";
         return (
           <section key={i} className="bg-white py-16">
-            <div className="max-w-[1536px] mx-auto px-6">
+            <div className="site-container px-6">
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${!isLeft ? "md:[direction:rtl]" : ""}`}>
                 {/* Text */}
                 <motion.div {...fadeUp(0)} className="[direction:ltr]">
@@ -270,7 +270,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {capabilities.map((cap, i) => (
               <motion.div
@@ -289,7 +289,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ PROJECT MANAGEMENT ════════ */}
       <section className="bg-primary py-16">
-        <div className="max-w-[1536px] mx-auto px-6 text-center">
+        <div className="site-container px-6 text-center">
           <motion.div {...fadeUp()}>
             <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">{stepsHeading}</p>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-12">{stepsSubheading}</h2>
@@ -311,7 +311,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ STATS ════════ */}
       <section ref={statsRef} className="py-16 bg-highlight">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
             {stats.map((s, i) => {
               const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
@@ -332,7 +332,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ FAQs ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">FAQs</h2>
           </motion.div>
@@ -367,7 +367,7 @@ export default function ResearchPageLayout({
 
       {/* ════════ RESOURCES SLIDER ════════ */}
       <section className="bg-white py-16">
-        <div className="max-w-[1536px] mx-auto px-6">
+        <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
           </motion.div>

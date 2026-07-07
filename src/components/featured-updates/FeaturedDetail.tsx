@@ -255,7 +255,7 @@ export default function FeaturedDetail() {
 
   return (
     <main className="-mt-[76px] bg-white">
-      <div className="max-w-[1536px] mx-auto px-6">
+      <div className="site-container px-6">
 
         {/* ── Article header ── */}
         <motion.div {...fadeUp} className="pt-[calc(76px+3rem)] pb-6">

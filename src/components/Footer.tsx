@@ -20,7 +20,6 @@ const serviceLinks = [
 
 const addresses = [
   "607-608, Tower C, Nirvana Courtyard, Sector 50, Gurugram – 122018",
-  "91 springboard, C2, Block C, Sector 1, Noida, Uttar Pradesh 201301",
 ];
 
 function BuildingIcon() {
@@ -41,7 +40,7 @@ export default function Footer() {
     <footer>
       {/* ── Main footer ── */}
       <div className="bg-primary text-white">
-        <div className="max-w-[1536px] mx-auto px-6 py-14">
+        <div className="site-container px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1.4fr] gap-10">
 
           {/* Brand col */}
@@ -114,7 +113,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="bg-[#0a1628]">
-        <div className="max-w-[1536px] mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="site-container px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/50 text-sm">
             © 2026 <span className="font-bold text-white">TrackOpinion</span> | All Rights Reserved
           </p>

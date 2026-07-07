@@ -38,7 +38,7 @@ export default function TrustedBy({
       </h2>
 
       {/* ── Slider ── */}
-      <div className="max-w-[1536px] mx-auto px-6 relative">
+      <div className="site-container px-6 relative">
 
         <button
           id={prevId}
@@ -100,7 +100,7 @@ export default function TrustedBy({
           aria-hidden="true"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] pointer-events-none select-none"
         />
-        <div className="relative max-w-[1536px] mx-auto px-6 py-14 text-center">
+        <div className="relative site-container px-6 py-14 text-center">
           <p className="text-primary font-extrabold uppercase mb-4 text-lg">
             We Work for Clients Around the World
           </p>

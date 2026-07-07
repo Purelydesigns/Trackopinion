@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SiteCard from "@/components/ui/SiteCard";
 
 const stories = [
   {
@@ -31,7 +32,7 @@ export default function SuccessStories() {
 
   return (
     <section className="bg-section py-16">
-      <div className="max-w-[1536px] mx-auto px-6">
+      <div className="site-container px-6">
 
         <motion.div
           ref={ref}
@@ -53,38 +54,28 @@ export default function SuccessStories() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 * i, duration: 0.5 }}
-              whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(13,27,62,0.12)" }}
-              className="bg-white rounded-2xl shadow-sm overflow-hidden cursor-pointer flex flex-col"
             >
-              {/* Thick navy top bar */}
-              <div className="h-1.5 bg-primary rounded-t-2xl" />
-
-              <div className="p-7 flex flex-col flex-1">
-                {/* Category */}
-                <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">
-                  {story.category}
-                </p>
-
-                {/* Title */}
-                <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">
-                  {story.title}
-                </h3>
-
-                {/* Excerpt */}
-                <p className="text-gray-600 text-sm leading-7 font-medium flex-1 mb-6">
-                  {story.excerpt}
-                </p>
-
-                {/* Footer */}
-                <div className="border-t border-gray-200 pt-4">
-                  <Link
-                    href="/case-studies"
-                    className="text-primary text-sm font-bold hover:gap-2 flex items-center gap-1 transition-all duration-200"
-                  >
-                    Read case study →
-                  </Link>
+              <SiteCard className="flex flex-col h-full">
+                <div className="p-7 flex flex-col flex-1">
+                  <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">
+                    {story.category}
+                  </p>
+                  <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">
+                    {story.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-7 font-medium flex-1 mb-6">
+                    {story.excerpt}
+                  </p>
+                  <div className="border-t border-gray-200 pt-4">
+                    <Link
+                      href="/case-studies"
+                      className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all duration-200"
+                    >
+                      Read case study →
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </SiteCard>
             </motion.div>
           ))}
         </div>
