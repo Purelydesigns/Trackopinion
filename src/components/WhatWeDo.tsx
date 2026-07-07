@@ -117,7 +117,7 @@ export default function WhatWeDo() {
   const stickyRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-section py-12">
+    <section className="bg-section py-10">
       <div className="site-container px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 

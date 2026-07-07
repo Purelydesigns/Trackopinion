@@ -24,7 +24,7 @@ export default function Certifications() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-8">
+    <section className="bg-section py-10">
       <div className="site-container px-6">
 
         <motion.div

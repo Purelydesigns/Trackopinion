@@ -19,7 +19,7 @@ const serviceLinks = [
 ];
 
 const addresses = [
-  "1401, 21st Street, STE R Sacramento, CA 95811",
+  "1401, 21st Street, STE R\nSacramento, CA 95811",
 ];
 
 function BuildingIcon() {
@@ -101,7 +101,7 @@ export default function Footer() {
               {addresses.map((addr, i) => (
                 <div key={i} className="flex gap-4 items-center">
                   <BuildingIcon />
-                  <p className="text-white/60 text-sm leading-6">{addr}</p>
+                  <p className="text-white/60 text-sm leading-6 whitespace-pre-line">{addr}</p>
                 </div>
               ))}
             </div>
