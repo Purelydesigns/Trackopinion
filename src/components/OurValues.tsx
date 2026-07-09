@@ -118,8 +118,6 @@ export default function OurValues() {
               <SiteCard>
                 <div className="p-5 md:p-8 flex flex-col items-center justify-center text-center">
                   <motion.div
-                    whileHover={{ rotate: [0, -10, 10, -6, 6, 0], scale: 1.15 }}
-                    transition={{ duration: 0.5 }}
                     className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4"
                   >
                     {icon}

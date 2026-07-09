@@ -101,7 +101,7 @@ export default function Home() {
         <TrustedBy />
         <OurValues />
         <SuccessStories />
-        <Certifications />
+        {/* <Certifications /> */}
         <Testimonials />
       </main>
     </>

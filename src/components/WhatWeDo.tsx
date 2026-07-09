@@ -123,14 +123,14 @@ export default function WhatWeDo() {
 
           {/* ── Left: heading + accordion ── */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <p className="text-primary text-xs font-bold uppercase tracking-widest">What We Do</p>
+            <div className="flex items-center gap-3">
+              <p className="text-primary text-sm font-bold uppercase tracking-widest mb-2">What We Do</p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase text-gray-900 leading-tight mb-4">
               Empowering Decision<br />
               Making with{" "}
-              <span className="font-normal">Track Opinion</span>
+              Track Opinion
             </h2>
 
             <p className="text-gray-600 text-base leading-8 font-medium mb-10">

@@ -13,6 +13,12 @@ const logos = [
   { name: "Google2",  text: "text-[#4285F4] font-bold",              label: "Google"  },
   { name: "CEAT2",    text: "text-[#003087] font-bold tracking-wide", label: "C≡AT"    },
   { name: "Netflix2", text: "text-[#E50914] font-extrabold",          label: "NETFLIX" },
+  { name: "Google",   text: "text-[#4285F4] font-bold",              label: "Google"  },
+  { name: "Netflix",  text: "text-[#E50914] font-extrabold",          label: "NETFLIX" },
+  { name: "CEAT",     text: "text-[#003087] font-bold tracking-wide", label: "C≡AT"    },
+  { name: "Google2",  text: "text-[#4285F4] font-bold",              label: "Google"  },
+  { name: "CEAT2",    text: "text-[#003087] font-bold tracking-wide", label: "C≡AT"    },
+  { name: "Netflix2", text: "text-[#E50914] font-extrabold",          label: "NETFLIX" },
 ];
 
 export default function TrustedBy({
@@ -98,9 +104,9 @@ export default function TrustedBy({
           src="/images/map.png"
           alt=""
           aria-hidden="true"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] pointer-events-none select-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] pointer-events-none select-none"
         />
-        <div className="relative site-container px-6 py-14 text-center">
+        <div className="relative site-container px-6 py-34 text-center">
           <p className="text-primary font-extrabold uppercase mb-4 text-lg">
             We Work for Clients Around the World
           </p>

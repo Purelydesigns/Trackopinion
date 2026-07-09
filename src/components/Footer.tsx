@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const aboutLinks = [
   { label: "About Company",   href: "/about"   },
@@ -16,6 +21,23 @@ const serviceLinks = [
   { label: "Enterprises Solution", href: "/solutions" },
   { label: "CATI Solutions",      href: "/solutions" },
   { label: "Healthcare Research", href: "/solutions" },
+];
+
+const certs = [
+  { label: "ISO 27001",            src: "/certification/iso 27001.png"                   },
+  { label: "HIPAA Compliance",     src: "/certification/hipaa.png"                       },
+  { label: "ESOMAR Corporate",     src: "/certification/ESOMAR_corporate2025_RGB.png"    },
+  { label: "GDPR Compliant",       src: "/certification/GDPR.png"                        },
+  { label: "Insights Association", src: "/certification/insights-association-logo-v2.png" },
+  { label: "MRSI",                 src: "/certification/MRSI.png"                        },
+  { label: "QUIRK'S Media",        src: "/certification/Quirks.png"                      },
+];
+
+const certCards = [
+  { value: "ISO 27001",   desc: "Information Security Certified" },
+  { value: "HIPAA",       desc: "Healthcare Data Compliant"      },
+  { value: "GDPR",        desc: "EU Data Protection Compliant"   },
+  { value: "ESOMAR",      desc: "Corporate Member 2025"          },
 ];
 
 const addresses = [
@@ -38,6 +60,53 @@ function BuildingIcon() {
 export default function Footer() {
   return (
     <footer>
+      {/* ── Certifications ── */}
+      <div className="bg-primary border-b border-white/10">
+        <div className="site-container px-6 py-10">
+
+          {/* Logo slider — white */}
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest text-center mb-6">Certifications &amp; Affiliations</p>
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            loop
+            slidesPerView={2}
+            spaceBetween={32}
+            breakpoints={{
+              480:  { slidesPerView: 3 },
+              768:  { slidesPerView: 4 },
+              1024: { slidesPerView: 6 },
+            }}
+            className="mb-10"
+          >
+            {certs.map((cert, i) => (
+              <SwiperSlide key={i}>
+                <div className="h-20 flex items-center justify-center">
+                  <Image
+                    src={cert.src}
+                    alt={cert.label}
+                    width={160}
+                    height={80}
+                    className="object-contain h-16 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* 4 stat cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {certCards.map((c, i) => (
+              <div key={i} className="border border-white/10 rounded-xl px-5 py-4 text-center bg-white/5">
+                <p className="text-white font-black text-lg mb-1">{c.value}</p>
+                <p className="text-white/50 text-xs leading-5">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+
       {/* ── Main footer ── */}
       <div className="bg-primary text-white">
         <div className="site-container px-6 py-14">

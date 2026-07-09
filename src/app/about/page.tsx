@@ -54,7 +54,7 @@ export default function AboutPage() {
         <Leadership />
         <WhyBusinesses />
         <Testimonials />
-        <Certifications />
+        {/* <Certifications /> */}
       </main>
     </>
   );

@@ -36,7 +36,7 @@ export default function AboutHero() {
           {/* Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.15] mb-6">
             Track Opinion:{" "} <br></br>
-            <span className="font-normal">Redefining Excellence</span>{" "} <br></br>
+            Redefining Excellence{" "} <br></br>
             in Market Research —{" "} <br></br>
             Your Trusted Partner for Unparalleled Insights
           </h1>

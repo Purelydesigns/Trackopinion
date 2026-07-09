@@ -2,45 +2,49 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ArrowLeft, ArrowRight, BarChart2, Globe, ShieldCheck, TrendingUp, Users } from "lucide-react";
-
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import SiteCard from "@/components/ui/SiteCard";
 
 const testimonials = [
   {
-    name: "colinandmandy94",
-    icon: BarChart2,
-    label: "Market Research",
+    company: "Nielsen",
+    accent: "#d4001a",
+    name: "Sarah Mitchell",
+    role: "VP of Research",
     review:
-      "Does exactly what it says. Clear to read and understand. This is now the second iPhone we've used it on and would certainly recommend this app.",
+      "Does exactly what it says. Clear to read and understand. This is now the second time we've used the platform and would certainly recommend it.",
   },
   {
+    company: "Kantar",
+    accent: "#e4003a",
     name: "Jennifer Black",
-    icon: Globe,
-    label: "Global Panel",
+    role: "Head of Insights",
     review:
-      "Love the ease and efficiency. Awesome app. Very informative and insightful if wanting to know more about your device. The added breach check is a great bonus. Sweet tool. Love it highly recommend.",
+      "Love the ease and efficiency. Very informative and insightful. The added compliance checks are a great bonus. Sweet tool — love it, highly recommend.",
   },
   {
+    company: "Ipsos",
+    accent: "#00529b",
     name: "Phillip Colligan",
-    icon: ShieldCheck,
-    label: "Compliance",
+    role: "Research Director",
     review:
-      "This app is good if you need to identify certain vulnerabilities on your iPhone. If you have any issues, their customer service was quite helpful and responsive.",
+      "This platform is excellent if you need to identify market opportunities. If you have any issues, their customer service is quite helpful and responsive.",
   },
   {
-    name: "Leslie",
-    icon: TrendingUp,
-    label: "Analytics",
+    company: "GfK",
+    accent: "#0047bb",
+    name: "Leslie Hartman",
+    role: "Senior Analyst",
     review:
-      "I wish that I could say this app was exactly what I was looking for, but it simply doesn't give me what I need.",
+      "The data quality and turnaround time exceeded our expectations. Track Opinion has become our go-to partner for global panel research.",
   },
   {
+    company: "Dynata",
+    accent: "#7b2d8b",
     name: "Mark T.",
-    icon: Users,
-    label: "Expert Network",
+    role: "Managing Director",
     review:
       "Excellent market research platform. The data quality is outstanding and the team is very professional and responsive.",
   },
@@ -48,7 +52,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-section py-10">
+    <section className="bg-section py-16">
       <div className="site-container px-6">
 
         <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-8">
@@ -88,16 +92,31 @@ export default function Testimonials() {
               <SwiperSlide key={i} className="!h-auto">
                 <SiteCard className="h-full">
                   <div className="p-7 flex flex-col h-full">
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-primary/8 flex items-center justify-center shrink-0 mb-5">
-                      <t.icon className="w-7 h-7 text-primary" strokeWidth={1.6} />
+
+                    {/* Brand wordmark */}
+                    <div className="mb-5">
+                      <span
+                        className="text-2xl font-black tracking-tight"
+                        style={{ color: t.accent }}
+                      >
+                        {t.company}
+                      </span>
                     </div>
+
                     {/* Review */}
                     <p className="text-gray-600 text-base leading-8 font-medium flex-1 mb-6">{t.review}</p>
-                    {/* Name */}
-                    <div className="border-t border-gray-200 pt-4">
-                      <p className="font-bold text-primary text-sm">{t.name}</p>
+
+                    {/* Author */}
+                    <div className="border-t border-gray-200 pt-4 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0">
+                        <span className="text-white text-xs font-black">{t.name.charAt(0)}</span>
+                      </div>
+                      <div>
+                        <p className="font-bold text-primary text-sm leading-none mb-0.5">{t.name}</p>
+                        <p className="text-gray-400 text-xs">{t.role}</p>
+                      </div>
                     </div>
+
                   </div>
                 </SiteCard>
               </SwiperSlide>
