@@ -16,7 +16,7 @@ const solutions = [
   {
     label: "Global Panel",
     icon: Globe,
-    href: "/contact-us",
+    href: "/solutions/global-panel",
     desc: "Reach respondents across 50+ countries",
     color: "bg-blue-50 text-blue-600",
     children: [],
