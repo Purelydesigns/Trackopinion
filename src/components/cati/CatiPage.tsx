@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Check, CheckCircle, ChevronDown, ChevronUp, Upload, Headphones, Globe, ShieldCheck, Zap, PhoneCall, MessageSquare } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 import GlobalReach from "@/components/about/GlobalReach";
 
 /* ── Data ── */
@@ -116,62 +117,20 @@ export default function CatiPage() {
   return (
     <main className="bg-white">
 
-      {/* ════════ HERO ════════ */}
-      <section className="-mt-[76px] pt-[76px] relative overflow-hidden min-h-[600px] flex items-center">
-        {/* Video background */}
-        <video src="/video/banner_recolored.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
-        {/* Gradient overlay — dark navy left fading to transparent right */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,27,62,0.95) 0%, rgba(26,47,94,0.80) 20%, rgba(26,82,118,0.55) 40%, rgba(174,214,241,0.25) 70%, rgba(255,255,255,0.05) 100%)" }} />
-        <div className="relative w-full site-container px-6 pt-16 pb-28">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-2xl"
-          >
-            {/* Pill badge */}
-            <div className="inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-              </span>
-              <span className="text-white/80 text-xs font-semibold uppercase tracking-widest">
-                CATI · Computer Assisted Telephone Interviewing
-              </span>
-            </div>
-
-            {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6">
-              Computer Assisted<br />
-              <span className="italic font-normal text-highlight">Telephone</span>{" "}
-              Interviewing
-            </h1>
-
-            <p className="text-white/65 text-base sm:text-lg leading-8 mb-10 max-w-xl">
-              CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="bg-accent text-white font-bold px-7 py-3.5 rounded-lg text-sm flex items-center gap-2 shadow-lg"
-              >
-                Explore More →
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="border border-white/30 text-white font-semibold px-7 py-3.5 rounded-lg text-sm hover:bg-white/10 transition-colors duration-200"
-              >
-                See Capabilities
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-
-      </section>
+      <PageHero
+        badge="CATI · Computer Assisted Telephone Interviewing"
+        heading={
+          <>
+            Computer Assisted<br />
+            <span className="italic font-normal" style={{ color: "#93c5fd" }}>Telephone</span>{" "}
+            Interviewing
+          </>
+        }
+        description="CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions."
+        primaryCta={{ label: "Explore More", href: "/contact-us" }}
+        secondaryCta={{ label: "See Capabilities", href: "#capabilities" }}
+        minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+      />
 
       {/* ════════ ERASE COMPLEXITIES HEADING ════════ */}
       <section className="bg-white pt-12">

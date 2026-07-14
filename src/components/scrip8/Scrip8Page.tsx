@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
+import PageHero from "@/components/ui/PageHero";
 
 /* ── CountUp ── */
 function CountUp({ end, suffix = "", decimals = 0 }: { end: number; suffix?: string; decimals?: number }) {
@@ -392,63 +393,20 @@ export default function Scrip8Page() {
   return (
     <main className="bg-white">
 
-      {/* ════════ HERO ════════ */}
-      <section className="-mt-[76px] bg-primary min-h-[600px] lg:min-h-[700px] flex items-center relative overflow-hidden pt-[76px]">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-        {/* Bottom fade to white */}
-        <div className="absolute bottom-0 left-0 right-0 h-38 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 50%, #ffffff 100%)" }} />
-
-        <div className="relative w-full site-container px-6 pt-20 pb-38 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div {...fadeUp(0)}>
-            <div className="flex flex-wrap gap-3 mb-6">
-              <span className="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-white text-xs font-semibold px-4 py-2.5 rounded-full backdrop-blur-sm">
-                <span className="relative flex w-2.5 h-2.5 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full w-2.5 h-2.5 bg-green-400" />
-                </span>
-                Powered by AI Analytics
-              </span>
-              <span className="inline-flex items-center gap-2.5 bg-transparent border border-white/20 text-white text-xs font-semibold px-4 py-2.5 rounded-full backdrop-blur-sm">
-                <span className="flex gap-0.5 text-amber-400 leading-none">★★★★★</span>
-                G2 Leader 2025
-              </span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
-              The Survey Platform<br />
-              Built for <span className="text-white/70">Real Insights.</span>
-            </h1>
-
-            <p className="text-white/80 text-base leading-8 mb-8 max-w-md">
-              Create, distribute and analyze surveys in minutes with Scrip8. Mobile-first, AI-powered, and trusted by 500+ research teams worldwide — from startups to Fortune 500s.
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-6">
-              <Link href="/contact-us" className="inline-flex items-center gap-2 bg-white text-primary font-bold px-7 py-4 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg text-sm">
-                Start Free — No Card Needed →
-              </Link>
-              <button className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white font-semibold px-7 py-4 rounded-lg hover:bg-white/20 transition-all duration-300 text-sm">
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                Watch 90-sec Demo
-              </button>
-            </div>
-
-            <p className="text-white/50 text-xs mb-8">✓ 7-day free trial · ✓ Setup in 5 minutes · ✓ Cancel anytime</p>
-
-            <div className="flex flex-wrap gap-2">
-              {["GDPR Compliant", "ISO 27001", "SOC 2 Type II", "HIPAA Ready"].map((b) => (
-                <span key={b} className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/70 text-xs font-semibold px-3 py-1.5 rounded-full">
-                  <Check className="w-3 h-3 text-green-400" strokeWidth={3} /> {b}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div {...fadeUp(0.2)} className="hidden lg:block">
-            <SurveyBuilderMockup />
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        badge="Scrip8 · AI-Powered Survey Platform"
+        heading={
+          <>
+            The Survey Platform<br />
+            Built for{" "}
+            <span className="italic font-normal" style={{ color: "#93c5fd" }}>Real Insights</span>
+          </>
+        }
+        description="Create, distribute and analyze surveys in minutes with Scrip8. Mobile-first, AI-powered, and trusted by 500+ research teams worldwide — from startups to Fortune 500s."
+        primaryCta={{ label: "Start Free — No Card Needed", href: "/contact-us" }}
+        secondaryCta={{ label: "Watch 90-sec Demo", href: "#demo" }}
+        minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+      />
 
       {/* ════════ TRUSTED BY ════════ */}
       <section className="bg-white py-12 border-b border-gray-100">
