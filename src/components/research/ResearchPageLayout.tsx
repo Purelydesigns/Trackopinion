@@ -81,7 +81,7 @@ function MockupCards() {
       <div className="relative w-72 h-64">
         {/* Back cards */}
         <div className="absolute left-0 top-4 w-52 h-52 bg-white/70 rounded-2xl shadow p-4 opacity-70">
-          <p className="font-bold text-gray-700 text-base">Research</p>
+          <p className="font-bold text-gray-700 text-base">Research ewrghtyujy</p>
           <p className="text-gray-400 text-xs mt-1">Analysis & Research....</p>
           <p className="text-primary text-xs font-semibold mt-1 underline">Results</p>
           <div className="mt-3 h-16 flex items-end gap-1">
