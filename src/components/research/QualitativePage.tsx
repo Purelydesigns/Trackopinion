@@ -2,7 +2,9 @@
 
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { Users, MessageSquare, BookOpen, Globe, CheckCircle2 } from "lucide-react";
+import SiteCard from "@/components/ui/SiteCard";
+import LatestReadsSection from "@/components/shared/LatestReadsSection";
+import { Users, MessageSquare, BookOpen, Globe, CheckCircle2, PenLine, Globe2, BarChart2, CheckCircle, UsersRound } from "lucide-react";
 import { motion } from "framer-motion";
 
 /* ─────────────── Methods data ─────────────── */
@@ -446,6 +448,193 @@ function BenefitsSection() {
   );
 }
 
+/* ─────────────── Why Choose section ─────────────── */
+const whyCards = [
+  {
+    icon: PenLine,
+    title: "End-to-End Consulting",
+    desc: "Right from understanding your goals to generating insights that help your business decisions, and have your back throughout the qualitative market research.",
+  },
+  {
+    icon: Globe2,
+    title: "Industry Agnostic",
+    desc: "Whichever is your industry, our experience is wide. Based on your company's size — start-up, mid-scale, or enterprise — we design our market research approach.",
+  },
+  {
+    icon: BarChart2,
+    title: "Deeper Data",
+    desc: "Qualitative research thrives on data that touches the depths. We offer that along with precision in data collection, analytics, and your business insights.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Translation Facility",
+    desc: "Need data collection at remote locations? Don't let regional and unfamiliar languages become a hurdle. Obtain translation services in your qualitative market research.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Goals-Based Methodology",
+    desc: "Your market research agenda defines which method we'd use. During our project consultation phase, we understand your needs and suggest an apt methodology.",
+  },
+  {
+    icon: UsersRound,
+    title: "Panel Vetting",
+    desc: "For qualitative market research, we demand a minimum of 6 months past participation from panelists as the industry standard. Varies from B2C to healthcare & brands.",
+  },
+];
+
+function WhyChooseSection() {
+  return (
+    <section className="py-20 bg-white">
+      <div className="site-container px-6">
+        <SectionHeader
+          label="What Sets Us Apart"
+          heading={
+            <>
+              Why Choose Track Opinion for Qualitative Research?{" "}
+            </>
+          }
+          description="Six reasons why leading brands, consulting firms, and agencies trust us for their qualitative research needs."
+          theme="light"
+          align="center"
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+          {whyCards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+              >
+                <SiteCard className="flex flex-col h-full">
+                  <div className="p-7 flex flex-col flex-1">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
+                      style={{ background: "rgba(13,27,62,0.07)" }}>
+                      <Icon size={26} strokeWidth={1.5} style={{ color: "#0d1b3e" }} />
+                    </div>
+                    <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-600 text-base leading-8 font-medium flex-1">
+                      {card.desc}
+                    </p>
+                  </div>
+                </SiteCard>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────── Project Management section ─────────────── */
+const pmSteps = [
+  {
+    num: 1,
+    label: "Project Consultation",
+    title: "You speak, we listen.",
+    quote: '"We seek a detailed discussion on your project"',
+    desc: "We conduct a detailed discussion on your project to understand your qualitative data needs that should meet end goals.",
+  },
+  {
+    num: 2,
+    label: "Team Allocation",
+    title: "You ask, we provide.",
+    quote: '"The right team, assembled for you"',
+    desc: "You get a research team with a project manager, expert research consultants, survey programmers and data analysts.",
+  },
+  {
+    num: 3,
+    label: "Project Execution",
+    title: "You want, we serve.",
+    quote: '"Precision and punctuality, always"',
+    desc: "We take pride in timely delivery while aiming to collect precise data as a qualitative market research firm in India.",
+  },
+];
+
+function ProjectManagementSection() {
+  return (
+    <section className="py-20 bg-primary overflow-hidden">
+      <div className="site-container px-6">
+
+        <SectionHeader
+          label="How We Work"
+          heading={
+            <>
+              Project Management{" "}
+            </>
+          }
+          description="A dedicated team available around the clock — structured project delivery from consultation to execution."
+          theme="dark"
+          align="center"
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
+          {pmSteps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * i, duration: 0.5 }}
+            >
+              <motion.div
+                whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.3)" }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="flex flex-col h-full rounded-2xl overflow-hidden text-center"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1.5px dashed rgba(255,255,255,0.15)",
+                }}
+              >
+                {/* Blue top accent bar — mirrors SiteCard */}
+                <div className="h-1.5" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa)" }} />
+
+                <div className="p-8 flex flex-col flex-1 items-center">
+                  {/* Step number bubble */}
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-lg"
+                    style={{ background: "#1a6fe8" }}
+                  >
+                    {step.num}
+                  </div>
+
+                  {/* Label */}
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-3">
+                    {step.label}
+                  </p>
+
+                  {/* Title */}
+                  <h3 className="text-white font-bold text-lg leading-snug mb-2">
+                    {step.title}
+                  </h3>
+
+                  {/* Quote */}
+                  <p className="text-blue-300 text-sm italic mb-4 font-medium">
+                    {step.quote}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-slate-400 text-sm leading-relaxed font-normal">
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+
 /* ─────────────── Page ─────────────── */
 export default function QualitativePage() {
   return (
@@ -465,6 +654,9 @@ export default function QualitativePage() {
       <MethodsSection />
       <MoreThanNumbersSection />
       <BenefitsSection />
+      <WhyChooseSection />
+      <ProjectManagementSection />
+      <LatestReadsSection />
     </main>
   );
 }
