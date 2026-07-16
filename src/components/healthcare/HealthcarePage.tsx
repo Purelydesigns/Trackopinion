@@ -7,20 +7,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import GlobalReach from "@/components/about/GlobalReach";
+import LatestReadsSection from "../shared/LatestReadsSection";
+import PageHero from "../ui/PageHero";
+import SiteCard from "../ui/SiteCard";
+import SectionHeader from "../ui/SectionHeader";
+import { ShieldCheck, Database, Languages } from "lucide-react";
 
 /* ── Data ── */
 const capabilities = [
   {
     title: "Profile Validation & Maintenance",
     desc: "Strict profiling starts right at the registration process when building a healthcare panel for online surveys. Healthcare professionals and physicians' profiles validated against NPI and AMA databases. Compulsory updates every six months for the panelists to maintain their latest data.",
+    icon: ShieldCheck,
   },
   {
     title: "Data Security",
     desc: "Patients' and professionals' records are secured with top-notch data sharing policies as directed by the local government and regulatory authorities. In compliance with GDPR, we seek panelists' consent before storing healthcare data points in Europe.",
+    icon: Database,
   },
   {
     title: "Coherent Data",
     desc: "Never lose the tone of a panelist's opinion and sentiments expressed in words. Accurate qualitative customer insights for your complex research. Translation experts in our team across the globe make it possible to conduct qualitative market research in all major languages.",
+    icon: Languages,
   },
 ];
 
@@ -226,94 +234,118 @@ export default function HealthcarePage() {
   return (
     <main className="bg-white">
 
-      {/* ════════ HERO BANNER — same as About Us ════════ */}
-      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
-        <video src="/video/banner.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="relative w-full site-container px-6">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-2xl"
-          >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
-              Healthcare
-            </h1>
-            <p className="text-white/80 text-sm sm:text-base md:text-lg leading-8 mb-8">
-              A carefully curated panel of thousands of patients, healthcare practitioners, and pharma employees for genuine data. Reach wide and deep in 30+ Countries. All your Medical research fulfilled right at Track Opinion.
-            </p>
-            <button className="cursor-pointer bg-white text-primary font-semibold px-8 py-3.5 rounded-lg hover:bg-gray-100 transition-colors duration-300 text-sm flex items-center gap-2">
-              Explore More <span className="text-lg">»</span>
-            </button>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+          badge="Healthcare"
+          heading={
+            <>
+              Healthcare{" "}
+            </>
+          }
+          description="A carefully curated panel of thousands of patients, healthcare practitioners, and pharma employees for genuine data. Reach wide and deep in 30+ Countries. All your Medical research fulfilled right at Track Opinion."
+          primaryCta={{ label: "Start a Research Project", href: "/contact-us" }}
+          secondaryCta={{ label: "Explore Methods", href: "#methods" }}
+          minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+        />
 
       {/* ════════ DIG DEEPER HEADING ════════ */}
-      <section className="bg-white pt-12">
+      <section className="bg-section pt-12">
         <div className="site-container px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-primary text-xl">●</span>
-            <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
               Dig Deeper into Patient&apos;s and Practitioners Experience
             </h2>
-            <span className="text-primary text-xl">●</span>
           </div>
           <div className="mt-6 border-b-2 border-gray-200" />
         </div>
       </section>
 
       {/* ════════ MAP CARD ════════ */}
-      <section className="bg-white py-12">
-        <div className="site-container px-6">
-          <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">30+ countries in our global reach</h2>
-              <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
-                Panel members available in all major countries and continents for healthcare market research. Partnership with local panel providers increases our bandwidth and diversifies online market research.
-              </p>
-            </div>
-            <GlobalReach hideHeading cardMode />
-          </div>
-        </div>
-      </section>
+      <GlobalReach
+        heading="30+ Countries in Our Global Reach"
+        description="Panel members available in all major countries and continents for healthcare market research. Partnership with local panel providers increases our bandwidth and diversifies online market research."
+      />
 
       {/* ════════ CAPABILITIES ════════ */}
-      <section className="bg-white py-16">
+      <section className="py-20 bg-white">
         <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Our Capabilities</h2>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {capabilities.map((cap, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp(0.1 * i)}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
-              >
-                <IconBox />
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{cap.title}</h3>
-                <p className="text-gray-900 text-base leading-8 font-medium">{cap.desc}</p>
-              </motion.div>
-            ))}
+          <SectionHeader
+            label="Our Capabilities"
+            heading={<>What Sets Our Healthcare Research Apart</>}
+            description="Validated panels, secure data practices, and multilingual expertise — built for the complexity of healthcare research."
+            theme="light"
+            align="center"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+            {capabilities.map((cap, i) => {
+              const Icon = cap.icon;
+              return (
+                <motion.div
+                  key={cap.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.5 }}
+                >
+                  <SiteCard className="flex flex-col h-full">
+                    <div className="p-7 flex flex-col flex-1">
+                      <div
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
+                        style={{ background: "rgba(13,27,62,0.07)" }}
+                      >
+                        <Icon size={26} strokeWidth={1.5} style={{ color: "#0d1b3e" }} />
+                      </div>
+                      <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
+                      <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>
+                    </div>
+                  </SiteCard>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ════════ 711K BANNER ════════ */}
-      <section className="site-container px-6 pb-16">
-        <motion.div {...fadeUp()} className="relative rounded-2xl overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=1200&q=80"
-            alt="Healthcare professionals"
-            className="w-full h-72 md:h-96 object-cover object-center"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-primary/90 py-5 px-8 text-center">
-            <p className="text-white font-bold text-lg mb-1">711k Healthcare professionals</p>
-            <p className="text-white/90 text-base font-medium">
-              Elevate your research experience to new heights with our comprehensive solutions, cutting-edge methodologies, and unwavering commitment
-            </p>
+      {/* ════════ STATS BANNER ════════ */}
+      <section className="py-6 pb-16 site-container px-6">
+        <motion.div
+          {...fadeUp()}
+          className="rounded-3xl overflow-hidden"
+          style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
+        >
+          {/* Top accent line */}
+          <div className="h-1" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa, #1a6fe8)" }} />
+
+          <div className="px-10 py-12">
+            {/* Headline */}
+            <div className="text-center mb-10">
+              <span className="inline-block text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">Healthcare Panel Network</span>
+              <h2 className="text-white font-extrabold text-2xl sm:text-3xl leading-snug max-w-2xl mx-auto">
+                Elevate your research with our comprehensive healthcare solutions and cutting-edge methodologies
+              </h2>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { value: "711K+", label: "Healthcare Professionals" },
+                { value: "30+",   label: "Countries Covered"        },
+                { value: "98%",   label: "Profile Accuracy Rate"    },
+                { value: "48h",   label: "Average Turnaround"       },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.5 }}
+                  className="flex flex-col items-center text-center rounded-2xl py-7 px-4"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                >
+                  <p className="text-white font-black text-3xl sm:text-4xl mb-2">{stat.value}</p>
+                  <p className="text-white/50 text-xs font-semibold uppercase tracking-wider leading-5">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </section>
@@ -362,64 +394,50 @@ export default function HealthcarePage() {
         </div>
       </section>
 
-      {/* ════════ FAQS ════════ */}
-      <section className="bg-white py-16">
+      {/* ════════ PANEL BOOK FORM ════════ */}
+      <section className="bg-section py-16">
         <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <p className="text-primary font-semibold uppercase text-sm mb-2">FAQs</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Have a Question? Contact Us</h2>
-          </motion.div>
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <motion.div key={i} {...fadeUp(0.06 * i)}>
-                {/* Question row — always its own card */}
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="cursor-pointer w-full flex items-center justify-between px-6 py-5 text-left border border-gray-200 rounded-2xl bg-white hover:border-gray-300 transition-colors"
-                >
-                  <span className="text-base font-semibold text-gray-900 pr-4">{faq.q}</span>
-                  {openFaq === i
-                    ? <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
-                    : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
-                  }
-                </button>
-                {/* Answer — separate card below */}
-                {openFaq === i && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22 }}
-                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-8 font-medium whitespace-pre-line"
-                  >
-                    {faq.a}
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <motion.div {...fadeUp()} className="rounded-3xl overflow-hidden shadow-sm flex flex-col md:flex-row">
 
-      {/* ════════ PANEL BOOK FORM — Career Detail style ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-3">Our HCP&apos;s Panel Book</h2>
-            <p className="text-gray-900 text-base max-w-xl mx-auto leading-8 font-medium">
-              For a comprehensive breakdown, complete the form below to receive your free Healthcare Professionals Panel Book
-            </p>
-          </motion.div>
+            {/* Left — navy info panel */}
+            <div
+              className="md:w-[340px] shrink-0 flex flex-col justify-between p-10"
+              style={{ background: "linear-gradient(160deg, #0a1628 0%, #0d1b3e 60%, #112254 100%)" }}
+            >
+              <div>
+                <span className="inline-block text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-4">Free Download</span>
+                <h2 className="text-white font-extrabold text-2xl leading-snug mb-4">
+                  Our HCP&apos;s Panel Book
+                </h2>
+                <p className="text-white/60 text-sm leading-7">
+                  For a comprehensive breakdown, complete the form to receive your free Healthcare Professionals Panel Book.
+                </p>
+              </div>
 
+              <div className="mt-10 flex flex-col gap-4">
+                {["711K+ Verified HCPs", "30+ Countries", "HIPAA & GDPR Compliant", "NPI & AMA Validated"].map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-3 h-3 text-blue-400" />
+                    </div>
+                    <span className="text-white/70 text-sm font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — form */}
+            <div className="flex-1 bg-white p-10">
           {submitted ? (
-            <div className="flex flex-col items-center gap-4 py-16 text-center">
-              <CheckCircle className="w-16 h-16 text-green-500" />
+            <div className="flex flex-col items-center gap-4 py-10 text-center">
+              <CheckCircle className="w-14 h-14 text-green-500" />
               <h3 className="text-xl font-bold text-gray-900">Request Submitted!</h3>
               <p className="text-gray-500 text-sm max-w-sm">
                 Thank you! We&apos;ll send your free HCP Panel Book to your email shortly.
               </p>
               <button
                 onClick={() => { setSubmitted(false); setFields({ name: "", company: "", designation: "", email: "" }); setFileName(""); setCaptcha(false); }}
-                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary transition-colors"
+                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg"
               >
                 Submit Another
               </button>
@@ -427,35 +445,35 @@ export default function HealthcarePage() {
           ) : (
             <form onSubmit={handleSubmit} noValidate>
               {/* Row 1 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Your Name <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name <span className="text-red-500">*</span></label>
                   <input type="text" placeholder="Name" value={fields.name} onChange={(e) => set("name", e.target.value)} className={inputClass("name")} />
                   <FieldError msg={errors.name ?? ""} />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Company Name <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Company Name <span className="text-red-500">*</span></label>
                   <input type="text" placeholder="Company Name" value={fields.company} onChange={(e) => set("company", e.target.value)} className={inputClass("company")} />
                   <FieldError msg={errors.company ?? ""} />
                 </div>
               </div>
 
               {/* Row 2 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Designation</label>
-                  <input type="text" placeholder="Location" value={fields.designation} onChange={(e) => set("designation", e.target.value)} className={inputClass("designation")} />
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Designation</label>
+                  <input type="text" placeholder="Your Designation" value={fields.designation} onChange={(e) => set("designation", e.target.value)} className={inputClass("designation")} />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Email ID <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email ID <span className="text-red-500">*</span></label>
                   <input type="email" placeholder="Email" value={fields.email} onChange={(e) => set("email", e.target.value)} className={inputClass("email")} />
                   <FieldError msg={errors.email ?? ""} />
                 </div>
               </div>
 
-              {/* Captcha */}
-              <div className="mb-8">
-                <label className="flex items-center gap-3 cursor-pointer w-fit border border-gray-200 rounded-xl px-5 py-4 bg-white shadow-sm select-none">
+              {/* Captcha + Submit */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-6">
+                <label className="flex items-center gap-3 cursor-pointer border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 select-none">
                   <div
                     onClick={() => setCaptcha((c) => !c)}
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${captcha ? "bg-primary border-primary" : "border-gray-300"}`}
@@ -463,23 +481,25 @@ export default function HealthcarePage() {
                     {captcha && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
                   </div>
                   <span className="text-sm text-gray-700 font-medium">I&apos;m not a robot</span>
-                  <div className="ml-4 text-right">
+                  <div className="ml-3 text-right">
                     <div className="text-[10px] text-gray-400">reCAPTCHA</div>
-                    <div className="text-[9px] text-gray-300">Privacy - Terms</div>
+                    <div className="text-[9px] text-gray-300">Privacy · Terms</div>
                   </div>
                 </label>
-              </div>
 
-              {/* Submit */}
-              <div className="flex justify-center">
-                <button type="submit" className="cursor-pointer bg-primary hover:bg-primary text-white font-bold px-12 py-3.5 rounded-xl transition-colors duration-300 text-sm flex items-center gap-2">
+                <button type="submit" className="cursor-pointer bg-primary text-white font-bold px-10 py-3 rounded-xl text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
                   Submit <span className="text-base">»</span>
                 </button>
               </div>
             </form>
           )}
+            </div>{/* right form panel */}
+          </motion.div>{/* card */}
         </div>
       </section>
+
+
+      <LatestReadsSection />
 
     </main>
   );

@@ -399,7 +399,7 @@ export default function Scrip8Page() {
           <>
             The Survey Platform<br />
             Built for{" "}
-            <span className="italic font-normal" style={{ color: "#93c5fd" }}>Real Insights</span>
+            Real Insights
           </>
         }
         description="Create, distribute and analyze surveys in minutes with Scrip8. Mobile-first, AI-powered, and trusted by 500+ research teams worldwide — from startups to Fortune 500s."
@@ -431,7 +431,7 @@ export default function Scrip8Page() {
               transition={{ delay: 0.1 * i, duration: 0.5 }}
               className={`py-10 text-center px-6 ${i < stats.length - 1 ? "border-r border-gray-100" : ""}`}
             >
-              <p className="text-4xl font-black text-accent mb-2 tracking-tight">
+              <p className="text-4xl font-black text-primary mb-2 tracking-tight">
                 <CountUp end={parseFloat(s.value)} />{s.suffix}
               </p>
               <p className="text-sm text-gray-500 font-medium tracking-wide">{s.label}</p>
@@ -444,7 +444,7 @@ export default function Scrip8Page() {
       <section className="bg-section py-20">
         <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">The Problem</p>
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">The Problem</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
               Traditional surveys are{" "}
               <span className="italic font-normal text-primary">holding you back</span>
@@ -466,9 +466,9 @@ export default function Scrip8Page() {
                 {/* Hover gradient overlay */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(26,111,232,0.07) 0%, rgba(221,228,240,0.10) 45%, rgba(255,255,255,0) 75%)" }} />
 
-                {/* Icon — red by default, accent blue on hover */}
+                {/* Icon — red by default, primary blue on hover */}
                 <div className="relative w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5 group-hover:bg-highlight transition-colors duration-300">
-                  <span className="text-red-500 group-hover:text-accent transition-colors duration-300">
+                  <span className="text-red-500 group-hover:text-primary transition-colors duration-300">
                     {p.icon}
                   </span>
                 </div>
@@ -477,7 +477,7 @@ export default function Scrip8Page() {
                 <p className="text-base leading-8 font-medium text-gray-900 mb-5">{p.desc}</p>
 
                 {/* Divider + fix */}
-                <div className="border-t border-gray-200 pt-4 flex items-start gap-2 text-accent text-sm font-semibold">
+                <div className="border-t border-gray-200 pt-4 flex items-start gap-2 text-primary text-sm font-semibold">
                   <Check className="w-4 h-4 mt-0.5 shrink-0" strokeWidth={2.5} />
                   {p.fix}
                 </div>
@@ -501,8 +501,8 @@ export default function Scrip8Page() {
               {/* Text — always second in DOM, reordered to first column on desktop for non-flip */}
               <motion.div {...fadeUp(0)} className={step.flip ? "" : "lg:order-first"}>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-7 h-7 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center">{step.num}</span>
-                  <span className="text-accent text-xs font-bold uppercase tracking-widest">{step.label}</span>
+                  <span className="w-7 h-7 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center">{step.num}</span>
+                  <span className="text-primary text-xs font-bold uppercase tracking-widest">{step.label}</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-4">{step.title}</h2>
                 <p className="text-base leading-8 font-medium text-gray-900 mb-6">{step.desc}</p>
@@ -510,13 +510,13 @@ export default function Scrip8Page() {
                   {step.checks.map((c, j) => (
                     <li key={j} className="flex items-center gap-3 text-base font-medium text-gray-900">
                       <span className="w-6 h-6 rounded-md bg-highlight flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 text-accent" strokeWidth={2.5} />
+                        <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2.5} />
                       </span>
                       {c}
                     </li>
                   ))}
                 </ul>
-                <Link href="/contact-us" className="text-accent font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all duration-200">
+                <Link href="/contact-us" className="text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all duration-200">
                   {step.cta} →
                 </Link>
               </motion.div>
@@ -533,7 +533,7 @@ export default function Scrip8Page() {
 
         <div className="relative site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Powered by AI</p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Intelligence built into every step</h2>
             <p className="text-white/70 text-base max-w-xl mx-auto leading-8 font-medium">
               Scrip8&apos;s AI layer doesn&apos;t just analyse data — it helps you design better surveys, predict drop-off, and surface insights you&apos;d otherwise miss entirely.
@@ -563,7 +563,7 @@ export default function Scrip8Page() {
       <section className="bg-section py-20">
         <div className="site-container px-6">
           <motion.div {...fadeUp()} className="text-center mb-14">
-            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Everything Included</p>
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Everything Included</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
               Mastering responses at{" "}
               <span className="italic font-normal text-primary">every scale</span>
@@ -620,10 +620,10 @@ export default function Scrip8Page() {
                 className="group rounded-2xl p-7 relative overflow-hidden cursor-pointer bg-white shadow-sm border border-gray-100"
               >
                 {/* Top border — animates left to right on hover */}
-                <div className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full bg-accent transition-all duration-500 ease-out rounded-t-2xl" />
+                <div className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full bg-primary transition-all duration-500 ease-out rounded-t-2xl" />
 
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-blue-50 group-hover:bg-accent transition-colors duration-300">
-                  <span className="text-accent group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-blue-50 group-hover:bg-primary transition-colors duration-300">
+                  <span className="text-primary group-hover:text-white transition-colors duration-300">
                     {f.icon}
                   </span>
                 </div>
@@ -640,7 +640,7 @@ export default function Scrip8Page() {
         <div className="site-container px-6">
           <motion.div {...fadeUp()} className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-accent text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
+              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
               <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
                 Real results from{" "}
                 <span className="italic font-normal text-primary">real research teams</span>
@@ -695,13 +695,13 @@ export default function Scrip8Page() {
                   <div className="flex mb-6">
                     {s.stats.map((st, j) => (
                       <div key={j} className={`flex-1 flex flex-col items-center justify-center py-2 px-3 text-center ${j < s.stats.length - 1 ? "border-r border-gray-200" : ""}`}>
-                        <p className="text-2xl font-black text-accent leading-none mb-1">{st.val}</p>
+                        <p className="text-2xl font-black text-primary leading-none mb-1">{st.val}</p>
                         <p className="text-[11px] text-gray-400 leading-snug">{st.label}</p>
                       </div>
                     ))}
                   </div>
                   <p className="text-gray-900 text-base italic leading-8 font-medium flex-1 mb-5">{s.quote}</p>
-                  <Link href="/case-studies" className="text-accent font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                  <Link href="/case-studies" className="text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                     Read case study →
                   </Link>
                 </div>
@@ -829,7 +829,7 @@ function PricingSection() {
     <section className="bg-white py-24">
       <div className="site-container px-6">
         <motion.div {...fadeUp()} className="text-center mb-10">
-          <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
+          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
             Simple, transparent{" "}
             <span className="italic font-normal text-primary">pricing</span>

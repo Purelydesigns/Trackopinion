@@ -16,7 +16,17 @@ const pins = [
   { name: "Australia", code: "au", coordinates: [134, -25] as [number, number] },
 ];
 
-export default function GlobalReach({ hideHeading = false, cardMode = false }: { hideHeading?: boolean; cardMode?: boolean }) {
+export default function GlobalReach({
+  hideHeading = false,
+  cardMode = false,
+  heading,
+  description,
+}: {
+  hideHeading?: boolean;
+  cardMode?: boolean;
+  heading?: string;
+  description?: string;
+}) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [active, setActive] = useState<number | null>(null);
@@ -83,11 +93,10 @@ export default function GlobalReach({ hideHeading = false, cardMode = false }: {
           className={`text-center mb-6 ${hideHeading ? "hidden" : ""}`}
         >
           <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
-            Global Reach
+            {heading ?? "Global Reach"}
           </h2>
           <p className="text-gray-600 text-base leading-8 font-medium mb-10 max-w-2xl mx-auto">
-            Take your research experience to a higher level with 4.5 million
-            active panel members worldwide and our team's caliber and expertise.
+            {description ?? "Take your research experience to a higher level with 4.5 million active panel members worldwide and our team's caliber and expertise."}
           </p>
         </motion.div>
       </div>

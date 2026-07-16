@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Check, CheckCircle, ChevronDown, ChevronUp, Upload, Headphones, Globe, ShieldCheck, Zap, PhoneCall, MessageSquare } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import GlobalReach from "@/components/about/GlobalReach";
+import SectionHeader from "../ui/SectionHeader";
+import SiteCard from "../ui/SiteCard";
 
 /* ── Data ── */
 const capabilities = [
@@ -112,7 +114,7 @@ export default function CatiPage() {
   }
 
   const inputClass = (field?: keyof FormErrors) =>
-    `w-full rounded-xl ${field && errors[field] ? "border-red-400" : "border-white/10"} border bg-white/8 px-4 py-3 text-sm placeholder:text-white/30 outline-none focus:border-accent transition-colors text-white`;
+    `w-full rounded-xl ${field && errors[field] ? "border-red-400" : "border-white/10"} border bg-white/8 px-4 py-3 text-sm placeholder:text-white/30 outline-none focus:border-primary transition-colors text-white`;
 
   return (
     <main className="bg-white">
@@ -122,7 +124,7 @@ export default function CatiPage() {
         heading={
           <>
             Computer Assisted<br />
-            <span className="italic font-normal" style={{ color: "#93c5fd" }}>Telephone</span>{" "}
+            Telephone{" "}
             Interviewing
           </>
         }
@@ -133,57 +135,37 @@ export default function CatiPage() {
       />
 
       {/* ════════ ERASE COMPLEXITIES HEADING ════════ */}
-      <section className="bg-white pt-12">
+      <section className="bg-section pt-12">
         <div className="site-container px-6 text-center">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-primary text-xl">●</span>
-            <h2 className="text-xl sm:text-2xl font-extrabold uppercase text-primary">
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
               Erase Complexities from Data Collection with CATI
             </h2>
-            <span className="text-primary text-xl">●</span>
           </div>
-          <p className="mt-4 text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
+          <p className="text-gray-600 text-base leading-8 font-medium mb-10 max-w-2xl mx-auto">
             Software driven calls for user feedback. Quality data with swift turnaround, anytime, from anywhere. That&apos;s what computer aided telephone interviews brings.
           </p>
           <div className="mt-6 border-b-2 border-gray-200" />
         </div>
       </section>
 
-      {/* ════════ MAP CARD ════════ */}
-      <section className="bg-white py-12">
-        <div className="site-container px-6">
-          <div className="bg-gray-100 rounded-2xl border border-gray-200 px-8 pt-10 pb-6 overflow-hidden">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">CATI Reach</h2>
-              <p className="text-gray-900 text-base max-w-2xl mx-auto leading-8 font-medium">
-                CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions.
-              </p>
-            </div>
-            <GlobalReach hideHeading cardMode />
-          </div>
-        </div>
-      </section>
+      {/* ════════ MAP ════════ */}
+      <GlobalReach
+        heading="CATI Reach"
+        description="CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions."
+      />
 
       {/* ════════ HOW CATI WORKS ════════ */}
-      <section className="bg-section py-20">
+      <section className="bg-white py-20">
         <div className="site-container px-6">
-          {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="h-px w-8 bg-accent block" />
-              <p className="text-accent text-xs font-bold uppercase tracking-widest">The Process</p>
-              <span className="h-px w-8 bg-accent block" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-primary mb-4">
-              How <span className="italic font-normal">CATI Works</span>
-            </h2>
-            <p className="text-gray-900 text-base max-w-xl mx-auto leading-8 font-medium">
-              A four-step framework from questionnaire design to clean data delivery — managed end-to-end by our expert team.
-            </p>
-          </motion.div>
+
+          <SectionHeader
+            label="The Process"
+            heading={<>CATI Works</>}
+            description="A four-step framework from questionnaire design to clean data delivery — managed end-to-end by our expert team."
+            theme="light"
+            align="center"
+          />
 
           {/* Steps */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
@@ -221,19 +203,19 @@ export default function CatiPage() {
                 {/* Dashed connector line (not on last item) */}
                 {i < arr.length - 1 && (
                   <div
-                    className="hidden lg:block absolute top-[40px] z-0 border-t-2 border-dashed border-accent/40"
+                    className="hidden lg:block absolute top-[40px] z-0 border-t-2 border-dashed border-primary/40"
                     style={{ left: "calc(50% + 42px)", right: "calc(-50% - 32px + 42px)" }}
                   />
                 )}
 
                 {/* Step number circle */}
-                <div className="relative z-10 w-20 h-20 rounded-full border-2 border-accent/30 bg-white group-hover:bg-accent group-hover:border-accent group-hover:-translate-y-3 flex items-center justify-center mb-4 shadow-sm transition-all duration-300">
-                  <span className="text-2xl font-black text-accent group-hover:text-white transition-colors duration-300">{step.num}</span>
+                <div className="relative z-10 w-20 h-20 rounded-full border-2 border-primary/30 bg-white group-hover:bg-primary group-hover:border-primary group-hover:-translate-y-3 flex items-center justify-center mb-4 shadow-sm transition-all duration-300">
+                  <span className="text-2xl font-black text-primary group-hover:text-white transition-colors duration-300">{step.num}</span>
                 </div>
 
                 {/* Icon box */}
-                <div className="w-11 h-11 rounded-xl bg-blue-50 group-hover:bg-accent flex items-center justify-center mb-4 shadow-sm transition-colors duration-300">
-                  <span className="text-accent group-hover:text-white transition-colors duration-300">{step.icon}</span>
+                <div className="w-11 h-11 rounded-xl bg-blue-50 group-hover:bg-primary flex items-center justify-center mb-4 shadow-sm transition-colors duration-300">
+                  <span className="text-primary group-hover:text-white transition-colors duration-300">{step.icon}</span>
                 </div>
 
                 <h3 className="text-primary font-bold text-base mb-2">{step.title}</h3>
@@ -245,46 +227,38 @@ export default function CatiPage() {
       </section>
 
       {/* ════════ OUR CAPABILITIES ════════ */}
-      <section className="py-20">
+      <section className="bg-section py-20">
         <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-14">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="h-px w-8 bg-accent block" />
-              <p className="text-accent text-xs font-bold uppercase tracking-widest">Our Capabilities</p>
-              <span className="h-px w-8 bg-accent block" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-primary mb-4">
-              Built for{" "}
-              <span className="italic font-normal">Scale &amp; Precision</span>
-            </h2>
-            <p className="text-gray-900 text-base max-w-xl mx-auto leading-8 font-medium">
-              Six CATI capabilities that make Track Opinion the most reliable partner for software-driven telephone research.
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <SectionHeader
+            label="Our Capabilities"
+            heading={<>Scale &amp; Precision</>}
+            description="Six CATI capabilities that make Track Opinion the most reliable partner for software-driven telephone research."
+            theme="light"
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
             {capabilities.map((cap, i) => (
               <motion.div
                 key={i}
-                {...fadeUp(0.08 * i)}
-                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(13,27,62,0.10)", borderColor: "rgba(26,111,232,0.3)" }}
-                transition={{ duration: 0.25 }}
-                className="group bg-white rounded-2xl border border-gray-100 shadow-sm p-8 cursor-pointer relative overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
               >
-                {/* Bottom border animation left to right */}
-                <div className="absolute bottom-0 left-0 h-[3px] w-0 group-hover:w-full bg-accent transition-all duration-500 ease-out rounded-b-2xl" />
-                {/* Hover gradient overlay — top-left blue fading to transparent */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(26,111,232,0.07) 0%, rgba(221,228,240,0.10) 45%, rgba(255,255,255,0) 75%)" }} />
-
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 group-hover:bg-transparent flex items-center justify-center mb-5 transition-all duration-300 relative overflow-hidden  group-hover:scale-110">
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" style={{ background: "linear-gradient(135deg, #3b82f6 0%, #1a6fe8 60%, #1558c0 100%)" }} />
-                  <span className="relative z-10 text-accent group-hover:text-white transition-colors duration-300 inline-flex">
-                    {cap.icon}
-                  </span>
-                </div>
-                <h3 className="text-primary font-bold text-base mb-3">{cap.title}</h3>
-                <p className="text-gray-900 text-base leading-8 font-medium">{cap.desc}</p>
+                <SiteCard className="flex flex-col h-full">
+                  <div className="p-7 flex flex-col flex-1">
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
+                      style={{ background: "rgba(13,27,62,0.07)" }}
+                    >
+                      <span style={{ color: "#0d1b3e" }}>{cap.icon}</span>
+                    </div>
+                    <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
+                    <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>
+                  </div>
+                </SiteCard>
               </motion.div>
             ))}
           </div>
@@ -371,7 +345,7 @@ export default function CatiPage() {
                   placeholder="Description...."
                   value={fields.description}
                   onChange={(e) => set("description", e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-white/8 px-4 py-3 text-sm placeholder:text-white/30 outline-none focus:border-accent transition-colors text-white resize-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/8 px-4 py-3 text-sm placeholder:text-white/30 outline-none focus:border-primary transition-colors text-white resize-none"
                 />
               </div>
 
@@ -381,14 +355,14 @@ export default function CatiPage() {
                 <label className="block text-sm font-semibold text-white/70 mb-3">Project Upload</label>
                 <div
                   onClick={() => fileRef.current?.click()}
-                  className="group cursor-pointer border-2 border-dashed border-white/20 rounded-2xl py-10 px-6 flex flex-col items-center justify-center gap-4 hover:border-accent/50 transition-colors duration-300"
+                  className="group cursor-pointer border-2 border-dashed border-white/20 rounded-2xl py-10 px-6 flex flex-col items-center justify-center gap-4 hover:border-primary/50 transition-colors duration-300"
                 >
                   {/* Three stacked document icons */}
                   <div className="flex items-end justify-center gap-2 h-16">
                     <div className="w-10 h-12 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center -rotate-12 translate-y-1 group-hover:translate-y-2 transition-transform duration-300">
                       <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     </div>
-                    <div className="w-11 h-14 rounded-lg bg-white/15 border border-white/25 flex items-center justify-center group-hover:bg-accent/30 group-hover:border-accent/60 group-hover:-translate-y-2 transition-all duration-300 z-10">
+                    <div className="w-11 h-14 rounded-lg bg-white/15 border border-white/25 flex items-center justify-center group-hover:bg-primary/30 group-hover:border-primary/60 group-hover:-translate-y-2 transition-all duration-300 z-10">
                       <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/60 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     </div>
                     <div className="w-10 h-12 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center rotate-12 translate-y-1 group-hover:translate-y-2 transition-transform duration-300">

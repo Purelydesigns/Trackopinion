@@ -11,7 +11,7 @@ export default function AboutHero() {
         <>
           Track Opinion:<br />
           Redefining Excellence<br />
-          in{" "}<span className="italic font-normal" style={{ color: "#93c5fd" }}>Market Research</span>
+          in{" "}Market Research
         </>
       }
       description="Track Opinion® is a global market research and outsourcing firm headquartered in India. Established in 2009, we specialize in end-to-end custom research services for consulting firms, global corporations, and SMBs."
