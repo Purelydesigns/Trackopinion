@@ -49,7 +49,7 @@ export default function PanelBooks() {
           <div>
             <SectionHeader
               label="Panel Books"
-              heading={<>Download Our<br />Panel Books</>}
+              heading={<>Send Request</>}
               description="Get detailed demographic, income, and methodology data for our verified panels across global markets."
               theme="light"
               align="left"

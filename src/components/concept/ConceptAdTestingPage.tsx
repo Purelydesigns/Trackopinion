@@ -8,6 +8,10 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Link from "next/link";
+import PageHero from "../ui/PageHero";
+import SiteCard from "../ui/SiteCard";
+import SectionHeader from "../ui/SectionHeader";
+import LatestReadsSection from "../shared/LatestReadsSection";
 
 /* ── Helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -192,76 +196,83 @@ export default function ConceptAdTestingPage() {
   return (
     <main className="bg-white">
 
-      {/* ════════ BANNER — video, same as About Us ════════ */}
-      <section className="-mt-[76px] relative min-h-[500px] sm:min-h-[700px] lg:h-[840px] flex items-center overflow-hidden">
-        <video
-          src="/video/banner.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full site-container px-6">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-2xl"
-          >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+      <PageHero
+          badge="Product Concept And Ad-Testing"
+          heading={
+            <>
               Product Concept &amp; Creative Ad Testing
-            </h1>
-            <p className="text-white/80 text-sm sm:text-base md:text-lg mb-8 leading-8">
-              Translate your message to connect better with your target audience before going to market. Validate ideas, ads, and packaging with real users — before you invest at scale.
-            </p>
-            <Link
-              href="/solutions"
-              className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary font-semibold px-8 py-3.5 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5"
-            >
-              Explore More »
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+            </>
+          }
+          description="Translate your message to connect better with your target audience before going to market. Validate ideas, ads, and packaging with real users — before you invest at scale."
+          primaryCta={{ label: "Explore More", href: "/contact-us" }}
+          secondaryCta={{ label: "See Capabilities", href: "#capabilities" }}
+          minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+        />
 
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
         <div className="site-container px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {capabilities.map((cap, i) => (
               <motion.div
                 key={i}
-                {...fadeUp(0.08 * i)}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 hover:shadow-md transition-shadow duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
               >
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
-                  {cap.icon}
-                </div>
-                {/* Heading — larger */}
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{cap.title}</h3>
-                {/* Paragraph — larger, semi-bold, dark grey */}
-                <p className="text-gray-700 text-base leading-7 font-medium">{cap.desc}</p>
+                <SiteCard className="flex flex-col h-full">
+                  <div className="p-7 flex flex-col flex-1">
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
+                      style={{ background: "rgba(13,27,62,0.07)" }}
+                    >
+                      {cap.icon}
+                    </div>
+                    <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
+                    <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>
+                  </div>
+                </SiteCard>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ════════ CONTENT SECTIONS — Terms page para style ════════ */}
+      {/* ════════ CONTENT SECTIONS ════════ */}
       {contentSections.map((sec, i) => (
         <section key={i} className="bg-white py-10">
           <div className="site-container px-6">
             <motion.div {...fadeUp()} className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="24" cy="16" r="8" /><circle cx="24" cy="16" r="3" /><path d="M10 40 C10 31 38 31 38 40" />
-                </svg>
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                style={{ background: "rgba(13,27,62,0.07)" }}
+              >
+                {i === 0 ? (
+                  /* Concept Testing — lightbulb */
+                  <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
+                    <path d="M20 32v2a4 4 0 0 0 8 0v-2" />
+                    <line x1="24" y1="6" x2="24" y2="2" />
+                    <line x1="10" y1="12" x2="7" y2="9" />
+                    <line x1="38" y1="12" x2="41" y2="9" />
+                    <line x1="6" y1="24" x2="2" y2="24" />
+                    <line x1="42" y1="24" x2="46" y2="24" />
+                  </svg>
+                ) : (
+                  /* Ad Testing — megaphone */
+                  <svg viewBox="0 0 48 48" className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
+                    <path d="M32 18c3 1.5 5 4 5 6s-2 4.5-5 6" />
+                    <path d="M14 32v8" />
+                  </svg>
+                )}
               </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900">{sec.heading}</h2>
+              <h2 className="text-xl sm:text-2xl font-extrabold leading-tight text-primary">{sec.heading}</h2>
             </motion.div>
             <div>
               {sec.paragraphs.map((p, j) => (
-                <motion.p key={j} {...fadeUp(0.08 * j)} className="text-gray-900 text-base leading-8 mb-3 font-medium">{p}</motion.p>
+                <motion.p key={j} {...fadeUp(0.08 * j)} className="text-gray-600 text-base leading-8 font-medium flex-1 mb-2">{p}</motion.p>
               ))}
             </div>
             {i < contentSections.length - 1 && <div className="mt-10 border-b border-gray-100" />}
@@ -270,144 +281,70 @@ export default function ConceptAdTestingPage() {
       ))}
 
       {/* ════════ METHODS (bg-primary) ════════ */}
-      <section className="bg-primary py-16">
-        <div className="site-container px-6 text-center">
-          <motion.div {...fadeUp()}>
-            <p className="text-primary font-bold uppercase text-sm tracking-widest mb-3">
-              Unique Product Concept Testing and Creative Ad Testing Methods
-            </p>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-12 max-w-2xl mx-auto leading-snug">
-              Track Opinion offers technology-backed solutions for concept testing research and creative ad testing service in India
-            </h2>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <section className="py-20 bg-primary overflow-hidden">
+        <div className="site-container px-6">
+
+          <SectionHeader
+            label="Our Methods"
+            heading={
+              <>
+                Track Opinion offers technology-backed solutions for concept testing research and creative ad testing service in India
+              </>
+            }
+            description="Unique Product Concept Testing and Creative Ad Testing Methods."
+            theme="dark"
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
             {methods.map((m, i) => (
-              <motion.div key={i} {...fadeUp(0.12 * i)} className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center mb-5">
-                  <span className="text-white text-2xl font-black">{m.num}</span>
-                </div>
-                <p className="text-white font-extrabold uppercase text-sm tracking-wider mb-3">{m.title}</p>
-                <p className="text-white/80 text-base leading-8 font-medium">{m.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════ STATS ════════ */}
-      <section className="py-16 bg-highlight">
-        <div className="site-container px-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-            {stats.map((s, i) => {
-              const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
-              const suffix = s.value.replace(/[0-9.]/g, "");
-              const decimals = s.value.includes(".") ? 1 : 0;
-              return (
-                <motion.div key={i} {...fadeUp(0.1 * i)}>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                    <CountUp end={num} suffix={suffix} decimals={decimals} />
-                  </div>
-                  <div className="text-gray-600 text-sm font-medium">{s.label}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════ FAQs — dark content, privacy/terms style ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">FAQs</h2>
-          </motion.div>
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <motion.div key={i} {...fadeUp(0.06 * i)}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="cursor-pointer w-full flex items-center justify-between px-6 py-5 text-left border border-gray-200 rounded-2xl bg-white hover:border-gray-300 transition-colors"
-                >
-                  <span className="text-base font-bold text-gray-900 pr-4">{faq.q}</span>
-                  {openFaq === i
-                    ? <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
-                    : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
-                  }
-                </button>
-                {openFaq === i && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22 }}
-                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white whitespace-pre-line"
-                  >
-                    <p className="text-gray-900 text-base leading-8 font-medium">{faq.a}</p>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════ RESOURCES SLIDER ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
-          </motion.div>
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            slidesPerView={1}
-            spaceBetween={24}
-            breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-            className="resources-swiper !pb-12"
-          >
-            {resources.map((r, i) => (
-              <SwiperSlide key={i}>
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <div className={`h-48 bg-gradient-to-br ${r.gradient}`} />
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
-                      <Calendar className="w-3.5 h-3.5" /> {r.date}
-                    </div>
-                    <h3 className="text-base font-bold text-gray-900 leading-snug">{r.title}</h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
-
-      {/* ════════ CTA ════════ */}
-      <section className="py-14 bg-highlight">
-        <div className="site-container px-6">
-          <motion.div
-            {...fadeUp()}
-            className="flex flex-col md:flex-row items-center justify-between gap-8"
-          >
-            <div className="flex-1">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                Find out how Track Opinion&#39;s concept development and testing service in India can help you save money before your product&#39;s launch
-              </h3>
-              <p className="text-gray-500 text-base leading-8">
-                Reach out to Track Opinion—an end-to-end market research company with a panel strength of 4.7Mn. Know what your users think about your product and marketing endeavors even before they actually access them.
-              </p>
-            </div>
-            <div className="shrink-0">
-              <Link
-                href="/contact-us"
-                className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+              <motion.div
+                key={m.num}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
               >
-                Contact Us
-              </Link>
-            </div>
-          </motion.div>
+                <motion.div
+                  whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.3)" }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="flex flex-col h-full rounded-2xl overflow-hidden text-center"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1.5px dashed rgba(255,255,255,0.15)",
+                  }}
+                >
+                  {/* Blue top accent bar */}
+                  <div className="h-1.5" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa)" }} />
+
+                  <div className="p-8 flex flex-col flex-1 items-center">
+                    {/* Step number bubble */}
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-lg"
+                      style={{ background: "#1a6fe8" }}
+                    >
+                      {m.num}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-white font-bold text-lg leading-snug mb-3">
+                      {m.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-400 text-sm leading-relaxed font-normal">
+                      {m.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </section>
+
+      <LatestReadsSection />
 
     </main>
   );

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Building2 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -24,38 +25,22 @@ const serviceLinks = [
 ];
 
 const certs = [
-  { label: "ISO 27001",            src: "/certification/iso 27001.png"                   },
-  { label: "HIPAA Compliance",     src: "/certification/hipaa.png"                       },
   { label: "ESOMAR Corporate",     src: "/certification/ESOMAR_corporate2025_RGB.png"    },
   { label: "GDPR Compliant",       src: "/certification/GDPR.png"                        },
   { label: "Insights Association", src: "/certification/insights-association-logo-v2.png" },
+  { label: "ISO 27001 Intercert",  src: "/certification/iso 27001.png"                   },
   { label: "MRSI",                 src: "/certification/MRSI.png"                        },
   { label: "QUIRK'S Media",        src: "/certification/Quirks.png"                      },
+  { label: "ISO 42001",            src: "/certification/iso-42001.png"                  },
+  { label: "ISO 27001",            src: "/certification/iso-27001.png"                  },
+  { label: "HIPAA Compliance",     src: "/certification/HIPAA.png"                      },
 ];
 
-const certCards = [
-  { value: "ISO 27001",   desc: "Information Security Certified" },
-  { value: "HIPAA",       desc: "Healthcare Data Compliant"      },
-  { value: "GDPR",        desc: "EU Data Protection Compliant"   },
-  { value: "ESOMAR",      desc: "Corporate Member 2025"          },
-];
 
 const addresses = [
   "1401, 21st Street, STE R\nSacramento, CA 95811",
 ];
 
-function BuildingIcon() {
-  return (
-    <svg viewBox="0 0 40 40" className="w-9 h-9 shrink-0 mt-0.5" fill="none">
-      <rect x="5" y="15" width="30" height="20" rx="1" stroke="white" strokeWidth="1.5" strokeOpacity="0.5" />
-      <path d="M5 15L20 5L35 15" stroke="white" strokeWidth="1.5" strokeOpacity="0.5" strokeLinejoin="round" />
-      <rect x="14" y="24" width="5" height="11" rx="0.5" stroke="white" strokeWidth="1.4" strokeOpacity="0.5" />
-      <rect x="21" y="24" width="5" height="11" rx="0.5" stroke="white" strokeWidth="1.4" strokeOpacity="0.5" />
-      <rect x="9"  y="18" width="4" height="4" rx="0.5" stroke="white" strokeWidth="1.2" strokeOpacity="0.4" />
-      <rect x="27" y="18" width="4" height="4" rx="0.5" stroke="white" strokeWidth="1.2" strokeOpacity="0.4" />
-    </svg>
-  );
-}
 
 export default function Footer() {
   return (
@@ -77,7 +62,7 @@ export default function Footer() {
               768:  { slidesPerView: 4 },
               1024: { slidesPerView: 6 },
             }}
-            className="mb-10"
+            className=""
           >
             {certs.map((cert, i) => (
               <SwiperSlide key={i}>
@@ -87,22 +72,13 @@ export default function Footer() {
                     alt={cert.label}
                     width={160}
                     height={80}
-                    className="object-contain h-16 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                    className="object-contain h-16 w-auto brightness-0 invert opacity-70 hover:brightness-100 hover:invert-0 hover:opacity-100 transition-all duration-300"
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
-          {/* 4 stat cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {certCards.map((c, i) => (
-              <div key={i} className="border border-white/10 rounded-xl px-5 py-4 text-center bg-white/5">
-                <p className="text-white font-black text-lg mb-1">{c.value}</p>
-                <p className="text-white/50 text-xs leading-5">{c.desc}</p>
-              </div>
-            ))}
-          </div>
 
         </div>
       </div>
@@ -169,7 +145,7 @@ export default function Footer() {
             <div className="space-y-6">
               {addresses.map((addr, i) => (
                 <div key={i} className="flex gap-4 items-center">
-                  <BuildingIcon />
+                  <Building2 className="w-8 h-8 shrink-0 text-white/50" />
                   <p className="text-white/60 text-sm leading-6 whitespace-pre-line">{addr}</p>
                 </div>
               ))}
