@@ -7,6 +7,7 @@ import PageHero from "@/components/ui/PageHero";
 import GlobalReach from "@/components/about/GlobalReach";
 import SectionHeader from "../ui/SectionHeader";
 import SiteCard from "../ui/SiteCard";
+import LatestReadsSection from "../shared/LatestReadsSection";
 
 /* ── Data ── */
 const capabilities = [
@@ -277,8 +278,7 @@ export default function CatiPage() {
                 <span className="text-white/80 text-xs font-semibold">Responding within 24h</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-black text-white mb-3">
-                Get In Touch to Execute a{" "}
-                <span className="italic font-normal text-highlight">CATI Project</span>
+                Get In Touch to Execute a CATI Project{" "}
               </h2>
               <p className="text-white/60 text-base leading-7">Generate valuable insights about your users, market, and brand. Seek online feedback affiliated with CATI for speedy quantitative market research solutions.</p>
             </div>
@@ -414,6 +414,8 @@ export default function CatiPage() {
           </motion.div>
         </div>
       </section>
+
+      <LatestReadsSection />
 
     </main>
   );

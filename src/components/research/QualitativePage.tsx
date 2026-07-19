@@ -31,6 +31,34 @@ const methods = [
   },
 ];
 
+/* ─────────────── Radar chart helpers ─────────────── */
+const CX = 190, CY = 190, MAX_R = 130;
+
+const radarDims = [
+  { label: "Emotion",    value: 0.82, angle: -90  },
+  { label: "Motivation", value: 0.70, angle: -30  },
+  { label: "Behaviour",  value: 0.88, angle:  30  },
+  { label: "Culture",    value: 0.64, angle:  90  },
+  { label: "Opinion",    value: 0.76, angle: 150  },
+  { label: "Trust",      value: 0.85, angle: -150 },
+];
+
+function radarPt(angle: number, r: number) {
+  const rad = (angle * Math.PI) / 180;
+  return { x: CX + r * Math.cos(rad), y: CY + r * Math.sin(rad) };
+}
+
+const dataPts   = radarDims.map(d => radarPt(d.angle, d.value * MAX_R));
+const fullPts   = radarDims.map(d => radarPt(d.angle, MAX_R));
+const polyFull  = dataPts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+const polyZero  = radarDims.map(() => `${CX},${CY}`).join(" ");
+const guides    = [0.25, 0.5, 0.75, 1];
+
+const labelAnchor = (angle: number) => {
+  if (Math.abs(angle) === 90) return "middle";
+  return angle > -90 && angle < 90 ? "start" : "end";
+};
+
 /* ─────────────── Methods section ─────────────── */
 function MethodsSection() {
   return (
@@ -53,43 +81,172 @@ function MethodsSection() {
           align="center"
         />
 
-        {/* Content — full width, no right image */}
-        <div className="">
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-primary mb-3">
-              Qualitative Market Research Methods{" "}
-            </h3>
-            <p className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">
-              Qualitative research companies help you explore hidden opinions inside your users&apos; hearts. What numbers can&apos;t reveal, we can.
-            </p>
-            <p className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">
-              At Track Opinion, we use diverse methods based on your project needs. Digital discussions, physical communities, web-enabled or real-time focus groups, and in-person or CATI interviews are some primary methods qualitative research agencies in India deploy.
-            </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Content — full width, no right image */}
+          <div className="">
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-primary mb-3">
+                Qualitative Market Research Methods{" "}
+              </h3>
+              <p className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">
+                Qualitative research companies help you explore hidden opinions inside your users&apos; hearts. What numbers can&apos;t reveal, we can.
+              </p>
+              <p className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">
+                At Track Opinion, we use diverse methods based on your project needs. Digital discussions, physical communities, web-enabled or real-time focus groups, and in-person or CATI interviews are some primary methods qualitative research agencies in India deploy.
+              </p>
+            </div>
+
+            {/* Method cards — 2 col grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {methods.map((m, i) => {
+                const Icon = m.icon;
+                return (
+                  <motion.div
+                    key={m.label}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-200"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                      <Icon size={18} className="text-blue-500" />
+                    </div>
+                    <div>
+                      <p className="text-md font-semibold leading-tight transition-colors duration-200">{m.label}</p>
+                      <p className="text-sm leading-8 font-medium flex-1 text-gray-600">{m.desc}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Method cards — 2 col grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {methods.map((m, i) => {
-              const Icon = m.icon;
-              return (
-                <motion.div
-                  key={m.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+          {/* Right — Qualitative Insights Radar */}
+          <div className="flex flex-col items-center justify-center py-4 gap-4">
+
+            {/* badge */}
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500">Qualitative Insights Map</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            </div>
+
+            <svg viewBox="0 0 380 380" className="w-full max-w-sm">
+              <defs>
+                <radialGradient id="rfill" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#1a6fe8" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#1a6fe8" stopOpacity="0.08" />
+                </radialGradient>
+              </defs>
+
+              {/* guide rings */}
+              {guides.map((g, i) => {
+                const pts = radarDims.map(d => {
+                  const p = radarPt(d.angle, g * MAX_R);
+                  return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+                }).join(" ");
+                return (
+                  <polygon key={i} points={pts}
+                    fill="none"
+                    stroke={i === guides.length - 1 ? "#cbd5e1" : "#e2e8f0"}
+                    strokeWidth={i === guides.length - 1 ? "1.5" : "1"}
+                    strokeDasharray={i < guides.length - 1 ? "3 3" : "none"}
+                  />
+                );
+              })}
+
+              {/* spokes */}
+              {fullPts.map((p, i) => (
+                <line key={i} x1={CX} y1={CY} x2={p.x} y2={p.y}
+                  stroke="#e2e8f0" strokeWidth="1" />
+              ))}
+
+              {/* % ring labels (50% ring) */}
+              {radarDims.map((d, i) => {
+                const p = radarPt(d.angle, MAX_R * 0.5);
+                return (
+                  <text key={i} x={p.x} y={p.y + 3}
+                    textAnchor="middle" fontSize="7" fill="#cbd5e1"
+                    style={{ fontFamily: "system-ui" }}>
+                    50%
+                  </text>
+                );
+              })}
+
+              {/* filled data polygon */}
+              <motion.polygon
+                points={polyFull}
+                fill="url(#rfill)"
+                stroke="#1a6fe8"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                initial={{ points: polyZero, opacity: 0 }}
+                whileInView={{ points: polyFull, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              />
+
+              {/* data-point dots */}
+              {dataPts.map((p, i) => (
+                <motion.circle key={i} cx={p.x} cy={p.y} r="5"
+                  fill="#1a6fe8"
+                  stroke="white" strokeWidth="2"
+                  style={{ filter: "drop-shadow(0 0 4px rgba(26,111,232,0.5))" }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                  className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-200"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-md font-semibold leading-tight transition-colors duration-200">{m.label}</p>
-                    <p className="text-sm leading-8 font-medium flex-1 text-gray-600">{m.desc}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  transition={{ delay: 0.8 + i * 0.07, duration: 0.3, ease: "backOut" }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  // @ts-ignore
+                  style2={{ transformOrigin: `${p.x}px ${p.y}px` }}
+                />
+              ))}
+
+              {/* spoke labels */}
+              {radarDims.map((d, i) => {
+                const p  = radarPt(d.angle, MAX_R + 26);
+                const anchor = labelAnchor(d.angle);
+                const valPt  = radarPt(d.angle, MAX_R + 14);
+                return (
+                  <motion.g key={i}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 + i * 0.08 }}
+                  >
+                    <text x={p.x} y={p.y - 4}
+                      textAnchor={anchor}
+                      fontSize="11" fontWeight="700" fill="#0d1b3e"
+                      style={{ fontFamily: "system-ui, sans-serif" }}>
+                      {d.label}
+                    </text>
+                    <text x={p.x} y={p.y + 9}
+                      textAnchor={anchor}
+                      fontSize="9" fill="#1a6fe8" fontWeight="600"
+                      style={{ fontFamily: "system-ui, sans-serif" }}>
+                      {Math.round(d.value * 100)}%
+                    </text>
+                  </motion.g>
+                );
+              })}
+
+              {/* center dot */}
+              <circle cx={CX} cy={CY} r="5" fill="#1a6fe8"
+                style={{ filter: "drop-shadow(0 0 6px rgba(26,111,232,0.6))" }} />
+            </svg>
+
+            {/* method chips */}
+            <div className="flex flex-wrap justify-center gap-2 max-w-xs">
+              {["Focus Groups", "In-Depth IDI", "Diary Studies", "Online Comm."].map((m) => (
+                <span key={m}
+                  className="text-[10px] font-semibold text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-3 py-1">
+                  {m}
+                </span>
+              ))}
+            </div>
+
           </div>
         </div>
 

@@ -49,7 +49,7 @@ export default function PanelBooks() {
           <div>
             <SectionHeader
               label="Panel Books"
-              heading={<>Send Request</>}
+              heading={<>Download Our <br></br>Panel Books</>}
               description="Get detailed demographic, income, and methodology data for our verified panels across global markets."
               theme="light"
               align="left"
@@ -211,7 +211,7 @@ export default function PanelBooks() {
                   style={{ background: "linear-gradient(135deg, #1a6fe8 0%, #1458c8 100%)" }}
                 >
                   <Download size={16} />
-                  Download Panel Books
+                  Send Request
                 </button>
               </form>
             )}

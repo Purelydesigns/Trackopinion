@@ -212,6 +212,15 @@ export default function ConceptAdTestingPage() {
       {/* ════════ CAPABILITIES ════════ */}
       <section className="bg-white py-16">
         <div className="site-container px-6">
+
+          <SectionHeader
+              label="Product Viability and Ad Testing"
+              heading={<>Numbers that lead your idea to a product <br></br>with creative ad testing</>}
+              description="Convert ideas into profitable products. Transform products into brand icons. Use our world-class product concept testing."
+              theme="light"
+              align="center"
+            />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {capabilities.map((cap, i) => (
               <motion.div

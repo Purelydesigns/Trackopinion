@@ -32,143 +32,35 @@ const panelData: Record<string, MarketData> = {
 };
 
 /* ─────────────── Image mapping ─────────────── */
-const charImages: Record<string, { female: string; male: string; nameF: string; nameM: string }> = {
-  global:  { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png",      nameF: "Female", nameM: "Male"   },
-  india:   { female: "/images/Demographics/india-female.png",   male: "/images/Demographics/india-male.png",   nameF: "Mahila", nameM: "Purush" },
-  usa:     { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png",      nameF: "Female", nameM: "Male"   },
-  uk:      { female: "/images/Demographics/UK-female.png",      male: "/images/Demographics/UK-male.png",      nameF: "Female", nameM: "Male"   },
-  japan:   { female: "/images/Demographics/japan-female.png",   male: "/images/Demographics/japan-male.png",   nameF: "Josei",  nameM: "Dansei" },
-  uae:     { female: "/images/Demographics/UAE-female.png",     male: "/images/Demographics/UAE-male.png",     nameF: "Female", nameM: "Male"   },
-  brazil:  { female: "/images/Demographics/Brazil-female.png",  male: "/images/Demographics/Brazil-male.png",  nameF: "Mulher", nameM: "Homem"  },
-  germany: { female: "/images/Demographics/Germany-female.png", male: "/images/Demographics/Germany-male.png", nameF: "Frau",   nameM: "Mann"   },
+const charImages: Record<string, { female: string; male: string }> = {
+  global:  { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png"      },
+  india:   { female: "/images/Demographics/india-female.png",   male: "/images/Demographics/india-male.png"   },
+  usa:     { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png"      },
+  uk:      { female: "/images/Demographics/UK-female.png",      male: "/images/Demographics/UK-male.png"      },
+  japan:   { female: "/images/Demographics/japan-female.png",   male: "/images/Demographics/japan-male.png"   },
+  uae:     { female: "/images/Demographics/UAE-female.png",     male: "/images/Demographics/UAE-male.png"     },
+  brazil:  { female: "/images/Demographics/Brazil-female.png",  male: "/images/Demographics/Brazil-male.png"  },
+  germany: { female: "/images/Demographics/Germany-female.png", male: "/images/Demographics/Germany-male.png" },
 };
 
 /* ─────────────── Donut ─────────────── */
-const R = 58, CX = 72, CY = 72, CIRC = 2 * Math.PI * R;
+const R = 52, CX = 66, CY = 66, CIRC = 2 * Math.PI * R;
 function DonutChart({ female, male, total }: { female: number; male: number; total: string }) {
   const fArc = (female / 100) * CIRC;
   return (
     <div className="relative flex items-center justify-center">
-      <svg width="144" height="144" viewBox="0 0 144 144">
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f0f2f8" strokeWidth="14" />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#1a6fe8" strokeWidth="14"
+      <svg width="132" height="132" viewBox="0 0 132 132">
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f0f4ff" strokeWidth="11" />
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#1a6fe8" strokeWidth="11"
           strokeDasharray={`${fArc} ${CIRC}`} strokeDashoffset={0}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#0d1b3e" strokeWidth="14"
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#0d1b3e" strokeWidth="11"
           strokeDasharray={`${(male / 100) * CIRC} ${CIRC}`} strokeDashoffset={-fArc}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
       </svg>
       <div className="absolute flex flex-col items-center text-center">
-        <span className="text-2xl font-semibold text-gray-800 leading-none">{total}</span>
-        <span className="text-[9px] uppercase tracking-widest text-gray-400 mt-1 font-medium">Panelists</span>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────── Thin bar stat ─────────────── */
-function StatBar({ label, pct, color }: { label: string; pct: number; color: string }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full" style={{ background: color }} />
-          <span className="text-sm text-gray-500 font-medium">{label}</span>
-        </div>
-        <span className="text-sm font-semibold text-gray-700">{pct}%</span>
-      </div>
-      <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: color }}
-          initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────── Gender card ─────────────── */
-function GenderCard({
-  gender, pct, localName, imgSrc,
-}: {
-  gender: "female" | "male"; pct: number; localName: string; imgSrc: string;
-}) {
-  const isFemale = gender === "female";
-  const accent   = isFemale ? "#1a6fe8" : "#0d1b3e";
-  const bgGrad   = isFemale
-    ? "linear-gradient(170deg, #dbeafe 0%, #eff6ff 45%, #f0f4ff 100%)"
-    : "linear-gradient(170deg, #dde2ee 0%, #eef0f5 45%, #f4f5f8 100%)";
-  const glowColor = isFemale ? "rgba(26,111,232,0.12)" : "rgba(13,27,62,0.08)";
-
-  return (
-    <div
-      className="relative rounded-3xl overflow-hidden flex flex-col"
-      style={{ background: bgGrad, minHeight: 420, boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)" }}
-    >
-      {/* accent top bar */}
-      <div className="h-1 w-full" style={{ background: accent }} />
-
-      {/* header row */}
-      <div className="flex items-start justify-between px-6 pt-5 pb-2">
-        <div>
-          <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">
-            {isFemale ? "Female" : "Male"}
-          </span>
-          <p className="text-base font-semibold text-gray-700 mt-0.5">{localName}</p>
-        </div>
-        <div className="text-right">
-          <span className="text-4xl font-bold leading-none" style={{ color: accent }}>{pct}</span>
-          <span className="text-xl font-normal text-gray-400">%</span>
-        </div>
-      </div>
-
-      {/* glow blob behind character */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 rounded-full pointer-events-none"
-        style={{
-          bottom: 60,
-          width: 180,
-          height: 180,
-          background: glowColor,
-          filter: "blur(40px)",
-        }}
-      />
-
-      {/* character image */}
-      <div className="relative flex-1 flex items-end justify-center" style={{ minHeight: 300 }}>
-        <Image
-          src={imgSrc}
-          alt={localName}
-          fill
-          className="object-contain object-bottom"
-          style={{ mixBlendMode: "multiply" }}
-          sizes="300px"
-        />
-      </div>
-
-      {/* bottom stat strip */}
-      <div
-        className="px-6 py-4 border-t"
-        style={{ borderColor: "rgba(255,255,255,0.7)", background: "rgba(255,255,255,0.55)", backdropFilter: "blur(8px)" }}
-      >
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: accent }}>
-            Panel Share
-          </span>
-          <span className="text-xs font-semibold text-gray-600">{pct}%</span>
-        </div>
-        <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.07)" }}>
-          <motion.div
-            className="h-full rounded-full"
-            style={{ background: accent }}
-            initial={{ width: 0 }}
-            animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-          />
-        </div>
+        <span className="text-xl font-bold text-gray-800 leading-none">{total}</span>
+        <span className="text-[8px] uppercase tracking-widest text-gray-400 mt-1 font-semibold">Panelists</span>
       </div>
     </div>
   );
@@ -196,9 +88,11 @@ export default function PanelDemographics({
   const market = markets.find((m) => m.id === marketId)!;
   const d = panelData[marketId];
   const chars = charImages[marketId];
+  const nameF = "Female";
+  const nameM = "Male";
 
   return (
-    <section className="pt-24 pb-12 bg-section">
+    <section className="pt-24 pb-20 bg-section">
       <div className="site-container px-6">
         <SectionHeader
           label="Demographics"
@@ -208,7 +102,7 @@ export default function PanelDemographics({
         />
 
         {/* Market selector */}
-        <div className="flex items-center justify-center gap-3 mb-14">
+        <div className="flex items-center justify-center gap-3 mb-16">
           <span className="text-xs text-gray-400 uppercase tracking-widest font-medium">Market</span>
           <div className="relative">
             <button
@@ -248,54 +142,192 @@ export default function PanelDemographics({
           </div>
         </div>
 
-        {/* Cards */}
+        {/* Main layout */}
         <AnimatePresence mode="wait">
           <motion.div
             key={marketId}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.38 }}
-            className="grid grid-cols-1 lg:grid-cols-[1fr_320px_1fr] gap-6"
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-[1fr_1px_220px_1px_1fr]"
+            style={{ minHeight: 480 }}
           >
-            {/* Female */}
-            <GenderCard gender="female" pct={d.female} localName={chars.nameF} imgSrc={chars.female} />
 
-            {/* Centre info card */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden">
-
-              {/* market label */}
-              <div className="px-6 pt-6 pb-4 border-b border-gray-50">
-                <p className="text-xs text-gray-400 uppercase tracking-widest font-medium mb-1">Selected Market</p>
-                <div className="flex items-center gap-2">
-                  <MarketBadge m={market} />
-                  <span className="text-base font-semibold text-gray-800">{market.label}</span>
+            {/* ── Female ── */}
+            <div className="flex flex-col pr-10 pb-8">
+              {/* Top label row */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Female</p>
+                  <p className="text-base font-semibold text-gray-700">{nameF}</p>
+                </div>
+                {/* Large accent % */}
+                <div className="flex items-end gap-0.5 leading-none">
+                  <span className="font-black text-[72px] leading-none" style={{ color: "#1a6fe8" }}>{d.female}</span>
+                  <span className="text-2xl font-light text-blue-300 mb-3">%</span>
                 </div>
               </div>
 
-              {/* donut */}
-              <div className="flex items-center justify-center py-7">
-                <DonutChart female={d.female} male={d.male} total={d.total} />
+              {/* Character — with big watermark circle behind */}
+              <div className="relative flex-1 flex items-end justify-center" style={{ minHeight: 320 }}>
+                {/* Watermark ring */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  style={{ bottom: 40 }}
+                >
+                  <div
+                    className="rounded-full"
+                    style={{
+                      width: 260,
+                      height: 260,
+                      background: "radial-gradient(circle, rgba(26,111,232,0.07) 0%, transparent 70%)",
+                    }}
+                  />
+                </div>
+                <Image
+                  src={chars.female}
+                  alt={nameF}
+                  fill
+                  className="object-contain object-bottom"
+                  style={{ mixBlendMode: "multiply" }}
+                  sizes="380px"
+                />
               </div>
 
-              {/* stat bars */}
-              <div className="px-6 pb-4 flex flex-col gap-4">
-                <StatBar label="Female" pct={d.female} color="#1a6fe8" />
-                <StatBar label="Male"   pct={d.male}   color="#0d1b3e" />
-              </div>
-
-              {/* divider */}
-              <div className="mx-6 border-t border-gray-100 mt-2" />
-
-              {/* total */}
-              <div className="px-6 py-5 flex items-center justify-between mt-auto">
-                <span className="text-sm text-gray-400 font-medium">Total Panelists</span>
-                <span className="text-xl font-semibold text-gray-800">{d.total}</span>
+              {/* Panel share */}
+              <div className="mt-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#1a6fe8" }}>Panel Share</span>
+                  <span className="text-xs font-semibold text-gray-500">{d.female}%</span>
+                </div>
+                <div className="h-[3px] rounded-full overflow-hidden bg-blue-100">
+                  <motion.div
+                    className="h-full rounded-full"
+                    style={{ background: "#1a6fe8" }}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${d.female}%` }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Male */}
-            <GenderCard gender="male" pct={d.male} localName={chars.nameM} imgSrc={chars.male} />
+            {/* Vertical divider */}
+            <div className="bg-gray-200 self-stretch mx-0" />
+
+            {/* ── Center stats ── */}
+            <div className="flex flex-col items-center justify-center px-8 gap-6">
+              {/* Market pill */}
+              <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-sm border border-gray-100">
+                <MarketBadge m={market} />
+                <span className="text-xs font-semibold text-gray-600">{market.label}</span>
+              </div>
+
+              {/* Donut */}
+              <DonutChart female={d.female} male={d.male} total={d.total} />
+
+              {/* Stat rows */}
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full" style={{ background: "#1a6fe8" }} />
+                      <span className="text-xs text-gray-500">Female</span>
+                    </div>
+                    <span className="text-xs font-semibold text-gray-700">{d.female}%</span>
+                  </div>
+                  <div className="h-1 rounded-full overflow-hidden bg-blue-100">
+                    <motion.div className="h-full rounded-full" style={{ background: "#1a6fe8" }}
+                      initial={{ width: 0 }} animate={{ width: `${d.female}%` }}
+                      transition={{ duration: 0.7, ease: "easeOut" }} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-gray-800" />
+                      <span className="text-xs text-gray-500">Male</span>
+                    </div>
+                    <span className="text-xs font-semibold text-gray-700">{d.male}%</span>
+                  </div>
+                  <div className="h-1 rounded-full overflow-hidden bg-gray-200">
+                    <motion.div className="h-full rounded-full bg-gray-800"
+                      initial={{ width: 0 }} animate={{ width: `${d.male}%` }}
+                      transition={{ duration: 0.7, ease: "easeOut" }} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="w-full border-t border-gray-200" />
+
+              {/* Total */}
+              <div className="w-full flex items-center justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Total Panelists</span>
+                <span className="text-lg font-bold text-gray-800">{d.total}</span>
+              </div>
+            </div>
+
+            {/* Vertical divider */}
+            <div className="bg-gray-200 self-stretch mx-0" />
+
+            {/* ── Male ── */}
+            <div className="flex flex-col pl-10 pb-8">
+              {/* Top label row */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Male</p>
+                  <p className="text-base font-semibold text-gray-700">{nameM}</p>
+                </div>
+                {/* Large accent % */}
+                <div className="flex items-end gap-0.5 leading-none">
+                  <span className="font-black text-[72px] leading-none text-gray-800">{d.male}</span>
+                  <span className="text-2xl font-light text-gray-400 mb-3">%</span>
+                </div>
+              </div>
+
+              {/* Character */}
+              <div className="relative flex-1 flex items-end justify-center" style={{ minHeight: 320 }}>
+                {/* Watermark ring */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div
+                    className="rounded-full"
+                    style={{
+                      width: 260,
+                      height: 260,
+                      background: "radial-gradient(circle, rgba(13,27,62,0.05) 0%, transparent 70%)",
+                    }}
+                  />
+                </div>
+                <Image
+                  src={chars.male}
+                  alt={nameM}
+                  fill
+                  className="object-contain object-bottom"
+                  style={{ mixBlendMode: "multiply" }}
+                  sizes="380px"
+                />
+              </div>
+
+              {/* Panel share */}
+              <div className="mt-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-500">Panel Share</span>
+                  <span className="text-xs font-semibold text-gray-500">{d.male}%</span>
+                </div>
+                <div className="h-[3px] rounded-full overflow-hidden bg-gray-200">
+                  <motion.div
+                    className="h-full rounded-full bg-gray-800"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${d.male}%` }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                </div>
+              </div>
+            </div>
+
           </motion.div>
         </AnimatePresence>
       </div>

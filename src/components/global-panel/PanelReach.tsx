@@ -21,23 +21,29 @@ function LiquidCircle({ pct }: { pct: number }) {
   const cx = 110, cy = 110, r = 86;
   const fillTopY = (cy - r) + (1 - pct / 100) * (2 * r);
 
-  // Wave period = circle diameter; build 3 full periods starting 1 period left
-  // so after translating by waveW the wave tiles seamlessly
-  const waveW = r * 2;
-  const waveA = 12;
-  const buildWidePath = (phaseX: number) => {
-    const startX  = cx - r - waveW + phaseX; // 1 period left of circle edge
-    const totalW  = waveW * 3;               // 3 periods wide
-    const steps   = 60;
+  // Path starts at x = -waveW (local) so the clip [cx-r..cx+r] = [24..196]
+  // sits in the middle of the path at all times. Animate x: [0, -waveW] to
+  // scroll one period left — seamless because path repeats every waveW px.
+  const waveW = r * 2;       // 172px — one period
+  const waveA = 13;
+  const steps  = 80;
+  const pStartX = -waveW;               // -172
+  const pEndX   = pStartX + waveW * 4; // 516  (4 full periods)
+
+  const buildPath = (phaseOffset: number) => {
     let d = "";
     for (let k = 0; k <= steps; k++) {
-      const x = startX + (k / steps) * totalW;
-      const y = fillTopY - waveA * Math.sin((k / steps) * Math.PI * 6);
+      const t = k / steps;
+      const x = pStartX + t * (pEndX - pStartX);
+      const y = fillTopY - waveA * Math.sin((t * 4 + phaseOffset) * Math.PI * 2);
       d += `${k === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)} `;
     }
-    d += `L ${(startX + totalW).toFixed(1)} 220 L ${startX.toFixed(1)} 220 Z`;
+    d += `L ${pEndX.toFixed(1)} 220 L ${pStartX.toFixed(1)} 220 Z`;
     return d;
   };
+
+  const path1 = buildPath(0);
+  const path2 = buildPath(0.5);
 
   // Outer dot ring
   const DOTS = 64;
@@ -52,51 +58,48 @@ function LiquidCircle({ pct }: { pct: number }) {
         <clipPath id="reach-circle">
           <circle cx={cx} cy={cy} r={r} />
         </clipPath>
+        {/* Water gradient: lighter at surface, richer at depth */}
+        <linearGradient id="water-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#4a8fe0" />
+          <stop offset="100%" stopColor="#0d3f9e" />
+        </linearGradient>
       </defs>
 
       {/* outer dot ring */}
-      {dots.map((d, i) => (
-        <circle key={i} cx={d.x} cy={d.y} r="2"
+      {dots.map((dot, i) => (
+        <circle key={i} cx={dot.x} cy={dot.y} r="2"
           fill={i % 3 === 0 ? "#93b8d8" : "#c4d8ec"} />
       ))}
 
-      {/* background circle */}
-      <circle cx={cx} cy={cy} r={r} fill="#cddaf0" />
+      {/* dark background circle — matches section bg so no bubble highlight */}
+      <circle cx={cx} cy={cy} r={r} fill="#0d1b3e" />
 
-      {/* ── all animated fill inside ONE clip group ── */}
+      {/* ── all animated fill inside clip ── */}
       <g clipPath="url(#reach-circle)">
-        {/* solid blue fill rises on mount */}
-        <motion.rect
-          x={cx - r} width={r * 2} height={220}
-          fill="#1a6fe8"
-          initial={{ y: 220 }}
-          animate={{ y: fillTopY }}
-          transition={{ duration: 1.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
 
-        {/* wave 1 — primary, moves right→left */}
-        <motion.g
-          animate={{ x: [-waveW, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
-        >
-          <path d={buildWidePath(0)} fill="rgba(26,90,220,0.35)" />
-        </motion.g>
-
-        {/* wave 2 — slower, offset phase for depth */}
+        {/* wave 1 — lighter shade of base blue */}
         <motion.g
           animate={{ x: [0, -waveW] }}
-          transition={{ duration: 3.6, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: "linear" }}
         >
-          <path d={buildWidePath(waveW / 2)} fill="rgba(26,70,200,0.22)" />
+          <path d={path1} fill="#1a6fe8" />
+        </motion.g>
+
+        {/* wave 2 — deeper shade for layered depth */}
+        <motion.g
+          animate={{ x: [0, -waveW] }}
+          transition={{ duration: 3.8, repeat: Infinity, ease: "linear" }}
+        >
+          <path d={path2} fill="#4a8fe0" />
         </motion.g>
       </g>
 
       {/* inner border ring */}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1.5" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" />
 
       {/* percentage */}
       <text x={cx} y={cy - 6} textAnchor="middle" fontSize="32" fontWeight="800" fill="white"
-            style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.45)) drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}>
+            style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.45))" }}>
         {pct}%
       </text>
       {/* label */}

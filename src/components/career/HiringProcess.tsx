@@ -101,7 +101,7 @@ export default function HiringProcess() {
                     {/* Circle */}
                     <div className="relative">
                       <span className={`absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[10px] font-black text-white flex items-center justify-center z-10 transition-colors duration-200
-                        ${isActive ? "bg-green-400" : isPast ? "bg-primary/30" : "bg-gray-400"}`}>
+                        ${isActive ? "bg-primary" : isPast ? "bg-primary/30" : "bg-gray-400"}`}>
                         {step.num}
                       </span>
                       <div className={`w-[72px] h-[72px] rounded-full border-2 flex items-center justify-center transition-all duration-300

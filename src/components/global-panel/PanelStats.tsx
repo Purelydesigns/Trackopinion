@@ -83,14 +83,6 @@ function BarChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
                 <div className="w-2 h-2 bg-[#0d1b3e] rotate-45 -mt-[4px] rounded-sm" />
               </div>
 
-              {/* ── Percentage label ── */}
-              <span
-                className="absolute text-[11px] font-semibold text-[#1a6fe8] pointer-events-none"
-                style={{ bottom: fillH + 8 }}
-              >
-                {bar.pct}%
-              </span>
-
               {/* ── Bar column ── */}
               <div className="relative w-full" style={{ height: MAX_H }}>
                 {/* dotted background pill */}
@@ -112,6 +104,14 @@ function BarChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
                   animate={{ height: fillH }}
                   transition={{ duration: 0.55, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
                 />
+
+                {/* ── Percentage label — inside bar column so bottom is relative to 200px div ── */}
+                <span
+                  className="absolute left-0 right-0 text-center text-[11px] font-semibold text-primary pointer-events-none"
+                  style={{ bottom: Math.max(fillH + 4, 4) }}
+                >
+                  {bar.pct}%
+                </span>
               </div>
 
               {/* ── X-axis label ── */}

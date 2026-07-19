@@ -53,13 +53,12 @@ function DonutChart({
   return (
     <div className="relative flex items-center justify-center">
       <svg viewBox="0 0 220 220" className="w-60 h-60 -rotate-90 drop-shadow-sm">
-        {/* subtle track ring */}
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#e8e4dc" strokeWidth="16" />
+        {/* track ring */}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#e5e7eb" strokeWidth="16" />
 
         {pcts.map((pct, i) => {
           const { segLen, offset } = segments[i];
           const isActive = i === activeIdx;
-          const sw = isActive ? 22 : 14;
 
           return (
             <motion.circle
@@ -67,47 +66,24 @@ function DonutChart({
               cx={CX} cy={CY} r={R}
               fill="none"
               stroke={EDU_COLORS[i]}
+              strokeWidth="16"
               strokeLinecap="round"
               style={{ cursor: "pointer" }}
-              /* draw-on animation: starts collapsed, expands to full segment */
-              initial={{ strokeDasharray: `0 ${C}`, strokeDashoffset: -offset, strokeWidth: sw, opacity: 0 }}
+              initial={{ strokeDasharray: `0 ${C}`, strokeDashoffset: -offset, opacity: 0 }}
               animate={{
                 strokeDasharray: `${segLen - GAP} ${C}`,
                 strokeDashoffset: -offset,
-                strokeWidth: sw,
                 opacity: hoveredIdx !== null && !isActive ? 0.25 : 1,
               }}
               transition={{
                 strokeDasharray: { duration: 0.7, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] },
                 opacity: { duration: 0.2 },
-                strokeWidth: { duration: 0.2 },
               }}
               onMouseEnter={() => onHover(i)}
               onMouseLeave={() => onHover(null)}
             />
           );
         })}
-
-        {/* active segment outer ring glow */}
-        {(() => {
-          const { segLen, offset } = segments[activeIdx];
-          return (
-            <motion.circle
-              key={`glow-${marketKey}-${activeIdx}`}
-              cx={CX} cy={CY} r={R}
-              fill="none"
-              stroke={EDU_COLORS[activeIdx]}
-              strokeWidth="28"
-              strokeLinecap="round"
-              strokeDasharray={`${segLen - GAP} ${C}`}
-              strokeDashoffset={-offset}
-              opacity={0.12}
-              animate={{ strokeDasharray: `${segLen - GAP} ${C}`, strokeDashoffset: -offset }}
-              transition={{ duration: 0.2 }}
-              style={{ pointerEvents: "none" }}
-            />
-          );
-        })()}
       </svg>
 
       {/* centre text — animate on active change */}

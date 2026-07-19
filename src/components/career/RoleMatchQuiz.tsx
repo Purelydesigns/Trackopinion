@@ -172,7 +172,7 @@ function AnalysingLoader() {
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="w-2.5 h-2.5 rounded-full bg-green-400"
+            className="w-2.5 h-2.5 rounded-full bg-primary"
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{ duration: 1, delay: i * 0.2, repeat: Infinity }}
           />
@@ -182,7 +182,7 @@ function AnalysingLoader() {
       {/* Progress bar */}
       <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-accent rounded-full"
+          className="h-full bg-primary rounded-full"
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.1 }}
           style={{ width: `${progress}%` }}
@@ -228,14 +228,14 @@ export default function RoleMatchQuiz() {
   const result = done ? getResult(answers) : null;
 
   return (
-    <section className="bg-primary py-24">
+    <section className="bg-white py-24">
       <div className="site-container px-6">
 
         <SectionHeader
           label="Find Your Role"
           heading={<>Not sure where you fit?<br />Let us match you in 60 seconds.</>}
           description="Answer 3 quick questions and we'll point you to the role that suits you best."
-          theme="dark"
+          theme="light"
         />
 
         {/* Progress dots */}
@@ -246,10 +246,10 @@ export default function RoleMatchQuiz() {
                 key={i}
                 className={`rounded-full transition-all duration-300 ${
                   i === step
-                    ? "w-8 h-2.5 bg-accent"
+                    ? "w-8 h-2.5 bg-primary"
                     : i < step
-                    ? "w-2.5 h-2.5 bg-accent/50"
-                    : "w-2.5 h-2.5 bg-white/20"
+                    ? "w-2.5 h-2.5 bg-primary/50"
+                    : "w-2.5 h-2.5 bg-gray-200"
                 }`}
               />
             ))}
@@ -275,7 +275,7 @@ export default function RoleMatchQuiz() {
                 {/* Green dots */}
                 <div className="flex gap-2 justify-center mb-6">
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                    <span key={i} className="w-2.5 h-2.5 rounded-full bg-primary" />
                   ))}
                 </div>
 
@@ -285,12 +285,12 @@ export default function RoleMatchQuiz() {
                 </div>
 
                 {/* Role */}
-                <h3 className="text-4xl sm:text-5xl font-black italic text-accent mb-6">
+                <h3 className="text-4xl sm:text-5xl font-black italic text-primary mb-6">
                   {result?.role}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/60 text-sm sm:text-base leading-8 max-w-lg mx-auto mb-10">
+                <p className="text-gray-500 text-sm sm:text-base leading-8 max-w-lg mx-auto mb-10">
                   {result?.desc}
                 </p>
 
@@ -298,19 +298,19 @@ export default function RoleMatchQuiz() {
                 <div className="flex flex-wrap gap-4 justify-center">
                   <a
                     href="/contact-us"
-                    className="inline-flex items-center gap-2 bg-accent hover:opacity-90 text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
+                    className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
                   >
                     Apply Now <ArrowRight className="w-4 h-4" />
                   </a>
                   <button
                     onClick={handleReset}
-                    className="inline-flex items-center gap-2 border border-white/40 hover:bg-white/10 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 text-sm"
+                    className="inline-flex items-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold px-8 py-4 rounded-lg transition-all duration-300 text-sm"
                   >
                     Try Again
                   </button>
                   <a
                     href="/contact-us"
-                    className="inline-flex items-center gap-2 border border-white/40 hover:bg-white/10 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 text-sm"
+                    className="inline-flex items-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold px-8 py-4 rounded-lg transition-all duration-300 text-sm"
                   >
                     See All Roles
                   </a>
@@ -327,10 +327,10 @@ export default function RoleMatchQuiz() {
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               >
-                <p className="text-white/50 text-base leading-8 font-medium flex-1 text-center uppercase mb-3">
+                <p className="text-gray-500 text-base leading-8 font-medium flex-1 text-center uppercase mb-3">
                   {current.label}
                 </p>
-                <h3 className="text-center text-lg sm:text-xl font-bold text-white mb-7">
+                <h3 className="text-center text-lg sm:text-xl font-bold text-gray-900 mb-7">
                   {current.question}
                 </h3>
 
@@ -344,23 +344,23 @@ export default function RoleMatchQuiz() {
                         onClick={() => setSelected(i)}
                         className={`group flex items-center gap-4 text-left px-5 py-4 rounded-2xl border transition-all duration-200 outline-none
                           ${isSelected
-                            ? "border-accent bg-accent/15 shadow-lg shadow-accent/20"
-                            : "border-white/10 bg-white/5 hover:border-accent/50 hover:bg-white/10"
+                            ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                            : "border-gray-200 bg-gray-50 hover:border-primary/50 hover:bg-primary/5"
                           }`}
                       >
                         <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200
                           ${isSelected
-                            ? "bg-accent text-white"
-                            : "bg-white/10 text-white/60 group-hover:bg-accent/20 group-hover:text-accent"
+                            ? "bg-primary text-white"
+                            : "bg-gray-200 text-gray-500 group-hover:bg-primary/20 group-hover:text-primary"
                           }`}
                         >
                           {opt.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm font-bold leading-snug mb-0.5 transition-colors duration-200 ${isSelected ? "text-white" : "text-white/80 group-hover:text-white"}`}>
+                          <p className={`text-sm font-bold leading-snug mb-0.5 transition-colors duration-200 ${isSelected ? "text-primary" : "text-gray-800 group-hover:text-primary"}`}>
                             {opt.title}
                           </p>
-                          <p className="text-xs text-white/40 leading-relaxed">{opt.desc}</p>
+                          <p className="text-sm text-gray-500 leading-relaxed">{opt.desc}</p>
                         </div>
                       </button>
                     );
@@ -374,7 +374,7 @@ export default function RoleMatchQuiz() {
                     disabled={selected === null}
                     className={`inline-flex items-center gap-2 px-8 py-4 rounded-lg font-bold text-sm transition-all duration-300
                       ${selected !== null
-                        ? "bg-accent text-white hover:opacity-90 hover:-translate-y-0.5 shadow-lg"
+                        ? "bg-primary text-white hover:opacity-90 hover:-translate-y-0.5 shadow-lg"
                         : "bg-white/10 text-white/30 cursor-not-allowed"
                       }`}
                   >
