@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import BlogList from "@/components/resources/BlogList";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
@@ -36,7 +37,9 @@ export default function ResourcesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
       <main>
-        <BlogList />
+        <Suspense>
+          <BlogList />
+        </Suspense>
       </main>
     </>
   );

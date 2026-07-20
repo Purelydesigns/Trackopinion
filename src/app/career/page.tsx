@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import CareerPage from "@/components/career/CareerPage";
 
 export const metadata: Metadata = {
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function Career() {
-  return <CareerPage />;
+  return (
+    <Suspense>
+      <CareerPage />
+    </Suspense>
+  );
 }
