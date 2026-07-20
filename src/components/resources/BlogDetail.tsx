@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, Share2, Check, X } from "lucide-react";
+import Image from "next/image";
+import { Calendar, Share2, X, Loader2, ArrowLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import ListPageHero from "@/components/ui/ListPageHero";
+import { toBlogSlug } from "@/lib/blogSlug";
 
 /* ── Share Popover ── */
 const shareLinks = [
@@ -99,15 +102,12 @@ function SharePopover({ title }: { title: string }) {
             transition={{ duration: 0.18 }}
             className="absolute right-0 top-10 z-50 bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 w-64"
           >
-            {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm font-bold text-gray-900">Share this article</p>
               <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-700 transition">
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Social buttons */}
             <div className="grid grid-cols-5 gap-2 mb-4">
               {shareLinks.map((s) => (
                 <a
@@ -122,14 +122,9 @@ function SharePopover({ title }: { title: string }) {
                 </a>
               ))}
             </div>
-
-            {/* Copy link */}
             <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2.5 border border-gray-100">
               <span className="text-xs text-gray-500 truncate flex-1">{url}</span>
-              <button
-                onClick={copyLink}
-                className="text-xs font-bold text-primary hover:text-primary transition shrink-0"
-              >
+              <button onClick={copyLink} className="text-xs font-bold text-primary hover:text-primary transition shrink-0">
                 {copied ? "Copied!" : "Copy"}
               </button>
             </div>
@@ -140,66 +135,111 @@ function SharePopover({ title }: { title: string }) {
   );
 }
 
-/* ── Reusable building blocks ── */
-
-function SectionBadge({ text }: { text: string }) {
-  return (
-    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-bold px-4 py-2 rounded-lg mb-6">
-      {text}
-    </div>
-  );
+function formatDate(raw: string): string {
+  if (!raw) return "";
+  const d = new Date(raw);
+  if (isNaN(d.getTime())) return raw;
+  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, ".");
 }
 
-function BoldPara({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-gray-900 text-base leading-8 mb-3 font-medium">{children}</p>
-  );
-}
-
-function Para({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-gray-900 text-base leading-8 mb-3 font-medium">{children}</p>
-  );
-}
-
-function CheckItem({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex gap-4 items-start py-1.5">
-      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-1">
-        <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-      </span>
-      <span className="text-gray-900 text-base leading-8 font-medium">{children}</span>
-    </li>
-  );
-}
-
-function SubCheckItem({ label, children }: { label?: string; children: React.ReactNode }) {
-  return (
-    <li className="flex gap-4 items-start py-1.5">
-      <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-1">
-        <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-      </span>
-      <span className="text-gray-900 text-base leading-8 font-medium">
-        {label && <strong className="text-gray-900 font-bold">{label} </strong>}
-        {children}
-      </span>
-    </li>
-  );
-}
-
-function IllustrationBlock({ emoji, caption }: { emoji: string; caption: string }) {
-  return (
-    <div className="my-10 flex flex-col items-center gap-4">
-      <div className="w-64 h-64 bg-purple-50 rounded-full flex items-center justify-center shadow-inner">
-        <span className="text-9xl">{emoji}</span>
-      </div>
-      <p className="text-[#0d1b3e] text-sm text-center italic max-w-md">{caption}</p>
-    </div>
-  );
-}
+type BlogData = {
+  title: string;
+  date: string;
+  category: string;
+  img: string;
+  altText: string;
+  content: string;
+};
 
 /* ── Main component ── */
-export default function BlogDetail() {
+export default function BlogDetail({ id }: { id: string }) {
+  const [blog, setBlog]       = useState<BlogData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError]     = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    (async () => {
+      try {
+        setLoading(true);
+        setError("");
+        setBlog(null);
+
+        // Step 1 — resolve slug → numeric ID.
+        // Fast path: check sessionStorage cache populated by the list page.
+        const slugMap: Record<string, number> = JSON.parse(
+          sessionStorage.getItem("blogSlugMap") ?? "{}"
+        );
+        let numericId: number | null = slugMap[id] ?? null;
+
+        // Slow path: fetch list pages until we find the slug match.
+        if (!numericId) {
+          let pageNum = 1;
+          const batchSize = 100;
+
+          while (!numericId) {
+            const listRes = await fetch(
+              `/api/blogs?pageNumber=${pageNum}&pageSize=${batchSize}`,
+              { signal }
+            );
+            if (!listRes.ok) throw new Error(`HTTP ${listRes.status}`);
+            const listData = await listRes.json();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const items: any[] = listData?.data?.item1 ?? [];
+            const total: number = listData?.data?.item2 ?? 0;
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const match = items.find((item: any) =>
+              toBlogSlug(item.header ?? item.title ?? "") === id
+            );
+
+            if (match) {
+              numericId = match.blogsId ?? match.id;
+              // Seed the cache so subsequent visits are instant
+              slugMap[id] = numericId!;
+              sessionStorage.setItem("blogSlugMap", JSON.stringify(slugMap));
+            } else if (pageNum * batchSize >= total) {
+              break;
+            } else {
+              pageNum++;
+            }
+          }
+        }
+
+        if (!numericId) throw new Error("Post not found");
+
+        // Step 2 — fetch the full detail
+        const detailRes = await fetch(`/api/blogs/${numericId}`, { signal });
+        if (!detailRes.ok) throw new Error(`HTTP ${detailRes.status}`);
+        const data = await detailRes.json();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const item: any = data?.data ?? data;
+        setBlog({
+          title:    item.header ?? item.title ?? item.blogTitle ?? "Blog Post",
+          date:     formatDate(item.fromDt ?? item.publishDate ?? item.createdAt ?? ""),
+          category: item.blogTags ?? item.tags ?? item.category ?? "",
+          img:      item.imagePath ?? item.image ?? "",
+          altText:  item.altText ?? item.header ?? "Blog image",
+          content:  item.content ?? item.body ?? "",
+        });
+      } catch (err) {
+        if ((err as Error).name === "AbortError") return;
+        setError(
+          (err as Error).message === "Post not found"
+            ? "This blog post could not be found."
+            : "Could not load this post. Please try again."
+        );
+      } finally {
+        if (!signal.aborted) setLoading(false);
+      }
+    })();
+
+    return () => controller.abort();
+  }, [id]);
+
   const fadeUp = {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
@@ -207,152 +247,109 @@ export default function BlogDetail() {
     transition: { duration: 0.5 },
   };
 
+  if (loading) {
+    return (
+      <main>
+        <ListPageHero title="Blog Posts" />
+        <section className="bg-section pb-20">
+          <div className="site-container px-6">
+            <div className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10 px-8 py-16" style={{ marginTop: -40 }}>
+              {/* Article skeleton */}
+              <div className="max-w-3xl mx-auto space-y-4">
+                <div className="h-4 w-24 rounded-full bg-gray-200 animate-pulse" />
+                <div className="h-8 w-3/4 rounded-full bg-gray-200 animate-pulse" />
+                <div className="h-8 w-1/2 rounded-full bg-gray-200 animate-pulse" />
+                <div className="h-px w-full bg-gray-100 my-6" />
+                <div className="w-full aspect-video rounded-2xl bg-gray-100 animate-pulse" />
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="h-4 rounded-full bg-gray-100 animate-pulse" style={{ width: `${85 + Math.sin(i) * 12}%` }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (error || !blog) {
+    return (
+      <main>
+        <ListPageHero title="Blog Posts" />
+        <section className="bg-section pb-20">
+          <div className="site-container px-6">
+            <div className="bg-white rounded-3xl shadow-sm relative z-10 px-8 py-24 text-center text-red-500 text-sm" style={{ marginTop: -40 }}>
+              {error || "Post not found."}
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main>
-      {/* ── Article header ── */}
-      <section className="-mt-[76px] bg-white pt-14 pb-0 pt-[calc(76px+3.5rem)]">
+      <ListPageHero title="Blog Posts" />
+
+      <section className="bg-section pb-20">
         <div className="site-container px-6">
-          <motion.h1
-            {...fadeUp}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight max-w-4xl"
-          >
-            How to Conduct Customer Satisfaction Research
-          </motion.h1>
+          <div className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10 px-8 pt-8 pb-0" style={{ marginTop: -40 }}>
 
-          {/* Date + share */}
-          <div className="flex items-center justify-between border-b border-gray-200 pb-6">
-            <div className="flex items-center gap-2 text-gray-900 text-base font-medium">
-              <Calendar className="w-4 h-4" />
-              <span>24.03.2026</span>
+            {/* Back link */}
+            <Link
+              href="/resources"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors duration-200 mb-6"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              All Blog Posts
+            </Link>
+
+            {/* Category tag */}
+            {blog.category && (
+              <div className="mb-4">
+                <span className="inline-block bg-highlight text-primary text-xs font-bold px-3 py-1.5 rounded-full border border-primary/20">
+                  {blog.category}
+                </span>
+              </div>
+            )}
+
+            <motion.h1
+              {...fadeUp}
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight max-w-4xl"
+            >
+              {blog.title}
+            </motion.h1>
+
+            {/* Date + share */}
+            <div className="flex items-center justify-between border-b border-gray-200 pb-6">
+              <div className="flex items-center gap-2 text-gray-500 text-sm font-medium">
+                <Calendar className="w-4 h-4" />
+                <span>{blog.date}</span>
+              </div>
+              <SharePopover title={blog.title} />
             </div>
-            <SharePopover title="How to Conduct Customer Satisfaction Research" />
-          </div>
-        </div>
-      </section>
+            {/* ── Hero image ── */}
+            {blog.img && (
+              <div className="flex justify-center pt-8">
+                <Image
+                  src={blog.img}
+                  alt={blog.altText}
+                  width={900}
+                  height={0}
+                  style={{ height: "auto", width: "60%", borderRadius: "1.25rem" }}
+                  unoptimized
+                  priority
+                />
+              </div>
+            )}
 
-      {/* ── Article body ── */}
-      <section className="bg-white py-12">
-        <div className="site-container px-6 max-w-4xl space-y-12">
-
-          {/* Section 1 */}
-          <motion.div {...fadeUp}>
-            <SectionBadge text="1. Define Your Why" />
-            <BoldPara>
-              The first step in any market research survey is to nail your goals.
-              Ensure you&apos;re clear about what your survey objective is. Don&apos;t
-              include multiple objectives in one survey; otherwise, your strategy
-              will be complicated and might derail as the project moves on.
-              Some of your objectives could be:
-            </BoldPara>
-            <ul className="divide-y divide-gray-100">
-              <CheckItem>To understand user problems and gaps in your offering.</CheckItem>
-              <CheckItem>To assess brand loyalty and user advocacy.</CheckItem>
-              <CheckItem>To improve your services and customer care operations.</CheckItem>
-              <CheckItem>To analyze the churn reasons.</CheckItem>
-              <CheckItem>To strengthen customer engagement.</CheckItem>
-            </ul>
-            <Para>
-              There can be more reasons why you want to evaluate user satisfaction
-              other than the ones we have defined here, based on your domain, the
-              scale of your business, and its issues.
-            </Para>
-          </motion.div>
-
-          {/* Section 2 */}
-          <motion.div {...fadeUp}>
-            <SectionBadge text="2. Chalk Out Your Key Metrics" />
-            <BoldPara>
-              Once you know what your goals are, you need to lay down the KPIs to
-              evaluate. Based on these parameters, you can take actions and
-              course-correct your business strategies.
-            </BoldPara>
-            <Para>Some of the important parameters we measure for our customers are:</Para>
-            <ul className="space-y-1">
-              <SubCheckItem label="NPS:">
-                <span className="underline">Net Promoter Score</span> is measured
-                based on the likelihood of users recommending your brand to others.
-              </SubCheckItem>
-              <SubCheckItem label="CES:">
-                Customer effort score measures how easy it is for a particular
-                customer to deal with your company during a transaction, a customer
-                care call, a question being answered, or an issue resolution.
-              </SubCheckItem>
-              <SubCheckItem label="CRR:">
-                Customer retention rate is the number of customers retained during
-                a specific period, irrespective of their engagement level and buying
-                value.
-              </SubCheckItem>
-            </ul>
-            <Para>Here is how you measure user satisfaction .</Para>
-
-            <IllustrationBlock
-              emoji="📊"
-              caption="To understand user satisfaction, knowing which KPI you should measure is important."
+            {/* ── Article body (API HTML) ── */}
+            <div
+              className="blog-content py-10"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
             />
-          </motion.div>
 
-          {/* Section 3 */}
-          <motion.div {...fadeUp}>
-            <SectionBadge text="3. Segment Your Audience" />
-            <BoldPara>
-              Needless to say, this is one of the most important steps in any
-              market research project. To know your customer satisfaction level,
-              you must first know who your audience is.
-            </BoldPara>
-            <Para>Divide your audience into segments based on:</Para>
-            <ul className="space-y-1">
-              <SubCheckItem label="Demographics:">gender, age, location, salary, education level, job profile.</SubCheckItem>
-              <SubCheckItem label="Psychographics:">motivation, hobbies, behavior, interests.</SubCheckItem>
-              <SubCheckItem label="Touchpoints:">sales, delivery, customer support, inquiries, issues reported, technical assistance, etc.</SubCheckItem>
-              <SubCheckItem label="Customer type:">new or old, repeat or churned, dormant or frequent.</SubCheckItem>
-              <SubCheckItem label="Role:">expert or generic (SMEs, end users, evangelists, technicians, ad hoc testers).</SubCheckItem>
-            </ul>
-          </motion.div>
-
-          {/* Section 4 */}
-          <motion.div {...fadeUp}>
-            <SectionBadge text="4. Select the Right Methodology" />
-            <BoldPara>
-              Next is to decide the level of depth you need to go to assess user
-              satisfaction. If your goals are elaborate and your users are industry
-              experts, you need to go for qualitative market research survey
-              methods. Quantitative surveys work well in the case of NPS and when
-              you just want to measure the numbers and not the sentiments behind
-              them.
-            </BoldPara>
-            <Para>You can use these qualitative methods:</Para>
-            <ul className="space-y-4">
-              {[
-                {
-                  label: "Focus group meetings.",
-                  desc: "These meetings are effective when users are comfortable sharing pain points publicly. Automotive and other B2B domains fit here.",
-                },
-                {
-                  label: "Online communities",
-                  desc: "These shared spaces are great for crowdfunding ideas and co-creating solutions.",
-                },
-                {
-                  label: "Personal Interviews",
-                  desc: "When users hesitate to discuss their experiences that are personal, sensitive, and require extra caution to be dealt with, such as healthcare, use in-depth interviews.",
-                },
-                {
-                  label: "Personal Interviews",
-                  desc: "When users hesitate to discuss their experiences that are personal, sensitive, and require extra caution to be dealt with, such as healthcare, use in-depth interviews.",
-                },
-              ].map((item, i) => (
-                <li key={i} className="flex gap-4 items-start py-1.5">
-                  <span className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center shrink-0 mt-1">
-                    <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-                  </span>
-                  <span className="text-gray-900 text-base leading-8 font-medium">
-                    <strong className="text-gray-900 font-bold">{item.label} </strong>
-                    {item.desc}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
+          </div>
         </div>
       </section>
 
@@ -365,20 +362,16 @@ export default function BlogDetail() {
           >
             <div className="flex-1">
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                Willing to Conduct a Customer Satisfaction Study?
+                Ready to Start Your Research?
               </h3>
               <p className="text-gray-900 text-base leading-8 font-medium">
-                If you&apos;re willing to know how satisfied your users are, worry not.
-                You can partner with a market research firm like Track Opinion. We
-                have over 15 years of experience in various domains. We conduct
-                both online and offline market research surveys to collect
-                qualitative and quantitative reviews.
+                Partner with Track Opinion for expert market research solutions tailored to your business needs.
               </p>
             </div>
             <div className="shrink-0">
               <Link
-                href="/contact"
-                className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
+                href="/contact-us"
+                className="bg-primary hover:opacity-90 text-white text-base font-bold px-10 py-5 rounded-lg transition-all duration-300 shadow hover:-translate-y-0.5 whitespace-nowrap"
               >
                 Contact Us
               </Link>

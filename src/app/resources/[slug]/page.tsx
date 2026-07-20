@@ -23,6 +23,11 @@ export async function generateMetadata({
   };
 }
 
-export default function BlogDetailPage() {
-  return <BlogDetail />;
+export default async function BlogDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  return <BlogDetail id={slug} />;
 }

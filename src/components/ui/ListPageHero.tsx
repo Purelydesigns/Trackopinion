@@ -17,23 +17,23 @@ export default function ListPageHero({
   minHeight = "min-h-[180px] sm:min-h-[220px]",
 }: ListPageHeroProps) {
   return (
-    <section className={`-mt-[76px] relative ${minHeight} flex items-end overflow-hidden`}>
+    <section className={`-mt-[76px] relative ${minHeight} flex items-end`}>
 
-      {/* Video background */}
-      <video
-        src={video}
-        autoPlay loop muted playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-
-      {/* Dark overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(13,27,62,0.97) 0%, rgba(13,27,62,0.90) 40%, rgba(13,27,62,0.80) 70%, rgba(13,27,62,0.70) 100%)",
-        }}
-      />
+      {/* Video background — clipped independently so dropdowns can escape */}
+      <div className="absolute inset-0 overflow-hidden">
+        <video
+          src={video}
+          autoPlay loop muted playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(13,27,62,0.97) 0%, rgba(13,27,62,0.90) 40%, rgba(13,27,62,0.80) 70%, rgba(13,27,62,0.70) 100%)",
+          }}
+        />
+      </div>
 
       {/* Content — pb-16 leaves room for the white card overlap below */}
       <div className="relative w-full site-container px-6 pt-[76px] pb-16">

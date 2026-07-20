@@ -50,14 +50,16 @@ function FieldError({ msg }: { msg: string }) {
   return msg ? <p className="text-red-500 text-xs mt-1">{msg}</p> : null;
 }
 
-type Fields = { firstName: string; lastName: string; mobile: string; company: string; message: string };
+type Fields = { firstName: string; lastName: string; email: string; mobile: string; company: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
 
 /* ── Main ── */
 export default function ContactPage() {
-  const [fields, setFields] = useState<Fields>({ firstName: "", lastName: "", mobile: "", company: "", message: "" });
+  const [fields, setFields] = useState<Fields>({ firstName: "", lastName: "", email: "", mobile: "", company: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   function set(field: keyof Fields, value: string) {
     setFields((f) => ({ ...f, [field]: value }));
@@ -68,6 +70,8 @@ export default function ContactPage() {
     const e: Errors = {};
     if (!fields.firstName.trim()) e.firstName = "First name is required.";
     if (!fields.lastName.trim())  e.lastName  = "Last name is required.";
+    if (!fields.email.trim())     e.email     = "Email address is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Enter a valid email address.";
     if (!fields.mobile.trim())    e.mobile    = "Mobile number is required.";
     else if (!/^\+?[\d\s\-]{7,15}$/.test(fields.mobile)) e.mobile = "Enter a valid mobile number.";
     if (!fields.company.trim())   e.company   = "Company name is required.";
@@ -76,9 +80,31 @@ export default function ContactPage() {
     return Object.keys(e).length === 0;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (validate()) setSubmitted(true);
+    if (!validate()) return;
+    setLoading(true);
+    setApiError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: fields.firstName,
+          lastName:  fields.lastName,
+          email:     fields.email,
+          mobile:    fields.mobile,
+          company:   fields.company,
+          message:   fields.message,
+        }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setApiError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputClass = (field: keyof Errors) =>
@@ -190,7 +216,7 @@ export default function ContactPage() {
                       Thank you for reaching out. Our team will get back to you shortly.
                     </p>
                     <button
-                      onClick={() => { setSubmitted(false); setFields({ firstName: "", lastName: "", mobile: "", company: "", message: "" }); }}
+                      onClick={() => { setSubmitted(false); setFields({ firstName: "", lastName: "", email: "", mobile: "", company: "", message: "" }); }}
                       className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary transition-colors"
                     >
                       Send Another
@@ -213,18 +239,25 @@ export default function ContactPage() {
                       </div>
                     </div>
 
-                    {/* Row 2 */}
+                    {/* Row 2 — Email + Mobile */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-900 mb-1.5">Mobile Number <span className="text-red-500">*</span></label>
-                        <input type="tel" placeholder="67899754567" value={fields.mobile} onChange={(e) => set("mobile", e.target.value)} className={inputClass("mobile")} />
-                        <FieldError msg={errors.mobile ?? ""} />
+                        <label className="block text-sm font-semibold text-gray-900 mb-1.5">Email Address <span className="text-red-500">*</span></label>
+                        <input type="email" placeholder="john@company.com" value={fields.email} onChange={(e) => set("email", e.target.value)} className={inputClass("email")} />
+                        <FieldError msg={errors.email ?? ""} />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-900 mb-1.5">Company Name <span className="text-red-500">*</span></label>
-                        <input type="text" placeholder="JohndoeLTD" value={fields.company} onChange={(e) => set("company", e.target.value)} className={inputClass("company")} />
-                        <FieldError msg={errors.company ?? ""} />
+                        <label className="block text-sm font-semibold text-gray-900 mb-1.5">Mobile Number <span className="text-red-500">*</span></label>
+                        <input type="tel" placeholder="+91 98765 43210" value={fields.mobile} onChange={(e) => set("mobile", e.target.value)} className={inputClass("mobile")} />
+                        <FieldError msg={errors.mobile ?? ""} />
                       </div>
+                    </div>
+
+                    {/* Row 3 — Company */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-900 mb-1.5">Company Name <span className="text-red-500">*</span></label>
+                      <input type="text" placeholder="Your Company Ltd." value={fields.company} onChange={(e) => set("company", e.target.value)} className={inputClass("company")} />
+                      <FieldError msg={errors.company ?? ""} />
                     </div>
 
                     {/* Message */}
@@ -240,12 +273,18 @@ export default function ContactPage() {
                       <FieldError msg={errors.message ?? ""} />
                     </div>
 
+                    {/* API error */}
+                    {apiError && (
+                      <p className="text-red-500 text-sm">{apiError}</p>
+                    )}
+
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="cursor-pointer bg-primary hover:bg-primary text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-300 text-sm flex items-center gap-2"
+                      disabled={loading}
+                      className="cursor-pointer bg-primary hover:bg-primary text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-300 text-sm flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Submit &raquo;
+                      {loading ? "Sending…" : <>Submit &raquo;</>}
                     </button>
 
                     {/* Disclaimer */}
