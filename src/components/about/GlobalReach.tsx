@@ -2,8 +2,9 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import SectionHeader from "../ui/SectionHeader";
+import Button from "@/components/ui/Button";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -86,19 +87,12 @@ export default function GlobalReach({
 
       {/* Heading inside container */}
       <div className={cardMode ? "" : "site-container px-6"}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className={`text-center mb-6 ${hideHeading ? "hidden" : ""}`}
-        >
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
-            {heading ?? "Global Reach"}
-          </h2>
-          <p className="text-gray-600 text-base leading-8 font-medium mb-10 max-w-2xl mx-auto">
-            {description ?? "Take your research experience to a higher level with 4.5 million active panel members worldwide and our team's caliber and expertise."}
-          </p>
-        </motion.div>
+        <SectionHeader
+          label=""
+          heading={<>{heading ?? "Global Reach"}</>}
+          description={description ?? "Take your research experience to a higher level with 4.5 million active panel members worldwide and our team's caliber and expertise."}
+          theme="light"
+        />
       </div>
 
       {/* Map inside container */}
@@ -210,12 +204,7 @@ export default function GlobalReach({
       {/* Know more button inside container */}
       {!cardMode && (
         <div className="flex justify-center mt-6">
-          <Link
-            href="/contact"
-            className="bg-primary text-white text-sm font-bold px-10 py-4 rounded-lg hover:bg-primary transition-all duration-300 shadow hover:-translate-y-0.5"
-          >
-            KNOW MORE
-          </Link>
+          <Button href="/about">KNOW MORE</Button>
         </div>
       )}
     </>

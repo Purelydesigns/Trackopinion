@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionHeader from "./ui/SectionHeader";
 
 const stats = [
   { value: 3,   suffix: "k+", label: "Complete Project"    },
@@ -40,18 +41,13 @@ export default function WhyUs() {
   return (
     <section className="bg-section py-10" ref={ref}>
 
-      {/* ── Heading ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-10 px-6"
-      >
-        <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-2">
-          Why Us?
-        </h2>
-        <p className="text-base text-gray-900 font-medium">Our Online Panel Stats</p>
-      </motion.div>
+      <SectionHeader
+        label=""
+        heading={<>Why Us?</>}
+        description="Our Online Panel Stats"
+        theme="light"
+        className="!mb-0"
+      />
 
       {/* ── Stats bar ── */}
       <div className="bg-primary py-12">

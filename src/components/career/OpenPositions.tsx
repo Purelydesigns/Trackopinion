@@ -178,8 +178,8 @@ export default function OpenPositions() {
               </div>
             </div>
 
-            <p className="text-sm text-gray-500 mb-5">
-              <span className="font-bold text-primary">{filtered.length}</span> position{filtered.length !== 1 ? "s" : ""} available
+            <p className="text-sm font-bold text-primary mb-5">
+              <span className="">{filtered.length}</span> position{filtered.length !== 1 ? "s" : ""} available
             </p>
 
             <div className="space-y-3">
@@ -227,7 +227,7 @@ export default function OpenPositions() {
                       </div>
 
                       <div className="shrink-0 flex items-center gap-3 ml-14">
-                        <Link
+                        {/* <Link
                           href={`/career/${job.slug}`}
                           className="px-5 py-2.5 rounded-lg text-sm font-semibold border border-gray-200 text-gray-600 hover:border-primary/40 hover:text-primary transition-all duration-200 whitespace-nowrap"
                         >
@@ -235,6 +235,12 @@ export default function OpenPositions() {
                         </Link>
                         <Link
                           href={`/career/${job.slug}#apply`}
+                          className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-sm whitespace-nowrap"
+                        >
+                          Apply <ArrowRight className="w-3.5 h-3.5" />
+                        </Link> */}
+                        <Link
+                          href={`/career/${job.slug}`}
                           className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-sm whitespace-nowrap"
                         >
                           Apply <ArrowRight className="w-3.5 h-3.5" />

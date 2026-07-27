@@ -250,12 +250,18 @@ export default function HealthcarePage() {
       {/* ════════ DIG DEEPER HEADING ════════ */}
       <section className="bg-section pt-12">
         <div className="site-container px-6 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
-              Dig Deeper into Patient&apos;s and Practitioners Experience
-            </h2>
-          </div>
-          <div className="mt-6 border-b-2 border-gray-200" />
+
+          <SectionHeader
+            label=""
+            heading={
+              <>
+                Dig Deeper into Patient&apos;s and Practitioners Experience
+              </>
+            }
+            description=""
+            className="!mb-6"
+          />
+          <div className="border-b-2 border-gray-200" />
         </div>
       </section>
 
@@ -316,13 +322,18 @@ export default function HealthcarePage() {
           <div className="h-1" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa, #1a6fe8)" }} />
 
           <div className="px-10 py-12">
-            {/* Headline */}
-            <div className="text-center mb-10">
-              <span className="inline-block text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">Healthcare Panel Network</span>
-              <h2 className="text-white font-extrabold text-2xl sm:text-3xl leading-snug max-w-2xl mx-auto">
-                Elevate your research with our comprehensive healthcare solutions and cutting-edge methodologies
-              </h2>
-            </div>
+
+            <SectionHeader
+              label="Healthcare Panel Network"
+              heading={
+                <>
+                  Elevate your research with our comprehensive healthcare solutions and cutting-edge methodologies
+                </>
+              }
+              description=""
+              className=""
+              theme="dark"
+            />
 
             {/* Stats grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -353,9 +364,17 @@ export default function HealthcarePage() {
       {/* ════════ WHO'S IN OUR PANEL ════════ */}
       <section className="bg-gray-50 py-16">
         <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Who&apos;s in Our Panel?</h2>
-          </motion.div>
+
+          <SectionHeader
+            label=""
+            heading={
+              <>
+                Who&apos;s in Our Panel?
+              </>
+            }
+            description=""
+            className=""
+          />
 
           <div className="relative">
             {/* Dashed line through circle centers */}
@@ -378,7 +397,7 @@ export default function HealthcarePage() {
                 <SwiperSlide key={i}>
                   <div className="flex flex-col items-center gap-3">
                     <motion.div
-                      whileHover={{ scale: 1.12}}
+                      whileHover={{ scale: 1.10}}
                       className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-300 border-4 border-gray-50"
                     >
                       {role.icon}
@@ -404,17 +423,20 @@ export default function HealthcarePage() {
               className="md:w-[340px] shrink-0 flex flex-col justify-between p-10"
               style={{ background: "linear-gradient(160deg, #0a1628 0%, #0d1b3e 60%, #112254 100%)" }}
             >
-              <div>
-                <span className="inline-block text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-4">Free Download</span>
-                <h2 className="text-white font-extrabold text-2xl leading-snug mb-4">
-                  Our HCP&apos;s Panel Book
-                </h2>
-                <p className="text-white/60 text-sm leading-7">
-                  For a comprehensive breakdown, complete the form to receive your free Healthcare Professionals Panel Book.
-                </p>
-              </div>
 
-              <div className="mt-10 flex flex-col gap-4">
+              <SectionHeader
+                label="Free Download"
+                heading={
+                  <>
+                    Our HCP&apos;s Panel Book
+                  </>
+                }
+                description="For a comprehensive breakdown, complete the form to receive your free Healthcare Professionals Panel Book."
+                theme="dark"
+                align="left"
+              />
+
+              <div className="flex flex-col gap-4">
                 {["711K+ Verified HCPs", "30+ Countries", "HIPAA & GDPR Compliant", "NPI & AMA Validated"].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">

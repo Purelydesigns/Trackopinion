@@ -3,6 +3,7 @@
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SiteCard from "@/components/ui/SiteCard";
+import Button from "@/components/ui/Button";
 import LatestReadsSection from "@/components/shared/LatestReadsSection";
 import { Users, MessageSquare, BookOpen, Globe, CheckCircle2, PenLine, Globe2, BarChart2, CheckCircle, UsersRound } from "lucide-react";
 import { motion } from "framer-motion";
@@ -111,7 +112,7 @@ function MethodsSection() {
                     className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-200"
                   >
                     <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-                      <Icon size={18} className="text-blue-500" />
+                      <Icon size={18} className="text-primary" />
                     </div>
                     <div>
                       <p className="text-md font-semibold leading-tight transition-colors duration-200">{m.label}</p>
@@ -128,16 +129,14 @@ function MethodsSection() {
 
             {/* badge */}
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500">Qualitative Insights Map</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Qualitative Insights Map</span>
             </div>
 
             <svg viewBox="0 0 380 380" className="w-full max-w-sm">
               <defs>
                 <radialGradient id="rfill" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#1a6fe8" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#1a6fe8" stopOpacity="0.08" />
+                  <stop offset="0%" stopColor="bg-primary" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="bg-primary" stopOpacity="0.08" />
                 </radialGradient>
               </defs>
 
@@ -179,7 +178,7 @@ function MethodsSection() {
               <motion.polygon
                 points={polyFull}
                 fill="url(#rfill)"
-                stroke="#1a6fe8"
+                stroke="#0d1b3e"
                 strokeWidth="2"
                 strokeLinejoin="round"
                 initial={{ points: polyZero, opacity: 0 }}
@@ -191,7 +190,7 @@ function MethodsSection() {
               {/* data-point dots */}
               {dataPts.map((p, i) => (
                 <motion.circle key={i} cx={p.x} cy={p.y} r="5"
-                  fill="#1a6fe8"
+                  fill="#0d1b3e"
                   stroke="white" strokeWidth="2"
                   style={{ filter: "drop-shadow(0 0 4px rgba(26,111,232,0.5))" }}
                   initial={{ scale: 0 }}
@@ -224,7 +223,7 @@ function MethodsSection() {
                     </text>
                     <text x={p.x} y={p.y + 9}
                       textAnchor={anchor}
-                      fontSize="9" fill="#1a6fe8" fontWeight="600"
+                      fontSize="9" fill="#0d1b3e" fontWeight="600"
                       style={{ fontFamily: "system-ui, sans-serif" }}>
                       {Math.round(d.value * 100)}%
                     </text>
@@ -233,7 +232,7 @@ function MethodsSection() {
               })}
 
               {/* center dot */}
-              <circle cx={CX} cy={CY} r="5" fill="#1a6fe8"
+              <circle cx={CX} cy={CY} r="5" fill="#0d1b3e"
                 style={{ filter: "drop-shadow(0 0 6px rgba(26,111,232,0.6))" }} />
             </svg>
 
@@ -241,7 +240,7 @@ function MethodsSection() {
             <div className="flex flex-wrap justify-center gap-2 max-w-xs">
               {["Focus Groups", "In-Depth IDI", "Diary Studies", "Online Comm."].map((m) => (
                 <span key={m}
-                  className="text-[10px] font-semibold text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-3 py-1">
+                  className="text-[10px] font-semibold text-primary-600 bg-primary-50 border border-primary-100 rounded-full px-3 py-1">
                   {m}
                 </span>
               ))}
@@ -272,7 +271,7 @@ function MiniBarChart() {
           className="rounded flex-1"
           style={{
             height: `${h * 100}%`,
-            background: i === bars.length - 1 ? "#1a6fe8" : i === bars.length - 2 ? "#60a5fa" : "#bfdbfe",
+            background: i === bars.length - 1 ? "#0d1b3e" : i === bars.length - 2 ? "#60a5fa" : "#bfdbfe",
           }}
         />
       ))}
@@ -311,7 +310,7 @@ function FloatingCards() {
           className="bg-white rounded-2xl shadow-xl px-6 py-5 w-74"
           style={{ rotate: -4 }}
         >
-          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1.5">Research</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-600 mb-1.5">Research</p>
           <p className="text-base font-bold text-gray-800 leading-snug">Analysis &amp; Research...</p>
           <span className="inline-block mt-2.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full px-3 py-1">Results</span>
           <MiniBarChart />
@@ -332,7 +331,7 @@ function FloatingCards() {
           className="bg-white rounded-2xl shadow-xl px-6 py-5 w-66"
           style={{ rotate: 3 }}
         >
-          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1.5">Analysis</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-600 mb-1.5">Analysis</p>
           <p className="text-base font-bold text-gray-800 leading-snug">Research</p>
           <p className="text-xs text-gray-400 mt-1">Analysis &amp; Research...</p>
           <span className="inline-block mt-2.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full px-3 py-1">Results</span>
@@ -353,7 +352,7 @@ function FloatingCards() {
           className="bg-white rounded-2xl shadow-xl px-6 py-5 w-70"
           style={{ rotate: -2 }}
         >
-          <p className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1.5">Insight</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary-600 mb-1.5">Insight</p>
           <p className="text-base font-bold text-gray-800 leading-snug">Deep Consumer<br />Insights</p>
           <div className="flex gap-2 mt-4">
             <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block" />
@@ -392,9 +391,16 @@ function MoreThanNumbersSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col gap-5"
           >
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase leading-tight mb-2 text-primary">
-              More Than Numbers
-            </h2>
+
+            <SectionHeader
+              label=""
+              heading={<>More Than Numbers</>}
+              description=""
+              theme="light"
+              align="left"
+              className="!mb-0"
+            />
+
             <p className="text-base leading-8 font-medium flex-1 mb-1 text-gray-600">
               At Track Opinion, we believe market research is bigger than numbers. That&apos;s
               why we analyze the &lsquo;whys&rsquo; and &lsquo;hows&rsquo; rather than just &lsquo;what and how many&rsquo;
@@ -416,7 +422,7 @@ function MoreThanNumbersSection() {
                   transition={{ delay: 0.15 + i * 0.08, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
-                  <CheckCircle2 size={17} className="text-blue-500 shrink-0" />
+                  <CheckCircle2 size={17} className="text-primary-500 shrink-0" />
                   <span className="text-base leading-8 font-medium flex-1 mb-1 text-gray-600">{b}</span>
                 </motion.li>
               ))}
@@ -502,7 +508,7 @@ function OrbitalDiagram() {
             <svg
               x={n.x - 11} y={n.y - nodeR + 14}
               width="22" height="22" viewBox="0 0 24 24"
-              fill="none" stroke="#1a6fe8" strokeWidth="1.8"
+              fill="none" stroke="#0d1b3e" strokeWidth="1.8"
               strokeLinecap="round" strokeLinejoin="round"
             >
               {n.icons.map((p, j) => <path key={j} d={p} />)}
@@ -579,13 +585,7 @@ function BenefitsSection() {
               unexplored that quantitative data can&apos;t.
             </p>
             <div>
-              <a
-                href="/contact-us"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-                style={{ background: "linear-gradient(135deg, #1a6fe8 0%, #1458c8 100%)" }}
-              >
-                Discuss Your Research →
-              </a>
+              <Button href="/contact-us">Discuss Your Research →</Button>
             </div>
           </motion.div>
 
@@ -750,19 +750,18 @@ function ProjectManagementSection() {
                 }}
               >
                 {/* Blue top accent bar — mirrors SiteCard */}
-                <div className="h-1.5" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa)" }} />
+                <div className="h-1.5" style={{ background: "linear-gradient(90deg, #fff, #fff)" }} />
 
                 <div className="p-8 flex flex-col flex-1 items-center">
                   {/* Step number bubble */}
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-lg"
-                    style={{ background: "#1a6fe8" }}
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary font-bold text-lg bg-white"
                   >
                     {step.num}
                   </div>
 
                   {/* Label */}
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-3">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-white mb-3">
                     {step.label}
                   </p>
 
@@ -772,7 +771,7 @@ function ProjectManagementSection() {
                   </h3>
 
                   {/* Quote */}
-                  <p className="text-blue-300 text-sm italic mb-4 font-medium">
+                  <p className="text-white text-sm italic mb-4 font-medium">
                     {step.quote}
                   </p>
 

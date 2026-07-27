@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SiteCard from "@/components/ui/SiteCard";
+import SectionHeader from "./ui/SectionHeader";
 
 const values = [
   {
@@ -91,21 +92,15 @@ export default function OurValues() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-10">
+    <section ref={ref} className="bg-section py-10 pt-0">
       <div className="site-container px-6">
 
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <p className="text-primary text-sm font-bold uppercase tracking-widest mb-2">Our Values</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
-            What we stand for
-          </h2>
-        </motion.div>
+        <SectionHeader
+          label="Our Values"
+          heading={<>What we stand for</>}
+          description=""
+          theme="light"
+        />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
           {values.map(({ label, icon }, i) => (

@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import SiteCard from "@/components/ui/SiteCard";
+import SectionHeader from "./ui/SectionHeader";
 
 const testimonials = [
   {
@@ -55,9 +56,12 @@ export default function Testimonials() {
     <section className="bg-section py-16">
       <div className="site-container px-6">
 
-        <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-8">
-          What Our Client Say
-        </h2>
+        <SectionHeader
+          label=""
+          heading={<>What Our Client Say</>}
+          description=""
+          theme="light"
+        />
 
         <div className="relative px-8 sm:px-12">
 

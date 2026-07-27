@@ -6,6 +6,7 @@ import { MapPin, Briefcase, Calendar, Check, Upload, CheckCircle, ArrowRight, Ch
 import Link from "next/link";
 import type { Job } from "@/lib/jobs";
 import PageHero from "@/components/ui/PageHero";
+import SectionHeader from "../ui/SectionHeader";
 
 /* ── Helpers ── */
 function CheckItem({ children }: { children: React.ReactNode }) {
@@ -190,15 +191,12 @@ export default function CareerDetail({ job }: { job: Job }) {
       {/* ── Application Form ── */}
       <section id="apply" className="bg-white py-20">
         <div className="site-container px-6 max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-5">
-              <span className="text-accent text-xs font-bold uppercase tracking-widest">Apply Now</span>
-            </div>
-            <h2 className="text-3xl font-black uppercase text-primary mb-3">Join Our Team</h2>
-            <p className="text-gray-500 text-sm leading-7 max-w-md mx-auto">
-              Take the next step in your career with Track Opinion — make a difference in a fast-paced global research environment.
-            </p>
-          </div>
+
+          <SectionHeader
+            label="Apply Now"
+            heading={<>Join Our Team</>}
+            description="Take the next step in your career with Track Opinion — make a difference in a fast-paced global research environment."
+          />
 
           <AnimatePresence mode="wait">
             {submitted ? (

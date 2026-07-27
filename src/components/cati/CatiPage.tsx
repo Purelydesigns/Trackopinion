@@ -138,15 +138,18 @@ export default function CatiPage() {
       {/* ════════ ERASE COMPLEXITIES HEADING ════════ */}
       <section className="bg-section pt-12">
         <div className="site-container px-6 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-4">
-              Erase Complexities from Data Collection with CATI
-            </h2>
-          </div>
-          <p className="text-gray-600 text-base leading-8 font-medium mb-10 max-w-2xl mx-auto">
-            Software driven calls for user feedback. Quality data with swift turnaround, anytime, from anywhere. That&apos;s what computer aided telephone interviews brings.
-          </p>
-          <div className="mt-6 border-b-2 border-gray-200" />
+
+          <SectionHeader
+            label=""
+            heading={
+              <>
+                Erase Complexities from Data Collection with CATI
+              </>
+            }
+            description="Software driven calls for user feedback. Quality data with swift turnaround, anytime, from anywhere. That&apos;s what computer aided telephone interviews brings."
+            className="!mb-0"
+          />
+          <div className="border-b-2 border-gray-200" />
         </div>
       </section>
 
@@ -267,21 +270,23 @@ export default function CatiPage() {
       </section>
 
       {/* ════════ CONTACT FORM ════════ */}
-      <section className="bg-section py-20">
+      <section className="bg-section">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div {...fadeUp()} className="rounded-3xl p-10 sm:p-12" style={{ background: "linear-gradient(145deg, #0d2147 0%, #0d1b3e 60%, #091530 100%)" }}>
 
-            {/* Badge + heading */}
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-5">
-                <span className="w-2 h-2 rounded-full bg-green-400" />
-                <span className="text-white/80 text-xs font-semibold">Responding within 24h</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-black text-white mb-3">
-                Get In Touch to Execute a CATI Project{" "}
-              </h2>
-              <p className="text-white/60 text-base leading-7">Generate valuable insights about your users, market, and brand. Seek online feedback affiliated with CATI for speedy quantitative market research solutions.</p>
-            </div>
+
+            <SectionHeader
+              label="Responding within 24h"
+              heading={
+                <>
+                  Get In Touch to Execute a CATI Project
+                </>
+              }
+              description="Generate valuable insights about your users, market, and brand. Seek online feedback affiliated with CATI for speedy quantitative market research solutions."
+              theme="dark"
+              align="left"
+              className="!mb-0"
+            />
 
           {submitted ? (
             <div className="flex flex-col items-center gap-4 py-16 text-center">

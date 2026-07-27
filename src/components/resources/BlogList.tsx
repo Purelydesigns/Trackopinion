@@ -301,8 +301,8 @@ export default function BlogList() {
                       {/* Left — content */}
                       <div className="flex flex-col justify-center">
                         <div className="flex items-center gap-2 mb-4 flex-wrap">
-                          <Calendar className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-400">{post.date}</span>
+                          <Calendar className="w-4 h-4 text-base" />
+                          <span className="text-sm text-base">{post.date}</span>
                           {post.category && (
                             <>
                               <span className="w-2 h-2 rounded-full bg-primary shrink-0" />

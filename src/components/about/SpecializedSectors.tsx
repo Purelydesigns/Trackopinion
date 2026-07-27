@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import SectionHeader from "../ui/SectionHeader";
 
 const w = "2";
 const s = { stroke: "white", strokeWidth: w, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
@@ -135,16 +136,12 @@ export default function SpecializedSectors() {
     <section className="bg-section py-10" ref={ref}>
       <div className="site-container px-6">
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
-            Our Specialized Sectors
-          </h2>
-        </motion.div>
+        <SectionHeader
+          label=""
+          heading={<>Our Specialized Sectors</>}
+          description=""
+          theme="light"
+        />
 
         {/* Slider */}
         <div className="relative">

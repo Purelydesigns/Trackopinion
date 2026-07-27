@@ -39,7 +39,7 @@ function Step1({ data, onChange }: { data: Record<string, string>; onChange: (k:
             value={data.name ?? ""}
             onChange={(e) => onChange("name", e.target.value)}
             placeholder="Your full name"
-            className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors"
+            className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors"
           />
         </div>
         <div>
@@ -49,7 +49,7 @@ function Step1({ data, onChange }: { data: Record<string, string>; onChange: (k:
             onChange={(e) => onChange("email", e.target.value)}
             placeholder="you@email.com"
             type="email"
-            className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors"
+            className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors"
           />
         </div>
       </div>
@@ -59,7 +59,7 @@ function Step1({ data, onChange }: { data: Record<string, string>; onChange: (k:
           value={data.phone ?? ""}
           onChange={(e) => onChange("phone", e.target.value)}
           placeholder="+91 98765 43210"
-          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors"
+          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors"
         />
       </div>
     </div>
@@ -76,7 +76,7 @@ function Step2({ data, onChange }: { data: Record<string, string>; onChange: (k:
         <select
           value={data.role ?? ""}
           onChange={(e) => onChange("role", e.target.value)}
-          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-accent transition-colors appearance-none"
+          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors appearance-none"
           style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
         >
           <option value="" disabled className="text-gray-800">Select a role…</option>
@@ -89,7 +89,7 @@ function Step2({ data, onChange }: { data: Record<string, string>; onChange: (k:
           value={data.location ?? ""}
           onChange={(e) => onChange("location", e.target.value)}
           placeholder="e.g. Remote, Noida, Gurugram…"
-          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors"
+          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors"
         />
       </div>
       <div>
@@ -99,7 +99,7 @@ function Step2({ data, onChange }: { data: Record<string, string>; onChange: (k:
           onChange={(e) => onChange("note", e.target.value)}
           placeholder="Tell us a little about yourself and why you're applying…"
           rows={3}
-          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors resize-none"
+          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors resize-none"
         />
       </div>
     </div>
@@ -132,7 +132,7 @@ function Step3({ data, onChange }: { data: Record<string, string>; onChange: (k:
           onChange={(e) => onChange("cover", e.target.value)}
           placeholder="Any additional context you'd like to share…"
           rows={3}
-          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-accent transition-colors resize-none"
+          className="w-full bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-white transition-colors resize-none"
         />
       </div>
     </div>
@@ -181,7 +181,7 @@ export default function ApplySection() {
             <div className="space-y-6">
               {features.map((f, i) => (
                 <div key={i} className="flex gap-4">
-                  <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center mt-0.5 ${f.active ? "bg-accent text-white" : "bg-white/8 text-white/40"}`}>
+                  <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center mt-0.5 ${f.active ? "bg-white text-primary" : "bg-white/8 text-white/40"}`}>
                     {f.icon}
                   </div>
                   <div>
@@ -206,8 +206,8 @@ export default function ApplySection() {
                   <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-5">
                     <Check className="w-8 h-8 text-green-400" />
                   </div>
-                  <h3 className="text-white font-black text-xl mb-2">Application Submitted!</h3>
-                  <p className="text-white/50 text-sm leading-7">Thank you for applying. Our HR team will review your application and get back to you within 5 business days.</p>
+                  <h3 className="text-2xl sm:text-2xl font-extrabold uppercase text-white">Application Submitted!</h3>
+                  <p className="text-base leading-8 font-medium flex-1 mb-6 mt-3 text-white/60">Thank you for applying. Our HR team will review your application and get back to you within 5 business days.</p>
                 </motion.div>
               ) : (
                 <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
@@ -223,7 +223,7 @@ export default function ApplySection() {
                           ${i < step ? "text-green-400" : i === step ? "text-white" : "text-white/30"}`}
                         >
                           <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black shrink-0
-                            ${i < step ? "bg-green-500 text-white" : i === step ? "bg-accent text-white" : "bg-white/10 text-white/30"}`}>
+                            ${i < step ? "bg-green-500 text-white" : i === step ? "bg-white text-primary" : "bg-white/10 text-white/30"}`}>
                             {i < step ? <Check className="w-3 h-3" /> : i + 1}
                           </span>
                           {label}

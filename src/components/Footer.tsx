@@ -31,8 +31,8 @@ const certs = [
   { label: "ISO 27001 Intercert",  src: "/certification/iso 27001.png"                   },
   { label: "MRSI",                 src: "/certification/MRSI.png"                        },
   { label: "QUIRK'S Media",        src: "/certification/Quirks.png"                      },
-  { label: "ISO 42001",            src: "/certification/iso-42001.png"                  },
-  { label: "ISO 27001",            src: "/certification/iso-27001.png"                  },
+  // { label: "ISO 42001",            src: "/certification/iso-42001.png"                  },
+  // { label: "ISO 27001",            src: "/certification/iso-27001.png"                  },
   { label: "HIPAA Compliance",     src: "/certification/HIPAA.png"                      },
 ];
 
@@ -50,7 +50,7 @@ export default function Footer() {
         <div className="site-container px-6 py-10">
 
           {/* Logo slider — white */}
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest text-center mb-6">Certifications &amp; Affiliations</p>
+          {/* <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest text-center mb-6">Certifications &amp; Affiliations</p> */}
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 2000, disableOnInteraction: false }}

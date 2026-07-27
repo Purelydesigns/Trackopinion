@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BadgeCheck, DollarSign, ShieldCheck, Star, Moon } from "lucide-react";
+import SectionHeader from "../ui/SectionHeader";
 
 const features = [
   {
@@ -38,9 +39,14 @@ export default function WhyBusinesses() {
             transition={{ duration: 0.6 }}
             className="bg-white rounded-2xl p-8"
           >
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900 mb-8 leading-snug">
-              Why businesses turn to Track Opinion
-            </h2>
+
+            <SectionHeader
+              label=""
+              heading={<>Why businesses turn to Track Opinion</>}
+              description=""
+              theme="light"
+              align="left"
+            />
             <div className="space-y-7">
               {features.map(({ Icon, title, desc }, i) => (
                 <motion.div

@@ -26,16 +26,16 @@ export default function SectionHeader({
 
   return (
     <div className={`flex flex-col mb-10 ${alignClass} ${className}`}>
-      <div className={`flex gap-4 mb-4 ${align === "right" ? "justify-end" : align === "left" ? "justify-start" : "justify-center"}`}>
-        <span className={`text-sm font-bold uppercase tracking-widest mb-2 ${isDark ? "text-white/60" : "text-gray-500"}`}>
+      <div className={`flex ${align === "right" ? "justify-end" : align === "left" ? "justify-start" : "justify-center"}`}>
+        <span className={`text-sm font-bold uppercase tracking-widest mb-2 ${isDark ? "text-white/60" : "text-primary"}`}>
           {label}
         </span>
       </div>
-      <h2 className={`text-3xl sm:text-4xl font-extrabold uppercase leading-tight mb-4 ${isDark ? "text-white" : "text-primary"}`}>
+      <h2 className={`text-2xl sm:text-3xl font-extrabold uppercase ${isDark ? "text-white" : "text-primary"}`}>
         {heading}
       </h2>
       {description && (
-        <p className={`text-base leading-8 font-medium flex-1 mb-6 ${isDark ? "text-white/60" : "text-gray-600"}`}>
+        <p className={`text-base leading-8 font-medium flex-1 mb-6 mt-3 ${isDark ? "text-white/60" : "text-gray-600"}`}>
           {description}
         </p>
       )}

@@ -5,6 +5,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
+import SectionHeader from "./ui/SectionHeader";
 
 const logos = [
   { name: "Google",   text: "text-[#4285F4] font-bold",              label: "Google"  },
@@ -38,10 +39,12 @@ export default function TrustedBy({
   return (
     <section className="bg-section py-10">
 
-      {/* ── Heading ── */}
-      <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-center text-gray-900 mb-10">
-        {heading}
-      </h2>
+      <SectionHeader
+        label=""
+        heading={<>{heading}</>}
+        description=""
+        theme="light"
+      />
 
       {/* ── Slider ── */}
       <div className="site-container px-6 relative">

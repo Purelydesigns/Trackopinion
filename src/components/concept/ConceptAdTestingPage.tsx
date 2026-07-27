@@ -324,13 +324,12 @@ export default function ConceptAdTestingPage() {
                   }}
                 >
                   {/* Blue top accent bar */}
-                  <div className="h-1.5" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa)" }} />
+                  <div className="h-1.5" style={{ background: "linear-gradient(90deg, #fff, #fff)" }} />
 
                   <div className="p-8 flex flex-col flex-1 items-center">
                     {/* Step number bubble */}
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-white font-bold text-lg"
-                      style={{ background: "#1a6fe8" }}
+                      className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary font-bold text-lg bg-white"
                     >
                       {m.num}
                     </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SiteCard from "@/components/ui/SiteCard";
+import SectionHeader from "./ui/SectionHeader";
 
 const stories = [
   {
@@ -31,21 +32,16 @@ export default function SuccessStories() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-10">
+    <section ref={ref} className="bg-section py-10">
       <div className="site-container px-6">
 
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <p className="text-primary text-sm font-bold uppercase tracking-widest mb-2">Compilation of Our Success Stories</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-primary">
-            Research that moved the needle
-          </h2>
-        </motion.div>
+
+        <SectionHeader
+          label="Compilation of Our Success Stories"
+          heading={<>Research that moved the needle</>}
+          description=""
+          theme="light"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stories.map((story, i) => (

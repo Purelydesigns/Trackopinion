@@ -298,7 +298,7 @@ export default function BlogDetail({ id }: { id: string }) {
             {/* Back link */}
             <Link
               href="/resources"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors duration-200 mb-6"
+              className="inline-flex items-center gap-2 text-sm text-base hover:text-primary transition-colors duration-200 mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
               All Blog Posts
@@ -322,7 +322,7 @@ export default function BlogDetail({ id }: { id: string }) {
 
             {/* Date + share */}
             <div className="flex items-center justify-between border-b border-gray-200 pb-6">
-              <div className="flex items-center gap-2 text-gray-500 text-sm font-medium">
+              <div className="flex items-center gap-2 text-base text-sm font-medium">
                 <Calendar className="w-4 h-4" />
                 <span>{blog.date}</span>
               </div>

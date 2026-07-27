@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import SectionHeader from "./ui/SectionHeader";
 
 const items = [
   {
@@ -123,19 +124,17 @@ export default function WhatWeDo() {
 
           {/* ── Left: heading + accordion ── */}
           <div>
-            <div className="flex items-center gap-3">
-              <p className="text-primary text-sm font-bold uppercase tracking-widest mb-2">What We Do</p>
-            </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase text-gray-900 leading-tight mb-4">
-              Empowering Decision<br />
+            <SectionHeader
+              label="What We Do"
+              heading={<>Empowering Decision<br />
               Making with{" "}
-              Track Opinion
-            </h2>
-
-            <p className="text-gray-600 text-base leading-8 font-medium mb-10">
-              End-to-end custom research services delivered by experts — so you can focus on the decision, not the data.
-            </p>
+              Track Opinion</>}
+              description="End-to-end custom research services delivered by experts — so you can focus on the decision, not the data."
+              theme="light"
+              align="left"
+              className="!mb-0"
+            />
 
             <div className="divide-y divide-gray-200">
               {items.map((item, i) => (

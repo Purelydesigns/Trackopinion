@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
+import SectionHeader from "../ui/SectionHeader";
 
 const leaders = [
   { name: "Jack Smith",  title: "Chairman",      img: "https://i.pravatar.cc/150?img=11" },
@@ -26,17 +27,12 @@ export default function Leadership() {
     <section className="bg-section py-10">
       <div className="site-container px-6">
 
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
-            Leadership
-          </h2>
-        </motion.div>
+        <SectionHeader
+          label=""
+          heading={<>Leadership</>}
+          description=""
+          theme="light"
+        />
 
         <div className="relative px-8 sm:px-12 [overflow-x:clip]">
 
