@@ -187,17 +187,16 @@ export default function Navbar() {
                   {solutions.map((item, idx) => {
                     const Icon = item.icon;
                     const isActive = hoveredIdx === idx;
-                    return (
-                      <button
-                        key={item.label}
-                        onMouseEnter={() => setHoveredIdx(idx)}
-                        onClick={() => setDropOpen(false)}
-                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-150 group ${
-                          isActive
-                            ? "bg-primary text-white shadow-sm"
-                            : "hover:bg-white hover:shadow-sm text-gray-700"
-                        }`}
-                      >
+                    const hasChildren = item.children.length > 0;
+
+                    const rowClass = `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-150 group ${
+                      isActive
+                        ? "bg-primary text-white shadow-sm"
+                        : "hover:bg-white hover:shadow-sm text-gray-700"
+                    }`;
+
+                    const rowInner = (
+                      <>
                         <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-150 ${
                           isActive ? "bg-white/20" : item.color
                         }`}>
@@ -208,10 +207,32 @@ export default function Navbar() {
                             {item.label}
                           </p>
                         </div>
-                        {item.children.length > 0 && (
+                        {hasChildren && (
                           <ChevronRight className={`w-4 h-4 shrink-0 ml-1 ${isActive ? "text-white" : "text-primary"}`} />
                         )}
+                      </>
+                    );
+
+                    /* No inner pages — the category itself is the destination,
+                       so link straight to it instead of requiring "Learn More". */
+                    return hasChildren ? (
+                      <button
+                        key={item.label}
+                        onMouseEnter={() => setHoveredIdx(idx)}
+                        className={rowClass}
+                      >
+                        {rowInner}
                       </button>
+                    ) : (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onMouseEnter={() => setHoveredIdx(idx)}
+                        onClick={() => setDropOpen(false)}
+                        className={rowClass}
+                      >
+                        {rowInner}
+                      </Link>
                     );
                   })}
                 </div>

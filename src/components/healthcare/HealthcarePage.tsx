@@ -295,10 +295,9 @@ export default function HealthcarePage() {
                   <SiteCard className="flex flex-col h-full">
                     <div className="p-7 flex flex-col flex-1">
                       <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
-                        style={{ background: "rgba(13,27,62,0.07)" }}
+                        className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4"
                       >
-                        <Icon size={26} strokeWidth={1.5} style={{ color: "#0d1b3e" }} />
+                        <Icon size={26} strokeWidth={1.5} style={{ color: "white" }} />
                       </div>
                       <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
                       <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>
@@ -318,8 +317,6 @@ export default function HealthcarePage() {
           className="rounded-3xl overflow-hidden"
           style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
         >
-          {/* Top accent line */}
-          <div className="h-1" style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa, #1a6fe8)" }} />
 
           <div className="px-10 py-12">
 

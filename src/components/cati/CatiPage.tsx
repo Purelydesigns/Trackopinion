@@ -14,32 +14,32 @@ const capabilities = [
   {
     title: "Gather, Not Manage",
     desc: "Call recordings and intuitive interfaces help agents facilitate respondents' answers and focus on their cadence without managing the incoming feedback and advanced training.",
-    icon: <Headphones className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <Headphones className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
   {
     title: "Time Zones",
     desc: "No worry about calling your respondents at an ungodly hour. Allow CATI to manage various timezones based on your users' demographics.",
-    icon: <Globe className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <Globe className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
   {
     title: "Data Security",
     desc: "With strong firewalls and secure file sharing, your call records and user data are in safe hands. No distortion, no leaks, no loss. Complete data integrity.",
-    icon: <ShieldCheck className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <ShieldCheck className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
   {
     title: "Turnaround Efficiency",
     desc: "Save over 30% of your time by commissioning a CATI project with us and still get qualitative market research data.",
-    icon: <Zap className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <Zap className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
   {
     title: "Predictive Dialing",
     desc: "CATI software helps establish an automatic call connection between the first available agent and your respondent.",
-    icon: <PhoneCall className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <PhoneCall className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
   {
     title: "Agent Assist",
     desc: "Chat with your interviewers, broadcast messages to an individual or all, and hand-hold them through the initial phase by setting program rules.",
-    icon: <MessageSquare className="w-9 h-9 text-current" strokeWidth={1.5} />,
+    icon: <MessageSquare className="w-9 h-9 text-white" strokeWidth={1.5} />,
   },
 ];
 
@@ -254,10 +254,9 @@ export default function CatiPage() {
                 <SiteCard className="flex flex-col h-full">
                   <div className="p-7 flex flex-col flex-1">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mb-5"
-                      style={{ background: "rgba(13,27,62,0.07)" }}
+                      className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4"
                     >
-                      <span style={{ color: "#0d1b3e" }}>{cap.icon}</span>
+                      {cap.icon}
                     </div>
                     <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
                     <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>

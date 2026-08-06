@@ -44,23 +44,24 @@ const charImages: Record<string, { female: string; male: string }> = {
 };
 
 /* ─────────────── Donut ─────────────── */
-const R = 52, CX = 66, CY = 66, CIRC = 2 * Math.PI * R;
+const SIZE = 176, STROKE = 15;
+const CX = SIZE / 2, CY = SIZE / 2, R = (SIZE - STROKE) / 2, CIRC = 2 * Math.PI * R;
 function DonutChart({ female, male, total }: { female: number; male: number; total: string }) {
   const fArc = (female / 100) * CIRC;
   return (
     <div className="relative flex items-center justify-center">
-      <svg width="132" height="132" viewBox="0 0 132 132">
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f0f4ff" strokeWidth="11" />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#1a6fe8" strokeWidth="11"
+      <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f0f4ff" strokeWidth={STROKE} />
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#1a6fe8" strokeWidth={STROKE}
           strokeDasharray={`${fArc} ${CIRC}`} strokeDashoffset={0}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#0d1b3e" strokeWidth="11"
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#0d1b3e" strokeWidth={STROKE}
           strokeDasharray={`${(male / 100) * CIRC} ${CIRC}`} strokeDashoffset={-fArc}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
       </svg>
       <div className="absolute flex flex-col items-center text-center">
-        <span className="text-xl font-bold text-gray-800 leading-none">{total}</span>
-        <span className="text-[8px] uppercase tracking-widest text-gray-400 mt-1 font-semibold">Panelists</span>
+        <span className="text-2xl font-bold text-gray-800 leading-none">{total}</span>
+        <span className="text-[9px] uppercase tracking-widest text-gray-400 mt-1.5 font-semibold">Panelists</span>
       </div>
     </div>
   );
@@ -150,7 +151,7 @@ export default function PanelDemographics({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-[1fr_1px_220px_1px_1fr]"
+            className="grid grid-cols-[1fr_1px_1fr_1px_1fr]"
             style={{ minHeight: 480 }}
           >
 
@@ -159,7 +160,7 @@ export default function PanelDemographics({
               {/* Top label row */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Female</p>
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Female</p>
                   <p className="text-base font-semibold text-gray-700">{nameF}</p>
                 </div>
                 {/* Large accent % */}
@@ -198,8 +199,8 @@ export default function PanelDemographics({
               {/* Panel share */}
               <div className="mt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#1a6fe8" }}>Panel Share</span>
-                  <span className="text-xs font-semibold text-gray-500">{d.female}%</span>
+                  <span className="text-[13px] font-semibold uppercase tracking-widest" style={{ color: "#1a6fe8" }}>Panel Share</span>
+                  <span className="text-[13px] font-semibold text-gray-500">{d.female}%</span>
                 </div>
                 <div className="h-[3px] rounded-full overflow-hidden bg-blue-100">
                   <motion.div
@@ -217,7 +218,7 @@ export default function PanelDemographics({
             <div className="bg-gray-200 self-stretch mx-0" />
 
             {/* ── Center stats ── */}
-            <div className="flex flex-col items-center justify-center px-8 gap-6">
+            <div className="flex flex-col items-center justify-center px-8 gap-6 [&>.stack]:w-full [&>.stack]:max-w-[280px]">
               {/* Market pill */}
               <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-sm border border-gray-100">
                 <MarketBadge m={market} />
@@ -228,14 +229,14 @@ export default function PanelDemographics({
               <DonutChart female={d.female} male={d.male} total={d.total} />
 
               {/* Stat rows */}
-              <div className="w-full flex flex-col gap-3">
+              <div className="stack flex flex-col gap-3">
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full" style={{ background: "#1a6fe8" }} />
-                      <span className="text-xs text-gray-500">Female</span>
+                      <span className="text-sm text-gray-500">Female</span>
                     </div>
-                    <span className="text-xs font-semibold text-gray-700">{d.female}%</span>
+                    <span className="text-sm font-semibold text-gray-700">{d.female}%</span>
                   </div>
                   <div className="h-1 rounded-full overflow-hidden bg-blue-100">
                     <motion.div className="h-full rounded-full" style={{ background: "#1a6fe8" }}
@@ -248,9 +249,9 @@ export default function PanelDemographics({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-gray-800" />
-                      <span className="text-xs text-gray-500">Male</span>
+                      <span className="text-sm text-gray-500">Male</span>
                     </div>
-                    <span className="text-xs font-semibold text-gray-700">{d.male}%</span>
+                    <span className="text-sm font-semibold text-gray-700">{d.male}%</span>
                   </div>
                   <div className="h-1 rounded-full overflow-hidden bg-gray-200">
                     <motion.div className="h-full rounded-full bg-gray-800"
@@ -261,11 +262,11 @@ export default function PanelDemographics({
               </div>
 
               {/* Divider */}
-              <div className="w-full border-t border-gray-200" />
+              <div className="stack border-t border-gray-200" />
 
               {/* Total */}
-              <div className="w-full flex items-center justify-between">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Total Panelists</span>
+              <div className="stack flex items-center justify-between">
+                <span className="text-[13px] font-semibold uppercase tracking-widest text-gray-400">Total Panelists</span>
                 <span className="text-lg font-bold text-gray-800">{d.total}</span>
               </div>
             </div>
@@ -278,7 +279,7 @@ export default function PanelDemographics({
               {/* Top label row */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Male</p>
+                  <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Male</p>
                   <p className="text-base font-semibold text-gray-700">{nameM}</p>
                 </div>
                 {/* Large accent % */}
@@ -314,8 +315,8 @@ export default function PanelDemographics({
               {/* Panel share */}
               <div className="mt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-500">Panel Share</span>
-                  <span className="text-xs font-semibold text-gray-500">{d.male}%</span>
+                  <span className="text-[13px] font-semibold uppercase tracking-widest text-gray-500">Panel Share</span>
+                  <span className="text-[13px] font-semibold text-gray-500">{d.male}%</span>
                 </div>
                 <div className="h-[3px] rounded-full overflow-hidden bg-gray-200">
                   <motion.div

@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Search, SlidersHorizontal, Calendar, CheckCircle2, ArrowRight } from "lucide-react";
+import { Search, SlidersHorizontal, Calendar, CheckCircle2, ArrowRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ListPageHero from "@/components/ui/ListPageHero";
+
+type Audience = "B2B" | "B2C";
 
 interface CaseStudy {
   id: number;
   date: string;
+  audience: Audience;
   tag: string;
   title: string;
   excerpt: string;
@@ -22,6 +25,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: 1,
     date: "24.03.2026",
+    audience: "B2B",
     tag: "Supply Chain",
     title: "Agentic AI Enabled Track and Trace Alert Monitoring for Faster Resolution",
     excerpt:
@@ -39,6 +43,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: 2,
     date: "24.03.2026",
+    audience: "B2B",
     tag: "Analytics",
     title: "Agentic AI Enabled Track and Trace Alert Monitoring for Faster Resolution",
     excerpt:
@@ -56,6 +61,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: 3,
     date: "24.03.2026",
+    audience: "B2C",
     tag: "Consumer Insights",
     title: "Agentic AI Enabled Track and Trace Alert Monitoring for Faster Resolution",
     excerpt:
@@ -73,6 +79,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: 4,
     date: "24.03.2026",
+    audience: "B2C",
     tag: "Healthcare",
     title: "Agentic AI Enabled Track and Trace Alert Monitoring for Faster Resolution",
     excerpt:
@@ -110,10 +117,25 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
         >
           {/* Left — text */}
           <div className="flex-1 min-w-0 flex flex-col justify-center">
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-3 mb-3 flex-wrap">
               <Calendar className="w-3.5 h-3.5 text-gray-500" />
               <span className="text-xs text-gray-500 font-medium">{study.date}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+
+              {/* Audience tag — B2B / B2C */}
+              <span
+                className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                  study.audience === "B2B"
+                    ? "bg-primary/10 text-primary border-primary/20"
+                    : "bg-amber-50 text-amber-700 border-amber-200"
+                }`}
+              >
+                {study.audience}
+              </span>
+
+              {/* Category tag */}
+              <span className="text-[11px] font-semibold text-gray-600 bg-gray-100 border border-gray-200 px-2.5 py-1 rounded-full">
+                {study.tag}
+              </span>
             </div>
             <h2 className="text-xl font-extrabold leading-tight mb-4 text-primary">{study.title}</h2>
             <p className="text-base leading-7 font-medium text-gray-500 line-clamp-3">{study.excerpt}</p>
@@ -197,13 +219,30 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
 
 export default function CaseStudiesList() {
   const [query, setQuery] = useState("");
+  const [audience, setAudience] = useState<Audience | "">("");
+  const [category, setCategory] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
 
-  const filtered = caseStudies.filter(
-    (s) =>
-      query.trim() === "" ||
-      s.title.toLowerCase().includes(query.toLowerCase()) ||
-      s.tag.toLowerCase().includes(query.toLowerCase())
-  );
+  const categories = Array.from(new Set(caseStudies.map((s) => s.tag)));
+  const hasActiveFilter = Boolean(query || audience || category);
+
+  const filtered = caseStudies.filter((s) => {
+    const q = query.trim().toLowerCase();
+    const matchQ =
+      !q ||
+      s.title.toLowerCase().includes(q) ||
+      s.tag.toLowerCase().includes(q) ||
+      s.audience.toLowerCase().includes(q);
+    const matchAud = !audience || s.audience === audience;
+    const matchCat = !category || s.tag === category;
+    return matchQ && matchAud && matchCat;
+  });
+
+  const clearAll = () => {
+    setQuery("");
+    setAudience("");
+    setCategory("");
+  };
 
   const searchSlot = (
     <div className="flex items-center gap-3">
@@ -222,17 +261,87 @@ export default function CaseStudiesList() {
           onChange={(e) => setQuery(e.target.value)}
           className="bg-transparent text-sm text-white placeholder:text-white/40 outline-none w-full"
         />
+        {query && (
+          <button onClick={() => setQuery("")} className="text-white/50 hover:text-white shrink-0">
+            <X className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
 
-      <button
-        className="w-9 h-9 rounded-full flex items-center justify-center transition hover:opacity-80"
-        style={{
-          background: "rgba(255,255,255,0.08)",
-          border: "1px solid rgba(255,255,255,0.12)",
-        }}
-      >
-        <SlidersHorizontal className="w-4 h-4 text-white/70" />
-      </button>
+      {/* Filter button + dropdown */}
+      <div className="relative">
+        <button
+          onClick={() => setShowFilter((v) => !v)}
+          className="w-9 h-9 rounded-full flex items-center justify-center transition hover:opacity-80"
+          style={{
+            background:
+              audience || category || showFilter ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.12)",
+          }}
+        >
+          <SlidersHorizontal className="w-4 h-4 text-white/70" />
+        </button>
+
+        <AnimatePresence>
+          {showFilter && (
+            <motion.div
+              initial={{ opacity: 0, y: 6, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+              className="absolute right-0 top-11 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 min-w-[200px] z-50"
+            >
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">
+                Audience
+              </p>
+              <div className="flex gap-2 px-1 mb-3">
+                {(["B2B", "B2C"] as Audience[]).map((a) => (
+                  <button
+                    key={a}
+                    onClick={() => setAudience(audience === a ? "" : a)}
+                    className={`flex-1 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-150 ${
+                      audience === a
+                        ? "bg-primary text-white"
+                        : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    {a}
+                  </button>
+                ))}
+              </div>
+
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">
+                Category
+              </p>
+              <button
+                onClick={() => {
+                  setCategory("");
+                  setShowFilter(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
+                  !category ? "bg-primary text-white" : "text-gray-600 hover:bg-gray-50"
+                }`}
+              >
+                All Categories
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setCategory(cat);
+                    setShowFilter(false);
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
+                    category === cat ? "bg-primary text-white" : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 
@@ -245,7 +354,45 @@ export default function CaseStudiesList() {
           <div
             className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10"
             style={{ marginTop: -40 }}
+            onClick={() => showFilter && setShowFilter(false)}
           >
+            {/* Active filters bar */}
+            {hasActiveFilter && (
+              <div className="flex items-center gap-3 px-10 pt-6 pb-1 flex-wrap">
+                <span className="text-sm text-gray-400">Showing results for:</span>
+                {query && (
+                  <span className="inline-flex items-center gap-1.5 bg-highlight text-primary text-xs font-semibold px-3 py-1.5 rounded-full border border-primary/20">
+                    &ldquo;{query}&rdquo;
+                    <button onClick={() => setQuery("")}>
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+                {audience && (
+                  <span className="inline-flex items-center gap-1.5 bg-highlight text-primary text-xs font-semibold px-3 py-1.5 rounded-full border border-primary/20">
+                    {audience}
+                    <button onClick={() => setAudience("")}>
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+                {category && (
+                  <span className="inline-flex items-center gap-1.5 bg-highlight text-primary text-xs font-semibold px-3 py-1.5 rounded-full border border-primary/20">
+                    {category}
+                    <button onClick={() => setCategory("")}>
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+                <button
+                  onClick={clearAll}
+                  className="text-xs text-gray-400 underline hover:text-gray-600"
+                >
+                  Clear all
+                </button>
+              </div>
+            )}
+
             <AnimatePresence>
               {filtered.map((study, i) => (
                 <motion.div
@@ -261,7 +408,12 @@ export default function CaseStudiesList() {
             </AnimatePresence>
 
             {filtered.length === 0 && (
-              <p className="text-center text-gray-400 py-20 text-sm">No case studies match your search.</p>
+              <p className="text-center text-gray-400 py-20 text-sm">
+                No case studies match your search.{" "}
+                <button onClick={clearAll} className="underline hover:text-gray-600">
+                  Clear filters
+                </button>
+              </p>
             )}
           </div>
         </div>
