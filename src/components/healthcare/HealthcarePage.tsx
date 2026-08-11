@@ -247,6 +247,107 @@ export default function HealthcarePage() {
           minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
         />
 
+
+      {/* ════════ WHO'S IN OUR PANEL ════════ */}
+      <section className="bg-gray-50 py-16">
+        <div className="site-container px-6">
+
+          <SectionHeader
+            label=""
+            heading={
+              <>
+                Who&apos;s in Our Panel?
+              </>
+            }
+            description=""
+            className=""
+          />
+
+          <div className="relative">
+            {/* Dashed line through circle centers */}
+            <div className="absolute top-10 left-0 right-0 border-t-2 border-dashed border-gray-300 z-0" />
+
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              loop
+              slidesPerView={4}
+              spaceBetween={0}
+              breakpoints={{
+                480:  { slidesPerView: 4 },
+                768:  { slidesPerView: 6 },
+                1024: { slidesPerView: 8 },
+              }}
+              className="relative z-10"
+            >
+              {panelRoles.map((role, i) => (
+                <SwiperSlide key={i}>
+                  <div className="flex flex-col items-center gap-3">
+                    <motion.div
+                      whileHover={{ scale: 1.10}}
+                      className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-300 border-4 border-gray-50"
+                    >
+                      {role.icon}
+                    </motion.div>
+                    <p className="text-xs sm:text-sm font-bold text-gray-700 text-center leading-5 mt-1">
+                      {role.label}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ STATS BANNER ════════ */}
+      <section className="py-6 pb-16 site-container px-6">
+        <motion.div
+          {...fadeUp()}
+          className="rounded-3xl overflow-hidden"
+          style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
+        >
+
+          <div className="px-10 py-12">
+
+            <SectionHeader
+              label="Healthcare Panel Network"
+              heading={
+                <>
+                  Elevate your research with our comprehensive healthcare solutions and cutting-edge methodologies
+                </>
+              }
+              description=""
+              className=""
+              theme="dark"
+            />
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { value: "711K+", label: "Healthcare Professionals" },
+                { value: "30+",   label: "Countries Covered"        },
+                { value: "98%",   label: "Profile Accuracy Rate"    },
+                { value: "48h",   label: "Average Turnaround"       },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.5 }}
+                  className="flex flex-col items-center text-center rounded-2xl py-7 px-4"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                >
+                  <p className="text-white font-black text-3xl sm:text-4xl mb-2">{stat.value}</p>
+                  <p className="text-white/50 text-xs font-semibold uppercase tracking-wider leading-5">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* ════════ DIG DEEPER HEADING ════════ */}
       <section className="bg-section pt-12">
         <div className="site-container px-6 text-center">
@@ -310,105 +411,9 @@ export default function HealthcarePage() {
         </div>
       </section>
 
-      {/* ════════ STATS BANNER ════════ */}
-      <section className="py-6 pb-16 site-container px-6">
-        <motion.div
-          {...fadeUp()}
-          className="rounded-3xl overflow-hidden"
-          style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
-        >
+      
 
-          <div className="px-10 py-12">
-
-            <SectionHeader
-              label="Healthcare Panel Network"
-              heading={
-                <>
-                  Elevate your research with our comprehensive healthcare solutions and cutting-edge methodologies
-                </>
-              }
-              description=""
-              className=""
-              theme="dark"
-            />
-
-            {/* Stats grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { value: "711K+", label: "Healthcare Professionals" },
-                { value: "30+",   label: "Countries Covered"        },
-                { value: "98%",   label: "Profile Accuracy Rate"    },
-                { value: "48h",   label: "Average Turnaround"       },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 * i, duration: 0.5 }}
-                  className="flex flex-col items-center text-center rounded-2xl py-7 px-4"
-                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  <p className="text-white font-black text-3xl sm:text-4xl mb-2">{stat.value}</p>
-                  <p className="text-white/50 text-xs font-semibold uppercase tracking-wider leading-5">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ════════ WHO'S IN OUR PANEL ════════ */}
-      <section className="bg-gray-50 py-16">
-        <div className="site-container px-6">
-
-          <SectionHeader
-            label=""
-            heading={
-              <>
-                Who&apos;s in Our Panel?
-              </>
-            }
-            description=""
-            className=""
-          />
-
-          <div className="relative">
-            {/* Dashed line through circle centers */}
-            <div className="absolute top-10 left-0 right-0 border-t-2 border-dashed border-gray-300 z-0" />
-
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 2000, disableOnInteraction: false }}
-              loop
-              slidesPerView={4}
-              spaceBetween={0}
-              breakpoints={{
-                480:  { slidesPerView: 4 },
-                768:  { slidesPerView: 6 },
-                1024: { slidesPerView: 8 },
-              }}
-              className="relative z-10"
-            >
-              {panelRoles.map((role, i) => (
-                <SwiperSlide key={i}>
-                  <div className="flex flex-col items-center gap-3">
-                    <motion.div
-                      whileHover={{ scale: 1.10}}
-                      className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-300 border-4 border-gray-50"
-                    >
-                      {role.icon}
-                    </motion.div>
-                    <p className="text-xs sm:text-sm font-bold text-gray-700 text-center leading-5 mt-1">
-                      {role.label}
-                    </p>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-      </section>
+      
 
       {/* ════════ PANEL BOOK FORM ════════ */}
       <section className="bg-section py-16">
@@ -432,17 +437,6 @@ export default function HealthcarePage() {
                 theme="dark"
                 align="left"
               />
-
-              <div className="flex flex-col gap-4">
-                {["711K+ Verified HCPs", "30+ Countries", "HIPAA & GDPR Compliant", "NPI & AMA Validated"].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
-                      <CheckCircle className="w-3 h-3 text-blue-400" />
-                    </div>
-                    <span className="text-white/70 text-sm font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Right — form */}

@@ -19,7 +19,10 @@ const solutions = [
     href: "/solutions/global-panel",
     desc: "Reach respondents across 50+ countries",
     color: "bg-blue-50 text-blue-600",
-    children: [],
+    children: [
+      { label: "B2B Panel", icon: Building2, desc: "785,500 validated professionals", href: "/solutions/global-panel/b2b" },
+      { label: "B2C Panel", icon: Users,     desc: "50M+ profiled consumers",         href: "/solutions/global-panel/b2c" },
+    ],
   },
   {
     label: "Research Services",

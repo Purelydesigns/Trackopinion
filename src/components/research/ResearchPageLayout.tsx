@@ -2,11 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import LatestReadsSection from "@/components/shared/LatestReadsSection";
 
 /* ── Types ── */
 export interface ResearchSection {
@@ -181,14 +178,6 @@ function CountUp({ end, suffix = "", decimals = 0 }: { end: number; suffix?: str
 
   return <span ref={ref}>{count.toFixed(decimals)}{suffix}</span>;
 }
-
-const resources = [
-  { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality",       gradient: "from-blue-400 to-indigo-500" },
-  { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?",                          gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research",              gradient: "from-blue-200 to-blue-400" },
-  { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies",                        gradient: "from-teal-400 to-cyan-600" },
-  { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects",          gradient: "from-violet-500 to-purple-700" },
-];
 
 /* ── Main Layout ── */
 export default function ResearchPageLayout({
@@ -366,36 +355,7 @@ export default function ResearchPageLayout({
       </section>
 
       {/* ════════ RESOURCES SLIDER ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">Explore Our Resources</h2>
-          </motion.div>
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            slidesPerView={1}
-            spaceBetween={24}
-            breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-            className="resources-swiper !pb-12"
-          >
-            {resources.map((r, i) => (
-              <SwiperSlide key={i}>
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <div className={`h-48 bg-gradient-to-br ${r.gradient}`} />
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
-                      <Calendar className="w-3.5 h-3.5" /> {r.date}
-                    </div>
-                    <h3 className="text-base font-bold text-gray-900 leading-snug">{r.title}</h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+      <LatestReadsSection />
 
     </main>
   );

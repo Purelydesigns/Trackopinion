@@ -2,11 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import PageHero from "../ui/PageHero";
 import SiteCard from "../ui/SiteCard";
@@ -180,14 +176,6 @@ const faqs = [
     q: "How do I choose the right sample size for testing?",
     a: "Sample size depends on your research objectives, the number of concepts you're testing, and the subgroups you need to analyze. For monadic concept tests, a minimum of 150–200 respondents per concept is recommended to detect meaningful differences. For ad pre-testing, 100–150 respondents per ad is a common starting point. We help you define the right sample during our project consultation phase.",
   },
-];
-
-const resources = [
-  { date: "24.03.2026", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality", gradient: "from-blue-400 to-indigo-500" },
-  { date: "24.03.2026", title: "Why Your Market Research Needs Custom Survey Programming?", gradient: "from-gray-700 to-gray-900" },
-  { date: "24.03.2026", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research", gradient: "from-blue-200 to-blue-400" },
-  { date: "24.03.2026", title: "How Panel Quality Affects Research Outcomes in B2B Studies", gradient: "from-teal-400 to-cyan-600" },
-  { date: "24.03.2026", title: "Data Collection Best Practices for International Market Research Projects", gradient: "from-violet-500 to-purple-700" },
 ];
 
 export default function ConceptAdTestingPage() {

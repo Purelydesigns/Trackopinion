@@ -8,8 +8,74 @@ import GlobalReach from "@/components/about/GlobalReach";
 import SectionHeader from "../ui/SectionHeader";
 import SiteCard from "../ui/SiteCard";
 import LatestReadsSection from "../shared/LatestReadsSection";
+import ProcessSteps, { ProcessStep } from "../shared/ProcessSteps";
+import { FileText, Users, BarChart3, ClipboardCheck } from "lucide-react";
 
 /* ── Data ── */
+const catiSteps: ProcessStep[] = [
+  {
+    num: "01",
+    label: "Project Consultation & Questionnaire Design",
+    desc: "Scoping, then logical jumps and control questions",
+    icon: <FileText className="w-6 h-6" />,
+    detail: {
+      title: "Step 01 — Project Consultation & Questionnaire Design",
+      body: "We start by scoping your objectives, target audience, and markets. From there we build precision questionnaires with logical jumps, skip patterns, and control questions tailored to your research goals.",
+    },
+  },
+  {
+    num: "02",
+    label: "Recruitment & Moderator Allocation",
+    desc: "Matched by demographic, timezone, and language",
+    icon: <Users className="w-6 h-6" />,
+    detail: {
+      title: "Step 02 — Recruitment & Moderator Allocation",
+      body: "Respondents are recruited against your screening criteria, and trained interviewers are assigned by demographic, timezone, and language requirements of your target audience.",
+    },
+  },
+  {
+    num: "03",
+    label: "Pilot Testing & Quality Validation",
+    desc: "A soft launch before full fieldwork",
+    icon: <ClipboardCheck className="w-6 h-6" />,
+    detail: {
+      title: "Step 03 — Pilot Testing & Quality Validation",
+      body: "A soft launch validates the script, routing, and average interview length before full fieldwork begins — so issues are caught and corrected while the sample is still intact.",
+    },
+  },
+  {
+    num: "04",
+    label: "Live CATI Fieldwork",
+    desc: "Predictive dialing, monitored in real time",
+    icon: <PhoneCall className="w-6 h-6" />,
+    detail: {
+      title: "Step 04 — Live CATI Fieldwork",
+      body: "Predictive dialing connects agents to respondents instantly. Calls are recorded and monitored in real-time, with progress against quota tracked throughout fieldwork.",
+    },
+  },
+  {
+    num: "05",
+    label: "Quality Assurance & Verification",
+    desc: "Back-checks, audits, and open-end review",
+    icon: <ShieldCheck className="w-6 h-6" />,
+    detail: {
+      title: "Step 05 — Quality Assurance & Verification",
+      body: "Completed interviews go through back-checks, call audits, and open-end review. Anything that fails validation is removed and replaced before the dataset is signed off.",
+    },
+  },
+  {
+    num: "06",
+    label: "Recordings & Data Delivery",
+    desc: "Cleaned datasets, reports, and call recordings",
+    icon: <BarChart3 className="w-6 h-6" />,
+    detail: {
+      title: "Step 06 — Recordings & Data Delivery",
+      body: "Cleaned, validated datasets with analysis-ready reports and call recordings — on time, every time, across the formats you need.",
+    },
+  },
+];
+
+
 const capabilities = [
   {
     title: "Gather, Not Manage",
@@ -160,75 +226,14 @@ export default function CatiPage() {
       />
 
       {/* ════════ HOW CATI WORKS ════════ */}
-      <section className="bg-white py-20">
-        <div className="site-container px-6">
+      <ProcessSteps
+        steps={catiSteps}
+        label="The Process"
+        heading={<>CATI Works</>}
+        description="A six-step framework from project consultation to clean data delivery — managed end-to-end by our expert team."
+        sectionClassName="bg-white py-20"
+      />
 
-          <SectionHeader
-            label="The Process"
-            heading={<>CATI Works</>}
-            description="A four-step framework from questionnaire design to clean data delivery — managed end-to-end by our expert team."
-            theme="light"
-            align="center"
-          />
-
-          {/* Steps */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-            {[
-              {
-                num: "01",
-                title: "Questionnaire Design",
-                desc: "Precision questionnaires with logical jumps, skip patterns, and control questions tailored to your research goals.",
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
-              },
-              {
-                num: "02",
-                title: "Agent Allocation",
-                desc: "Trained interviewers assigned by demographic, timezone, and language requirements of your target audience.",
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
-              },
-              {
-                num: "03",
-                title: "Live Interviews",
-                desc: "Predictive dialing connects agents to respondents instantly. Calls recorded and monitored in real-time for quality.",
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>,
-              },
-              {
-                num: "04",
-                title: "Data Delivery",
-                desc: "Cleaned, validated datasets with analysis-ready reports — on time, every time, across formats you need.",
-                icon: <svg viewBox="0 0 24 24" className="w-5 h-5 text-current" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
-              },
-            ].map((step, i, arr) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="group flex flex-col items-center text-center relative cursor-pointer"
-              >
-                {/* Dashed connector line (not on last item) */}
-                {i < arr.length - 1 && (
-                  <div
-                    className="hidden lg:block absolute top-[40px] z-0 border-t-2 border-dashed border-primary/40"
-                    style={{ left: "calc(50% + 42px)", right: "calc(-50% - 32px + 42px)" }}
-                  />
-                )}
-
-                {/* Step number circle */}
-                <div className="relative z-10 w-20 h-20 rounded-full border-2 border-primary/30 bg-white group-hover:bg-primary group-hover:border-primary group-hover:-translate-y-3 flex items-center justify-center mb-4 shadow-sm transition-all duration-300">
-                  <span className="text-2xl font-black text-primary group-hover:text-white transition-colors duration-300">{step.num}</span>
-                </div>
-
-                {/* Icon box */}
-                <div className="w-11 h-11 rounded-xl bg-blue-50 group-hover:bg-primary flex items-center justify-center mb-4 shadow-sm transition-colors duration-300">
-                  <span className="text-primary group-hover:text-white transition-colors duration-300">{step.icon}</span>
-                </div>
-
-                <h3 className="text-primary font-bold text-base mb-2">{step.title}</h3>
-                <p className="text-gray-900 text-base leading-8 font-medium">{step.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ════════ OUR CAPABILITIES ════════ */}
       <section className="bg-section py-20">

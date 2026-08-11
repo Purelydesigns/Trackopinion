@@ -2,12 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { BarChart2, ShieldCheck, AlignLeft, Layers, PieChart, Gauge, Database, Zap, DollarSign, Users, Clock, Calendar } from "lucide-react";
+import { BarChart2, ShieldCheck, AlignLeft, Layers, PieChart, Gauge, Database, Zap, DollarSign, Users, Clock } from "lucide-react";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import LatestReadsSection from "@/components/shared/LatestReadsSection";
 
 /* ── Data ── */
 const tabs = ["Data Cleansing", "Statistics", "Dashboards", "Visualization"];
@@ -528,51 +525,7 @@ export default function AnalyticsPage() {
       </section>
 
       {/* ════════ RESOURCES / BLOG SLIDER ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-gray-900">
-              Explore Our Resources
-            </h2>
-          </motion.div>
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            loop
-            slidesPerView={1}
-            spaceBetween={24}
-            breakpoints={{
-              640:  { slidesPerView: 2, spaceBetween: 24 },
-              1024: { slidesPerView: 3, spaceBetween: 24 },
-            }}
-            className="resources-swiper !pb-12"
-          >
-            {[
-              { color: "from-blue-100 to-blue-300",    bg: "#e0eaff", title: "From Clinical to Commercial: How Research Bridges Science and Market Reality" },
-              { color: "from-violet-400 to-gray-800",  bg: "#6d7cad", title: "Why Your Market Research Needs Custom Survey Programming?" },
-              { color: "from-blue-200 to-blue-400",  bg: "#f4c8b0", title: "Measuring Customer Loyalty: Key Metrics to Track via Market Research" },
-              { color: "from-teal-300 to-cyan-600",    bg: "#81d4e0", title: "How Online Surveys Are Reshaping Consumer Insights in 2026" },
-              { color: "from-blue-100 to-blue-200", bg: "#f9d8a0", title: "Understanding Panellist Fatigue and How to Overcome It" },
-            ].map((post, i) => (
-              <SwiperSlide key={i}>
-                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
-                  <div className={`h-52 bg-gradient-to-br ${post.color} flex items-center justify-center`}>
-                    <div className="w-20 h-20 rounded-2xl bg-white/30 backdrop-blur-sm" />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>24.03.2026</span>
-                    </div>
-                    <h3 className="text-base font-bold text-gray-900 leading-snug">{post.title}</h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+      <LatestReadsSection />
 
 
     </main>

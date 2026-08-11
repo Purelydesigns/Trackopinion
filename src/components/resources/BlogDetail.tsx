@@ -315,7 +315,7 @@ export default function BlogDetail({ id }: { id: string }) {
 
             <motion.h1
               {...fadeUp}
-              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight"
             >
               {blog.title}
             </motion.h1>
