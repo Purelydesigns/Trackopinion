@@ -7,7 +7,7 @@ import {
   PhoneCall, HeartPulse, FileCode2, ArrowRight,
   BarChart3, Users, Layers, Languages, PieChart,
   ShieldCheck, Microscope, TrendingUp,
-  ChevronRight,
+  ChevronRight, BookOpen, FileText,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -81,6 +81,12 @@ const navLinks = [
   { label: "CONTACT US",   href: "/contact-us"      },
 ];
 
+/* ── Resources dropdown data ── */
+const resourceLinks = [
+  { label: "Blog",         href: "/resources",    icon: BookOpen, desc: "Insights, guides & industry articles" },
+  { label: "Case Studies", href: "/case-studies", icon: FileText, desc: "Real-world research outcomes"        },
+];
+
 const pathToLabel: Record<string, string> = {
   "/":                 "HOME",
   "/about":            "ABOUT US",
@@ -92,13 +98,24 @@ const pathToLabel: Record<string, string> = {
 export default function Navbar() {
   const pathname = usePathname();
   const active = pathToLabel[pathname] ??
-    (pathname.startsWith("/solutions") ? "SOLUTIONS" : "");
+    (pathname.startsWith("/solutions")
+      ? "SOLUTIONS"
+      : pathname.startsWith("/resources") || pathname.startsWith("/case-studies")
+        ? "RESOURCES"
+        : "");
   const [menuOpen, setMenuOpen]             = useState(false);
-  const [dropOpen, setDropOpen]             = useState(false);
+  /* Only one header dropdown may be open at a time */
+  const [openMenu, setOpenMenu]             = useState<"solutions" | "resources" | null>(null);
+  const dropOpen = openMenu === "solutions";
+  const resOpen  = openMenu === "resources";
+  const toggleMenu = (m: "solutions" | "resources") =>
+    setOpenMenu((p) => (p === m ? null : m));
   const [hoveredIdx, setHoveredIdx]         = useState(1);
   const [scrolled, setScrolled]             = useState(false);
   const [mobileDropOpen, setMobileDropOpen] = useState(false);
+  const [mobileResOpen, setMobileResOpen]   = useState(false);
   const dropRef                             = useRef<HTMLLIElement>(null);
+  const resRef                              = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -108,9 +125,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
-        setDropOpen(false);
-      }
+      const t = e.target as Node;
+      const inDrop = dropRef.current?.contains(t);
+      const inRes  = resRef.current?.contains(t);
+      if (!inDrop && !inRes) setOpenMenu(null);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -154,7 +172,7 @@ export default function Navbar() {
           {/* ── SOLUTIONS mega-menu ── */}
           <li ref={dropRef} className="relative">
             <button
-              onClick={() => setDropOpen((p) => !p)}
+              onClick={() => toggleMenu("solutions")}
               className={`cursor-pointer flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
                 active === "SOLUTIONS"
                   ? isTransparent
@@ -173,8 +191,8 @@ export default function Navbar() {
             <div
               className={`absolute top-[calc(100%+10px)] left-1/2 -translate-x-[45%] w-[760px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden transition-all duration-250 origin-top ${
                 dropOpen
-                  ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-                  : "opacity-0 scale-[0.97] -translate-y-2 pointer-events-none"
+                  ? "z-50 visible opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                  : "z-0 invisible opacity-0 scale-[0.97] -translate-y-2 pointer-events-none"
               }`}
             >
               <div className="flex">
@@ -228,7 +246,7 @@ export default function Navbar() {
                         key={item.label}
                         href={item.href}
                         onMouseEnter={() => setHoveredIdx(idx)}
-                        onClick={() => setDropOpen(false)}
+                        onClick={() => setOpenMenu(null)}
                         className={rowClass}
                       >
                         {rowInner}
@@ -252,7 +270,7 @@ export default function Navbar() {
                       </div>
                       <Link
                         href={hovered?.href ?? "/solutions"}
-                        onClick={() => setDropOpen(false)}
+                        onClick={() => setOpenMenu(null)}
                         className="ml-auto flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary transition-colors"
                       >
                         Explore <ArrowRight className="w-3.5 h-3.5" />
@@ -270,7 +288,7 @@ export default function Navbar() {
                             <Link
                               key={child.label}
                               href={child.href}
-                              onClick={() => setDropOpen(false)}
+                              onClick={() => setOpenMenu(null)}
                               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 group transition-colors duration-150"
                             >
                               <span className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary flex items-center justify-center shrink-0 transition-colors duration-200">
@@ -297,7 +315,7 @@ export default function Navbar() {
                         <p className="text-gray-400 text-xs leading-relaxed mb-4">{hovered?.desc}</p>
                         <Link
                           href={hovered?.href ?? "/solutions"}
-                          onClick={() => setDropOpen(false)}
+                          onClick={() => setOpenMenu(null)}
                           className="inline-flex items-center gap-2 bg-primary hover:bg-primary text-white text-xs font-semibold px-5 py-2 rounded-full transition-colors duration-200"
                         >
                           Learn More <ArrowRight className="w-3.5 h-3.5" />
@@ -311,7 +329,7 @@ export default function Navbar() {
                     <p className="text-xs text-gray-400">Need a tailored solution?</p>
                     <Link
                       href="/contact-us"
-                      onClick={() => setDropOpen(false)}
+                      onClick={() => setOpenMenu(null)}
                       className="text-xs font-bold text-primary hover:text-primary flex items-center gap-1 transition-colors"
                     >
                       Talk to an expert <ArrowRight className="w-3 h-3" />
@@ -323,7 +341,50 @@ export default function Navbar() {
             </div>
           </li>
 
-          <li><Link href="/resources" className={linkCls("RESOURCES")}>RESOURCES</Link></li>
+          {/* ── RESOURCES dropdown ── */}
+          <li ref={resRef} className="relative">
+            <button
+              onClick={() => toggleMenu("resources")}
+              className={`cursor-pointer flex items-center gap-1 ${linkCls("RESOURCES")}`}
+            >
+              RESOURCES
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${resOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            <div
+              className={`absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[290px] bg-white rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] border border-gray-100 overflow-hidden transition-all duration-200 origin-top p-2 ${
+                resOpen
+                  ? "z-50 visible opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                  : "z-0 invisible opacity-0 scale-95 -translate-y-2 pointer-events-none"
+              }`}
+            >
+              {resourceLinks.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setOpenMenu(null)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl group transition-colors duration-150 ${
+                      isActive ? "bg-gray-50" : "hover:bg-gray-50"
+                    }`}
+                  >
+                    <span className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-primary flex items-center justify-center shrink-0 transition-colors duration-200">
+                      <Icon className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors duration-200" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors duration-150 leading-tight">
+                        {item.label}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-primary ml-auto opacity-0 group-hover:opacity-100 transition-all duration-150" />
+                  </Link>
+                );
+              })}
+            </div>
+          </li>
           <li><Link href="/career" className={linkCls("CAREER")}>CAREER</Link></li>
           <li><Link href="/contact-us" className={linkCls("CONTACT US")}>CONTACT US</Link></li>
         </ul>
@@ -443,8 +504,39 @@ export default function Navbar() {
               </div>
             </div>
 
+            {/* Resources accordion */}
+            <div>
+              <button
+                onClick={() => setMobileResOpen((p) => !p)}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-black hover:bg-white/30 hover:text-primary transition-colors"
+              >
+                RESOURCES
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileResOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <div className={`overflow-hidden transition-all duration-300 ${mobileResOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="ml-3 border-l-2 border-primary pl-3 mt-1 flex flex-col gap-1">
+                  {resourceLinks.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => { setMobileResOpen(false); setMenuOpen(false); }}
+                        className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold text-black hover:bg-white/30 hover:text-primary transition-colors"
+                      >
+                        <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
+                          <Icon className="w-3.5 h-3.5 text-gray-500" />
+                        </span>
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
             {[
-              { label: "RESOURCES",   href: "/resources" },
               { label: "CAREER",      href: "/career"           },
               { label: "CONTACT US",  href: "/contact-us"       },
             ].map((link) => (

@@ -26,8 +26,8 @@ export default function CareerPage() {
         minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
       />
       <RoleMatchQuiz />
-      <HiringProcess />
       <OpenPositions />
+      <HiringProcess />
       <ApplySection />
       <CareerCta />
     </main>

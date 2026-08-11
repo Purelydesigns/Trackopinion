@@ -315,7 +315,7 @@ export default function BlogDetail({ id }: { id: string }) {
 
             <motion.h1
               {...fadeUp}
-              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight max-w-4xl"
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight"
             >
               {blog.title}
             </motion.h1>
@@ -330,7 +330,7 @@ export default function BlogDetail({ id }: { id: string }) {
             </div>
             {/* ── Hero image ── */}
             {blog.img && (
-              <div className="flex justify-center pt-8">
+              <div className="flex justify-center pt-8 hidden">
                 <Image
                   src={blog.img}
                   alt={blog.altText}

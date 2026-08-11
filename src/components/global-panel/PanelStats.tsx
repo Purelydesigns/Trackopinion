@@ -41,11 +41,29 @@ const statsData: Record<string, Stat> = {
   },
 };
 
-/* ─────────────── Bar chart ─────────────── */
-const MAX_H = 200; // px — max visual bar height
+/* ─────────────── Area curve chart ─────────────── */
+/* SVG user-space box. The <svg> renders at width:100% / height:auto, so the
+   rendered box keeps this exact aspect ratio — which lets the HTML tooltip
+   overlay be positioned with plain percentages. */
+const W = 640, H = 250;
+const PAD_L = 26, PAD_R = 26, PAD_T = 34, PAD_B = 44;
+const PLOT_W = W - PAD_L - PAD_R;
+const PLOT_H = H - PAD_T - PAD_B;
 
-function BarChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
+const NAVY = "#0d1b3e";
+const BLUE = "#2a6bb8";
+
+function AreaChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
   const maxPct = Math.max(...bars.map((b) => b.pct));
+
+  const pts = bars.map((bar, i) => ({
+    ...bar,
+    x: PAD_L + (i / (bars.length - 1)) * PLOT_W,
+    y: PAD_T + (1 - bar.pct / maxPct) * PLOT_H,
+  }));
+
+  const line = pts.map((p) => `${p.x},${p.y}`).join(" ");
+  const area = `${line} ${PAD_L + PLOT_W},${PAD_T + PLOT_H} ${PAD_L},${PAD_T + PLOT_H}`;
 
   return (
     <AnimatePresence mode="wait">
@@ -55,72 +73,109 @@ function BarChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex items-end justify-between gap-4 sm:gap-5 group/chart mt-6 w-full"
-        style={{ height: MAX_H + 52 }}
+        className="relative w-full mt-6 group/chart"
       >
-        {bars.map((bar, i) => {
-          const fillH = Math.round((bar.pct / maxPct) * MAX_H);
-          const delay  = i * 0.04;
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          className="block w-full h-auto overflow-visible"
+          role="img"
+          aria-label={`Distribution curve: ${bars.map((b) => `${b.label} ${b.pct}%`).join(", ")}`}
+        >
+          {/* horizontal gridlines */}
+          {[0, 0.25, 0.5, 0.75, 1].map((t) => (
+            <line
+              key={t}
+              x1={PAD_L}
+              x2={PAD_L + PLOT_W}
+              y1={PAD_T + t * PLOT_H}
+              y2={PAD_T + t * PLOT_H}
+              stroke="#e6edf5"
+              strokeWidth={1}
+            />
+          ))}
 
-          return (
-            <div
-              key={bar.label}
-              className="relative flex flex-col items-center flex-1 group/bar
-                         group-hover/chart:opacity-30 hover:!opacity-100
-                         transition-opacity duration-200 cursor-default"
-              style={{ minWidth: 0, maxWidth: 44 }}
+          {/* area fill */}
+          <motion.polygon
+            points={area}
+            fill={BLUE}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.12 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+          />
+
+          {/* curve */}
+          <motion.polyline
+            points={line}
+            fill="none"
+            stroke={NAVY}
+            strokeWidth={2.5}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
+          />
+
+          {/* points + value labels */}
+          {pts.map((p, i) => (
+            <motion.g
+              key={p.label}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.45 + i * 0.05 }}
             >
-              {/* ── Hover tooltip ── */}
-              <div
-                className="absolute z-20 pointer-events-none opacity-0 group-hover/bar:opacity-100
-                            transition-opacity duration-150 flex flex-col items-center"
-                style={{ bottom: fillH + 32 }}
+              <circle cx={p.x} cy={p.y} r={6} fill={NAVY} stroke="#fff" strokeWidth={2.5} />
+              <text
+                x={p.x}
+                y={p.y - 14}
+                textAnchor={i === 0 ? "start" : i === pts.length - 1 ? "end" : "middle"}
+                className="fill-primary"
+                style={{ fontSize: 15, fontWeight: 700 }}
               >
-                <div className="bg-[#0d1b3e] text-white text-[11px] font-medium
-                                px-3 py-1.5 rounded-full whitespace-nowrap shadow-lg">
-                  {bar.label} — {bar.pct}%
-                </div>
-                <div className="w-2 h-2 bg-[#0d1b3e] rotate-45 -mt-[4px] rounded-sm" />
+                {p.pct}%
+              </text>
+            </motion.g>
+          ))}
+
+          {/* x-axis labels */}
+          {pts.map((p, i) => (
+            <text
+              key={p.label}
+              x={p.x}
+              y={H - 14}
+              textAnchor={i === 0 ? "start" : i === pts.length - 1 ? "end" : "middle"}
+              fill="#4b5563"
+              style={{ fontSize: 15, fontWeight: 500 }}
+            >
+              {p.label}
+            </text>
+          ))}
+        </svg>
+
+        {/* ── Hover targets + tooltips (HTML overlay, positioned in %) ── */}
+        {pts.map((p) => (
+          <div
+            key={p.label}
+            className="absolute top-0 bottom-0 group/pt"
+            style={{
+              left: `${((p.x - PLOT_W / (bars.length - 1) / 2) / W) * 100}%`,
+              width: `${(PLOT_W / (bars.length - 1) / W) * 100}%`,
+            }}
+          >
+            <div
+              className="absolute -translate-x-1/2 z-20 pointer-events-none opacity-0
+                         group-hover/pt:opacity-100 transition-opacity duration-150
+                         flex flex-col items-center"
+              style={{ left: "50%", top: `${(p.y / H) * 100}%`, marginTop: -46 }}
+            >
+              <div className="bg-[#0d1b3e] text-white text-[11px] font-medium px-3 py-1.5
+                              rounded-full whitespace-nowrap shadow-lg">
+                {p.label} — {p.pct}%
               </div>
-
-              {/* ── Bar column ── */}
-              <div className="relative w-full" style={{ height: MAX_H }}>
-                {/* dotted background pill */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 rounded-full overflow-hidden"
-                  style={{
-                    height: MAX_H,
-                    backgroundImage: "radial-gradient(circle, #b8cfe8 1.2px, transparent 1.2px)",
-                    backgroundSize: "5px 5px",
-                    backgroundPosition: "center top",
-                    backgroundColor: "#dde9f6",
-                  }}
-                />
-
-                {/* filled pill */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 rounded-full bg-[#0d1b3e]"
-                  initial={{ height: 0 }}
-                  animate={{ height: fillH }}
-                  transition={{ duration: 0.55, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-                />
-
-                {/* ── Percentage label — inside bar column so bottom is relative to 200px div ── */}
-                <span
-                  className="absolute left-0 right-0 text-center text-[11px] font-semibold text-primary pointer-events-none"
-                  style={{ bottom: Math.max(fillH + 4, 4) }}
-                >
-                  {bar.pct}%
-                </span>
-              </div>
-
-              {/* ── X-axis label ── */}
-              <span className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600 text-center whitespace-nowrap">
-                {bar.label}
-              </span>
+              <div className="w-2 h-2 bg-[#0d1b3e] rotate-45 -mt-[4px] rounded-sm" />
             </div>
-          );
-        })}
+          </div>
+        ))}
       </motion.div>
     </AnimatePresence>
   );
@@ -144,7 +199,7 @@ function StatCard({
       <p className="text-base leading-8 font-medium flex-1 mb-6 text-gray-600">{sub}</p>
 
       {/* chart */}
-      <BarChart bars={bars} chartKey={chartKey} />
+      <AreaChart bars={bars} chartKey={chartKey} />
     </div>
   );
 }

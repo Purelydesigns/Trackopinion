@@ -101,22 +101,25 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
 
   return (
     <>
-      {/* Flip container — fixed height so both faces stay stable */}
+      {/* Row — fixed height so both faces stay stable */}
       <div
-        className="relative cursor-pointer"
-        style={{ height: 340, perspective: 1200 }}
+        className="relative cursor-pointer flex items-stretch gap-10 px-10"
+        style={{ height: 340 }}
         onMouseEnter={() => setFlipped(true)}
         onMouseLeave={() => setFlipped(false)}
       >
-        {/* ── FRONT ── white row */}
+        {/* ── Left column — the only part that flips ── */}
+        <div className="flex-1 min-w-0 relative" style={{ perspective: 1200 }}>
+
+        {/* ── FRONT ── text */}
         <motion.div
           animate={{ rotateY: flipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute inset-0 flex items-stretch gap-10 px-10"
+          className="absolute inset-0"
           style={{ backfaceVisibility: "hidden" }}
         >
           {/* Left — text */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="w-full h-full min-w-0 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <Calendar className="w-3.5 h-3.5 text-gray-500" />
               <span className="text-xs text-gray-500 font-medium">{study.date}</span>
@@ -140,21 +143,13 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
             <h2 className="text-xl font-extrabold leading-tight mb-4 text-primary">{study.title}</h2>
             <p className="text-base leading-7 font-medium text-gray-500 line-clamp-3">{study.excerpt}</p>
           </div>
-
-          {/* Right — illustration */}
-          <div
-            className="w-[380px] shrink-0 rounded-2xl flex items-center justify-center text-7xl my-6"
-            style={{ background: study.bg }}
-          >
-            {study.image}
-          </div>
         </motion.div>
 
         {/* ── BACK ── dark navy */}
         <motion.div
           animate={{ rotateY: flipped ? 0 : -180 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-none flex items-center gap-10 px-10"
+          className="absolute inset-0 rounded-2xl flex items-center gap-6 px-6 my-6"
           style={{
             background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)",
             backfaceVisibility: "hidden",
@@ -165,7 +160,6 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
           <div className="flex-1 min-w-0 flex flex-col justify-center gap-4">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 w-fit">
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               <span className="text-blue-300 text-xs font-bold uppercase tracking-widest">Case Study</span>
             </div>
 
@@ -210,6 +204,15 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
             </div>
           </div>
         </motion.div>
+
+        </div>
+        {/* ── Right — illustration (static, never flips) ── */}
+        <div
+          className="w-[380px] shrink-0 rounded-2xl flex items-center justify-center text-7xl my-6"
+          style={{ background: study.bg }}
+        >
+          {study.image}
+        </div>
       </div>
 
       {divider && <div className="border-t border-gray-200 mx-10" />}

@@ -236,16 +236,6 @@ function MethodsSection() {
                 style={{ filter: "drop-shadow(0 0 6px rgba(26,111,232,0.6))" }} />
             </svg>
 
-            {/* method chips */}
-            <div className="flex flex-wrap justify-center gap-2 max-w-xs">
-              {["Focus Groups", "In-Depth IDI", "Diary Studies", "Online Comm."].map((m) => (
-                <span key={m}
-                  className="text-[10px] font-semibold text-primary-600 bg-primary-50 border border-primary-100 rounded-full px-3 py-1">
-                  {m}
-                </span>
-              ))}
-            </div>
-
           </div>
         </div>
 

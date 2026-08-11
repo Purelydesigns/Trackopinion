@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Users, ShoppingBag, Activity, Phone, Globe } from "lucide-react";
+import { Download, Users, ShoppingBag, Activity, Phone, Globe, Send, MailCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../ui/SectionHeader";
 
@@ -109,7 +109,7 @@ export default function PanelBooks() {
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Download size={24} className="text-blue-600" />
+                  <MailCheck size={24} className="text-blue-600" />
                 </div>
                 <p className="text-lg font-semibold text-gray-800">Request Received!</p>
                 <p className="text-sm text-gray-500 font-normal max-w-xs">
@@ -210,7 +210,7 @@ export default function PanelBooks() {
                   className="mt-1 w-full flex items-center justify-center gap-2.5 rounded-xl py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
                   style={{ background: "linear-gradient(135deg, #1a6fe8 0%, #1458c8 100%)" }}
                 >
-                  <Download size={16} />
+                  <Send size={16} />
                   Send Request
                 </button>
               </form>
