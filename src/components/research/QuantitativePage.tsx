@@ -1,116 +1,122 @@
-import ResearchPageLayout, { ResearchPageProps } from "./ResearchPageLayout";
+"use client";
 
-const content: ResearchPageProps = {
-  banner: {
-    title: "Quantitative Market Research",
-    subtitle: "Make Data-Driven Decisions with Quantitative Market Research",
+import {
+  ClipboardList, PhoneCall, Globe, FileSpreadsheet,
+  Layers, Workflow, PieChart, FileText, Users, LineChart,
+} from "lucide-react";
+import ResearchDeepLayout, { type ResearchDeepContent } from "./ResearchDeepLayout";
+
+const content: ResearchDeepContent = {
+  hero: {
+    badge: "Quantitative Market Research",
+    heading: <>Numbers Through Online Surveys &amp; CATI Interviews</>,
+    description:
+      "Know what the audience thinks about your offerings. As a quantitative market research agency in India, we amplify your business decision-making capabilities.",
+    primaryCta: { label: "Start a Research Project", href: "/contact-us" },
+    secondaryCta: { label: "Explore Methods", href: "#methods" },
   },
-  factsHeading: "Numbers that Tell the Complete Story of Your Market",
-  factsDesc: "Measure, validate, and scale your business decisions using structured surveys, statistical analysis, and large-sample data collection across 30+ global markets.",
-  sections: [
-    {
-      heading: "Quantitative Market Research Methods",
-      side: "left",
-      mockup: "toggle",
-      paragraphs: [
-        "Quantitative research methods help you measure market trends, customer satisfaction, and brand perception at scale. What opinions suggest, numbers confirm.",
-        "At Track Opinion, we deploy online surveys, telephonic interviews, panel-based data collection, and longitudinal tracking studies to capture statistically significant insights for your business decisions.",
-      ],
-    },
-    {
-      heading: "Beyond the Surface",
-      side: "right",
-      mockup: "cards",
-      paragraphs: [
-        "As a quantitative research firm, we believe data should drive decisions. We go beyond simple counts — applying regression analysis, segmentation, and predictive modelling to surface actionable market intelligence.",
-        "Our rigorously vetted panel of 4.7 million active members ensures your survey data reflects real market demographics — validated, profiled, and representative of your target audience.",
-      ],
-    },
-    {
-      heading: "Benefits of Quantitative Research",
-      side: "left",
-      mockup: "circles",
-      paragraphs: [
-        "Quantitative data provides measurable evidence for market size, customer preferences, competitive positioning, and purchase intent. It reduces guesswork and replaces assumptions with statistically validated findings.",
-        "With large-scale structured surveys and advanced analytics, you can segment audiences, track trends over time, and make high-confidence business decisions backed by real numbers.",
-      ],
-    },
-  ],
-  capabilities: [
-    {
-      title: "Large-Scale Surveys",
-      desc: "Reach thousands of respondents across geographies and demographics simultaneously. Our panel ensures fast field time and high completion rates for your quantitative studies.",
-    },
-    {
-      title: "Statistical Analysis",
-      desc: "From descriptive statistics to multivariate regression, our analysts apply the right techniques to extract reliable, actionable insights from your survey data.",
-    },
-    {
-      title: "Market Segmentation",
-      desc: "Identify and profile distinct customer groups based on behavior, attitude, and demographics. Use segmentation findings to tailor products, messaging, and strategy.",
-    },
-    {
-      title: "Tracking Studies",
-      desc: "Monitor brand health, customer satisfaction, and market trends over time with consistent, repeatable survey waves that reveal how perceptions shift across periods.",
-    },
-    {
-      title: "Cross-Tab Reporting",
-      desc: "Slice your data by any demographic or behavioral variable. Our cross-tabulation reports help you understand differences between audience segments at a glance.",
-    },
-    {
-      title: "Validated Panel",
-      desc: "Every panelist is verified against strict quality criteria including profile validation, duplicate detection, and minimum participation standards to guarantee data integrity.",
-    },
-  ],
-  stepsHeading: "Project Management",
-  stepsSubheading: "A dedicated team available around the clock",
-  steps: [
-    {
-      num: "1",
-      title: "Project Consultation",
-      subtitle: "You speak, we listen.",
-      desc: "We align on your research objectives, target audience, sample size, and methodology to ensure the study design meets your business goals.",
-    },
-    {
-      num: "2",
-      title: "Team Allocation",
-      subtitle: "You ask, we provide.",
-      desc: "A dedicated project manager, survey programmer, field executive, and data analyst are assigned to ensure seamless execution from start to finish.",
-    },
-    {
-      num: "3",
-      title: "Project Execution",
-      subtitle: "You want, we serve.",
-      desc: "We field the survey, monitor data quality in real time, and deliver clean, weighted datasets with full reporting and actionable recommendations.",
-    },
-  ],
-  stats: [
-    { value: "15+",  label: "Years of Expertise" },
-    { value: "100+", label: "Clients"            },
-    { value: "30+",  label: "Market Covered"     },
-    { value: "4.7M", label: "Active Panellists"  },
-    { value: "20K+", label: "Project Completed"  },
-  ],
-  faqs: [
-    {
-      q: "What is quantitative market research?",
-      a: "Quantitative market research is a structured approach to data collection that uses numerical data, closed-ended surveys, and statistical analysis to measure market trends, consumer behavior, and brand performance. It answers questions like \"how many\", \"how often\", and \"to what extent\" — giving businesses statistically reliable, generalizable insights.",
-    },
-    {
-      q: "How large a sample size do I need for quantitative research?",
-      a: "Sample size depends on your target population size, desired confidence level, margin of error, and subgroup analysis requirements. As a rule of thumb, a minimum of 400 responses provides a 95% confidence level with a ±5% margin of error for a general population study. We help you determine the right sample for your specific objectives.",
-    },
-    {
-      q: "What is the difference between qualitative and quantitative market research?",
-      a: "Qualitative research explores motivations and emotions through open-ended methods like interviews and focus groups. Quantitative research measures and quantifies behavior and attitudes through structured surveys and statistical analysis. Qualitative gives depth; quantitative gives breadth. Many projects benefit from combining both approaches.",
-    },
-    {
-      q: "How long does a quantitative research project take?",
-      a: "Timelines vary by complexity, but a standard online quantitative study — including questionnaire design, programming, fielding, data cleaning, and reporting — typically takes 2 to 4 weeks. Complex multi-market or longitudinal studies may take longer. We provide a detailed timeline during the project consultation phase.",
-    },
-  ],
+
+  methods: {
+    label: "Quantitative Market Research",
+    heading: <>Numbers Through Online Surveys<br />And CATI Interviews</>,
+    description:
+      "Know what the audience thinks about your offerings. As a quantitative market research agency in India, we amplify your business decision-making capabilities.",
+    subheading: "What's Quantitative Market Research?",
+    paragraphs: [
+      "Quantitative market research companies aid in gaining stats from users about their preferences, pain points, and needs. You can also assess market gaps, trends, and competition.",
+      "Track Opinion uses diverse methods such as online and offline surveys, CATI, and web-enabled interviews, among many others.",
+    ],
+    items: [
+      { icon: ClipboardList,    label: "Online Surveys",         desc: "Structured questionnaires fielded at scale" },
+      { icon: FileSpreadsheet,  label: "Offline Surveys",        desc: "Field data collection where reach demands it" },
+      { icon: PhoneCall,        label: "CATI Interviews",        desc: "Computer-assisted telephone interviewing" },
+      { icon: Globe,            label: "Web-Enabled Interviews", desc: "Remote interviews across global markets" },
+    ],
+    radarLabel: "Quantitative Coverage Map",
+    radarDims: [
+      { label: "Preferences",  value: 0.88, angle: -90  },
+      { label: "Pain Points",  value: 0.82, angle: -30  },
+      { label: "Needs",        value: 0.86, angle:  30  },
+      { label: "Market Gaps",  value: 0.74, angle:  90  },
+      { label: "Trends",       value: 0.80, angle: 150  },
+      { label: "Competition",  value: 0.78, angle: -150 },
+    ],
+  },
+
+  moreThanNumbers: {
+    heading: <>What&apos;s Quantitative Market Research?</>,
+    paragraphs: [
+      "Quantitative market research companies aid in gaining stats from users about their preferences, pain points, and needs. You can also assess market gaps, trends, and competition.",
+      "Track Opinion uses diverse methods such as online and offline surveys, CATI, and web-enabled interviews, among many others.",
+    ],
+    bullets: [
+      "Stats on user preferences, pain points, and needs",
+      "Assess market gaps, trends, and competition",
+      "Online and offline surveys, CATI, and web-enabled interviews",
+    ],
+    cards: [
+      { eyebrow: "Survey",    title: "Online & Offline Surveys" },
+      { eyebrow: "CATI",      title: "Telephone Interviews", sub: "Computer-assisted..." },
+      { eyebrow: "Reporting", title: "Reporting Insights" },
+    ],
+  },
+
+  benefits: {
+    label: "Benefits",
+    heading: <>Benefits of Quantitative<br />Research</>,
+    paragraphs: [
+      "As a quantitative research agency, we help you dig facts about your users' perceptions, market insights, and competitors' performance.",
+      "By relying on demographic-based outcomes, refine your services, improve your products, and communicate better with users. Also, explore new territories, customer segments, and ideas using quantitative market research.",
+    ],
+    ctaLabel: "Discuss Your Research →",
+    ctaHref: "/contact-us",
+    centerLabel: "Insights",
+    orbitNodes: [
+      {
+        label: ["User", "Perceptions"],
+        angle: -90,
+        icons: ["M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2", "M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"],
+      },
+      { label: ["Market"],      angle: 195, icons: ["M23 6l-9.5 9.5-5-5L1 18", "M17 6h6v6"] },
+      { label: ["Competitors"], angle: -20, icons: ["M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"] },
+      { label: ["Demographics"], angle: 122, icons: ["M18 20V10", "M12 20V4", "M6 20v-6"] },
+      {
+        label: ["Segments"],
+        angle: 50,
+        icons: ["M21.21 15.89A10 10 0 1 1 8 2.83", "M22 12A10 10 0 0 0 12 2v10z"],
+      },
+    ],
+  },
+
+  whyChoose: {
+    label: "What Sets Us Apart",
+    heading: <>Why Choose Track Opinion for Quantitative Research?</>,
+    description:
+      "Six reasons why leading brands, consulting firms, and agencies trust us for their quantitative market research.",
+    cards: [
+      { icon: Workflow,  title: "Process Oriented",      desc: "You don't get only data. You get a process-driven team that executes end-to-end quantitative market research." },
+      { icon: PieChart,  title: "Customer Segmentation", desc: "Segment customers well that suit your sample requirements with legit panel profiles fulfilling survey prerequisites." },
+      { icon: Layers,    title: "Highly Detailed",       desc: "Get holistic research — from understanding the project to designing surveys, programming them for distribution, data collection, and reporting." },
+      { icon: Users,     title: "Population",            desc: "Whether B2C or B2B industry, our thorough vetting selects panelists with the necessary experience having apt psychographic and demographic data." },
+      { icon: FileText,  title: "Questionnaire Designs", desc: "Receive a tailored approach in the survey designs and questions with the nuances only an experienced quantitative research agency understands." },
+      { icon: LineChart, title: "Reporting Insights",    desc: "Collect and transform crude data into valuable insights that leverage your business decisions. Use our reporting capabilities to share and utilize opinions." },
+    ],
+  },
+
+  projectManagement: {
+    label: "How We Work",
+    heading: <>Our Survey Process</>,
+    description:
+      "From screening the right panelists to making sure the survey gets completed — four steps that protect your response quality.",
+    steps: [
+      { num: 1, label: "Phone Screening and Validation", title: "For proper vetting.",        quote: '"The right respondents, verified first"', desc: "We select panel members based on initial phone screening and by validating their profiles and suitability." },
+      { num: 2, label: "Send Our Survey Link",           title: "For easy access.",           quote: '"Delivered safely, wherever they are"',   desc: "Send survey links from various channels such as app notifications, emails, website forms, and other ways that embed links safely." },
+      { num: 3, label: "Phone and Email Follow-ups",     title: "For better participation.",  quote: '"We keep respondents engaged"',           desc: "The number of responses matters. We regularly tap users for updates and engagement throughout the project lifecycle." },
+      { num: 4, label: "Ensure Survey Completion",       title: "For good completion rates.", quote: '"Completion, not just participation"',    desc: "More than participation, the completion rate matters. And we ensure a higher number of clicks on the submit button." },
+    ],
+  },
 };
 
 export default function QuantitativePage() {
-  return <ResearchPageLayout {...content} />;
+  return <ResearchDeepLayout content={content} />;
 }

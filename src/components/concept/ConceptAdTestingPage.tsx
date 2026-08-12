@@ -42,7 +42,7 @@ const capabilities = [
     title: "Concept Testing",
     desc: "Test your product idea at an early stage in development. Avoid expensive setbacks by obtaining users' input before investing in marketing, ads, and sales.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
         <path d="M20 32v2a4 4 0 0 0 8 0v-2" />
         <line x1="24" y1="6" x2="24" y2="2" />
@@ -57,7 +57,7 @@ const capabilities = [
     title: "Ad Testing",
     desc: "Dodge expensive marketing failures. Test your advert design with a handful of sample users and tweak your ad before you actually launch it.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
         <path d="M32 18c3 1.5 5 4 5 6s-2 4.5-5 6" />
         <path d="M14 32v8" />
@@ -68,7 +68,7 @@ const capabilities = [
     title: "Relaunch Testing",
     desc: "Planning to relaunch a product or service? Find a panel that suits your target audience, and test your remodeled product, design, idea, or packaging.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M40 24a16 16 0 1 1-3.5-10" />
         <polyline points="40 10 40 24 26 24" />
       </svg>
@@ -78,7 +78,7 @@ const capabilities = [
     title: "GTM Strategy",
     desc: "Define your go-to-market approach by testing the concept and ads. Learn what resonated with potential users and what needs tweaking before marketing.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 44 L24 20 L38 8 L38 32 Z" />
         <path d="M24 20 L10 14 L24 8" />
         <line x1="10" y1="14" x2="10" y2="38" />
@@ -91,7 +91,7 @@ const capabilities = [
     title: "Risk Mitigation",
     desc: "Testing your product at the early stages of ideation, designing, and development helps you curb potential risks and failure points and plan for mitigation.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 4L6 12v14c0 10 8 18 18 20 10-2 18-10 18-20V12Z" />
         <polyline points="16 24 21 29 32 18" />
       </svg>
@@ -101,7 +101,7 @@ const capabilities = [
     title: "Market Fit",
     desc: "Know what the industry needs to fill the existing gaps. Use the feedback from concept testing research and make your product more fit for the users.",
     icon: (
-      <svg viewBox="0 0 48 48" className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="20" />
         <circle cx="24" cy="24" r="12" />
         <circle cx="24" cy="24" r="4" />
@@ -209,26 +209,55 @@ export default function ConceptAdTestingPage() {
               align="center"
             />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Editorial rows — no cards; number + title left, copy right */}
+          <div className="mt-12 border-t border-gray-200">
             {capabilities.map((cap, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                transition={{ delay: 0.06 * i, duration: 0.5, ease: "easeOut" }}
+                className="group relative border-b border-gray-200"
               >
-                <SiteCard className="flex flex-col h-full">
-                  <div className="p-7 flex flex-col flex-1">
-                    <div
-                      className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4"
+                {/* hover wash */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "linear-gradient(90deg, rgba(26,111,232,0.05), transparent 60%)" }}
+                />
+
+                <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,300px)_1fr] gap-x-10 gap-y-5 py-12">
+                  {/* Numeral */}
+                  <div className="hidden lg:block">
+                    <span
+                      className="font-black leading-none text-primary/[0.07] group-hover:text-primary/[0.14] transition-colors duration-300 tabular-nums"
+                      style={{ fontSize: 68 }}
                     >
-                      {cap.icon}
-                    </div>
-                    <h3 className="text-gray-900 font-bold text-lg leading-snug mb-4">{cap.title}</h3>
-                    <p className="text-gray-600 text-base leading-8 font-medium flex-1">{cap.desc}</p>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                </SiteCard>
+
+                  {/* Title + icon */}
+                  <div className="flex items-start gap-4">
+                    <span className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shrink-0">
+                      {cap.icon}
+                    </span>
+                    <div>
+                      <span className="lg:hidden block text-xs font-black text-primary/25 mb-1 tabular-nums">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-primary font-extrabold text-2xl leading-tight">
+                        {cap.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Copy */}
+                  <div className="flex flex-col gap-4">
+                    <p className="text-gray-700 text-lg leading-9 font-medium">{cap.desc}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -245,7 +274,7 @@ export default function ConceptAdTestingPage() {
               >
                 {i === 0 ? (
                   /* Concept Testing — lightbulb */
-                  <svg viewBox="0 0 48 48" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
                     <path d="M20 32v2a4 4 0 0 0 8 0v-2" />
                     <line x1="24" y1="6" x2="24" y2="2" />
@@ -256,7 +285,7 @@ export default function ConceptAdTestingPage() {
                   </svg>
                 ) : (
                   /* Ad Testing — megaphone */
-                  <svg viewBox="0 0 48 48" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
                     <path d="M32 18c3 1.5 5 4 5 6s-2 4.5-5 6" />
                     <path d="M14 32v8" />

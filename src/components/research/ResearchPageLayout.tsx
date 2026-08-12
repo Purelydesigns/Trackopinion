@@ -297,63 +297,7 @@ export default function ResearchPageLayout({
           </div>
         </div>
       </section>
-
-      {/* ════════ STATS ════════ */}
-      <section ref={statsRef} className="py-16 bg-highlight">
-        <div className="site-container px-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-            {stats.map((s, i) => {
-              const num = parseFloat(s.value.replace(/[^0-9.]/g, ""));
-              const suffix = s.value.replace(/[0-9.]/g, "");
-              const decimals = s.value.includes(".") ? 1 : 0;
-              return (
-                <motion.div key={i} {...fadeUp(0.1 * i)}>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                    <CountUp end={num} suffix={suffix} decimals={decimals} />
-                  </div>
-                  <div className="text-gray-600 text-sm font-medium">{s.label}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════ FAQs ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">FAQs</h2>
-          </motion.div>
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <motion.div key={i} {...fadeUp(0.06 * i)}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="cursor-pointer w-full flex items-center justify-between px-6 py-5 text-left border border-gray-200 rounded-2xl bg-white hover:border-gray-300 transition-colors"
-                >
-                  <span className="text-base font-semibold text-gray-900 pr-4">{faq.q}</span>
-                  {openFaq === i
-                    ? <ChevronUp className="w-5 h-5 text-gray-400 shrink-0" />
-                    : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
-                  }
-                </button>
-                {openFaq === i && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22 }}
-                    className="mt-2 px-6 py-5 border border-gray-200 rounded-2xl bg-white text-gray-900 text-base leading-7"
-                  >
-                    {faq.a}
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* ════════ RESOURCES SLIDER ════════ */}
       <LatestReadsSection />
 

@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, CheckCircle, ChevronDown, ChevronUp } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import GlobalReach from "@/components/about/GlobalReach";
+import PanelSpecialties from "./PanelSpecialties";
 import LatestReadsSection from "../shared/LatestReadsSection";
 import PageHero from "../ui/PageHero";
 import SiteCard from "../ui/SiteCard";
@@ -249,59 +247,10 @@ export default function HealthcarePage() {
 
 
       {/* ════════ WHO'S IN OUR PANEL ════════ */}
-      <section className="bg-gray-50 py-16">
-        <div className="site-container px-6">
-
-          <SectionHeader
-            label=""
-            heading={
-              <>
-                Who&apos;s in Our Panel?
-              </>
-            }
-            description=""
-            className=""
-          />
-
-          <div className="relative">
-            {/* Dashed line through circle centers */}
-            <div className="absolute top-10 left-0 right-0 border-t-2 border-dashed border-gray-300 z-0" />
-
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 2000, disableOnInteraction: false }}
-              loop
-              slidesPerView={4}
-              spaceBetween={0}
-              breakpoints={{
-                480:  { slidesPerView: 4 },
-                768:  { slidesPerView: 6 },
-                1024: { slidesPerView: 8 },
-              }}
-              className="relative z-10"
-            >
-              {panelRoles.map((role, i) => (
-                <SwiperSlide key={i}>
-                  <div className="flex flex-col items-center gap-3">
-                    <motion.div
-                      whileHover={{ scale: 1.10}}
-                      className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg cursor-pointer transition-colors duration-300 border-4 border-gray-50"
-                    >
-                      {role.icon}
-                    </motion.div>
-                    <p className="text-xs sm:text-sm font-bold text-gray-700 text-center leading-5 mt-1">
-                      {role.label}
-                    </p>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-      </section>
+      <PanelSpecialties />
 
       {/* ════════ STATS BANNER ════════ */}
-      <section className="py-6 pb-16 site-container px-6">
+      <section className="py-16 site-container px-6">
         <motion.div
           {...fadeUp()}
           className="rounded-3xl overflow-hidden"

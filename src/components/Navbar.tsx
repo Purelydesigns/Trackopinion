@@ -33,7 +33,7 @@ const solutions = [
     children: [
       { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/solutions/research-services/qualitative"  },
       { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative" },
-      { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/scrip8" },
+      { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/research-services/survey-programming" },
       { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/contact-us" },
       { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/analytics" },
     ],
