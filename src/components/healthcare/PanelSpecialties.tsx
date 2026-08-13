@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search, ArrowRight, ChevronDown, ChevronUp,
+  Search, ArrowRight, ChevronDown, ChevronUp, X,
   Stethoscope, ClipboardPlus, Baby, Smile, Eye, Pill,
   Scissors, Bone, Droplets, Ear, Venus,
   HeartPulse, Brain, Activity, Dna, Syringe,
@@ -73,12 +73,46 @@ const stats = [
   { value: "711K+", label: "Verified Professionals" },
 ];
 
+/* Allied & additional roles shown in the modal */
+const alliedRoles = [
+  "Anesthesiologists", "Radiologists", "Pathologists",
+  "Emergency Medicine Physicians", "Geriatricians",
+  "Rheumatologists", "Infectious Disease Specialists",
+  "Physical Medicine & Rehab Specialists",
+  "Occupational Medicine Specialists", "Nuclear Medicine Specialists",
+  "Vascular Surgeons", "Plastic Surgeons",
+  "Sports Medicine Specialists", "Nurses", "Physiotherapists",
+  "Occupational Therapists", "Speech-Language Pathologists",
+  "Dietitians", "Nutritionists", "Medical Lab Technologists",
+  "Radiologic Technologists", "Psychologists", "Counselors",
+  "Social Workers", "Audiologists", "Optometrists",
+  "Podiatrists", "Chiropractors", "Paramedics",
+  "Pharmacy Technicians", "Dental Hygienists", "Midwives",
+  "Respiratory Therapists", "Perfusionists", "Clinical Researchers",
+];
+
 export default function PanelSpecialties() {
   const [active, setActive] = useState<{ g: number; i: number }>({ g: 0, i: 0 });
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
   const [query, setQuery] = useState("");
+  const [showAllied, setShowAllied] = useState(false);
 
   const q = query.trim().toLowerCase();
+
+  /* Close on Escape + lock body scroll while the modal is open */
+  useEffect(() => {
+    if (!showAllied) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowAllied(false);
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [showAllied]);
 
   const filtered = useMemo(
     () =>
@@ -246,16 +280,80 @@ export default function PanelSpecialties() {
 
         {/* Allied roles CTA */}
         <div className="flex justify-center mt-12">
-          <a
-            href="/contact-us"
+          <button
+            onClick={() => setShowAllied(true)}
             className="inline-flex items-center gap-2.5 bg-white rounded-full px-7 py-3.5 shadow-sm border border-gray-100 text-primary text-sm font-bold hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-center"
           >
             +35 More Allied Roles — Nursing, Therapy, Diagnostics &amp; More
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
         </div>
 
       </div>
+
+      {/* ── Allied roles modal ── */}
+      {/* Rendered conditionally without AnimatePresence so it always unmounts —
+          an exit-animated backdrop can linger at opacity 0 and swallow clicks. */}
+      <>
+        {showAllied && (
+          <motion.div
+            key="allied-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setShowAllied(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary/40 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Allied and additional specialties"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex items-start justify-between gap-6 px-8 pt-7 pb-5 border-b border-gray-100">
+                <div>
+                  <h3 className="text-primary font-extrabold text-2xl leading-tight mb-1.5">
+                    Allied &amp; Additional Specialties
+                  </h3>
+                  <p className="text-gray-500 text-sm font-medium">
+                    Beyond our 21 core specialties, our 711K+ strong panel also includes:
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowAllied(false)}
+                  aria-label="Close"
+                  className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-primary transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Scrollable pill list */}
+              <div className="overflow-y-auto px-8 py-7">
+                <div className="flex flex-wrap gap-3">
+                  {alliedRoles.map((role, i) => (
+                    <motion.span
+                      key={role}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: Math.min(i * 0.015, 0.4), duration: 0.25 }}
+                      className="bg-section border border-gray-200 text-primary text-sm font-semibold rounded-full px-4 py-2.5 hover:border-primary/40 hover:bg-highlight transition-colors duration-200"
+                    >
+                      {role}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </>
     </section>
   );
 }
