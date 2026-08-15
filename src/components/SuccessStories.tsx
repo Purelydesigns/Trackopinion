@@ -7,7 +7,7 @@ export default function SuccessStories() {
     <LatestReadsSection
       label="Compilation of Our Success Stories"
       heading={<>Research that moved the needle</>}
-      description=""
+      description="Expert-written articles on qualitative research, consumer insights, and market research best practices."
       linkLabel="Read case study →"
       linkHref="/case-studies"
       viewAllHref="/case-studies"
