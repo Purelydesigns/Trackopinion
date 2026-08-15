@@ -1,8 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Share2, Check, X } from "lucide-react";
+import { Calendar, Share2, Check, X, ArrowLeft } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import ListPageHero from "@/components/ui/ListPageHero";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -254,24 +256,46 @@ export default function FeaturedDetail() {
   };
 
   return (
-    <main className="-mt-[76px] bg-white">
-      <div className="site-container px-6">
+    <main>
+      {/* ── Video banner — same as the blog detail page ── */}
+      <ListPageHero
+        title="Featured Updates"
+        titleAs="p"
+        breadcrumb={[{ name: "Featured Updates", href: "/featured-updates" }, { name: TITLE }]}
+      />
 
-        {/* ── Article header ── */}
-        <motion.div {...fadeUp} className="pt-[calc(76px+3rem)] pb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-            {TITLE}
-          </h1>
+      {/* ── White card overlapping the banner ── */}
+      <section className="bg-section pb-20">
+        <div className="site-container px-6">
+          <div
+            className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10 px-8 sm:px-10 pt-8 pb-0"
+            style={{ marginTop: -40 }}
+          >
 
-          {/* Date + share */}
-          <div className="flex items-center justify-between border-b border-gray-200 pb-6">
-            <div className="flex items-center gap-2 text-gray-900 text-base font-medium">
-              <Calendar className="w-4 h-4 text-gray-400" />
-              <span>24.03.2026</span>
-            </div>
-            <SharePopover title={TITLE} />
-          </div>
-        </motion.div>
+            {/* Back link */}
+            <Link
+              href="/featured-updates"
+              className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors duration-200 mb-6"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              All Featured Updates
+            </Link>
+
+            {/* ── Article header ── */}
+            <motion.div {...fadeUp} className="pb-6">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
+                {TITLE}
+              </h1>
+
+              {/* Date + share */}
+              <div className="flex items-center justify-between border-b border-gray-200 pb-6">
+                <div className="flex items-center gap-2 text-gray-900 text-base font-medium">
+                  <Calendar className="w-4 h-4 text-gray-400" />
+                  <span>24.03.2026</span>
+                </div>
+                <SharePopover title={TITLE} />
+              </div>
+            </motion.div>
 
         {/* ── Image Carousel ── */}
         <motion.div {...fadeUp} className="mb-10">
@@ -327,7 +351,9 @@ export default function FeaturedDetail() {
           </ul>
         </motion.div>
 
-      </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

@@ -7,7 +7,7 @@ import {
   PhoneCall, HeartPulse, FileCode2, ArrowRight,
   BarChart3, Users, Layers, Languages, PieChart,
   ShieldCheck, Microscope, TrendingUp,
-  ChevronRight, BookOpen, FileText,
+  ChevronRight, BookOpen, FileText, Newspaper, Radar, Compass, Repeat,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -35,7 +35,7 @@ const solutions = [
       { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative" },
       { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/research-services/survey-programming" },
       { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/contact-us" },
-      { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/analytics" },
+      { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/research-services/analytics" },
     ],
   },
   {
@@ -45,9 +45,12 @@ const solutions = [
     desc: "Strategic insights for large-scale businesses",
     color: "bg-blue-50 text-primary",
     children: [
-      { label: "Product Concept & Creative Ad Testing", icon: Microscope,  desc: "Validate ideas before launch",  href: "/solutions/product-concept-and-ad-testing" },
-      { label: "Customer Loyalty Measurement",          icon: ShieldCheck, desc: "Measure & grow retention",      href: "/solutions/customer-loyalty-measurement" },
-      { label: "Brand Image Study",                     icon: TrendingUp,  desc: "Track brand health over time",  href: "/solutions/brand-image-study" },
+      { label: "Product Concept & Creative Ad Testing",   icon: Microscope,  desc: "Validate ideas before launch",     href: "/solutions/enterprise-solution/product-concept-and-ad-testing" },
+      { label: "Customer Loyalty Measurement",            icon: ShieldCheck, desc: "Measure & grow retention",         href: "/solutions/enterprise-solution/customer-loyalty-measurement" },
+      { label: "Brand Image Study",                       icon: TrendingUp,  desc: "Track brand health over time",     href: "/solutions/enterprise-solution/brand-image-study" },
+      { label: "Competitive Intelligence & Market Mapping", icon: Radar,     desc: "Map rivals, segments & whitespace", href: "/solutions/enterprise-solution/competitive-intelligence-and-market-mapping" },
+      { label: "New Market Entry Research",               icon: Compass,     desc: "De-risk entry before you commit",  href: "/solutions/enterprise-solution/new-market-entry-research" },
+      { label: "Usage & Attitude Studies",                icon: Repeat,      desc: "Behaviour, occasions & attitudes", href: "/solutions/enterprise-solution/usage-and-attitude-studies" },
     ],
   },
   {
@@ -86,8 +89,9 @@ const navLinks = [
 
 /* ── Resources dropdown data ── */
 const resourceLinks = [
-  { label: "Blog",         href: "/resources",    icon: BookOpen, desc: "Insights, guides & industry articles" },
-  { label: "Case Studies", href: "/case-studies", icon: FileText, desc: "Real-world research outcomes"        },
+  { label: "Blog",             href: "/resources",        icon: BookOpen,  desc: "Insights, guides & industry articles" },
+  { label: "Case Studies",     href: "/case-studies",     icon: FileText,  desc: "Real-world research outcomes"         },
+  { label: "Featured Updates", href: "/featured-updates", icon: Newspaper, desc: "News shaping our industry & beyond"   },
 ];
 
 const pathToLabel: Record<string, string> = {
@@ -103,7 +107,9 @@ export default function Navbar() {
   const active = pathToLabel[pathname] ??
     (pathname.startsWith("/solutions")
       ? "SOLUTIONS"
-      : pathname.startsWith("/resources") || pathname.startsWith("/case-studies")
+      : pathname.startsWith("/resources") ||
+        pathname.startsWith("/case-studies") ||
+        pathname.startsWith("/featured-updates")
         ? "RESOURCES"
         : "");
   const [menuOpen, setMenuOpen]             = useState(false);

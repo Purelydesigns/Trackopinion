@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import ListPageHero from "@/components/ui/ListPageHero";
 
 const updates = [
   {
@@ -55,37 +56,26 @@ export default function FeaturedList() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <div className="-mt-[76px] bg-primary">
+    <main>
+      {/* ── Video banner — same as the Resources listing ── */}
+      <ListPageHero title="Featured Updates" breadcrumb="Featured Updates" />
 
-      {/* ── Dark navy header with heading + subheading ── */}
-      <div className="site-container px-6 py-14 pt-[calc(76px+3.5rem)] text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl md:text-3xl font-bold text-white mb-3"
-        >
-          Featured Updates
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-white/60 text-base"
-        >
-          Insights, Breakthroughs, and Updates Shaping our Industry and Beyond
-        </motion.p>
-      </div>
-
-      {/* ── White card ── */}
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-        className="bg-white rounded-t-[2.5rem]"
-      >
+      {/* ── White card overlapping the banner ── */}
+      <section className="bg-section pb-20">
         <div className="site-container px-6">
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10"
+            style={{ marginTop: -40 }}
+          >
+            <div className="px-8 sm:px-10 py-4">
+
+              <p className="text-gray-500 text-base leading-8 font-medium pt-6 pb-2">
+                Insights, Breakthroughs, and Updates Shaping our Industry and Beyond
+              </p>
 
           {updates.map((item, i) => (
             <motion.div
@@ -132,25 +122,26 @@ export default function FeaturedList() {
             </motion.div>
           ))}
 
-          {/* Pagination */}
-          <div className="flex justify-center gap-2 py-10">
-            {[1, 2, 3].map((n) => (
-              <button
-                key={n}
-                className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
-                  n === 1
-                    ? "bg-primary text-white shadow"
-                    : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-primary hover:text-white hover:border-primary"
-                }`}
-              >
-                {n}
-              </button>
-            ))}
-          </div>
+              {/* Pagination */}
+              <div className="flex justify-center gap-2 py-10">
+                {[1, 2, 3].map((n) => (
+                  <button
+                    key={n}
+                    className={`w-9 h-9 rounded-full text-xs font-bold transition-all duration-300 ${
+                      n === 1
+                        ? "bg-primary text-white shadow"
+                        : "bg-gray-100 text-gray-500 border border-gray-200 hover:bg-primary hover:text-white hover:border-primary"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
 
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
-
-    </div>
+      </section>
+    </main>
   );
 }

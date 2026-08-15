@@ -2,12 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import PageHero from "../ui/PageHero";
 import SiteCard from "../ui/SiteCard";
 import SectionHeader from "../ui/SectionHeader";
 import LatestReadsSection from "../shared/LatestReadsSection";
+import { ConceptScorecard, AdAttentionVisual } from "./ConceptVisuals";
+import { faqs } from "./faqs";
 
 /* ── Helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -116,19 +118,29 @@ const capabilities = [
 
 const contentSections = [
   {
+    label: "Concept Testing",
     heading: "What's Product Concept Testing?",
     paragraphs: [
       "Toying with an idea to build something new or unique? Concept testing in new product development can help you achieve a viable product by assessing its potential for commercial success.",
       "You test your product at various stages. Descriptive writing, concept designs, and working prototypes are some artifacts you share with a selective audience and seek their input.",
-      "The concept testing research feedback via surveys focus group meetings, and interviews weeds out the superfluous and enhances your product's functioning and benefits.",
+    ],
+    bullets: [
+      "Descriptive writing, concept designs and working prototypes",
+      "Feedback via surveys, focus group meetings and interviews",
+      "Weeds out the superfluous before you invest at scale",
     ],
   },
   {
+    label: "Ad Testing",
     heading: "Why Creative Ad Testing?",
     paragraphs: [
       "Developing a novel idea or relaunching an old product? Define a go-to-market strategy with us by testing your creative ads.",
       "Analyze with a panel how your fresh idea will be perceived. Or test your product's renewed packaging or enhancements in the aisles.",
-      "Measure your users' responses with our well-executed ad surveys with eye tracking and facial recognition. Test waters to find the target market's engagement before going full throttle into advertising.",
+    ],
+    bullets: [
+      "Well-executed ad surveys with eye tracking and facial recognition",
+      "Test packaging and enhancements in the aisles",
+      "Find target-market engagement before going full throttle",
     ],
   },
 ];
@@ -159,24 +171,7 @@ const stats = [
   { value: "20K+", label: "Project Completed" },
 ];
 
-const faqs = [
-  {
-    q: "Why are product Concepts and creative ad testing important for your business?",
-    a: "Product concept and creative ad testing saves your effort, time, and money.\n\nWhether you're launching a new product, relaunching or rebranding an existing solution, or planning to start a marketing campaign, a lot of money is at stake. Instead of going blind to the market with your product or ad, you can gauge responses to your ads and products. This saves you from several setbacks, gives you the opportunity to fix shortcomings pointed out by your users, and opens the gate to enhance it within time.",
-  },
-  {
-    q: "When should I conduct product concept testing?",
-    a: "Product concept testing should be conducted as early as possible in the product development lifecycle — ideally before investing heavily in design, engineering, or marketing. Key moments include: after identifying a new product idea, after creating initial prototypes or design concepts, before finalizing packaging or branding, and before launching a major marketing campaign.",
-  },
-  {
-    q: "What metrics are used in creative ad testing?",
-    a: "Creative ad testing uses metrics such as recall (how well audiences remember the ad), comprehension (how clearly the message is understood), persuasion (how effectively it changes intent), emotional response (measured via facial coding or biometrics), attention (eye-tracking heatmaps), and brand linkage (association with the intended brand).",
-  },
-  {
-    q: "How do I choose the right sample size for testing?",
-    a: "Sample size depends on your research objectives, the number of concepts you're testing, and the subgroups you need to analyze. For monadic concept tests, a minimum of 150–200 respondents per concept is recommended to detect meaningful differences. For ad pre-testing, 100–150 respondents per ad is a common starting point. We help you define the right sample during our project consultation phase.",
-  },
-];
+
 
 export default function ConceptAdTestingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -185,6 +180,7 @@ export default function ConceptAdTestingPage() {
     <main className="bg-white">
 
       <PageHero
+          breadcrumb={[{ name: "Enterprise Solution" }, { name: "Product Concept & Ad Testing" }]}
           badge="Product Concept And Ad-Testing"
           heading={
             <>
@@ -264,45 +260,69 @@ export default function ConceptAdTestingPage() {
         </div>
       </section>
 
-      {/* ════════ CONTENT SECTIONS ════════ */}
-      {contentSections.map((sec, i) => (
-        <section key={i} className="bg-white py-10">
-          <div className="site-container px-6">
-            <motion.div {...fadeUp()} className="flex items-center gap-4 mb-6">
-              <div
-                className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center"
-              >
-                {i === 0 ? (
-                  /* Concept Testing — lightbulb */
-                  <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
-                    <path d="M20 32v2a4 4 0 0 0 8 0v-2" />
-                    <line x1="24" y1="6" x2="24" y2="2" />
-                    <line x1="10" y1="12" x2="7" y2="9" />
-                    <line x1="38" y1="12" x2="41" y2="9" />
-                    <line x1="6" y1="24" x2="2" y2="24" />
-                    <line x1="42" y1="24" x2="46" y2="24" />
-                  </svg>
-                ) : (
-                  /* Ad Testing — megaphone */
-                  <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
-                    <path d="M32 18c3 1.5 5 4 5 6s-2 4.5-5 6" />
-                    <path d="M14 32v8" />
-                  </svg>
-                )}
+      {/* CONTENT SECTIONS — alternating split, same rhythm as the Qualitative page */}
+      {contentSections.map((sec, i) => {
+        const flip = i % 2 === 1;
+        return (
+          <section key={i} className={`py-20 ${flip ? "bg-section" : "bg-white"}`}>
+            <div className="site-container px-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                {/* Visual */}
+                <motion.div
+                  initial={{ opacity: 0, x: flip ? 20 : -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className={flip ? "lg:order-2" : ""}
+                >
+                  {i === 0 ? <ConceptScorecard /> : <AdAttentionVisual />}
+                </motion.div>
+
+                {/* Text */}
+                <motion.div
+                  initial={{ opacity: 0, x: flip ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className={`flex flex-col gap-5 ${flip ? "lg:order-1" : ""}`}
+                >
+                  <SectionHeader
+                    label={sec.label}
+                    heading={<>{sec.heading}</>}
+                    theme="light"
+                    align="left"
+                    className="!mb-0"
+                  />
+
+                  {sec.paragraphs.map((para, j) => (
+                    <p key={j} className="text-base leading-8 font-medium flex-1 mb-1 text-gray-600">
+                      {para}
+                    </p>
+                  ))}
+
+                  <ul className="flex flex-col gap-3 mt-1">
+                    {sec.bullets.map((b, j) => (
+                      <motion.li
+                        key={j}
+                        initial={{ opacity: 0, x: 12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.15 + j * 0.08, duration: 0.4 }}
+                        className="flex items-center gap-3"
+                      >
+                        <CheckCircle2 size={17} className="text-primary shrink-0" />
+                        <span className="text-base leading-8 font-medium flex-1 mb-1 text-gray-600">{b}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+
               </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold leading-tight text-primary">{sec.heading}</h2>
-            </motion.div>
-            <div>
-              {sec.paragraphs.map((p, j) => (
-                <motion.p key={j} {...fadeUp(0.08 * j)} className="text-gray-600 text-base leading-8 font-medium flex-1 mb-2">{p}</motion.p>
-              ))}
             </div>
-            {i < contentSections.length - 1 && <div className="mt-10 border-b border-gray-100" />}
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
       {/* ════════ METHODS (bg-primary) ════════ */}
       <section className="py-20 bg-primary overflow-hidden">

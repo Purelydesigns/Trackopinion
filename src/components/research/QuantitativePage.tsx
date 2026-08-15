@@ -8,6 +8,7 @@ import ResearchDeepLayout, { type ResearchDeepContent } from "./ResearchDeepLayo
 
 const content: ResearchDeepContent = {
   hero: {
+    breadcrumb: [{ name: "Research Services" }, { name: "Quantitative" }],
     badge: "Quantitative Market Research",
     heading: <>Numbers Through Online Surveys &amp; CATI Interviews</>,
     description:

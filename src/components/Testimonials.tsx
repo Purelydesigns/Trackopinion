@@ -8,7 +8,30 @@ import "swiper/css/navigation";
 import SiteCard from "@/components/ui/SiteCard";
 import SectionHeader from "./ui/SectionHeader";
 
-const testimonials = [
+export interface Testimonial {
+  /** Wordmark shown at the top of the card */
+  company: string;
+  /** Wordmark colour — falls back to brand navy */
+  accent?: string;
+  name: string;
+  role: string;
+  review: string;
+}
+
+interface Props {
+  items?: Testimonial[];
+  label?: string;
+  heading?: React.ReactNode;
+  description?: string;
+  /** Unique suffix for the nav-button ids — required if two instances share a page */
+  id?: string;
+  /** Extra classes for the SectionHeader, e.g. "!mb-0" to tighten the gap */
+  className?: string;
+  /** Extra classes for the wrapping <section>, e.g. "bg-white" or "py-24" */
+  sectionClassName?: string;
+}
+
+const defaultTestimonials: Testimonial[] = [
   {
     company: "Nielsen",
     accent: "#d4001a",
@@ -51,29 +74,41 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({
+  items = defaultTestimonials,
+  label = "",
+  heading = <>What Our Client Say</>,
+  description = "",
+  id = "testimonial",
+  className = "",
+  sectionClassName = "bg-section py-16",
+}: Props) {
+  const prevId = `${id}-prev`;
+  const nextId = `${id}-next`;
+
   return (
-    <section className="bg-section py-16">
+    <section className={sectionClassName}>
       <div className="site-container px-6">
 
         <SectionHeader
-          label=""
-          heading={<>What Our Client Say</>}
-          description=""
+          label={label}
+          heading={heading}
+          description={description}
           theme="light"
+          className={className}
         />
 
         <div className="relative px-8 sm:px-12">
 
           <button
-            id="testimonial-prev"
+            id={prevId}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
 
           <button
-            id="testimonial-next"
+            id={nextId}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary transition-colors duration-200 shadow-md"
           >
             <ArrowRight className="w-5 h-5" />
@@ -81,7 +116,7 @@ export default function Testimonials() {
 
           <Swiper
             modules={[Navigation, Autoplay]}
-            navigation={{ prevEl: "#testimonial-prev", nextEl: "#testimonial-next" }}
+            navigation={{ prevEl: `#${prevId}`, nextEl: `#${nextId}` }}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop
             slidesPerView={1}
@@ -92,7 +127,7 @@ export default function Testimonials() {
             }}
             className="!pt-2 !pb-8 !px-2 !items-stretch"
           >
-            {testimonials.map((t, i) => (
+            {items.map((t, i) => (
               <SwiperSlide key={i} className="!h-auto">
                 <SiteCard className="h-full">
                   <div className="p-7 flex flex-col h-full">
@@ -101,7 +136,7 @@ export default function Testimonials() {
                     <div className="mb-5">
                       <span
                         className="text-2xl font-black tracking-tight"
-                        style={{ color: t.accent }}
+                        style={{ color: t.accent ?? "#0d1b3e" }}
                       >
                         {t.company}
                       </span>

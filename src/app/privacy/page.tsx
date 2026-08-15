@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import Link from "next/link";
+import ListPageHero from "@/components/ui/ListPageHero";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -10,11 +11,13 @@ export const metadata: Metadata = {
 };
 
 /* ── Reusable components ── */
+/* Rendered as an <h2> so the document has a real heading outline for SEO,
+   while keeping the badge styling. */
 function SectionBadge({ text }: { text: string }) {
   return (
-    <div className="inline-block bg-[#e8ecf8] text-primary text-sm font-bold px-4 py-2 rounded-lg mb-6 mt-10">
+    <h2 className="inline-block bg-[#e8ecf8] text-primary text-sm font-bold px-4 py-2 rounded-lg mb-6 mt-10">
       {text}
-    </div>
+    </h2>
   );
 }
 
@@ -39,18 +42,17 @@ function CheckItem({ label, children }: { label?: string; children: React.ReactN
 export default function PrivacyPage() {
   return (
     <main>
-      {/* ── Dark navy header ── */}
-      <div className="-mt-[76px] bg-primary py-8">
-        <div className="site-container px-6 text-center pt-[76px]">
-          <h1 className="text-2xl md:text-3xl font-bold text-white">Privacy Policy</h1>
-        </div>
-      </div>
+      {/* ── Video banner — same as the Resources listing ── */}
+      <ListPageHero title="Privacy Policy" breadcrumb="Privacy Policy" />
 
-      {/* ── Dark wrapper so rounded-top corners are visible ── */}
-      <div className="bg-[#111827]">
-        <div className="bg-white rounded-t-[2.5rem] shadow-2xl">
-          <div className="site-container px-6 py-12">
-            <div>
+      {/* ── White card overlapping the banner ── */}
+      <section className="bg-section pb-20">
+        <div className="site-container px-6">
+          <div
+            className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10"
+            style={{ marginTop: -40 }}
+          >
+            <div className="px-8 sm:px-10 py-12">
 
               {/* Updated date */}
               <p className="font-bold text-gray-900 text-base mb-8">Updated Date: 02-06-2026</p>
@@ -459,7 +461,7 @@ export default function PrivacyPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

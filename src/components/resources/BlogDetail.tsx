@@ -250,7 +250,7 @@ export default function BlogDetail({ id }: { id: string }) {
   if (loading) {
     return (
       <main>
-        <ListPageHero title="Blog Posts" />
+        <ListPageHero title="Blog Posts" breadcrumb={[{ name: "Resources", href: "/resources" }]} />
         <section className="bg-section pb-20">
           <div className="site-container px-6">
             <div className="bg-white rounded-3xl shadow-sm overflow-hidden relative z-10 px-8 py-16" style={{ marginTop: -40 }}>
@@ -275,7 +275,7 @@ export default function BlogDetail({ id }: { id: string }) {
   if (error || !blog) {
     return (
       <main>
-        <ListPageHero title="Blog Posts" />
+        <ListPageHero title="Blog Posts" breadcrumb={[{ name: "Resources", href: "/resources" }]} />
         <section className="bg-section pb-20">
           <div className="site-container px-6">
             <div className="bg-white rounded-3xl shadow-sm relative z-10 px-8 py-24 text-center text-red-500 text-sm" style={{ marginTop: -40 }}>
@@ -289,7 +289,11 @@ export default function BlogDetail({ id }: { id: string }) {
 
   return (
     <main>
-      <ListPageHero title="Blog Posts" />
+      <ListPageHero
+        title="Blog Posts"
+        titleAs="p"
+        breadcrumb={[{ name: "Resources", href: "/resources" }, { name: blog.title }]}
+      />
 
       <section className="bg-section pb-20">
         <div className="site-container px-6">

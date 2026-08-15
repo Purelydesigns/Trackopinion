@@ -79,6 +79,7 @@ export default function LatestReadsSection({
           heading={heading}
           description={description}
           theme="light"
+          className="!mb-0"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

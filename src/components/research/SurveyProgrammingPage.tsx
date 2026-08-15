@@ -9,6 +9,7 @@ import ResearchDeepLayout, { type ResearchDeepContent } from "./ResearchDeepLayo
 
 const content: ResearchDeepContent = {
   hero: {
+    breadcrumb: [{ name: "Research Services" }, { name: "Survey Programming" }],
     badge: "Survey Programming · Powered by Scrip8",
     heading: <>Online Survey Programming</>,
     description:

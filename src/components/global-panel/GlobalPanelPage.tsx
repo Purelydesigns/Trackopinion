@@ -14,6 +14,7 @@ export default function GlobalPanelPage() {
   return (
     <main>
       <PageHero
+        breadcrumb={[{ name: "Global Panel", href: "/solutions/global-panel" }, { name: "B2C Panel" }]}
         badge="Global Panel Data — 10 Markets"
         heading={
           <>

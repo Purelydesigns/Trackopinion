@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Breadcrumb, { type Crumb } from "./Breadcrumb";
 import { ReactNode } from "react";
 
 interface Cta {
@@ -19,7 +20,8 @@ interface PageHeroProps {
   secondaryCta?: Cta;
   video?: string;              // defaults to /video/banner.mp4
   minHeight?: string;          // tailwind class e.g. "min-h-[680px]"
-  breadcrumb?: string;         // e.g. "About Us"
+  /** "About Us", or a trail: [{ name: "Global Panel", href: "..." }, { name: "B2B" }] */
+  breadcrumb?: string | Crumb[];
 }
 
 export default function PageHero({
@@ -59,12 +61,7 @@ export default function PageHero({
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-2xl"
         >
-          {/* Breadcrumb */}
-          {breadcrumb && (
-            <p className="text-white/50 text-sm font-medium mb-5">
-              Home / <span className="text-white/80">{breadcrumb}</span>
-            </p>
-          )}
+          {breadcrumb && <Breadcrumb trail={breadcrumb} />}
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-7">

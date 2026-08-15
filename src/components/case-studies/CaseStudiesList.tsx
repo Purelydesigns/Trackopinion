@@ -350,7 +350,7 @@ export default function CaseStudiesList() {
 
   return (
     <main>
-      <ListPageHero title="Case Studies" right={searchSlot} />
+      <ListPageHero title="Case Studies" breadcrumb="Case Studies" right={searchSlot} />
 
       <section className="bg-section pb-20">
         <div className="site-container px-6">

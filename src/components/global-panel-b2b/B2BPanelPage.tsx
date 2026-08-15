@@ -73,6 +73,7 @@ export default function B2BPanelPage() {
   return (
     <main>
       <PageHero
+        breadcrumb={[{ name: "Global Panel", href: "/solutions/global-panel" }, { name: "B2B Panel" }]}
         badge={`B2B Panel — ${TOTAL_PANELISTS.toLocaleString()} Active Panelists`}
         heading={<>Delivering Data &amp; Insights<br />for Businesses</>}
         description="Tap into our diverse global B2B panel for unique market perspectives — validated decision-makers across industries, seniority levels and functions worldwide."

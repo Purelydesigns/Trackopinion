@@ -394,6 +394,7 @@ export default function Scrip8Page() {
     <main className="bg-white">
 
       <PageHero
+        breadcrumb={[{ name: "Solutions" }, { name: "Scrip8" }]}
         badge="Scrip8 · AI-Powered Survey Platform"
         heading={
           <>

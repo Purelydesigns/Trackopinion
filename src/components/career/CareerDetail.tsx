@@ -81,7 +81,7 @@ export default function CareerDetail({ job }: { job: Job }) {
         primaryCta={{ label: "Apply Now", href: "#apply" }}
         secondaryCta={{ label: "Back to Careers", href: "/career" }}
         minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
-        breadcrumb={`Careers / ${job.title}`}
+        breadcrumb={[{ name: "Careers", href: "/career" }, { name: job.title }]}
       />
 
       {/* ── Body ── */}

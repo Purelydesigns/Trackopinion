@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd, { organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -91,10 +93,44 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        {/* CookieYes — consent banner. Loads before hydration so the banner
+            appears on first paint and blocks tags before they fire. */}
+        <Script
+          id="cookieyes"
+          strategy="beforeInteractive"
+          src="https://cdn-cookieyes.com/client_data/bb74aacc1520c6fb02d1e3cb/script.js"
+        />
+      </head>
       <body className={`${montserrat.className} min-h-full flex flex-col`}>
+        {/* Site-wide structured data — identifies the publisher for every page */}
+        <JsonLd data={[organizationSchema, websiteSchema]} />
+
         <Navbar />
         <div className="flex-1 pt-[76px]">{children}</div>
         <Footer />
+
+        {/* Relay CookieYes consent changes to Google Consent Mode.
+            `gtag` is guarded because no GA/GTM tag is installed on the site yet —
+            without the guard every consent change throws a ReferenceError. */}
+        <Script id="cookieyes-consent-relay" strategy="afterInteractive">
+          {`
+            document.addEventListener("cookieyes_consent_update", function (event) {
+              var consent = event.detail || {};
+              var ads = consent.accepted && consent.accepted.indexOf("advertisement") !== -1
+                ? "granted" : "denied";
+
+              if (typeof gtag !== "function") return;
+
+              gtag("consent", "update", {
+                analytics_storage: "granted",
+                ad_storage: ads,
+                ad_user_data: ads,
+                ad_personalization: ads
+              });
+            });
+          `}
+        </Script>
       </body>
     </html>
   );

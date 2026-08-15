@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { CheckCircle, Phone, Mail} from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 /* ── Office data ── */
@@ -119,35 +120,20 @@ export default function ContactPage() {
 
   return (
     <main>
-      {/* ── Banner ── */}
-      <div className="-mt-[76px] bg-primary min-h-[500px] sm:min-h-[600px] flex items-center relative overflow-hidden">
-        <video
-          src="/video/banner.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative w-full site-container px-6 pt-[76px]">
-          <p className="text-white/60 text-sm font-medium mb-6">
-            Home / <span className="text-white">Contact Us</span>
-          </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.15] mb-6">
-            Let&apos;s Start a{" "}
-            <span className="italic font-normal">Conversation</span>
-          </h1>
-          <p className="text-white/80 text-base sm:text-lg leading-8 mb-10 max-w-xl">
-            Have a research question or want to explore how Track Opinion can help your business? Our experts are ready — we respond within 24 hours.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="#contact-form" className="inline-flex items-center gap-2 bg-white text-primary font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">
-              Send a Message →
-            </a>
-            <a href="tel:+911234567890" className="inline-flex items-center gap-2 bg-transparent border border-white/50 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/10 transition-all duration-300">
-              <Phone className="w-4 h-4 text-white" /> Call Now
-            </a>
-          </div>
-        </div>
-      </div>
+      {/* ── Banner — shared PageHero, same as About ── */}
+      <PageHero
+        breadcrumb="Contact Us"
+        badge="We Respond Within 24 Hours"
+        heading={
+          <>
+            Let&apos;s Start a Conversation{" "}
+          </>
+        }
+        description="Have a research question or want to explore how Track Opinion can help your business? Our experts are ready — we respond within 24 hours."
+        primaryCta={{ label: "Send a Message", href: "#contact-form" }}
+        secondaryCta={{ label: "Call Now", href: "tel:+911234567890" }}
+        minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+      />
 
       {/* ── Connect section ── */}
       <section className="bg-gray-50 py-20">

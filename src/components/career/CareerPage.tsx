@@ -11,6 +11,7 @@ export default function CareerPage() {
   return (
     <main>
       <PageHero
+        breadcrumb="Careers"
         badge="We're Hiring — Join Our Team"
         heading={
           <>

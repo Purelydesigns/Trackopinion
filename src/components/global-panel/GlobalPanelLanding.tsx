@@ -30,6 +30,7 @@ export default function GlobalPanelLanding() {
   return (
     <main>
       <PageHero
+        breadcrumb={[{ name: "Solutions" }, { name: "Global Panel" }]}
         badge="Global Panel Data"
         heading={
           <>
