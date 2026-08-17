@@ -5,46 +5,31 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { b2cMarkets } from "./b2cData";
 
-/* ─────────────── Markets ─────────────── */
-const markets = [
-  { id: "global",  label: "Global",         code: "🌐", badge: false },
-  { id: "india",   label: "India",          code: "IN", badge: true  },
-  { id: "usa",     label: "United States",  code: "US", badge: true  },
-  { id: "uk",      label: "United Kingdom", code: "GB", badge: true  },
-  { id: "japan",   label: "Japan",          code: "JP", badge: true  },
-  { id: "uae",     label: "UAE",            code: "AE", badge: true  },
-  { id: "brazil",  label: "Brazil",         code: "BR", badge: true  },
-  { id: "germany", label: "Germany",        code: "DE", badge: true  },
-];
+/* ─────────────── Markets & data ───────────────
+   All 25 markets come from b2cData.ts, generated from the live
+   Track Opinion API, so the figures match trackopinion.com/online-panel. */
+const markets = b2cMarkets.map((m) => ({ id: m.id, label: m.label, code: m.code, badge: true }));
 
-/* ─────────────── Panel data ─────────────── */
-type MarketData = { total: string; female: number; male: number };
-const panelData: Record<string, MarketData> = {
-  global:  { total: "15.4M", female: 52, male: 48 },
-  india:   { total: "42.0M", female: 45, male: 55 },
-  usa:     { total: "38.0M", female: 55, male: 45 },
-  uk:      { total: "18.0M", female: 53, male: 47 },
-  japan:   { total: "8.2M",  female: 50, male: 50 },
-  uae:     { total: "9.5M",  female: 38, male: 62 },
-  brazil:  { total: "12.5M", female: 56, male: 44 },
-  germany: { total: "12.0M", female: 49, male: 51 },
+/* ─────────────── Character illustrations ───────────────
+   Artwork exists for a handful of markets; the rest fall back to the
+   generic pair so every market still renders. */
+const CHARS: Record<string, { female: string; male: string }> = {
+  india:     { female: "/images/Demographics/india-female.png",   male: "/images/Demographics/india-male.png"   },
+  usa:       { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png"      },
+  uk:        { female: "/images/Demographics/UK-female.png",      male: "/images/Demographics/UK-male.png"      },
+  japan:     { female: "/images/Demographics/japan-female.png",   male: "/images/Demographics/japan-male.png"   },
+  brazil:    { female: "/images/Demographics/Brazil-female.png",  male: "/images/Demographics/Brazil-male.png"  },
+  germany:   { female: "/images/Demographics/Germany-female.png", male: "/images/Demographics/Germany-male.png" },
 };
-
-/* ─────────────── Image mapping ─────────────── */
-const charImages: Record<string, { female: string; male: string }> = {
-  global:  { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png"      },
-  india:   { female: "/images/Demographics/india-female.png",   male: "/images/Demographics/india-male.png"   },
-  usa:     { female: "/images/Demographics/US-female.png",      male: "/images/Demographics/US-male.png"      },
-  uk:      { female: "/images/Demographics/UK-female.png",      male: "/images/Demographics/UK-male.png"      },
-  japan:   { female: "/images/Demographics/japan-female.png",   male: "/images/Demographics/japan-male.png"   },
-  uae:     { female: "/images/Demographics/UAE-female.png",     male: "/images/Demographics/UAE-male.png"     },
-  brazil:  { female: "/images/Demographics/Brazil-female.png",  male: "/images/Demographics/Brazil-male.png"  },
-  germany: { female: "/images/Demographics/Germany-female.png", male: "/images/Demographics/Germany-male.png" },
-};
+const FALLBACK_CHARS = { female: "/images/Demographics/US-female.png", male: "/images/Demographics/US-male.png" };
+const charsFor = (id: string) => CHARS[id] ?? FALLBACK_CHARS;
 
 /* ─────────────── Donut ─────────────── */
-const SIZE = 176, STROKE = 15;
+/* Sized so "Active Panel Users" fits on a single line inside the ring:
+   usable width = SIZE − 2×STROKE − padding. */
+const SIZE = 244, STROKE = 18;
 const CX = SIZE / 2, CY = SIZE / 2, R = (SIZE - STROKE) / 2, CIRC = 2 * Math.PI * R;
 function DonutChart({ female, male, total }: { female: number; male: number; total: string }) {
   const fArc = (female / 100) * CIRC;
@@ -59,9 +44,16 @@ function DonutChart({ female, male, total }: { female: number; male: number; tot
           strokeDasharray={`${(male / 100) * CIRC} ${CIRC}`} strokeDashoffset={-fArc}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
       </svg>
-      <div className="absolute flex flex-col items-center text-center">
-        <span className="text-2xl font-bold text-gray-800 leading-none">{total}</span>
-        <span className="text-[9px] uppercase tracking-widest text-gray-400 mt-1.5 font-semibold">Panelists</span>
+      {/* Constrained to the ring's inner width so nothing runs under the
+          stroke. `whitespace-nowrap` keeps the label on one line. */}
+      <div
+        className="absolute flex flex-col items-center text-center"
+        style={{ width: SIZE - STROKE * 2 - 20 }}
+      >
+        <span className="text-[11px] uppercase tracking-wider text-gray-400 font-semibold whitespace-nowrap">
+          Active Panel Users
+        </span>
+        <span className="text-3xl font-bold text-gray-800 leading-none mt-2.5">{total}</span>
       </div>
     </div>
   );
@@ -86,9 +78,10 @@ export default function PanelDemographics({
 }) {
   const [open, setOpen] = useState(false);
 
-  const market = markets.find((m) => m.id === marketId)!;
-  const d = panelData[marketId];
-  const chars = charImages[marketId];
+  const market = markets.find((m) => m.id === marketId) ?? markets[0];
+  const src = b2cMarkets.find((m) => m.id === market.id) ?? b2cMarkets[0];
+  const d = { total: src.users, female: src.female, male: src.male };
+  const chars = charsFor(market.id);
   const nameF = "Female";
   const nameM = "Male";
 
@@ -161,7 +154,7 @@ export default function PanelDemographics({
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Female</p>
-                  <p className="text-base font-semibold text-gray-700">{nameF}</p>
+                  <p className="text-base font-semibold text-gray-700">{market.label} Panel</p>
                 </div>
                 {/* Large accent % */}
                 <div className="flex items-end gap-0.5 leading-none">
@@ -225,8 +218,11 @@ export default function PanelDemographics({
                 <span className="text-xs font-semibold text-gray-600">{market.label}</span>
               </div>
 
-              {/* Donut */}
-              <DonutChart female={d.female} male={d.male} total={d.total} />
+              {/* Donut + what the split below it shows */}
+              <div className="flex flex-col items-center gap-3">
+                <DonutChart female={d.female} male={d.male} total={d.total} />
+                <p className="text-[13px] font-semibold text-gray-500">Gender Ratio in (%)</p>
+              </div>
 
               {/* Stat rows */}
               <div className="stack flex flex-col gap-3">
@@ -280,7 +276,7 @@ export default function PanelDemographics({
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-0.5">Male</p>
-                  <p className="text-base font-semibold text-gray-700">{nameM}</p>
+                  <p className="text-base font-semibold text-gray-700">{market.label} Panel</p>
                 </div>
                 {/* Large accent % */}
                 <div className="flex items-end gap-0.5 leading-none">
