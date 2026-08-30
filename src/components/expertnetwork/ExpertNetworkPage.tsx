@@ -1,40 +1,14 @@
 "use client";
 
-import { useState, useRef } from "react";
+;
 import { motion } from "framer-motion";
-import { Check, CheckCircle, CheckCircle2, Users, Building2, Globe, ShieldCheck, Clock, Star, TrendingUp, Award, ArrowRight, Send } from "lucide-react";
+import { CheckCircle2, Users, Building2, ArrowRight } from "lucide-react";
 import SiteCard from "@/components/ui/SiteCard";
 import Button from "@/components/ui/Button";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
-import Testimonials, { type Testimonial } from "@/components/Testimonials";
-
-const expertTestimonials: Testimonial[] = [
-  {
-    company: "Global Pharma",
-    name: "Dr. Sarah M.",
-    role: "Head of Strategy, Global Pharma Firm",
-    review: "Track Opinion matched us with a former pharma CMO within three hours of our brief. The insight quality was exceptional and directly influenced our market entry decision.",
-  },
-  {
-    company: "Investment Management",
-    name: "James T.",
-    role: "Senior Analyst, Investment Management",
-    review: "The compliance process gave our team complete confidence. We've run over 40 engagements through Track Opinion and every one has been handled with total professionalism.",
-  },
-  {
-    company: "Technology Sector",
-    name: "Priya K.",
-    role: "Former CFO, Technology Sector",
-    review: "As an expert, I appreciate that Track Opinion respects my time, pays promptly, and handles all the compliance paperwork. I can focus purely on sharing my expertise.",
-  },
-  {
-    company: "Management Consulting",
-    name: "Michael A.",
-    role: "Principal, Management Consulting",
-    review: "The depth of sector coverage is unmatched. We needed a specialist in Nigerian downstream energy — Track Opinion delivered two qualified candidates within 24 hours.",
-  },
-];
+import Testimonials from "@/components/Testimonials";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ── Helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -43,16 +17,6 @@ const fadeUp = (delay = 0) => ({
   viewport: { once: true },
   transition: { duration: 0.5, delay },
 });
-
-function FieldError({ msg }: { msg: string }) {
-  return msg ? <p className="text-red-500 text-xs mt-1">{msg}</p> : null;
-}
-
-type FormFields = {
-  name: string; company: string; location: string; email: string;
-  jobTitle: string; projectType: string; description: string;
-};
-type FormErrors = Partial<Record<keyof FormFields, string>>;
 
 /* ── Data ── */
 const regions = [
@@ -102,22 +66,8 @@ const audiences = [
     desc: "Share your knowledge, shape important decisions, and earn competitive compensation on your own schedule.",
     icon: Users,
     features: expertFeatures,
-    cta: { label: "Join the Network", href: "#register" },
+    cta: { label: "Join the Network", href: "#enquiry" },
   },
-];
-
-const registerBenefits = [
-  { icon: Clock,       title: "Quick Response Time",      desc: "Our Expert Relations team responds within 2 business days to complete your onboarding" },
-  { icon: ShieldCheck, title: "Compliance Assured",       desc: "Full compliance screening and safeguards managed by our dedicated team" },
-  { icon: Award,       title: "Competitive Compensation", desc: "Self-determined rates paid promptly upon engagement completion" },
-  { icon: Globe,       title: "Global Reach",             desc: "Connect with leading organisations across 60+ countries and every major industry" },
-];
-
-const stats = [
-  { value: "< 4 hrs", label: "Average Response Time" },
-  { value: "96%", label: "Client Satisfaction Score" },
-  { value: "88%", label: "Repeat Client Rate" },
-  { value: "50K+", label: "Engagements Delivered" },
 ];
 
 const sectors = [
@@ -127,39 +77,6 @@ const sectors = [
   { name: "Consumer Goods", pct: 58 },
   { name: "Energy & Utilities", pct: 52 },
   { name: "Manufacturing & Industrial", pct: 44 },
-];
-
-const capabilities = [
-  {
-    title: "Expert Matching Engine",
-    desc: "Our proprietary algorithm screens 150K+ profiles against your brief — delivering pre-qualified candidates within hours, not days.",
-    icon: <Users className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
-  {
-    title: "Global Network Access",
-    desc: "5,500+ subsectors covered across 60+ countries. From Silicon Valley CTOs to frontier-market regulators — whoever you need, we find them.",
-    icon: <Globe className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
-  {
-    title: "Compliance & Vetting",
-    desc: "Every expert goes through rigorous background checks, NDA protocols, and conflict-of-interest reviews before any engagement begins.",
-    icon: <ShieldCheck className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
-  {
-    title: "Speed of Delivery",
-    desc: "First match in under 4 hours. Full project scoping and kickoff within 24h. We run on your timeline, not ours.",
-    icon: <Clock className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
-  {
-    title: "Quality Assurance",
-    desc: "96% client satisfaction backed by post-engagement reviews, call recordings, and structured quality scorecards on every project.",
-    icon: <Star className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
-  {
-    title: "Engagement Formats",
-    desc: "Phone interviews, video calls, written surveys, and bespoke advisory panels — designed around what your research actually needs.",
-    icon: <Award className="w-9 h-9 text-current" strokeWidth={1.5} />,
-  },
 ];
 
 /* ── Line chart points (growth trend) ── */
@@ -201,44 +118,6 @@ function smoothCurvePath(pts: { x: number; y: number }[]) {
 
 /* ── Main Component ── */
 export default function ExpertNetworkPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [captcha, setCaptcha] = useState(false);
-  const [fileName, setFileName] = useState("");
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  const [fields, setFields] = useState<FormFields>({
-    name: "", company: "", location: "", email: "",
-    jobTitle: "", projectType: "", description: "",
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  /* Same field styling as the Panel Books form */
-  const inputCls = "rounded-lg px-3 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 outline-none border border-gray-200 bg-white focus:border-blue-400 transition-colors w-full";
-  const labelCls = "text-xs font-semibold uppercase text-gray-600";
-
-  function set(field: keyof FormFields, value: string) {
-    setFields((f) => ({ ...f, [field]: value }));
-    setErrors((e) => ({ ...e, [field]: "" }));
-  }
-
-  function validate(): boolean {
-    const e: FormErrors = {};
-    if (!fields.name.trim())    e.name    = "Your name is required.";
-    if (!fields.company.trim()) e.company = "Company name is required.";
-    if (!fields.email.trim())   e.email   = "Email is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Enter a valid email.";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (validate()) setSubmitted(true);
-  }
-
-  const inputClass = (field?: keyof FormErrors) =>
-    `w-full rounded-xl ${field && errors[field] ? "border-red-400" : "border-white/10"} border bg-white/8 px-4 py-3 text-sm placeholder:text-white/30 outline-none focus:border-accent transition-colors text-white`;
-
   return (
     <main className="bg-white">
 
@@ -252,7 +131,7 @@ export default function ExpertNetworkPage() {
         }
         description="Connecting leading organisations with pre-screened, executive-level experts across 5,500+ subsectors worldwide. Accelerate your research with real-world intelligence — on demand."
         primaryCta={{ label: "Connect With an Expert", href: "/contact-us" }}
-        secondaryCta={{ label: "Join the Network", href: "#register" }}
+        secondaryCta={{ label: "Join the Network", href: "#enquiry" }}
         minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
       />
 
@@ -638,6 +517,8 @@ export default function ExpertNetworkPage() {
         </div>
       </section>
 
+      <SolutionEnquiryForm />
+
       {/* ════════ PANEL BOOK / TESTIMONIALS ════════ */}
       <Testimonials 
         label="What They Say"
@@ -646,160 +527,7 @@ export default function ExpertNetworkPage() {
         className="!mb-0"
       />
 
-      {/* REGISTER AS AN EXPERT */}
-      <section id="register" className="py-20 bg-white scroll-mt-24">
-        <div className="site-container px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
-
-            {/* Left - heading + benefit rows */}
-            <div>
-              <SectionHeader
-                label="Join Us"
-                heading={<>Ready to Join? <br />Register as an Expert</>}
-                description="Leave your details below and a member of our Expert Relations team will be in touch shortly with next steps."
-                theme="light"
-                align="left"
-                className="!mb-2"
-              />
-
-              <div className="flex flex-col gap-3">
-                {registerBenefits.map((f, i) => {
-                  const Icon = f.icon;
-                  return (
-                    <motion.div
-                      key={f.title}
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.07 }}
-                      className="flex items-center gap-4 rounded-xl px-2 py-2 border transition-all duration-200"
-                      style={{ background: "#f8f9fb", borderColor: "#e5e7eb" }}
-                    >
-                      <div
-                        className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                        style={{ background: "#eef0f5" }}
-                      >
-                        <Icon size={16} style={{ color: "#6b7280" }} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-md font-semibold leading-tight text-gray-900">{f.title}</p>
-                        <p className="text-sm leading-8 font-medium flex-1 text-gray-600">{f.desc}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right - form */}
-            <div className="rounded-2xl p-8 border border-gray-100 shadow-sm bg-gray-50">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center">
-                    <CheckCircle size={24} className="text-blue-600" />
-                  </div>
-                  <p className="text-lg font-semibold text-gray-800">Registration Submitted!</p>
-                  <p className="text-sm text-gray-500 font-normal max-w-xs">
-                    Our Expert Relations team will reach out within 48 hours to complete your onboarding.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFields({ name: "", company: "", location: "", email: "", jobTitle: "", projectType: "", description: "" });
-                      setCaptcha(false);
-                    }}
-                    className="mt-4 text-xs text-blue-600 underline underline-offset-2"
-                  >
-                    Submit another registration
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-1">Register as an Expert</h3>
-                    <p className="text-base leading-8 font-medium flex-1 text-gray-600">
-                      Complete the form and our team will be in touch within 48 hours.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <label className="flex flex-col gap-1.5">
-                      <span className={labelCls}>Your Name <span className="text-blue-500">*</span></span>
-                      <input
-                        value={fields.name}
-                        onChange={(e) => set("name", e.target.value)}
-                        placeholder="Full Name"
-                        className={`${inputCls} ${errors.name ? "!border-red-400" : ""}`}
-                      />
-                      <FieldError msg={errors.name ?? ""} />
-                    </label>
-                    <label className="flex flex-col gap-1.5">
-                      <span className={labelCls}>Company Name <span className="text-blue-500">*</span></span>
-                      <input
-                        value={fields.company}
-                        onChange={(e) => set("company", e.target.value)}
-                        placeholder="Current / Most Recent Employer"
-                        className={`${inputCls} ${errors.company ? "!border-red-400" : ""}`}
-                      />
-                      <FieldError msg={errors.company ?? ""} />
-                    </label>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <label className="flex flex-col gap-1.5">
-                      <span className={labelCls}>Designation</span>
-                      <input
-                        value={fields.jobTitle}
-                        onChange={(e) => set("jobTitle", e.target.value)}
-                        placeholder="Your Job Title / Role"
-                        className={inputCls}
-                      />
-                    </label>
-                    <label className="flex flex-col gap-1.5">
-                      <span className={labelCls}>Email ID <span className="text-blue-500">*</span></span>
-                      <input
-                        type="email"
-                        value={fields.email}
-                        onChange={(e) => set("email", e.target.value)}
-                        placeholder="your@email.com"
-                        className={`${inputCls} ${errors.email ? "!border-red-400" : ""}`}
-                      />
-                      <FieldError msg={errors.email ?? ""} />
-                    </label>
-                  </div>
-
-                  <label className="flex items-start gap-3 cursor-pointer select-none">
-                    <div
-                      onClick={() => setCaptcha((c) => !c)}
-                      className={`w-4 h-4 rounded border-2 shrink-0 mt-1 flex items-center justify-center transition-all duration-150 ${
-                        captcha ? "bg-[#1a6fe8] border-[#1a6fe8]" : "bg-white border-gray-300"
-                      }`}
-                    >
-                      {captcha && <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />}
-                    </div>
-                    <span className="text-gray-600 text-xs leading-5">
-                      I&apos;m not a robot and agree to Track Opinion&apos;s{" "}
-                      <a href="/terms" className="underline text-primary">Terms</a>
-                      {" "}&amp;{" "}
-                      <a href="/privacy" className="underline text-primary">Privacy Policy</a>
-                    </span>
-                  </label>
-
-                  <button
-                    type="submit"
-                    className="mt-1 w-full flex items-center justify-center gap-2.5 rounded-xl py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-                    style={{ background: "linear-gradient(135deg, #1a6fe8 0%, #1458c8 100%)" }}
-                  >
-                    <Send size={16} />
-                    Submit Registration
-                  </button>
-                </form>
-              )}
-            </div>
-
-          </div>
-        </div>
-      </section>
+      
 
     </main>
   );

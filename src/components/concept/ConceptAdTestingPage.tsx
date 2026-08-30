@@ -1,42 +1,15 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
-import { ChevronDown, ChevronUp, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
+;
+import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import PageHero from "../ui/PageHero";
-import SiteCard from "../ui/SiteCard";
 import SectionHeader from "../ui/SectionHeader";
 import LatestReadsSection from "../shared/LatestReadsSection";
+import FaqAccordion from "../shared/FaqAccordion";
 import { ConceptScorecard, AdAttentionVisual } from "./ConceptVisuals";
 import { faqs } from "./faqs";
-
-/* ── Helpers ── */
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5, delay },
-});
-
-function CountUp({ end, suffix = "", decimals = 0 }: { end: number; suffix?: string; decimals?: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const steps = 60;
-    const inc = end / steps;
-    const timer = setInterval(() => {
-      start += inc;
-      if (start >= end) { setCount(end); clearInterval(timer); }
-      else setCount(start);
-    }, 1800 / steps);
-    return () => clearInterval(timer);
-  }, [inView, end]);
-  return <span ref={ref}>{count.toFixed(decimals)}{suffix}</span>;
-}
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ── Capability cards with relevant icons ── */
 const capabilities = [
@@ -163,18 +136,7 @@ const methods = [
   },
 ];
 
-const stats = [
-  { value: "15+",  label: "Years of Expertise" },
-  { value: "100+", label: "Clients" },
-  { value: "30+",  label: "Market Covered" },
-  { value: "4.7M", label: "Active Panellists" },
-  { value: "20K+", label: "Project Completed" },
-];
-
-
-
 export default function ConceptAdTestingPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <main className="bg-white">
@@ -386,6 +348,12 @@ export default function ConceptAdTestingPage() {
 
         </div>
       </section>
+
+      {/* FAQs — the FAQPage JSON-LD on this route promises this content
+          is visible, so it has to actually render. */}
+      <FaqAccordion faqs={faqs} />
+
+      <SolutionEnquiryForm />
 
       <LatestReadsSection />
 

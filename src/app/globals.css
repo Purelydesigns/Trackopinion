@@ -3,13 +3,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Height of the fixed navbar. Layout offsets and the hero components that
+     pull up under it read this instead of repeating a magic 76px. */
+  --navbar-height: 76px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 
   /* ── Brand colors ── */
   --color-primary:      #0d1b3e;   /* navy — buttons, headings, active states */
@@ -20,17 +22,15 @@
   --color-highlight:    #dde4f0;   /* blue-tinted light — stats/newsletter bg */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* No dark theme: every section sets its own light background, so the
+   create-next-app `prefers-color-scheme: dark` block only ever showed through
+   in the overscroll area as a black band. Removed rather than half-supported.
+   The font-family is set by the Montserrat class on <body> in layout.tsx; the
+   stack here is only a fallback for anything rendered outside it. */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 /* Site-wide container */

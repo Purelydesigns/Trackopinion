@@ -16,7 +16,7 @@ export default function AboutHero() {
       }
       description="Track Opinion® is a global market research and outsourcing firm headquartered in India. Established in 2009, we specialize in end-to-end custom research services for consulting firms, global corporations, and SMBs."
       primaryCta={{ label: "Get in Touch", href: "/contact-us" }}
-      secondaryCta={{ label: "Our Panel", href: "/solutions" }}
+      secondaryCta={{ label: "Our Panel", href: "/solutions/global-panel" }}
       minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
     />
   );

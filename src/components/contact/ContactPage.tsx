@@ -3,48 +3,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { CheckCircle, Phone, Mail} from "lucide-react";
+import { CheckCircle, Phone, Mail } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
-
-/* ── Office data ── */
-const offices = [
-  {
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14 mx-auto mb-4 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="8" y="28" width="48" height="32" rx="2" />
-        <path d="M4 28L32 8l28 20" />
-        <rect x="24" y="40" width="16" height="20" />
-        <rect x="14" y="34" width="10" height="10" />
-        <rect x="40" y="34" width="10" height="10" />
-      </svg>
-    ),
-    address: "607-608, Tower C, Nirvana Courtyard, Sector 50, Gurugram – 122018",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14 mx-auto mb-4 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="4" y="20" width="56" height="40" rx="2" />
-        <rect x="12" y="28" width="12" height="12" />
-        <rect x="40" y="28" width="12" height="12" />
-        <rect x="26" y="40" width="12" height="20" />
-        <path d="M4 20V14a2 2 0 012-2h52a2 2 0 012 2v6" />
-        <path d="M16 12V8M32 12V8M48 12V8" />
-      </svg>
-    ),
-    address: "91 springboard, C2, Block C, Sector 1, Noida, Uttar Pradesh 201301",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14 mx-auto mb-4 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M32 4C22 4 14 12 14 22c0 14 18 38 18 38s18-24 18-38c0-10-8-18-18-18z" />
-        <circle cx="32" cy="22" r="6" />
-        <path d="M20 56c-8 2-14 5-14 8h52c0-3-6-6-14-8" />
-      </svg>
-    ),
-    address: "1401, 21st Street, STE R Sacramento, CA 95811",
-  },
-];
+import HoneypotField, { useHoneypot } from "@/components/ui/HoneypotField";
+import { CONTACT_EMAIL, OFFICES, PHONE_IN } from "@/lib/contactDetails";
+import { officeIcon } from "@/lib/officeIcons";
+import { LIMITS, submitLead, validateLead } from "@/lib/leads";
 
 /* ── Field error ── */
 function FieldError({ msg }: { msg: string }) {
@@ -61,22 +26,34 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
+  const honeypot = useHoneypot();
 
   function set(field: keyof Fields, value: string) {
     setFields((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: "" }));
   }
 
+  /** Maps the shared lead errors back onto this form's split name fields. */
   function validate(): boolean {
     const e: Errors = {};
     if (!fields.firstName.trim()) e.firstName = "First name is required.";
-    if (!fields.lastName.trim())  e.lastName  = "Last name is required.";
-    if (!fields.email.trim())     e.email     = "Email address is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Enter a valid email address.";
-    if (!fields.mobile.trim())    e.mobile    = "Mobile number is required.";
-    else if (!/^\+?[\d\s\-]{7,15}$/.test(fields.mobile)) e.mobile = "Enter a valid mobile number.";
-    if (!fields.company.trim())   e.company   = "Company name is required.";
-    if (!fields.message.trim())   e.message   = "Please tell us how we can help.";
+    if (!fields.lastName.trim()) e.lastName = "Last name is required.";
+    if (!fields.company.trim()) e.company = "Company name is required.";
+
+    const shared = validateLead(
+      {
+        name: `${fields.firstName} ${fields.lastName}`.trim(),
+        email: fields.email,
+        mobile: fields.mobile,
+        company: fields.company,
+        message: fields.message,
+      },
+      ["mobile", "company", "message"],
+    );
+    if (shared.email) e.email = shared.email;
+    if (shared.mobile) e.mobile = shared.mobile;
+    if (shared.message) e.message = shared.message;
+
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -84,28 +61,28 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
     setLoading(true);
     setApiError("");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: fields.firstName,
-          lastName:  fields.lastName,
-          email:     fields.email,
-          mobile:    fields.mobile,
-          company:   fields.company,
-          message:   fields.message,
-        }),
-      });
-      if (!res.ok) throw new Error("Submission failed");
+
+    const result = await submitLead({
+      source: "contact",
+      name: `${fields.firstName} ${fields.lastName}`.trim(),
+      email: fields.email.trim(),
+      mobile: fields.mobile.trim(),
+      company: fields.company.trim(),
+      message: fields.message.trim(),
+      website: honeypot.value,
+    });
+
+    setLoading(false);
+    if (result.ok) {
       setSubmitted(true);
-    } catch {
-      setApiError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+      return;
     }
+    // Surface anything the server rejected that the client let through.
+    setErrors((prev) => ({ ...prev, ...result.errors }));
+    setApiError(result.message);
   }
 
   const inputClass = (field: keyof Errors) =>
@@ -151,22 +128,22 @@ export default function ContactPage() {
 
             {/* Call & Email */}
             <div className="grid grid-cols-2 gap-3 mb-8">
-              <a href="tel:+911244567890" className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
+              <a href={PHONE_IN.href} className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
                 <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
                   <Phone className="w-4 h-4 text-primary group-hover:text-white transition-colors duration-200" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Call Us</p>
-                  <p className="text-sm font-semibold text-gray-900">+91 124 456 7890</p>
+                  <p className="text-sm font-semibold text-gray-900">{PHONE_IN.display}</p>
                 </div>
               </a>
-              <a href="mailto:info@trackopinion.com" className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
                 <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
                   <Mail className="w-4 h-4 text-primary group-hover:text-white transition-colors duration-200" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Email Us</p>
-                  <p className="text-sm font-semibold text-gray-900">info@trackopinion.com</p>
+                  <p className="text-sm font-semibold text-gray-900">{CONTACT_EMAIL}</p>
                 </div>
               </a>
             </div>
@@ -209,7 +186,8 @@ export default function ContactPage() {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  <form onSubmit={handleSubmit} className="space-y-5 relative" noValidate>
+                    <HoneypotField {...honeypot.props} />
 
                     {/* Row 1 */}
                     <div className="grid grid-cols-2 gap-4">
@@ -251,6 +229,7 @@ export default function ContactPage() {
                       <label className="block text-sm font-semibold text-gray-900 mb-1.5">How can we Help? <span className="text-red-500">*</span></label>
                       <textarea
                         rows={4}
+                        maxLength={LIMITS.message}
                         placeholder="Let us know how we can help you?"
                         value={fields.message}
                         onChange={(e) => set("message", e.target.value)}
@@ -261,7 +240,7 @@ export default function ContactPage() {
 
                     {/* API error */}
                     {apiError && (
-                      <p className="text-red-500 text-sm">{apiError}</p>
+                      <p role="alert" className="text-red-600 text-sm">{apiError}</p>
                     )}
 
                     {/* Submit */}
@@ -299,19 +278,28 @@ export default function ContactPage() {
             Our Offices
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {offices.map((office, i) => (
+            {OFFICES.map((office, i) => {
+              const Icon = officeIcon(office);
+              return (
               <motion.div
-                key={i}
+                key={office.city}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * i, duration: 0.5 }}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm px-8 py-10 text-center hover:shadow-md transition-shadow duration-300"
               >
-                {office.icon}
-                <p className="text-gray-900 text-base font-bold leading-7">{office.address}</p>
+                <Icon
+                  aria-hidden
+                  strokeWidth={1.5}
+                  className="w-14 h-14 mx-auto mb-4 text-primary"
+                />
+                <p className="text-gray-900 text-base font-bold leading-7">
+                  {office.lines.join(", ")}
+                </p>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

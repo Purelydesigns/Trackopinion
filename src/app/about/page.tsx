@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 import AboutHero from "@/components/about/AboutHero";
 import VisionMission from "@/components/about/VisionMission";
 import SpecializedSectors from "@/components/about/SpecializedSectors";
@@ -7,8 +8,6 @@ import GlobalReach from "@/components/about/GlobalReach";
 import Leadership from "@/components/about/Leadership";
 import WhyBusinesses from "@/components/about/WhyBusinesses";
 import Testimonials from "@/components/Testimonials";
-import Certifications from "@/components/Certifications";
-import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -16,6 +15,7 @@ export const metadata: Metadata = {
     "Track Opinion® is a global market research and outsourcing firm headquartered in India. Established in 2009, we specialize in end-to-end custom research services.",
   alternates: { canonical: "https://www.trackopinion.com/about" },
   openGraph: {
+      images: [OG_IMAGE],
     url: "https://www.trackopinion.com/about",
     title: "About Us | Track Opinion®",
     description:

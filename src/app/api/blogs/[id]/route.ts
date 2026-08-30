@@ -1,19 +1,25 @@
 import { NextResponse } from "next/server";
+import { apiBaseUrl, logAndDescribe, upstreamJson } from "@/lib/api";
 
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+
+  // Only ever a numeric post id. Rejecting anything else stops a crafted
+  // segment from injecting extra query parameters into the upstream URL.
+  if (!/^\d+$/.test(id)) {
+    return NextResponse.json({ error: "Invalid blog id." }, { status: 400 });
+  }
+
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Blog/blogDetails?id=${id}`,
+    const data = await upstreamJson(
+      `${apiBaseUrl()}/api/Blog/blogDetails?id=${encodeURIComponent(id)}`,
       { headers: { accept: "*/*" } }
     );
-    if (!res.ok) throw new Error(`Upstream ${res.status}`);
-    const data = await res.json();
     return NextResponse.json(data);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch blog detail" }, { status: 502 });
+  } catch (err) {
+    return NextResponse.json({ error: logAndDescribe("blogs/[id]", err) }, { status: 502 });
   }
 }

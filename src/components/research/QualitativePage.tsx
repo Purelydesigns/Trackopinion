@@ -118,9 +118,9 @@ const content: ResearchDeepContent = {
     description:
       "A dedicated team available around the clock — structured project delivery from consultation to execution.",
     steps: [
-      { num: 1, label: "Project Consultation", title: "You speak, we listen.", quote: '"We seek a detailed discussion on your project"', desc: "We conduct a detailed discussion on your project to understand your qualitative data needs that should meet end goals." },
-      { num: 2, label: "Team Allocation",      title: "You ask, we provide.",  quote: '"The right team, assembled for you"',            desc: "You get a research team with a project manager, expert research consultants, survey programmers and data analysts." },
-      { num: 3, label: "Project Execution",    title: "You want, we serve.",   quote: '"Precision and punctuality, always"',            desc: "We take pride in timely delivery while aiming to collect precise data as a qualitative market research firm in India." },
+      { num: 1, label: "", title: "Project Consultation", quote: '', desc: "We conduct a detailed discussion on your project to understand your qualitative data needs that should meet end goals." },
+      { num: 2, label: "", title: "Team Allocation", quote: '', desc: "You get a research team with a project manager, expert research consultants, survey programmers and data analysts." },
+      { num: 3, label: "", title: "Project Execution", quote: '', desc: "We take pride in timely delivery while aiming to collect precise data as a qualitative market research firm in India." },
     ],
   },
 };

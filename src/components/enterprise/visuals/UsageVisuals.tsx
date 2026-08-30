@@ -16,7 +16,13 @@ const occasions = [
 export function OccasionWheel() {
   const CX = 90, CY = 90, R_IN = 34, R_OUT = 78;
   const total = occasions.reduce((n, o) => n + o.pct, 0);
-  let angle = -90;
+  // Start angle per wedge, as a prefix sum — see the note in
+  // CompetitiveVisuals for why this cannot accumulate during render.
+  const startAngles = occasions.reduce<number[]>((acc, o, i) => {
+    const prev = i === 0 ? -90 : acc[i - 1] + (occasions[i - 1].pct / total) * 360;
+    acc.push(prev);
+    return acc;
+  }, []);
 
   const arc = (start: number, sweep: number, r1: number, r2: number) => {
     const rad = (d: number) => (d * Math.PI) / 180;
@@ -32,23 +38,23 @@ export function OccasionWheel() {
     <VisualPanel eyebrow="Occasion Mapping" title="When the Category Is Used" chip={<><Clock className="w-3.5 h-3.5" /> day parts</>}>
       <div className="flex items-center gap-7">
         <svg viewBox="0 0 180 180" width="180" height="180" className="shrink-0">
-          {occasions.map((o, i) => {
-            const sweep = (o.pct / total) * 360 - 2;
-            const d = arc(angle, sweep, R_IN, R_OUT * (0.72 + (o.pct / 31) * 0.28));
-            const el = (
-              <motion.path
-                key={o.label} d={d}
-                fill={i === 3 ? NAVY : i === 0 ? "#2a4a86" : MUTED}
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.15 + i * 0.09, duration: 0.4 }}
-                style={{ transformOrigin: `${CX}px ${CY}px` }}
-              />
-            );
-            angle += (o.pct / total) * 360;
-            return el;
-          })}
+          {occasions.map((o, i) => (
+            <motion.path
+              key={o.label}
+              d={arc(
+                startAngles[i],
+                (o.pct / total) * 360 - 2,
+                R_IN,
+                R_OUT * (0.72 + (o.pct / 31) * 0.28),
+              )}
+              fill={i === 3 ? NAVY : i === 0 ? "#2a4a86" : MUTED}
+              initial={{ opacity: 0, scale: 0.85 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + i * 0.09, duration: 0.4 }}
+              style={{ transformOrigin: `${CX}px ${CY}px` }}
+            />
+          ))}
           <circle cx={CX} cy={CY} r={R_IN - 4} fill="#fff" />
           <text x={CX} y={CY - 2} textAnchor="middle" fontSize="17" fontWeight="800" fill={NAVY}>31%</text>
           <text x={CX} y={CY + 12} textAnchor="middle" fontSize="8" fontWeight="700" fill="#9aa7b8">EVENING</text>

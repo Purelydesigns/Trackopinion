@@ -6,7 +6,9 @@ import { motion } from "framer-motion";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import LatestReadsSection from "@/components/shared/LatestReadsSection";
+import FaqAccordion, { type Faq } from "@/components/shared/FaqAccordion";
 import { CheckCircle2 } from "lucide-react";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ═══════════════ Content types ═══════════════ */
 
@@ -54,7 +56,17 @@ const METHOD_COLS: Record<number, string> = {
 
 /* ═══════════════ Layout ═══════════════ */
 
-export default function EnterprisePageLayout({ content }: { content: EnterpriseContent }) {
+export default function EnterprisePageLayout({
+  content,
+  faqs,
+}: {
+  content: EnterpriseContent;
+  /**
+   * Pass the same list the route hands to `faqSchema`. FAQPage markup is only
+   * valid when the questions are visible on the page.
+   */
+  faqs?: Faq[];
+}) {
   const { hero, capabilities, sections, methods } = content;
 
   return (
@@ -236,6 +248,10 @@ export default function EnterprisePageLayout({ content }: { content: EnterpriseC
           </div>
         </div>
       </section>
+
+      {faqs && faqs.length > 0 && <FaqAccordion faqs={faqs} />}
+
+      <SolutionEnquiryForm />
 
       <LatestReadsSection />
     </main>

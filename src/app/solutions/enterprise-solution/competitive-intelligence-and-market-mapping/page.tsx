@@ -8,7 +8,7 @@ const DESCRIPTION =
   "Map the competitive landscape, size every segment and find the white space. Track Opinion's competitive intelligence and market mapping research, validated with real category buyers.";
 
 export const metadata: Metadata = {
-  title: "Competitive Intelligence & Market Mapping | Track Opinion",
+  title: "Competitive Intelligence & Market Mapping",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

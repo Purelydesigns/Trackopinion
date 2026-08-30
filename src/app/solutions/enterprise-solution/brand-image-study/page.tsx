@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Track brand health over time with Track Opinion's brand image studies — awareness, perception, consideration and competitive positioning across waves.";
 
 export const metadata: Metadata = {
-  title: "Brand Image Study | Track Opinion",
+  title: "Brand Image Study",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

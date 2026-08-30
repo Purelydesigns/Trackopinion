@@ -7,6 +7,9 @@ import Link from "next/link";
 import type { Job } from "@/lib/jobs";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "../ui/SectionHeader";
+import HoneypotField, { useHoneypot } from "@/components/ui/HoneypotField";
+import { CAREERS_EMAIL } from "@/lib/contactDetails";
+import { submitLead, validateLead } from "@/lib/leads";
 
 /* ── Helpers ── */
 function CheckItem({ children }: { children: React.ReactNode }) {
@@ -38,6 +41,9 @@ export default function CareerDetail({ job }: { job: Job }) {
     name: "", email: "", mobile: "", profile: job.title, linkedin: "", about: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [sending, setSending] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const honeypot = useHoneypot();
 
   function set(field: keyof FormFields, value: string) {
     setFields((f) => ({ ...f, [field]: value }));
@@ -46,27 +52,76 @@ export default function CareerDetail({ job }: { job: Job }) {
 
   function validate(): boolean {
     const e: FormErrors = {};
-    if (!fields.name.trim())   e.name   = "Full name is required.";
-    if (!fields.email.trim())  e.email  = "Email address is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email))
-                               e.email  = "Enter a valid email address.";
-    if (!fields.mobile.trim()) e.mobile = "Mobile number is required.";
-    else if (!/^\+?[\d\s\-]{7,15}$/.test(fields.mobile))
-                               e.mobile = "Enter a valid mobile number.";
-    if (!fields.profile.trim()) e.profile = "Please specify which profile you are applying for.";
+
+    const shared = validateLead(
+      {
+        name: fields.name,
+        email: fields.email,
+        mobile: fields.mobile,
+        company: fields.profile,
+        message: fields.about,
+      },
+      ["mobile", "company", "message"],
+    );
+    if (shared.name) e.name = shared.name;
+    if (shared.email) e.email = shared.email;
+    if (shared.mobile) e.mobile = shared.mobile;
+    if (shared.company) e.profile = "Please specify which profile you are applying for.";
+    if (shared.message) e.about = "Please tell us a bit about yourself.";
+
     if (fields.linkedin.trim() && !/^https?:\/\/.+/.test(fields.linkedin))
-                               e.linkedin = "Enter a valid URL starting with http(s)://";
-    if (!fileName)             e.resume  = "Please upload your resume.";
-    if (!fields.about.trim())  e.about   = "Please tell us a bit about yourself.";
-    if (!captcha)              e.captcha = "Please confirm you are not a robot.";
+      e.linkedin = "Enter a valid URL starting with http(s)://";
+    // The resume is emailed separately — see the note under the upload field —
+    // so it cannot be a hard requirement here.
+    if (!captcha) e.captcha = "Please confirm the statement above before applying.";
+
     setErrors(e);
     return Object.keys(e).length === 0;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (validate()) setSubmitted(true);
+    if (!validate()) return;
+
+    setSending(true);
+    setApiError("");
+
+    const result = await submitLead({
+      source: "career",
+      name: fields.name.trim(),
+      email: fields.email.trim(),
+      mobile: fields.mobile.trim(),
+      company: fields.profile.trim(),
+      message: [
+        [
+          `Applying for: ${job.title} (${job.location}, ${job.type})`,
+          fields.linkedin.trim() ? `LinkedIn: ${fields.linkedin.trim()}` : null,
+          fileName ? `Resume the applicant will email: ${fileName}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+        fields.about.trim(),
+      ].join("\n\n"),
+      website: honeypot.value,
+    });
+
+    setSending(false);
+    if (result.ok) {
+      setSubmitted(true);
+      return;
+    }
+    setErrors((prev) => ({ ...prev, ...result.errors }));
+    setApiError(result.message);
   }
+
+  /** Pre-addressed email so the applicant can attach their CV in one click. */
+  const resumeMailto =
+    `mailto:${CAREERS_EMAIL}` +
+    `?subject=${encodeURIComponent(`Resume — ${job.title} — ${fields.name.trim() || "Application"}`)}` +
+    `&body=${encodeURIComponent(
+      `Hello,\n\nPlease find my resume attached for the ${job.title} role.\n\n` +
+      `Name: ${fields.name.trim()}\nEmail: ${fields.email.trim()}\nPhone: ${fields.mobile.trim()}\n`,
+    )}`;
 
   const inputCls = (field: keyof FormErrors) =>
     `w-full border ${errors[field] ? "border-red-400" : "border-gray-200"} rounded-xl bg-gray-50 px-4 py-3 text-sm placeholder:text-gray-400 outline-none focus:border-accent focus:bg-white transition-colors text-gray-900`;
@@ -209,16 +264,28 @@ export default function CareerDetail({ job }: { job: Job }) {
                 <div className="w-20 h-20 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center mb-2">
                   <CheckCircle className="w-10 h-10 text-green-500" />
                 </div>
-                <h3 className="text-xl font-black text-primary">Application Submitted!</h3>
+                <h3 className="text-xl font-black text-primary">Application received</h3>
                 <p className="text-gray-500 text-sm max-w-sm leading-7">
-                  Thank you for applying for <strong>{job.title}</strong>. We&apos;ll review your resume and get back to you within 5 business days.
+                  Thank you for applying for <strong>{job.title}</strong>. We&apos;ll be in
+                  touch within 5 business days.
                 </p>
-                <Link
-                  href="/career"
-                  className="mt-4 inline-flex items-center gap-2 px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:opacity-90 transition-all"
-                >
-                  Back to Jobs
-                </Link>
+                <p className="text-gray-700 text-sm max-w-sm leading-7 font-semibold">
+                  One more step: send us your resume so we can review it.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+                  <a
+                    href={resumeMailto}
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:opacity-90 transition-all"
+                  >
+                    Email my resume <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <Link
+                    href="/career"
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-lg border border-gray-200 text-gray-600 text-sm font-semibold hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    Back to Jobs
+                  </Link>
+                </div>
               </motion.div>
             ) : (
               <motion.form
@@ -226,7 +293,7 @@ export default function CareerDetail({ job }: { job: Job }) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 onSubmit={handleSubmit}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-6"
+                className="relative bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-6"
                 noValidate
               >
                 {/* Row 1 */}
@@ -264,9 +331,11 @@ export default function CareerDetail({ job }: { job: Job }) {
                   <FieldError msg={errors.linkedin ?? ""} />
                 </div>
 
+                <HoneypotField {...honeypot.props} />
+
                 {/* Resume upload */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-1.5">Upload Resume <span className="text-red-500">*</span></label>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-1.5">Resume <span className="text-gray-400 font-normal normal-case">(emailed after you apply)</span></label>
                   <label className={`flex flex-col items-center justify-center gap-2 border-2 border-dashed rounded-xl bg-gray-50 py-8 cursor-pointer hover:border-accent/50 hover:bg-accent/5 transition-colors ${errors.resume ? "border-red-400" : "border-gray-200"}`}>
                     <Upload className="w-8 h-8 text-gray-300" />
                     <span className="text-sm text-gray-500 font-medium">
@@ -275,6 +344,10 @@ export default function CareerDetail({ job }: { job: Job }) {
                         : "Click to upload your resume"}
                     </span>
                     <span className="text-xs text-gray-400">PDF, DOC, DOCX — max 5 MB</span>
+                    <span className="text-xs text-gray-400 px-6 text-center">
+                      Naming your file here helps us match it up — you&apos;ll send the
+                      file itself by email on the next screen.
+                    </span>
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx"
@@ -302,23 +375,36 @@ export default function CareerDetail({ job }: { job: Job }) {
                   <FieldError msg={errors.about ?? ""} />
                 </div>
 
-                {/* Captcha */}
+                {/* Consent. This replaced a checkbox styled to look like Google
+                    reCAPTCHA: it verified nothing, so presenting it as a bot check
+                    was misleading. Bot traffic is handled by the honeypot above and
+                    rate limiting on /api/lead. */}
                 <div>
-                  <div
-                    className={`inline-flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 cursor-pointer select-none transition-colors ${errors.captcha ? "border-red-400" : "border-gray-200 hover:border-gray-300"}`}
-                    onClick={() => { setCaptcha((v) => !v); setErrors((e) => ({ ...e, captcha: "" })); }}
-                  >
-                    <div className={`w-4 h-4 border-2 rounded flex items-center justify-center shrink-0 transition-colors ${captcha ? "bg-accent border-accent" : "border-gray-300"}`}>
-                      {captcha && <svg viewBox="0 0 10 8" className="w-2.5 h-2.5 fill-white"><path d="M1 4l3 3 5-6" /></svg>}
-                    </div>
-                    <span className="text-sm text-gray-700 font-medium">I&apos;m not a robot</span>
-                    <div className="ml-6 text-right">
-                      <div className="text-[10px] text-gray-400">reCAPTCHA</div>
-                      <div className="text-[9px] text-gray-300">Privacy · Terms</div>
-                    </div>
-                  </div>
+                  <label className="flex items-start gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={captcha}
+                      onChange={() => {
+                        setCaptcha((v) => !v);
+                        setErrors((e) => ({ ...e, captcha: "" }));
+                      }}
+                      className="mt-0.5 w-4 h-4 accent-accent shrink-0"
+                    />
+                    <span className="text-sm text-gray-700 leading-6">
+                      I confirm the details above are accurate and consent to Track Opinion
+                      storing them to process my application, as described in the{" "}
+                      <Link href="/privacy" className="font-semibold text-primary hover:underline">
+                        privacy policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
                   <FieldError msg={errors.captcha ?? ""} />
                 </div>
+
+                {apiError && (
+                  <p role="alert" className="text-red-600 text-sm">{apiError}</p>
+                )}
 
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-gray-100">
@@ -330,9 +416,10 @@ export default function CareerDetail({ job }: { job: Job }) {
                   </Link>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold px-10 py-3.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                    disabled={sending}
+                    className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold px-10 py-3.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-sm disabled:opacity-60 disabled:hover:translate-y-0"
                   >
-                    Send Application <ArrowRight className="w-4 h-4" />
+                    {sending ? "Sending…" : <>Send Application <ArrowRight className="w-4 h-4" /></>}
                   </button>
                 </div>
 

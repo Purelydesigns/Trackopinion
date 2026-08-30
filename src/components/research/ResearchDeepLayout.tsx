@@ -9,6 +9,8 @@ import SiteCard from "@/components/ui/SiteCard";
 import Button from "@/components/ui/Button";
 import LatestReadsSection from "@/components/shared/LatestReadsSection";
 import FloatingCards, { type FloatCard } from "@/components/shared/FloatingCards";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
+import FaqAccordion, { type Faq } from "@/components/shared/FaqAccordion";
 
 /* ═══════════════ Content types ═══════════════ */
 
@@ -49,6 +51,8 @@ export interface ResearchDeepContent {
     items: { icon: LucideIcon; label: string; desc: string }[];
     radarLabel: string;
     radarDims: RadarDim[];
+    /** Replaces the radar chart when the page has artwork of its own. */
+    visual?: React.ReactNode;
   };
   /** Floating-cards + bullets split. Omit to hide the section. */
   moreThanNumbers?: {
@@ -56,6 +60,8 @@ export interface ResearchDeepContent {
     paragraphs: string[];
     bullets: string[];
     cards: [FloatCard, FloatCard, FloatCard];
+    /** Replaces the floating cards when the page has artwork of its own. */
+    visual?: React.ReactNode;
   };
   /** Card grid of longer-form advantages. Omit to hide the section. */
   advantages?: {
@@ -115,8 +121,11 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
   const polyFull = dataPts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
   const polyZero = dims.map(() => `${CX},${CY}`).join(" ");
 
+  // The viewBox is wider than the chart on both sides: spoke labels are
+  // anchored outward from the outer ring, and longer ones ("Data Security",
+  // "Confidentiality") ran past the edge and were clipped mid-word.
   return (
-    <svg viewBox="0 0 380 380" className="w-full max-w-sm">
+    <svg viewBox="-60 0 500 380" className="w-full max-w-sm">
       <defs>
         <radialGradient id="rfill" cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stopColor="#1a6fe8" stopOpacity="0.25" />
@@ -280,7 +289,24 @@ function OrbitalDiagram({ nodes: nodeData, centerLabel }: { nodes: OrbitNode[]; 
 }
 
 /* ═══════════════ Page ═══════════════ */
-export default function ResearchDeepLayout({ content }: { content: ResearchDeepContent }) {
+export default function ResearchDeepLayout({
+  content,
+  faqs,
+  extras,
+}: {
+  content: ResearchDeepContent;
+  /**
+   * Page-specific sections with no slot in the shared content shape — a
+   * pricing table, case studies. Rendered after the process strip and before
+   * the FAQs, so the page still ends on FAQ → enquire → read more.
+   */
+  extras?: React.ReactNode;
+  /**
+   * Pass the same list the route hands to `faqSchema`. FAQPage markup is only
+   * valid when the questions are visible on the page.
+   */
+  faqs?: Faq[];
+}) {
   const { hero, methods, moreThanNumbers, advantages, benefits, whyChoose, projectManagement } = content;
 
   return (
@@ -347,7 +373,7 @@ export default function ResearchDeepLayout({ content }: { content: ResearchDeepC
                   {methods.radarLabel}
                 </span>
               </div>
-              <RadarChart dims={methods.radarDims} />
+              {methods.visual ?? <RadarChart dims={methods.radarDims} />}
             </div>
           </div>
         </div>
@@ -362,7 +388,7 @@ export default function ResearchDeepLayout({ content }: { content: ResearchDeepC
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}
             >
-              <FloatingCards cards={moreThanNumbers.cards} />
+              {moreThanNumbers.visual ?? <FloatingCards cards={moreThanNumbers.cards} />}
             </motion.div>
 
             <motion.div
@@ -583,9 +609,7 @@ export default function ResearchDeepLayout({ content }: { content: ResearchDeepC
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary font-bold text-lg bg-white">
                       {step.num}
                     </div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white mb-3">{step.label}</p>
                     <h3 className="text-white font-bold text-lg leading-snug mb-2">{step.title}</h3>
-                    <p className="text-white text-sm italic mb-4 font-medium">{step.quote}</p>
                     <p className="text-slate-400 text-sm leading-relaxed font-normal">{step.desc}</p>
                   </div>
                 </motion.div>
@@ -594,6 +618,12 @@ export default function ResearchDeepLayout({ content }: { content: ResearchDeepC
           </div>
         </div>
       </section>
+
+      {extras}
+
+      {faqs && faqs.length > 0 && <FaqAccordion faqs={faqs} />}
+
+      <SolutionEnquiryForm />
 
       <LatestReadsSection />
     </main>

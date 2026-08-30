@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, CheckCircle, ChevronDown, ChevronUp } from "lucide-react";
+;
 import GlobalReach from "@/components/about/GlobalReach";
 import PanelSpecialties from "./PanelSpecialties";
 import LatestReadsSection from "../shared/LatestReadsSection";
+import FaqAccordion from "../shared/FaqAccordion";
 import PageHero from "../ui/PageHero";
 import SiteCard from "../ui/SiteCard";
 import SectionHeader from "../ui/SectionHeader";
 import { ShieldCheck, Database, Languages } from "lucide-react";
 import { faqs } from "./faqs";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ── Data ── */
 const capabilities = [
@@ -31,28 +32,6 @@ const capabilities = [
   },
 ];
 
-
-
-/* ── Helpers ── */
-function FieldError({ msg }: { msg: string }) {
-  return msg ? <p className="text-red-500 text-xs mt-1">{msg}</p> : null;
-}
-
-function IconBox() {
-  return (
-    <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shrink-0">
-      <svg viewBox="0 0 24 24" className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="9" r="3.5" />
-        <path d="M18 20c0-3.314-2.686-6-6-6s-6 2.686-6 6" />
-        <path d="M17 7a2 2 0 110-4 2 2 0 010 4M7 7a2 2 0 110-4 2 2 0 010 4" strokeDasharray="2 2" />
-      </svg>
-    </div>
-  );
-}
-
-type FormFields = { name: string; company: string; designation: string; email: string; };
-type FormErrors = Partial<Record<keyof FormFields, string>>;
-
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
@@ -62,36 +41,6 @@ const fadeUp = (delay = 0) => ({
 
 /* ── Main ── */
 export default function HealthcarePage() {
-  const [openFaq, setOpenFaq]   = useState<number | null>(0);
-  const [fileName, setFileName] = useState("");
-  const [captcha, setCaptcha]   = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [fields, setFields] = useState<FormFields>({ name: "", company: "", designation: "", email: "" });
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  function set(field: keyof FormFields, value: string) {
-    setFields((f) => ({ ...f, [field]: value }));
-    setErrors((e) => ({ ...e, [field]: "" }));
-  }
-
-  function validate(): boolean {
-    const e: FormErrors = {};
-    if (!fields.name.trim())    e.name    = "Your name is required.";
-    if (!fields.company.trim()) e.company = "Company name is required.";
-    if (!fields.email.trim())   e.email   = "Email ID is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = "Enter a valid email address.";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (validate()) setSubmitted(true);
-  }
-
-  const inputClass = (field: keyof FormErrors) =>
-    `w-full border-b ${errors[field] ? "border-red-400" : "border-gray-200"} bg-gray-50 px-4 py-3 text-sm placeholder:text-gray-500 outline-none focus:border-primary transition-colors text-gray-900`;
-
   return (
     <main className="bg-white">
 
@@ -108,7 +57,6 @@ export default function HealthcarePage() {
           secondaryCta={{ label: "Explore Methods", href: "#methods" }}
           minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
         />
-
 
       {/* ════════ WHO'S IN OUR PANEL ════════ */}
       <PanelSpecialties />
@@ -228,102 +176,11 @@ export default function HealthcarePage() {
 
       
 
-      {/* ════════ PANEL BOOK FORM ════════ */}
-      <section className="bg-section py-16">
-        <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="rounded-3xl overflow-hidden shadow-sm flex flex-col md:flex-row">
+      {/* FAQs — the FAQPage JSON-LD on this route promises this content
+          is visible, so it has to actually render. */}
+      <FaqAccordion faqs={faqs} />
 
-            {/* Left — navy info panel */}
-            <div
-              className="md:w-[340px] shrink-0 flex flex-col justify-between p-10"
-              style={{ background: "linear-gradient(160deg, #0a1628 0%, #0d1b3e 60%, #112254 100%)" }}
-            >
-
-              <SectionHeader
-                label="Free Download"
-                heading={
-                  <>
-                    Our HCP&apos;s Panel Book
-                  </>
-                }
-                description="For a comprehensive breakdown, complete the form to receive your free Healthcare Professionals Panel Book."
-                theme="dark"
-                align="left"
-              />
-            </div>
-
-            {/* Right — form */}
-            <div className="flex-1 bg-white p-10">
-          {submitted ? (
-            <div className="flex flex-col items-center gap-4 py-10 text-center">
-              <CheckCircle className="w-14 h-14 text-green-500" />
-              <h3 className="text-xl font-bold text-gray-900">Request Submitted!</h3>
-              <p className="text-gray-500 text-sm max-w-sm">
-                Thank you! We&apos;ll send your free HCP Panel Book to your email shortly.
-              </p>
-              <button
-                onClick={() => { setSubmitted(false); setFields({ name: "", company: "", designation: "", email: "" }); setFileName(""); setCaptcha(false); }}
-                className="cursor-pointer mt-2 px-6 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg"
-              >
-                Submit Another
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate>
-              {/* Row 1 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name <span className="text-red-500">*</span></label>
-                  <input type="text" placeholder="Name" value={fields.name} onChange={(e) => set("name", e.target.value)} className={inputClass("name")} />
-                  <FieldError msg={errors.name ?? ""} />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Company Name <span className="text-red-500">*</span></label>
-                  <input type="text" placeholder="Company Name" value={fields.company} onChange={(e) => set("company", e.target.value)} className={inputClass("company")} />
-                  <FieldError msg={errors.company ?? ""} />
-                </div>
-              </div>
-
-              {/* Row 2 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Designation</label>
-                  <input type="text" placeholder="Your Designation" value={fields.designation} onChange={(e) => set("designation", e.target.value)} className={inputClass("designation")} />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email ID <span className="text-red-500">*</span></label>
-                  <input type="email" placeholder="Email" value={fields.email} onChange={(e) => set("email", e.target.value)} className={inputClass("email")} />
-                  <FieldError msg={errors.email ?? ""} />
-                </div>
-              </div>
-
-              {/* Captcha + Submit */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-6">
-                <label className="flex items-center gap-3 cursor-pointer border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 select-none">
-                  <div
-                    onClick={() => setCaptcha((c) => !c)}
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${captcha ? "bg-primary border-primary" : "border-gray-300"}`}
-                  >
-                    {captcha && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
-                  </div>
-                  <span className="text-sm text-gray-700 font-medium">I&apos;m not a robot</span>
-                  <div className="ml-3 text-right">
-                    <div className="text-[10px] text-gray-400">reCAPTCHA</div>
-                    <div className="text-[9px] text-gray-300">Privacy · Terms</div>
-                  </div>
-                </label>
-
-                <button type="submit" className="cursor-pointer bg-primary text-white font-bold px-10 py-3 rounded-xl text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
-                  Submit <span className="text-base">»</span>
-                </button>
-              </div>
-            </form>
-          )}
-            </div>{/* right form panel */}
-          </motion.div>{/* card */}
-        </div>
-      </section>
-
+      <SolutionEnquiryForm />
 
       <LatestReadsSection />
 

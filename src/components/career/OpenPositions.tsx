@@ -18,6 +18,25 @@ type Job = {
   desc: string;
 };
 
+/** The shape the openings endpoint returns. Field names vary by record. */
+type RawOpening = {
+  pkId?: number;
+  id?: number;
+  role?: string;
+  title?: string;
+  jobTitle?: string;
+  department?: string;
+  category?: string;
+  location?: string;
+  city?: string;
+  locationType?: string;
+  type?: number | string;
+  jobDesscription?: string;
+  jobDescription?: string;
+  description?: string;
+  shortDescription?: string;
+};
+
 const PAGE_SIZE = 10;
 
 const typeColor: Record<string, string> = {
@@ -38,14 +57,20 @@ export default function OpenPositions() {
   const router       = useRouter();
   const searchParams = useSearchParams();
 
-  const [jobs, setJobs]         = useState<Job[]>([]);
-  const [loading, setLoading]   = useState(true);
-  const [fetchErr, setFetchErr] = useState("");
-  const [total, setTotal]       = useState(0);
+  /* One state object per loaded page. Deriving `loading` from whether the
+     loaded page matches the requested one avoids resetting three pieces of
+     state synchronously inside the effect, which triggers a cascading render. */
+  const [result, setResult] = useState<{
+    page: number;
+    jobs: Job[];
+    total: number;
+    error: string;
+  } | null>(null);
   const [query, setQuery]       = useState("");
   const [category, setCategory] = useState("All Roles");
 
-  const page = Math.max(1, Number(searchParams.get("page") ?? 1));
+  const rawPage = Number(searchParams.get("page"));
+  const page = Number.isFinite(rawPage) && rawPage > 0 ? Math.trunc(rawPage) : 1;
 
   const pushPage = useCallback((n: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -56,45 +81,56 @@ export default function OpenPositions() {
   useEffect(() => {
     const controller = new AbortController();
 
-    setLoading(true);
-    setFetchErr("");
-    setJobs([]);
-
     fetch(`/api/careers?pageNumber=${page}&pageSize=${PAGE_SIZE}`, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
       .then((data) => {
-        const raw        = Array.isArray(data) ? data : data?.data?.item1 ?? data?.data ?? data?.result ?? [];
-        const totalCount = data?.data?.item2 ?? 0;
-        const typeLabel: Record<number, string> = { 1: "Full Time", 2: "Part Time", 3: "Internship", 4: "Remote", 5: "Hybrid" };
-        const list: Job[] = (Array.isArray(raw) ? raw : []).map(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (item: any, idx: number) => ({
-            id:           item.pkId ?? item.id ?? idx,
-            slug:         String(item.pkId ?? item.id ?? idx),
-            title:        item.role ?? item.title ?? item.jobTitle ?? "Open Position",
-            department:   item.department ?? item.category ?? "General",
-            location:     item.location ?? item.city ?? "India",
+        const raw: RawOpening[] = Array.isArray(data)
+          ? data
+          : data?.data?.item1 ?? data?.data ?? data?.result ?? [];
+        const totalCount: number = data?.data?.item2 ?? 0;
+        const typeLabel: Record<number, string> = {
+          1: "Full Time", 2: "Part Time", 3: "Internship", 4: "Remote", 5: "Hybrid",
+        };
+
+        const list: Job[] = (Array.isArray(raw) ? raw : []).map((item, idx) => {
+          const text =
+            item.jobDesscription ?? item.jobDescription ?? item.description ??
+            item.shortDescription ?? "";
+          const words = text.split(/\s+/).filter(Boolean);
+
+          return {
+            id: item.pkId ?? item.id ?? idx,
+            slug: String(item.pkId ?? item.id ?? idx),
+            title: item.role ?? item.title ?? item.jobTitle ?? "Open Position",
+            department: item.department ?? item.category ?? "General",
+            location: item.location ?? item.city ?? "India",
             locationType: item.locationType ?? "On-site",
-            type:         typeLabel[item.type] ?? item.type ?? "Full Time",
-            desc:         (() => { const t = item.jobDesscription ?? item.jobDescription ?? item.description ?? item.shortDescription ?? ""; const w = t.split(/\s+/).filter(Boolean); return w.length > 50 ? w.slice(0, 50).join(" ") + "…" : t; })(),
-          })
-        );
-        setJobs(list);
-        setTotal(totalCount);
+            type:
+              typeof item.type === "number"
+                ? typeLabel[item.type] ?? "Full Time"
+                : item.type ?? "Full Time",
+            desc: words.length > 50 ? words.slice(0, 50).join(" ") + "…" : text,
+          };
+        });
+
+        setResult({ page, jobs: list, total: totalCount, error: "" });
       })
       .catch((err) => {
         if (err.name === "AbortError") return;
-        setFetchErr("Could not load openings. Please refresh.");
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
+        setResult({ page, jobs: [], total: 0, error: "Could not load openings. Please refresh." });
       });
 
     return () => controller.abort();
   }, [page]);
+
+  // Derived, so nothing has to be reset synchronously when `page` changes.
+  const loading = result?.page !== page;
+  const jobs = loading ? [] : result.jobs;
+  const total = loading ? 0 : result.total;
+  const fetchErr = loading ? "" : result.error;
 
   const categories = ["All Roles", ...Array.from(new Set(jobs.map((j) => j.department)))];
 

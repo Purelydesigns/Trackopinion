@@ -8,7 +8,7 @@ const DESCRIPTION =
   "Test demand, pricing, competition and route-to-market before you commit budget. In-market, in-language entry research across 30+ countries.";
 
 export const metadata: Metadata = {
-  title: "New Market Entry Research | Track Opinion",
+  title: "New Market Entry Research",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

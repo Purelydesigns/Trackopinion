@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import SectionHeader from "../ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -18,12 +19,10 @@ const pins = [
 ];
 
 export default function GlobalReach({
-  hideHeading = false,
   cardMode = false,
   heading,
   description,
 }: {
-  hideHeading?: boolean;
   cardMode?: boolean;
   heading?: string;
   description?: string;
@@ -123,8 +122,8 @@ export default function GlobalReach({
           </defs>
 
           <Geographies geography={GEO_URL}>
-            {({ geographies }: { geographies: any[] }) =>
-              geographies.map((geo: any) => (
+            {({ geographies }) =>
+              geographies.map((geo) => (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
@@ -164,10 +163,16 @@ export default function GlobalReach({
                       position: "relative",
                     }}
                   >
-                    {/* Circular flag image */}
-                    <img
+                    {/* Circular flag image. `unoptimized` because flagcdn
+                        already serves these at the right size and routing them
+                        through the optimizer would add a hop per flag. */}
+                    <Image
                       src={`https://flagcdn.com/w40/${pin.code}.png`}
-                      alt={pin.name}
+                      alt=""
+                      aria-hidden
+                      width={36}
+                      height={36}
+                      unoptimized
                       style={{
                         width: "36px",
                         height: "36px",

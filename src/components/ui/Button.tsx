@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AnchorHTMLAttributes } from "react";
+;
 
 type Variant = "primary" | "dark";
 

@@ -2,6 +2,7 @@
 
 import { TrendingUp, Flag, Eye, Building2, Megaphone, Target } from "lucide-react";
 import EnterprisePageLayout, { type EnterpriseContent } from "./EnterprisePageLayout";
+import { faqs } from "@/components/brandtracker/faqs";
 import { BrandFunnel, PerceptionMap } from "./visuals/BrandVisuals";
 
 const content: EnterpriseContent = {
@@ -77,5 +78,5 @@ const content: EnterpriseContent = {
 };
 
 export default function BrandImageContent() {
-  return <EnterprisePageLayout content={content} />;
+  return <EnterprisePageLayout content={content} faqs={faqs} />;
 }

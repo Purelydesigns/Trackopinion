@@ -9,7 +9,7 @@ const DESCRIPTION =
   "A carefully curated panel of thousands of patients, healthcare practitioners, and pharma employees for genuine data. Reach wide and deep in 30+ countries.";
 
 export const metadata: Metadata = {
-  title: "Healthcare | Track Opinion",
+  title: "Healthcare",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };
@@ -24,7 +24,8 @@ export default function Healthcare() {
             { name: "Healthcare", path: PATH },
           ]),
           serviceSchema({ name: TITLE, description: DESCRIPTION, path: PATH }),
-          faqSchema(faqs),
+          // Omitted while `faqs` is empty — an empty FAQPage is invalid markup.
+          ...(faqs.length > 0 ? [faqSchema(faqs)] : []),
         ]}
       />
       <HealthcarePage />

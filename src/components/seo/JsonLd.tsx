@@ -5,6 +5,8 @@
  * crawlers see it without executing JavaScript.
  */
 
+import { CONTACT_EMAIL, OFFICES, PHONE_IN, PHONE_US } from "@/lib/contactDetails";
+
 export type Schema = Record<string, unknown>;
 
 export default function JsonLd({ data }: { data: Schema | Schema[] }) {
@@ -34,35 +36,26 @@ export const organizationSchema: Schema = {
   foundingDate: "2009",
   description:
     "Track Opinion® is a global market research and outsourcing firm providing end-to-end custom research services, online panels, survey programming and data analytics.",
-  email: "hello@trackopinion.com",
-  address: [
-    {
-      "@type": "PostalAddress",
-      streetAddress: "607-608, Tower C, Nirvana Courtyard, Sector 50",
-      addressLocality: "Gurugram",
-      postalCode: "122018",
-      addressCountry: "IN",
-    },
-    {
-      "@type": "PostalAddress",
-      streetAddress: "1401, 21st Street, STE R",
-      addressLocality: "Sacramento",
-      addressRegion: "CA",
-      postalCode: "95811",
-      addressCountry: "US",
-    },
-  ],
+  // Was hello@, while the site showed info@. Inconsistent contact details
+  // across a site read as a weak signal in local search.
+  email: CONTACT_EMAIL,
+  address: OFFICES.map((office) => ({
+    "@type": "PostalAddress",
+    streetAddress: office.lines[0],
+    addressLocality: office.city,
+    addressCountry: office.country,
+  })),
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+91-836-843-0469",
+      telephone: PHONE_IN.e164,
       contactType: "customer service",
       areaServed: "IN",
       availableLanguage: ["en"],
     },
     {
       "@type": "ContactPoint",
-      telephone: "+1-916-460-9393",
+      telephone: PHONE_US.e164,
       contactType: "sales",
       areaServed: "US",
       availableLanguage: ["en"],
@@ -126,5 +119,65 @@ export function serviceSchema(opts: {
     provider: { "@id": `${SITE_URL}/#organization` },
     areaServed: "Worldwide",
     serviceType: "Market Research",
+  };
+}
+
+/** A blog post or news article. */
+export function articleSchema(opts: {
+  title: string;
+  description: string;
+  path: string;
+  /** ISO 8601, or "" when unknown — the field is omitted rather than faked. */
+  datePublished?: string;
+  image?: string;
+}): Schema {
+  const url = `${SITE_URL}${opts.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.title,
+    description: opts.description,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    ...(opts.datePublished ? { datePublished: opts.datePublished } : {}),
+    ...(opts.image
+      ? { image: opts.image.startsWith("http") ? opts.image : `${SITE_URL}${opts.image}` }
+      : {}),
+    author: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
+/**
+ * An open role. Feeds Google Jobs, which is the highest-value structured data
+ * a careers page can carry.
+ */
+export function jobPostingSchema(opts: {
+  title: string;
+  description: string;
+  path: string;
+  /** ISO 8601 date the listing was last updated. */
+  datePosted?: string;
+  location: string;
+  /** "Full Time" / "Internship" as written on the site. */
+  employmentType: string;
+}): Schema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: opts.title,
+    description: opts.description,
+    url: `${SITE_URL}${opts.path}`,
+    ...(opts.datePosted ? { datePosted: opts.datePosted } : {}),
+    employmentType: opts.employmentType.toUpperCase().replace(/\s+/g, "_"),
+    hiringOrganization: { "@id": `${SITE_URL}/#organization` },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: opts.location,
+        addressCountry: "IN",
+      },
+    },
   };
 }

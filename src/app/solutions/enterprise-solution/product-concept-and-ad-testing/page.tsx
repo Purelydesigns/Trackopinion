@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Test your product concept and creative ads before launch. Track Opinion's concept testing and ad testing research helps you save money, reduce risk, and go to market with confidence.";
 
 export const metadata: Metadata = {
-  title: "Product Concept & Creative Ad Testing | Track Opinion",
+  title: "Product Concept & Creative Ad Testing",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

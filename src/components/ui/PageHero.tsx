@@ -35,7 +35,7 @@ export default function PageHero({
   breadcrumb,
 }: PageHeroProps) {
   return (
-    <section className={`-mt-[76px] relative ${minHeight} flex items-center overflow-hidden`}>
+    <section className={`-mt-(--navbar-height) relative ${minHeight} flex items-center overflow-hidden`}>
 
       {/* Video background */}
       <video

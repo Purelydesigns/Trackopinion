@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 import CaseStudiesList from "@/components/case-studies/CaseStudiesList";
-import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "Explore Track Opinion's real-world case studies across healthcare, FMCG, technology, pharma and more — see how we deliver market research results.",
   alternates: { canonical: "https://www.trackopinion.com/case-studies" },
   openGraph: {
+      images: [OG_IMAGE],
     url: "https://www.trackopinion.com/case-studies",
     title: "Case Studies | Track Opinion®",
     description:

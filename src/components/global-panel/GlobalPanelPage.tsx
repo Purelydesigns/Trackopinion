@@ -6,7 +6,7 @@ import PanelDemographics from "./PanelDemographics";
 import PanelStats from "./PanelStats";
 import PanelEducation from "./PanelEducation";
 import PanelReach from "./PanelReach";
-import PanelBooks from "./PanelBooks";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 export default function GlobalPanelPage() {
   const [marketId, setMarketId] = useState("india");
@@ -31,7 +31,8 @@ export default function GlobalPanelPage() {
       <PanelStats        marketId={marketId} />
       <PanelEducation    marketId={marketId} />
       <PanelReach        marketId={marketId} />
-      <PanelBooks />
+      <SolutionEnquiryForm />
+
     </main>
   );
 }

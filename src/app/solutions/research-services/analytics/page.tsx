@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AnalyticsPage from "@/components/analytics/AnalyticsPage";
+import AnalyticsPage from "@/components/research/AnalyticsPage";
 import JsonLd, { breadcrumbSchema, serviceSchema } from "@/components/seo/JsonLd";
 
 const PATH = "/solutions/research-services/analytics";
@@ -8,7 +8,7 @@ const DESCRIPTION =
   "From opinions to decisions with clarity. Track Opinion's analytics and reporting services deliver data cleansing, dashboards, visualization, and actionable insights.";
 
 export const metadata: Metadata = {
-  title: "Analytics and Reporting | Track Opinion",
+  title: "Analytics and Reporting",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

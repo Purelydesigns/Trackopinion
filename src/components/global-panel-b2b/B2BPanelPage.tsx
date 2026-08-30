@@ -2,18 +2,15 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ChevronDown, ShieldCheck, BadgeCheck, Users2, Briefcase,
-  Network, UserCheck, Handshake, Activity, Search, X,
-} from "lucide-react";
+import { ChevronDown, ShieldCheck, BadgeCheck, Briefcase, Network, UserCheck, Handshake, Activity, Search, X } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
-import PanelBooks from "@/components/global-panel/PanelBooks";
 import ProcessSteps, { type ProcessStep } from "@/components/shared/ProcessSteps";
 import {
   b2bMarkets, TOTAL_PANELISTS, recruitmentStrategy, validationCriteria,
   fraudDetection, panelAttributes, type Slice,
 } from "./b2bData";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 const NAVY = "#0d1b3e";
 
@@ -147,29 +144,31 @@ const DONUT_FILLS = ["#0d1b3e", "#22406f", "#3a5d92", "#5b7cae", "#8ba3c6", "#b9
 
 function Donut({ rows }: { rows: Slice[] }) {
   const R = 58, C = 2 * Math.PI * R;
-  let offset = 0;
   const top = [...rows].sort((a, b) => b.pct - a.pct);
+  // Prefix sum of the arc lengths — see CompetitiveVisuals for why this cannot
+  // accumulate inside the map.
+  const segments = top.reduce<{ label: string; len: number; offset: number }[]>((acc, s) => {
+    const len = (s.pct / 100) * C;
+    const prev = acc[acc.length - 1];
+    acc.push({ label: s.label, len, offset: prev ? prev.offset + prev.len : 0 });
+    return acc;
+  }, []);
 
   return (
     <div className="flex items-center gap-6">
       <div className="relative shrink-0">
         <svg width="156" height="156" viewBox="0 0 156 156">
-          {top.map((s, i) => {
-            const len = (s.pct / 100) * C;
-            const el = (
-              <circle
-                key={s.label}
-                cx="78" cy="78" r={R} fill="none"
-                stroke={DONUT_FILLS[Math.min(i, DONUT_FILLS.length - 1)]}
-                strokeWidth="21"
-                strokeDasharray={`${len} ${C}`}
-                strokeDashoffset={-offset}
-                transform="rotate(-90 78 78)"
-              />
-            );
-            offset += len;
-            return el;
-          })}
+          {segments.map((s, i) => (
+            <circle
+              key={s.label}
+              cx="78" cy="78" r={R} fill="none"
+              stroke={DONUT_FILLS[Math.min(i, DONUT_FILLS.length - 1)]}
+              strokeWidth="21"
+              strokeDasharray={`${s.len} ${C}`}
+              strokeDashoffset={-s.offset}
+              transform="rotate(-90 78 78)"
+            />
+          ))}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-xl font-black text-primary leading-none">{fmt(top[0].pct)}</span>
@@ -222,21 +221,6 @@ function RankedList({ rows }: { rows: Slice[] }) {
           </span>
         </div>
       ))}
-    </div>
-  );
-}
-
-/* ─────────── Stat tile ─────────── */
-function Stat({ icon: Icon, value, label }: { icon: typeof Users2; value: string; label: string }) {
-  return (
-    <div className="flex items-center gap-4">
-      <span className="w-11 h-11 rounded-xl bg-highlight flex items-center justify-center text-primary shrink-0">
-        <Icon className="w-5 h-5" />
-      </span>
-      <div>
-        <p className="text-2xl font-extrabold text-primary leading-none tabular-nums">{value}</p>
-        <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mt-1.5">{label}</p>
-      </div>
     </div>
   );
 }
@@ -626,7 +610,8 @@ export default function B2BPanelPage() {
         </div>
       </section>
 
-      <PanelBooks />
+      <SolutionEnquiryForm />
+
     </main>
   );
 }

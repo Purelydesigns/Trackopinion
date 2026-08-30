@@ -8,7 +8,7 @@ const DESCRIPTION =
   "Understand what your category actually does and why. U&A studies mapping penetration, frequency, occasions and the attitudes that drive choice.";
 
 export const metadata: Metadata = {
-  title: "Usage & Attitude Studies | Track Opinion",
+  title: "Usage & Attitude Studies",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

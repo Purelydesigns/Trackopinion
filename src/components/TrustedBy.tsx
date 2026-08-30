@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -103,11 +104,14 @@ export default function TrustedBy({
 
       {/* ── World tagline ── */}
       {showWorldTagline && <div className="mt-12 relative overflow-hidden bg-section">
-        <img
+        <Image
           src="/images/map.png"
           alt=""
-          aria-hidden="true"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] pointer-events-none select-none"
+          aria-hidden
+          width={1200}
+          height={620}
+          sizes="40vw"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-auto pointer-events-none select-none"
         />
         <div className="relative site-container px-6 py-34 text-center">
           <p className="text-primary font-extrabold uppercase mb-4 text-lg">

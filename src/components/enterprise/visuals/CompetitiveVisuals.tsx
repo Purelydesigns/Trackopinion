@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Grid3x3, PieChart } from "lucide-react";
-import { VisualPanel, StatStrip, NAVY, BLUE, MUTED } from "./Panels";
+import { VisualPanel, StatStrip, NAVY, MUTED } from "./Panels";
 
 /* ── 1. Feature coverage grid — who covers what ── */
 const players = ["You", "Rival A", "Rival B", "Rival C"];
@@ -77,28 +77,38 @@ const share = [
 
 export function ShareDonut() {
   const R = 54, C = 2 * Math.PI * R;
-  let offset = 0;
+  // Prefix sum of the arc lengths, computed before render rather than
+  // accumulated during it.
+  const segments = share.reduce<{ label: string; fill: string; len: number; offset: number }[]>(
+    (acc, s) => {
+      const len = (s.pct / 100) * C;
+      const prev = acc[acc.length - 1];
+      acc.push({
+        label: s.label,
+        fill: s.fill,
+        len,
+        offset: prev ? prev.offset + prev.len : 0,
+      });
+      return acc;
+    },
+    [],
+  );
 
   return (
     <VisualPanel eyebrow="Segment Share" title="Where Demand Sits" chip={<><PieChart className="w-3.5 h-3.5" /> by revenue</>}>
       <div className="flex items-center gap-7">
         <div className="relative shrink-0">
           <svg width="150" height="150" viewBox="0 0 150 150">
-            {share.map((s) => {
-              const len = (s.pct / 100) * C;
-              const el = (
-                <motion.circle
-                  key={s.label}
-                  cx="75" cy="75" r={R} fill="none" stroke={s.fill} strokeWidth="20"
-                  strokeDasharray={`${len} ${C}`} strokeDashoffset={-offset}
-                  transform="rotate(-90 75 75)"
-                  initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                />
-              );
-              offset += len;
-              return el;
-            })}
+            {segments.map((s) => (
+              <motion.circle
+                key={s.label}
+                cx="75" cy="75" r={R} fill="none" stroke={s.fill} strokeWidth="20"
+                strokeDasharray={`${s.len} ${C}`} strokeDashoffset={-s.offset}
+                transform="rotate(-90 75 75)"
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+            ))}
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-2xl font-black text-primary leading-none">15%</span>

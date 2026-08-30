@@ -1,19 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import HoneypotField, { useHoneypot } from "@/components/ui/HoneypotField";
+import { EMAIL_RE, submitLead } from "@/lib/leads";
 
 export default function NewsletterSubscribe() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const honeypot = useHoneypot();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (email) setSubmitted(true);
-  };
+    const trimmed = email.trim();
+
+    if (!EMAIL_RE.test(trimmed)) {
+      setError("Enter a valid email address.");
+      return;
+    }
+
+    setSending(true);
+    setError("");
+
+    const result = await submitLead({
+      source: "newsletter",
+      // The upstream record needs a name; the address is the only thing asked for.
+      name: trimmed.split("@")[0],
+      email: trimmed,
+      message: "Newsletter subscription request.",
+      website: honeypot.value,
+    });
+
+    setSending(false);
+    if (result.ok) setSubmitted(true);
+    else setError(result.errors.email ?? result.message);
+  }
 
   return (
     <section className="py-16 bg-highlight">
@@ -31,9 +56,8 @@ export default function NewsletterSubscribe() {
               Subscribe to our Newsletter
             </h3>
             <p className="text-gray-500 text-base leading-8">
-              Subscribe for Updates: Stay informed about the latest investor
-              updates, financial results, and announcements by subscribing to
-              our newsletter.
+              Subscribe for Updates: Stay informed about the latest investor updates,
+              financial results, and announcements by subscribing to our newsletter.
             </p>
           </div>
 
@@ -43,26 +67,44 @@ export default function NewsletterSubscribe() {
               <motion.p
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-green-600 font-semibold text-center py-4"
+                role="status"
+                className="text-green-700 font-semibold text-center py-4"
               >
-                ✅ Thank you for subscribing!
+                Thank you for subscribing — we&apos;ll be in touch.
               </motion.p>
             ) : (
-              <form onSubmit={handleSubmit} className="flex rounded-xl overflow-hidden shadow-md">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-5 text-base text-gray-700 bg-white outline-none placeholder:text-gray-400"
-                />
-                <button
-                  type="submit"
-                  className="bg-primary hover:bg-primary text-white text-base font-bold px-10 py-5 transition-colors duration-300 whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
+              <form onSubmit={handleSubmit} noValidate className="relative">
+                <HoneypotField {...honeypot.props} />
+                <div className="flex rounded-xl overflow-hidden shadow-md">
+                  <label className="sr-only" htmlFor="newsletter-email">
+                    Email address
+                  </label>
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError("");
+                    }}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "newsletter-error" : undefined}
+                    placeholder="Enter your email"
+                    className="flex-1 px-6 py-5 text-base text-gray-700 bg-white outline-none placeholder:text-gray-400"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="bg-primary text-white text-base font-bold px-10 py-5 transition-opacity duration-300 whitespace-nowrap disabled:opacity-60"
+                  >
+                    {sending ? "Subscribing…" : "Subscribe"}
+                  </button>
+                </div>
+                {error && (
+                  <p id="newsletter-error" role="alert" className="text-red-600 text-sm mt-2">
+                    {error}
+                  </p>
+                )}
               </form>
             )}
           </div>

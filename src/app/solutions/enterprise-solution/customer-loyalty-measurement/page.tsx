@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Measure, understand and grow customer loyalty with NPS, CSAT and retention research from Track Opinion — turning loyalty data into business strategy.";
 
 export const metadata: Metadata = {
-  title: "Customer Loyalty Measurement | Track Opinion",
+  title: "Customer Loyalty Measurement",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };

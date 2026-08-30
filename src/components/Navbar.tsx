@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   ChevronDown, Globe, FlaskConical, Building2,
   PhoneCall, HeartPulse, FileCode2, ArrowRight,
-  BarChart3, Users, Layers, Languages, PieChart,
-  ShieldCheck, Microscope, TrendingUp,
+  BarChart3, Users, Layers, PieChart,
+  ShieldCheck, Microscope, TrendingUp, UserSearch,
   ChevronRight, BookOpen, FileText, Newspaper, Radar, Compass, Repeat,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -27,21 +28,20 @@ const solutions = [
   {
     label: "Research Services",
     icon: FlaskConical,
-    href: "/contact-us",
+    href: "/solutions/research-services",
     desc: "Full-service qualitative & quantitative research",
     color: "bg-purple-50 text-purple-600",
     children: [
       { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/solutions/research-services/qualitative"  },
       { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative" },
       { label: "Survey Programming",    icon: Layers,   desc: "Multi-platform deployment",    href: "/solutions/research-services/survey-programming" },
-      { label: "Translation",           icon: Languages, desc: "50+ language support",        href: "/contact-us" },
       { label: "Reporting & Analytics", icon: PieChart,  desc: "Insight dashboards & reports",href: "/solutions/research-services/analytics" },
     ],
   },
   {
     label: "Enterprise Solution",
     icon: Building2,
-    href: "/contact-us",
+    href: "/solutions/enterprise-solution",
     desc: "Strategic insights for large-scale businesses",
     color: "bg-blue-50 text-primary",
     children: [
@@ -70,6 +70,14 @@ const solutions = [
     children: [],
   },
   {
+    label: "Expert Network",
+    icon: UserSearch,
+    href: "/solutions/expert-network",
+    desc: "Reach vetted industry specialists",
+    color: "bg-amber-50 text-amber-600",
+    children: [],
+  },
+  {
     label: "Scrip8",
     icon: FileCode2,
     href: "/solutions/scrip8",
@@ -77,14 +85,6 @@ const solutions = [
     color: "bg-slate-50 text-slate-600",
     children: [],
   },
-];
-
-const navLinks = [
-  { label: "HOME",         href: "/"               },
-  { label: "ABOUT US",     href: "/about"           },
-  { label: "RESOURCES",    href: "/resources"},
-  { label: "CAREER",       href: "/career"          },
-  { label: "CONTACT US",   href: "/contact-us"      },
 ];
 
 /* ── Resources dropdown data ── */
@@ -127,10 +127,26 @@ export default function Navbar() {
   const resRef                              = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
+    // `passive` so the listener never blocks scrolling, and the state is only
+    // written when the boolean actually flips rather than on every frame.
     const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Escape closes whichever dropdown is open — previously only an outside
+  // click did, which left keyboard users with no way out.
+  useEffect(() => {
+    if (!openMenu && !menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenMenu(null);
+      setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [openMenu, menuOpen]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -142,7 +158,6 @@ export default function Navbar() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-
 
   const isTransparent = !scrolled;
 
@@ -164,12 +179,27 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 w-full z-50 py-3 px-6 transition-all duration-300">
       <div className={`site-container px-4 py-2 flex items-center justify-between transition-all duration-300 ${isTransparent ? "" : "bg-white rounded-full shadow-xl"}`}>
 
-        {/* ── Logo ── */}
-        <Link href="/">
-          <img
-            src={isTransparent ? "/logo-white.png" : "/logo.png"}
+        {/* ── Logo ──
+            Both marks render and cross-fade. Swapping a single `src` on scroll
+            made the browser fetch the second file mid-scroll, so the logo
+            flashed the first time a visitor scrolled. */}
+        <Link href="/" aria-label="Track Opinion — home" className="relative block h-10 w-[220px]">
+          <Image
+            src="/logo-white.png"
             alt="Track Opinion"
-            className="h-10 w-auto object-contain"
+            fill
+            sizes="150px"
+            priority
+            className={`object-contain object-left transition-opacity duration-300 ${isTransparent ? "opacity-100" : "opacity-0"}`}
+          />
+          <Image
+            src="/logo.png"
+            alt=""
+            aria-hidden
+            fill
+            sizes="150px"
+            priority
+            className={`object-contain object-left transition-opacity duration-300 ${isTransparent ? "opacity-0" : "opacity-100"}`}
           />
         </Link>
 
@@ -181,7 +211,10 @@ export default function Navbar() {
           {/* ── SOLUTIONS mega-menu ── */}
           <li ref={dropRef} className="relative">
             <button
+              type="button"
               onClick={() => toggleMenu("solutions")}
+              aria-expanded={dropOpen}
+              aria-haspopup="true"
               className={`cursor-pointer flex items-center gap-1 text-[13px] font-semibold tracking-wide transition-colors whitespace-nowrap ${
                 active === "SOLUTIONS"
                   ? isTransparent
@@ -275,7 +308,7 @@ export default function Navbar() {
                       </span>
                       <div>
                         <p className="text-primary font-bold text-sm">{hovered?.label}</p>
-                        <p className="text-gray-400 text-xs mt-0.5">{hovered?.desc}</p>
+                        <p className="text-gray-500 text-xs mt-0.5">{hovered?.desc}</p>
                       </div>
                       <Link
                         href={hovered?.href ?? "/solutions"}
@@ -307,7 +340,7 @@ export default function Navbar() {
                                 <p className="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors duration-150 leading-tight">
                                   {child.label}
                                 </p>
-                                <p className="text-xs text-gray-400 mt-0.5">{child.desc}</p>
+                                <p className="text-xs text-gray-600 mt-0.5">{child.desc}</p>
                               </div>
                               <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-primary ml-auto opacity-0 group-hover:opacity-100 transition-all duration-150" />
                             </Link>
@@ -321,7 +354,7 @@ export default function Navbar() {
                           <HovIcon className="w-7 h-7" />
                         </span>
                         <p className="text-primary font-bold text-sm mb-1">{hovered?.label}</p>
-                        <p className="text-gray-400 text-xs leading-relaxed mb-4">{hovered?.desc}</p>
+                        <p className="text-gray-500 text-xs leading-relaxed mb-4">{hovered?.desc}</p>
                         <Link
                           href={hovered?.href ?? "/solutions"}
                           onClick={() => setOpenMenu(null)}
@@ -386,7 +419,7 @@ export default function Navbar() {
                       <p className="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors duration-150 leading-tight">
                         {item.label}
                       </p>
-                      <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-primary ml-auto opacity-0 group-hover:opacity-100 transition-all duration-150" />
                   </Link>
@@ -435,7 +468,7 @@ export default function Navbar() {
         >
           {/* Drawer header */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/30 bg-white/30">
-            <img src="/logo.png" alt="Track Opinion" className="h-10 w-auto object-contain transition-none" />
+            <Image src="/logo.png" alt="Track Opinion" width={150} height={40} className="h-10 w-auto object-contain" />
             <button
               onClick={() => setMenuOpen(false)}
               className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-gray-800 transition-colors border border-white/30"

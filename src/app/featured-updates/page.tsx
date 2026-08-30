@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 import FeaturedList from "@/components/featured-updates/FeaturedList";
-import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 export const metadata: Metadata = {
   title: "Featured Updates",
@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "Stay informed with the latest insights, breakthroughs, and updates shaping the market research industry and beyond from Track Opinion®.",
   alternates: { canonical: "https://www.trackopinion.com/featured-updates" },
   openGraph: {
+      images: [OG_IMAGE],
     url: "https://www.trackopinion.com/featured-updates",
     title: "Featured Updates | Track Opinion®",
     description:

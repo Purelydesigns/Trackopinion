@@ -6,6 +6,7 @@ import { ArrowRight, Building2, Users } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SiteCard from "@/components/ui/SiteCard";
+import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 const panels = [
   {
@@ -83,7 +84,7 @@ export default function GlobalPanelLanding() {
 
                       <ul className="flex flex-col gap-2 mb-8">
                         {p.points.map((pt) => (
-                          <li key={pt} className="flex items-start gap-2.5 text-gray-600 text-sm">
+                          <li key={pt} className="flex items-start gap-2.5 text-gray-600 text-base leading-8 font-medium">
                             <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                             {pt}
                           </li>
@@ -101,6 +102,8 @@ export default function GlobalPanelLanding() {
           </div>
         </div>
       </section>
+      <SolutionEnquiryForm />
+
     </main>
   );
 }

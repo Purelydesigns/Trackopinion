@@ -14,10 +14,6 @@ export const faqs = [
     a: "Customer loyalty should ideally be measured quarterly or after key touchpoints such as purchases, support interactions, or product launches. Regular measurement helps track trends and respond proactively to any decline in satisfaction.",
   },
   {
-    q: "How often should customer loyalty be measured?",
-    a: "Customer loyalty should ideally be measured quarterly or after key touchpoints such as purchases, support interactions, or product launches. Regular measurement helps track trends and respond proactively to any decline in satisfaction.",
-  },
-  {
     q: "What are common challenges in measuring customer loyalty?",
     a: "Common challenges include survey fatigue, response bias, difficulty linking loyalty data to business outcomes, and inconsistent methodologies across departments. Using standardized metrics like NPS or CSAT and integrating them with CRM data can help overcome these barriers.",
   },

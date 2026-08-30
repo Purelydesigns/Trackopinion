@@ -142,12 +142,12 @@ const content: ResearchDeepContent = {
     description:
       "From the first consultation to the insights your stakeholders act on — here's how a survey project runs.",
     steps: [
-      { num: 1, label: "Project Consultation", title: "Share your needs.",       quote: '"Strategy, timeline, and sample"',        desc: "Share your online survey needs. Get consultation on strategy, timeline, and sample." },
-      { num: 2, label: "Survey Designs",       title: "Design and brand.",       quote: '"A few clicks, not expertise"',           desc: "Design, create, and brand your forms. You only need a few clicks, not experience or expertise." },
-      { num: 3, label: "Team Access",          title: "Bring in your team.",     quote: '"Add or remove members anytime"',         desc: "Get tool access for the team members. Add new members or remove them from the tool." },
-      { num: 4, label: "Distribute",           title: "Reach your audience.",    quote: '"Multiple channels, one survey"',         desc: "Share your surveys with the audience via multiple channels." },
-      { num: 5, label: "Collect Data",         title: "Let the data pour in.",   quote: '"Secured, refined, legit datasets only"', desc: "Sit back and let survey data pour in. Secured, refined, and legit datasets only." },
-      { num: 6, label: "Generate Insights",    title: "Decide with confidence.", quote: '"Reports your stakeholders act on"',      desc: "Run easy-to-understand reports, share them with stakeholders, and make decisions." },
+      { num: 1, label: "", title: "Project Consultation", quote: '', desc: "Share your online survey needs. Get consultation on strategy, timeline, and sample." },
+      { num: 2, label: "", title: "Survey Designs", quote: '', desc: "Design, create, and brand your forms. You only need a few clicks, not experience or expertise." },
+      { num: 3, label: "", title: "Bring in your team.", quote: '', desc: "Get tool access for the team members. Add new members or remove them from the tool." },
+      { num: 4, label: "", title: "Reach your audience.", quote: '', desc: "Share your surveys with the audience via multiple channels." },
+      { num: 5, label: "", title: "Let the data pour in.", quote: '', desc: "Sit back and let survey data pour in. Secured, refined, and legit datasets only." },
+      { num: 6, label: "", title: "Decide with confidence.", quote: '', desc: "Run easy-to-understand reports, share them with stakeholders, and make decisions." },
     ],
   },
 };

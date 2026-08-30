@@ -10,6 +10,7 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
+  variable: "--font-montserrat",
 });
 
 const BASE_URL = "https://www.trackopinion.com";
@@ -55,14 +56,8 @@ export const metadata: Metadata = {
     title: "Track Opinion® — Global Market Research & Online Panel",
     description:
       "Bank on a Global panel of 4.5 Million members. Get tailor-made online surveys and market research processes. Unlock user behaviour and market intelligence.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Track Opinion — Global Market Research",
-      },
-    ],
+    // og:image comes from app/opengraph-image.tsx, which is generated at build
+    // time — no file to upload and forget.
   },
 
   twitter: {
@@ -72,18 +67,17 @@ export const metadata: Metadata = {
     title: "Track Opinion® — Global Market Research & Online Panel",
     description:
       "Bank on a Global panel of 4.5 Million members for tailor-made surveys and market research.",
-    images: ["/og-image.png"],
   },
 
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  // No `icons` block: declaring one replaces the file conventions entirely,
+  // which suppressed the apple-touch-icon link. app/favicon.ico and
+  // app/apple-icon.tsx are picked up on their own.
 
-  verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION_TOKEN",
-  },
+  // Omitted entirely when the variable is unset, rather than shipping a
+  // placeholder token in a <meta> tag on every page.
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -102,12 +96,12 @@ export default function RootLayout({
           src="https://cdn-cookieyes.com/client_data/bb74aacc1520c6fb02d1e3cb/script.js"
         />
       </head>
-      <body className={`${montserrat.className} min-h-full flex flex-col`}>
+      <body className={`${montserrat.variable} ${montserrat.className} min-h-full flex flex-col`}>
         {/* Site-wide structured data — identifies the publisher for every page */}
         <JsonLd data={[organizationSchema, websiteSchema]} />
 
         <Navbar />
-        <div className="flex-1 pt-[76px]">{children}</div>
+        <div className="flex-1 pt-(--navbar-height)">{children}</div>
         <Footer />
 
         {/* Relay CookieYes consent changes to Google Consent Mode.

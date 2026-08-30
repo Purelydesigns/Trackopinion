@@ -30,6 +30,12 @@ export const siteGroups: SiteGroup[] = [
     ],
   },
   {
+    title: "Solutions",
+    links: [
+      { label: "All Solutions", href: "/solutions", desc: "Every research solution we offer", changeFrequency: "monthly", priority: 0.9 },
+    ],
+  },
+  {
     title: "Global Panel",
     links: [
       { label: "Global Panel Overview", href: "/solutions/global-panel",     desc: "Choose between our B2C and B2B panels", changeFrequency: "monthly", priority: 0.9 },
@@ -40,15 +46,18 @@ export const siteGroups: SiteGroup[] = [
   {
     title: "Research Services",
     links: [
+      { label: "Research Services Overview", href: "/solutions/research-services", desc: "Qualitative, quantitative, programming and analytics", changeFrequency: "monthly", priority: 0.9 },
       { label: "Qualitative Research",  href: "/solutions/research-services/qualitative",        desc: "Focus groups, IDIs and diary studies",       changeFrequency: "monthly", priority: 0.8 },
       { label: "Quantitative Research", href: "/solutions/research-services/quantitative",       desc: "Online surveys and CATI at scale",           changeFrequency: "monthly", priority: 0.8 },
       { label: "Survey Programming",    href: "/solutions/research-services/survey-programming", desc: "Scrip8 — design, distribute and report",     changeFrequency: "monthly", priority: 0.8 },
+      { label: "Translation",           href: "/solutions/research-services/translation",   desc: "Survey translation across 25 countries",     changeFrequency: "monthly", priority: 0.8 },
       { label: "Reporting & Analytics", href: "/solutions/research-services/analytics",           desc: "Data cleansing, statistics and dashboards",  changeFrequency: "monthly", priority: 0.7 },
     ],
   },
   {
     title: "Enterprise Solutions",
     links: [
+      { label: "Enterprise Solutions Overview", href: "/solutions/enterprise-solution", desc: "Strategic insight programmes for large organisations", changeFrequency: "monthly", priority: 0.9 },
       { label: "Product Concept & Ad Testing",             href: "/solutions/enterprise-solution/product-concept-and-ad-testing",             desc: "Validate ideas and creative before launch",   changeFrequency: "monthly", priority: 0.8 },
       { label: "Customer Loyalty Measurement",             href: "/solutions/enterprise-solution/customer-loyalty-measurement",               desc: "NPS, CSAT and retention research",            changeFrequency: "monthly", priority: 0.8 },
       { label: "Brand Image Study",                        href: "/solutions/enterprise-solution/brand-image-study",                          desc: "Track brand health across waves",             changeFrequency: "monthly", priority: 0.8 },

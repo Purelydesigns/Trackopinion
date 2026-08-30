@@ -110,10 +110,10 @@ const content: ResearchDeepContent = {
     description:
       "From screening the right panelists to making sure the survey gets completed — four steps that protect your response quality.",
     steps: [
-      { num: 1, label: "Phone Screening and Validation", title: "For proper vetting.",        quote: '"The right respondents, verified first"', desc: "We select panel members based on initial phone screening and by validating their profiles and suitability." },
-      { num: 2, label: "Send Our Survey Link",           title: "For easy access.",           quote: '"Delivered safely, wherever they are"',   desc: "Send survey links from various channels such as app notifications, emails, website forms, and other ways that embed links safely." },
-      { num: 3, label: "Phone and Email Follow-ups",     title: "For better participation.",  quote: '"We keep respondents engaged"',           desc: "The number of responses matters. We regularly tap users for updates and engagement throughout the project lifecycle." },
-      { num: 4, label: "Ensure Survey Completion",       title: "For good completion rates.", quote: '"Completion, not just participation"',    desc: "More than participation, the completion rate matters. And we ensure a higher number of clicks on the submit button." },
+      { num: 1, label: "", title: "Phone Screening and Validation", quote: '', desc: "We select panel members based on initial phone screening and by validating their profiles and suitability." },
+      { num: 2, label: "", title: "Send Our Survey Link", quote: '', desc: "Send survey links from various channels such as app notifications, emails, website forms, and other ways that embed links safely." },
+      { num: 3, label: "", title: "Phone and Email Follow-ups", quote: '', desc: "The number of responses matters. We regularly tap users for updates and engagement throughout the project lifecycle." },
+      { num: 4, label: "", title: "Ensure Survey Completion", quote: '', desc: "More than participation, the completion rate matters. And we ensure a higher number of clicks on the submit button." },
     ],
   },
 };

@@ -2,6 +2,7 @@
 
 import { HeartHandshake, TrendingUp, Gauge, Search, Award, Repeat } from "lucide-react";
 import EnterprisePageLayout, { type EnterpriseContent } from "./EnterprisePageLayout";
+import { faqs } from "@/components/loyalty/faqs";
 import { NpsBreakdown, RetentionCurve } from "./visuals/LoyaltyVisuals";
 
 const content: EnterpriseContent = {
@@ -74,5 +75,5 @@ const content: EnterpriseContent = {
 };
 
 export default function CustomerLoyaltyContent() {
-  return <EnterprisePageLayout content={content} />;
+  return <EnterprisePageLayout content={content} faqs={faqs} />;
 }

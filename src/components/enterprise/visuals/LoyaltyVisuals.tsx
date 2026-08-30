@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Gauge, Repeat } from "lucide-react";
-import { VisualPanel, StatStrip, NAVY, BLUE, MUTED, TRACK } from "./Panels";
+import { VisualPanel, StatStrip, NAVY, BLUE, MUTED } from "./Panels";
 
 /* ── 1. NPS breakdown — promoters / passives / detractors ── */
 const nps = [

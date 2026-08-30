@@ -27,7 +27,7 @@ export default function ListPageHero({
   titleAs: TitleTag = "h1",
 }: ListPageHeroProps) {
   return (
-    <section className={`-mt-[76px] relative ${minHeight} flex items-end`}>
+    <section className={`-mt-(--navbar-height) relative ${minHeight} flex items-end`}>
 
       {/* Video background — clipped independently so dropdowns can escape */}
       <div className="absolute inset-0 overflow-hidden">
@@ -46,7 +46,7 @@ export default function ListPageHero({
       </div>
 
       {/* Content — pb-16 leaves room for the white card overlap below */}
-      <div className="relative w-full site-container px-6 pt-[76px] pb-16">
+      <div className="relative w-full site-container px-6 pt-(--navbar-height) pb-16">
         <div className="flex items-end justify-between gap-8">
 
           {/* Left — breadcrumb + title */}

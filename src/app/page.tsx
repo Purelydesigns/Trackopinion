@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 import HeroSection from "@/components/HeroSection";
 import WhatWeDo from "@/components/WhatWeDo";
 import WhyUs from "@/components/WhyUs";
 import TrustedBy from "@/components/TrustedBy";
 import OurValues from "@/components/OurValues";
 import SuccessStories from "@/components/SuccessStories";
-import Certifications from "@/components/Certifications";
 import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://www.trackopinion.com",
   },
   openGraph: {
+      images: [OG_IMAGE],
     url: "https://www.trackopinion.com",
     title: "Track Opinion® — Global Market Research & Online Panel",
     description:
@@ -101,7 +102,6 @@ export default function Home() {
         <TrustedBy />
         <OurValues />
         <SuccessStories />
-        {/* <Certifications /> */}
         <Testimonials />
       </main>
     </>

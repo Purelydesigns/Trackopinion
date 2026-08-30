@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Computer Assisted Telephone Interviewing with trained multilingual interviewers, predictive dialing, real-time monitoring and validated data delivery across 50+ languages.";
 
 export const metadata: Metadata = {
-  title: "CATI Solutions | Track Opinion",
+  title: "CATI Solutions",
   description: DESCRIPTION,
   alternates: { canonical: `https://www.trackopinion.com${PATH}` },
 };
