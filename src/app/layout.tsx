@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TalkToExpert from "@/components/TalkToExpert";
 import JsonLd, { organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 
 const montserrat = Montserrat({
@@ -103,6 +104,9 @@ export default function RootLayout({
         <Navbar />
         <div className="flex-1 pt-(--navbar-height)">{children}</div>
         <Footer />
+
+        {/* Floating enquiry button, bottom-right on every page. */}
+        <TalkToExpert />
 
         {/* Relay CookieYes consent changes to Google Consent Mode.
             `gtag` is guarded because no GA/GTM tag is installed on the site yet —

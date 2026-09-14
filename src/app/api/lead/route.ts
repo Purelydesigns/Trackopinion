@@ -68,6 +68,7 @@ export async function POST(req: Request) {
     "expert-network": ["company", "message"],
     "panel-sample": ["company"],
     solutions: ["mobile", "company"],
+    "talk-to-expert": ["mobile", "message"],
     career: ["mobile", "company", "message"],
     newsletter: [],
   };

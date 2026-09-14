@@ -15,6 +15,7 @@ export const LEAD_SOURCES = {
   "expert-network": "Expert Network enquiry",
   "panel-sample": "Panel sample request",
   solutions: "Solutions enquiry",
+  "talk-to-expert": "Talk to an expert",
   career: "Job application",
 } as const;
 
