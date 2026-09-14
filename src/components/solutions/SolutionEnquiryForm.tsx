@@ -157,7 +157,7 @@ export default function SolutionEnquiryForm({
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-start">
           {/* ── Left: pitch + service picker ── */}
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent mb-3">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary mb-3">
               {eyebrow}
             </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
@@ -240,7 +240,7 @@ export default function SolutionEnquiryForm({
                     setFields(EMPTY);
                     setSelected(initial);
                   }}
-                  className="mt-2 text-sm font-semibold text-accent hover:underline"
+                  className="mt-2 text-sm font-semibold text-primary hover:underline"
                 >
                   Send another request
                 </button>

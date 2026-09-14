@@ -18,6 +18,9 @@ export const CONTACT_EMAIL = "info@trackopinion.com";
 /** Careers inbox — where applicants send their resume. */
 export const CAREERS_EMAIL = "info@trackopinion.com";
 
+/** Security, compliance and document requests, as published on the Trust Centre. */
+export const TRUST_EMAIL = "trust@trackopinion.com";
+
 /** Privacy and data-subject requests, as published in the privacy policy. */
 export const PRIVACY_EMAIL = "updates@trackopinion.com";
 

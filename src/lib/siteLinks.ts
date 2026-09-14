@@ -87,6 +87,7 @@ export const siteGroups: SiteGroup[] = [
     title: "Legal",
     links: [
       { label: "Terms of Service", href: "/terms",   desc: "Your rights and responsibilities", changeFrequency: "yearly", priority: 0.3 },
+      { label: "Trust",            href: "/trust",   desc: "Security, certifications and data handling", changeFrequency: "yearly", priority: 0.4 },
       { label: "Privacy Policy",   href: "/privacy", desc: "How we handle your data",          changeFrequency: "yearly", priority: 0.3 },
       { label: "Sitemap",          href: "/sitemap", desc: "Every page on this website",       changeFrequency: "monthly", priority: 0.3 },
     ],

@@ -16,7 +16,7 @@ function CheckItem({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex gap-3 items-start py-2">
       <span className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-        <Check className="w-3 h-3 text-accent" strokeWidth={3} />
+        <Check className="w-3 h-3 text-primary" strokeWidth={3} />
       </span>
       <span className="text-gray-700 text-sm leading-7">{children}</span>
     </li>
@@ -154,10 +154,10 @@ export default function CareerDetail({ job }: { job: Job }) {
               >
                 <div className="flex flex-wrap gap-3 mb-4">
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg px-3 py-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-accent" /> {job.location}
+                    <MapPin className="w-3.5 h-3.5 text-primary" /> {job.location}
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200 rounded-lg px-3 py-1.5">
-                    <Briefcase className="w-3.5 h-3.5 text-accent" /> {job.type}
+                    <Briefcase className="w-3.5 h-3.5 text-primary" /> {job.type}
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5">
                     <Calendar className="w-3.5 h-3.5" /> Updated: {job.updatedDate}
@@ -340,7 +340,7 @@ export default function CareerDetail({ job }: { job: Job }) {
                     <Upload className="w-8 h-8 text-gray-300" />
                     <span className="text-sm text-gray-500 font-medium">
                       {fileName
-                        ? <span className="text-accent font-bold">{fileName}</span>
+                        ? <span className="text-primary font-bold">{fileName}</span>
                         : "Click to upload your resume"}
                     </span>
                     <span className="text-xs text-gray-400">PDF, DOC, DOCX — max 5 MB</span>

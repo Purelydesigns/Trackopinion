@@ -48,7 +48,7 @@ const typeColor: Record<string, string> = {
 
 const deptColor: Record<string, string> = {
   "Research":   "text-primary bg-highlight border-primary/20",
-  "Projects":   "text-accent bg-blue-50 border-accent/20",
+  "Projects":   "text-primary bg-blue-50 border-accent/20",
   "Marketing":  "text-orange-700 bg-orange-50 border-orange-200",
   "Internship": "text-purple-700 bg-purple-50 border-purple-200",
 };
