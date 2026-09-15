@@ -45,7 +45,7 @@ const organizationSchema = {
     },
     {
       "@type": "PostalAddress",
-      streetAddress: "91 Springboard, C2, Block C, Sector 1",
+      streetAddress: "GF, Plot No. 8, Sector 125, Opp. Starbucks, Noida – 201313",
       addressLocality: "Noida",
       addressRegion: "Uttar Pradesh",
       postalCode: "201301",

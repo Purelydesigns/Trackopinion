@@ -139,6 +139,10 @@ export default function Footer() {
             <Link href="/trust" className="hover:text-white transition-colors duration-200">
               Trust Center
             </Link>
+            <span className="text-white/30">|</span>
+            <Link href="/sitemap" className="hover:text-white transition-colors duration-200">
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>

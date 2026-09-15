@@ -33,9 +33,41 @@ export default function TalkToExpert() {
   const [submitted, setSubmitted] = useState(false);
   const honeypot = useHoneypot();
 
+  /**
+   * The button is navy and the footer is navy, so parking one over the other
+   * both hid the button and covered the footer's last link. It steps aside
+   * once the footer comes into view — the footer has its own contact links,
+   * so nothing is lost.
+   */
+  const [footerVisible, setFooterVisible] = useState(false);
+
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    // A passive scroll listener, reading the footer's top edge directly.
+    // Deliberately not throttled through requestAnimationFrame: rAF is paused
+    // in a hidden or backgrounded tab, which left the button stuck in whatever
+    // state it had when the tab lost focus. One getBoundingClientRect per
+    // scroll event on a single element is cheap, and React bails out of the
+    // render when the boolean has not changed.
+    const check = () => {
+      // Step aside a little before the footer's edge reaches the button.
+      setFooterVisible(footer.getBoundingClientRect().top < window.innerHeight - 80);
+    };
+
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, []);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -146,7 +178,13 @@ export default function TalkToExpert() {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-primary pl-5 pr-6 py-4 text-sm font-bold text-white shadow-lg transition-all duration-200 hover:opacity-95 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        aria-hidden={footerVisible && !open}
+        tabIndex={footerVisible && !open ? -1 : 0}
+        className={`fixed bottom-6 right-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-primary pl-5 pr-6 py-4 text-sm font-bold text-white shadow-lg ring-1 ring-white/15 transition-all duration-300 hover:opacity-95 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+          footerVisible && !open
+            ? "opacity-0 translate-y-4 pointer-events-none"
+            : "opacity-100 translate-y-0"
+        }`}
       >
         <Headset aria-hidden className="w-5 h-5" strokeWidth={1.75} />
         <span className="hidden sm:inline">Talk to an Expert</span>

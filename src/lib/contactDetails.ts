@@ -51,7 +51,7 @@ export const OFFICES: Office[] = [
   },
   {
     city: "Noida",
-    lines: ["91 springboard, C2, Block C, Sector 1, Noida, Uttar Pradesh 201301"],
+    lines: ["GF, Plot No. 8, Sector 125, Opp. Starbucks, Noida – 201313"],
     country: "IN",
   },
   {
