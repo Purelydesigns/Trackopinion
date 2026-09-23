@@ -50,7 +50,7 @@ const defaultTestimonials: Testimonial[] = [
   },
   {
     company: "Ipsos",
-    accent: "#00529b",
+    accent: "#0d1b3e",
     name: "Phillip Colligan",
     role: "Research Director",
     review:
@@ -58,7 +58,7 @@ const defaultTestimonials: Testimonial[] = [
   },
   {
     company: "GfK",
-    accent: "#0047bb",
+    accent: "#0d1b3e",
     name: "Leslie Hartman",
     role: "Senior Analyst",
     review:

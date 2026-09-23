@@ -36,8 +36,8 @@ function DonutChart({ female, male, total }: { female: number; male: number; tot
   return (
     <div className="relative flex items-center justify-center">
       <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#f0f4ff" strokeWidth={STROKE} />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#1a6fe8" strokeWidth={STROKE}
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#eef1f6" strokeWidth={STROKE} />
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#3a5d92" strokeWidth={STROKE}
           strokeDasharray={`${fArc} ${CIRC}`} strokeDashoffset={0}
           transform={`rotate(-90 ${CX} ${CY})`} strokeLinecap="round" />
         <circle cx={CX} cy={CY} r={R} fill="none" stroke="#0d1b3e" strokeWidth={STROKE}
@@ -63,7 +63,7 @@ function DonutChart({ female, male, total }: { female: number; male: number; tot
 function MarketBadge({ m }: { m: typeof markets[0] }) {
   if (!m.badge) return <span className="text-sm">{m.code}</span>;
   return (
-    <span className="inline-flex items-center justify-center bg-[#1a6fe8] text-white text-[10px] font-semibold rounded px-1.5 py-0.5 min-w-[22px] tracking-wide">
+    <span className="inline-flex items-center justify-center bg-primary text-white text-[10px] font-semibold rounded px-1.5 py-0.5 min-w-[22px] tracking-wide">
       {m.code}
     </span>
   );
@@ -158,8 +158,8 @@ export default function PanelDemographics({
                 </div>
                 {/* Large accent % */}
                 <div className="flex items-end gap-0.5 leading-none">
-                  <span className="font-black text-[72px] leading-none" style={{ color: "#1a6fe8" }}>{d.female}</span>
-                  <span className="text-2xl font-light text-blue-300 mb-3">%</span>
+                  <span className="font-black text-[72px] leading-none" style={{ color: "#3a5d92" }}>{d.female}</span>
+                  <span className="text-2xl font-light text-primary/40 mb-3">%</span>
                 </div>
               </div>
 
@@ -175,7 +175,7 @@ export default function PanelDemographics({
                     style={{
                       width: 260,
                       height: 260,
-                      background: "radial-gradient(circle, rgba(26,111,232,0.07) 0%, transparent 70%)",
+                      background: "radial-gradient(circle, rgba(13,27,62,0.07) 0%, transparent 70%)",
                     }}
                   />
                 </div>
@@ -192,13 +192,13 @@ export default function PanelDemographics({
               {/* Panel share */}
               <div className="mt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[13px] font-semibold uppercase tracking-widest" style={{ color: "#1a6fe8" }}>Panel Share</span>
+                  <span className="text-[13px] font-semibold uppercase tracking-widest" style={{ color: "#3a5d92" }}>Panel Share</span>
                   <span className="text-[13px] font-semibold text-gray-500">{d.female}%</span>
                 </div>
-                <div className="h-[3px] rounded-full overflow-hidden bg-blue-100">
+                <div className="h-[3px] rounded-full overflow-hidden bg-primary/10">
                   <motion.div
                     className="h-full rounded-full"
-                    style={{ background: "#1a6fe8" }}
+                    style={{ background: "#3a5d92" }}
                     initial={{ width: 0 }}
                     animate={{ width: `${d.female}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
@@ -229,13 +229,13 @@ export default function PanelDemographics({
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full" style={{ background: "#1a6fe8" }} />
+                      <span className="w-2 h-2 rounded-full" style={{ background: "#3a5d92" }} />
                       <span className="text-sm text-gray-500">Female</span>
                     </div>
                     <span className="text-sm font-semibold text-gray-700">{d.female}%</span>
                   </div>
-                  <div className="h-1 rounded-full overflow-hidden bg-blue-100">
-                    <motion.div className="h-full rounded-full" style={{ background: "#1a6fe8" }}
+                  <div className="h-1 rounded-full overflow-hidden bg-primary/10">
+                    <motion.div className="h-full rounded-full" style={{ background: "#3a5d92" }}
                       initial={{ width: 0 }} animate={{ width: `${d.female}%` }}
                       transition={{ duration: 0.7, ease: "easeOut" }} />
                   </div>

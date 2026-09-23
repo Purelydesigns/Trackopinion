@@ -31,7 +31,7 @@ const caseStudies: CaseStudy[] = [
     excerpt:
       "A leading global beverage brewing company sought to enhance their logistics reliability and operational efficiency across their supply chain. The goal was to reduce manual intervention, accelerate anomaly resolution, and enable real-time visibility across the brewery-to-distribution center network through an Agentic AI-powered alert generation and resolution platform.",
     image: "🤖",
-    bg: "linear-gradient(135deg, #e8eef8 0%, #c8d8f0 100%)",
+    bg: "linear-gradient(135deg, #eef1f6 0%, #c7d6ea 100%)",
     bullets: [
       "Reduced manual intervention by 65% across all distribution centers",
       "Real-time visibility enabled across 40+ brewery-to-distribution nodes",
@@ -160,7 +160,7 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
           <div className="flex-1 min-w-0 flex flex-col justify-center gap-4">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 w-fit">
-              <span className="text-blue-300 text-xs font-bold uppercase tracking-widest">Case Study</span>
+              <span className="text-white/70 text-xs font-bold uppercase tracking-widest">Case Study</span>
             </div>
 
             <h3 className="text-white font-bold text-lg leading-snug">{study.title}</h3>
@@ -168,7 +168,7 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
             <ul className="flex flex-col gap-2">
               {study.bullets.map((b, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-white/80 text-sm leading-relaxed">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-white/70 mt-0.5 shrink-0" />
                   {b}
                 </li>
               ))}
@@ -193,7 +193,7 @@ function FlipCard({ study, divider }: { study: CaseStudy; divider: boolean }) {
               }}
             >
               <span className="text-white font-extrabold text-2xl leading-none">{study.stat}</span>
-              <span className="text-blue-300 text-xs font-semibold mt-0.5">
+              <span className="text-white/70 text-xs font-semibold mt-0.5">
                 {study.statLabel.split("\n")[0]}
               </span>
             </div>

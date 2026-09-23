@@ -19,7 +19,7 @@ const solutions = [
     icon: Globe,
     href: "/solutions/global-panel",
     desc: "Reach respondents across 50+ countries",
-    color: "bg-blue-50 text-blue-600",
+    color: "bg-primary/5 text-primary",
     children: [
       { label: "B2B Panel", icon: Building2, desc: "785,500 validated professionals", href: "/solutions/global-panel/b2b" },
       { label: "B2C Panel", icon: Users,     desc: "50M+ profiled consumers",         href: "/solutions/global-panel/b2c" },
@@ -43,7 +43,7 @@ const solutions = [
     icon: Building2,
     href: "/solutions/enterprise-solution",
     desc: "Strategic insights for large-scale businesses",
-    color: "bg-blue-50 text-primary",
+    color: "bg-primary/5 text-primary",
     children: [
       { label: "Product Concept & Creative Ad Testing",   icon: Microscope,  desc: "Validate ideas before launch",     href: "/solutions/enterprise-solution/product-concept-and-ad-testing" },
       { label: "Customer Loyalty Measurement",            icon: ShieldCheck, desc: "Measure & grow retention",         href: "/solutions/enterprise-solution/customer-loyalty-measurement" },

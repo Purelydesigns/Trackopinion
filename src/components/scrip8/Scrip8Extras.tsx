@@ -176,7 +176,7 @@ function PricingSection() {
               >
                 {plan.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                    <span className="text-white text-xs font-bold px-6 py-2 rounded-full block whitespace-nowrap shadow-lg" style={{ background: "linear-gradient(135deg, #3b82f6 0%, #1a6fe8 60%, #1558c0 100%)" }}>
+                    <span className="text-white text-xs font-bold px-6 py-2 rounded-full block whitespace-nowrap shadow-lg" style={{ background: "linear-gradient(135deg, #6f8fbf 0%, #3a5d92 60%, #2a4a86 100%)" }}>
                       Most Popular
                     </span>
                   </div>

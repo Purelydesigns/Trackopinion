@@ -8,7 +8,7 @@
  */
 
 const NAVY = "#0d1b3e";
-const BLUE = "#1a6fe8";
+const BLUE = "#3a5d92";
 
 const questionTypes = [
   { label: "Multiple Choice", active: true },
@@ -69,7 +69,7 @@ export function Scrip8Builder() {
             <div
               key={a.label}
               className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 ${
-                a.active ? "bg-blue-50" : "bg-gray-50"
+                a.active ? "bg-primary/5" : "bg-gray-50"
               }`}
             >
               <span
@@ -104,7 +104,7 @@ export function Scrip8Builder() {
                   className="h-full rounded-full"
                   style={{
                     width: `${a.pct}%`,
-                    background: i === 0 ? NAVY : i === 1 ? BLUE : "#bfdbfe",
+                    background: i === 0 ? NAVY : i === 1 ? BLUE : "#c7d6ea",
                   }}
                 />
               </div>

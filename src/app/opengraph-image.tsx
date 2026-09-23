@@ -36,7 +36,7 @@ export default function OpengraphImage() {
             width: 520,
             height: 520,
             borderRadius: 520,
-            border: "2px solid rgba(26,111,232,0.35)",
+            border: "2px solid rgba(13,27,62,0.35)",
             display: "flex",
           }}
         />
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
             width: 360,
             height: 360,
             borderRadius: 360,
-            border: "2px solid rgba(26,111,232,0.25)",
+            border: "2px solid rgba(13,27,62,0.25)",
             display: "flex",
           }}
         />
@@ -59,7 +59,7 @@ export default function OpengraphImage() {
               fontSize: 22,
               letterSpacing: 4,
               textTransform: "uppercase",
-              color: "#7aa9f0",
+              color: "#8ba3c6",
               fontWeight: 600,
             }}
           >
@@ -93,7 +93,7 @@ export default function OpengraphImage() {
                 width: 40,
                 height: h,
                 borderRadius: 4,
-                background: "#1a6fe8",
+                background: "#6f8fbf",
                 display: "flex",
               }}
             />

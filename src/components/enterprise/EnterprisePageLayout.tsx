@@ -107,7 +107,7 @@ export default function EnterprisePageLayout({
                   <span
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: "linear-gradient(90deg, rgba(26,111,232,0.05), transparent 60%)" }}
+                    style={{ background: "linear-gradient(90deg, rgba(13,27,62,0.05), transparent 60%)" }}
                   />
 
                   <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,300px)_1fr] gap-x-10 gap-y-5 py-12">

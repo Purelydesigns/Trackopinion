@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 export const NAVY = "#0d1b3e";
-export const BLUE = "#1a6fe8";
+export const BLUE = "#3a5d92";
 export const MUTED = "#c7d6ea";
 export const TRACK = "#eef3f9";
 
@@ -25,7 +25,7 @@ export function VisualPanel({
       <span
         aria-hidden
         className="pointer-events-none absolute -inset-6 rounded-[2rem] blur-3xl opacity-60"
-        style={{ background: "radial-gradient(60% 60% at 45% 30%, rgba(26,111,232,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 60% at 45% 30%, rgba(13,27,62,0.12), transparent 70%)" }}
       />
       <motion.div
         initial={{ opacity: 0, y: 20 }}

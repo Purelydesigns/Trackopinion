@@ -41,14 +41,14 @@ const PAGE_SIZE = 10;
 
 const typeColor: Record<string, string> = {
   "Full Time":  "text-green-700 bg-green-50 border-green-200",
-  "Remote":     "text-blue-700 bg-blue-50 border-blue-200",
+  "Remote":     "text-primary bg-primary/5 border-primary/20",
   "Internship": "text-purple-700 bg-purple-50 border-purple-200",
   "Hybrid":     "text-amber-700 bg-amber-50 border-amber-200",
 };
 
 const deptColor: Record<string, string> = {
   "Research":   "text-primary bg-highlight border-primary/20",
-  "Projects":   "text-primary bg-blue-50 border-accent/20",
+  "Projects":   "text-primary bg-primary/5 border-primary/20",
   "Marketing":  "text-orange-700 bg-orange-50 border-orange-200",
   "Internship": "text-purple-700 bg-purple-50 border-purple-200",
 };

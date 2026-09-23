@@ -129,7 +129,7 @@ export default function ContactPage() {
             {/* Call & Email */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               <a href={PHONE_IN.href} className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
-                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
+                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
                   <Phone className="w-4 h-4 text-primary group-hover:text-white transition-colors duration-200" />
                 </div>
                 <div>
@@ -138,7 +138,7 @@ export default function ContactPage() {
                 </div>
               </a>
               <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-4 border border-gray-200 rounded-xl px-5 py-4 hover:border-primary hover:shadow-sm transition-all duration-200 group">
-                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
+                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-200">
                   <Mail className="w-4 h-4 text-primary group-hover:text-white transition-colors duration-200" />
                 </div>
                 <div>
@@ -168,7 +168,7 @@ export default function ContactPage() {
           <motion.div {...fadeUp}>
             <div
               className="rounded-2xl p-[6px]"
-              style={{ background: "linear-gradient(160deg, #93c5fd 0%, #3b82f6 40%, #1e3a8a 100%)" }}
+              style={{ background: "linear-gradient(160deg, #8ba3c6 0%, #3a5d92 40%, #0d1b3e 100%)" }}
             >
               <div className="bg-white rounded-2xl p-8">
                 {submitted ? (

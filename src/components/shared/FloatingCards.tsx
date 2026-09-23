@@ -18,7 +18,7 @@ function MiniBarChart() {
           className="rounded flex-1"
           style={{
             height: `${h * 100}%`,
-            background: i === bars.length - 1 ? "#0d1b3e" : i === bars.length - 2 ? "#60a5fa" : "#bfdbfe",
+            background: i === bars.length - 1 ? "#0d1b3e" : i === bars.length - 2 ? "#8ba3c6" : "#c7d6ea",
           }}
         />
       ))}
@@ -40,8 +40,8 @@ const bounceVariants = [
 export default function FloatingCards({ cards }: { cards: [FloatCard, FloatCard, FloatCard] }) {
   return (
     <div className="relative w-full h-[560px]">
-      <div className="absolute w-48 h-48 rounded-full bg-blue-50 opacity-70 bottom-0 right-8 blur-3xl pointer-events-none" />
-      <div className="absolute w-28 h-28 rounded-full bg-blue-100 opacity-40 top-6 right-2 blur-2xl pointer-events-none" />
+      <div className="absolute w-48 h-48 rounded-full bg-primary/5 opacity-70 bottom-0 right-8 blur-3xl pointer-events-none" />
+      <div className="absolute w-28 h-28 rounded-full bg-primary/10 opacity-40 top-6 right-2 blur-2xl pointer-events-none" />
 
       {/* card 1 */}
       <motion.div
@@ -99,9 +99,9 @@ export default function FloatingCards({ cards }: { cards: [FloatCard, FloatCard,
           <p className="text-base font-bold text-gray-800 leading-snug">{cards[2].title}</p>
           {cards[2].sub && <p className="text-xs text-gray-400 mt-1">{cards[2].sub}</p>}
           <div className="flex gap-2 mt-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-300 inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-100 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#6f8fbf] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#c7d6ea] inline-block" />
           </div>
         </motion.div>
       </motion.div>

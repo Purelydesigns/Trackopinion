@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
  */
 
 const NAVY = "#0d1b3e";
-const BLUE = "#1a6fe8";
+const BLUE = "#3a5d92";
 
 /* ═══════════════ 1. Report mock-up ═══════════════ */
 
@@ -81,7 +81,7 @@ export function AnalyticsDashboard() {
                 className="flex-1 rounded-t"
                 style={{
                   height: `${b.value * 100}%`,
-                  background: i === bars.length - 1 ? NAVY : "#bfdbfe",
+                  background: i === bars.length - 1 ? NAVY : "#c7d6ea",
                 }}
               />
             ))}

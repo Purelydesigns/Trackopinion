@@ -128,8 +128,8 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
     <svg viewBox="-60 0 500 380" className="w-full max-w-sm">
       <defs>
         <radialGradient id="rfill" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#1a6fe8" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#1a6fe8" stopOpacity="0.08" />
+          <stop offset="0%"   stopColor="#0d1b3e" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#0d1b3e" stopOpacity="0.08" />
         </radialGradient>
       </defs>
 
@@ -187,7 +187,7 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
         <motion.circle
           key={i} cx={p.x} cy={p.y} r="5"
           fill="#0d1b3e" stroke="white" strokeWidth="2"
-          style={{ filter: "drop-shadow(0 0 4px rgba(26,111,232,0.5))" }}
+          style={{ filter: "drop-shadow(0 0 4px rgba(13,27,62,0.5))" }}
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
@@ -219,7 +219,7 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
       })}
 
       <circle cx={CX} cy={CY} r="5" fill="#0d1b3e"
-        style={{ filter: "drop-shadow(0 0 6px rgba(26,111,232,0.6))" }} />
+        style={{ filter: "drop-shadow(0 0 6px rgba(13,27,62,0.6))" }} />
     </svg>
   );
 }
@@ -351,9 +351,9 @@ export default function ResearchDeepLayout({
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08, duration: 0.4 }}
-                      className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-200"
+                      className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/10 transition-all duration-200"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center shrink-0">
                         <Icon size={18} className="text-primary" />
                       </div>
                       <div>
@@ -457,7 +457,7 @@ export default function ResearchDeepLayout({
                     <span
                       aria-hidden
                       className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: "linear-gradient(90deg, rgba(26,111,232,0.05), transparent 60%)" }}
+                      style={{ background: "linear-gradient(90deg, rgba(13,27,62,0.05), transparent 60%)" }}
                     />
 
                     <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,300px)_1fr] gap-x-10 gap-y-5 py-12">

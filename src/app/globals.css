@@ -7,6 +7,14 @@
   /* Height of the fixed navbar. Layout offsets and the hero components that
      pull up under it read this instead of repeating a magic 76px. */
   --navbar-height: 76px;
+
+  /* Navy tints, for charts needing a second or third series now that the old
+     vivid blue is gone. Declared here rather than in @theme because Tailwind
+     tree-shakes theme variables nothing references, which would leave a var()
+     resolving to nothing. The chart components inline these same values. */
+  --navy-tint: #3a5d92;   /* mid navy   — second series  */
+  --navy-soft: #8ba3c6;   /* light navy — third series   */
+  --navy-pale: #c7d6ea;   /* pale navy  — tracks, fourth */
 }
 
 @theme inline {
@@ -16,7 +24,10 @@
   /* ── Brand colors ── */
   --color-primary:      #0d1b3e;   /* navy — buttons, headings, active states */
   --color-primary-hover: #162550;  /* navy hover */
-  --color-accent:       #1a6fe8;   /* vivid blue — stats, highlights, links */
+  /* Was a vivid blue (#1a6fe8). Retired on request: the site uses the navy
+     and its tints only, so `accent` now resolves to the primary navy and any
+     remaining text-accent/bg-accent usage stays on-brand. */
+  --color-accent:       #0d1b3e;   /* navy — same as primary */
   --color-section:      #fbf9f6;   /* warm off-white — section backgrounds */
   --color-card:         #ffffff;   /* white cards */
   --color-highlight:    #dde4f0;   /* blue-tinted light — stats/newsletter bg */

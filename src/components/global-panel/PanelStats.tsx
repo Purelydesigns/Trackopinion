@@ -51,7 +51,7 @@ const PLOT_W = W - PAD_L - PAD_R;
 const PLOT_H = H - PAD_T - PAD_B;
 
 const NAVY = "#0d1b3e";
-const BLUE = "#2a6bb8";
+const BLUE = "#3a5d92";
 
 function AreaChart({ bars, chartKey }: { bars: Bar[]; chartKey: string }) {
   const maxPct = Math.max(...bars.map((b) => b.pct));

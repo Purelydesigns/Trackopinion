@@ -13,7 +13,7 @@ const EDU_LEVELS = [
   { num: "05", label: "Doctoral / Professional",  sub: "PhD / professional degree"  },
 ];
 
-const EDU_COLORS = ["#bfdbfe", "#60a5fa", "#1a6fe8", "#1e40af", "#0d1b3e"];
+const EDU_COLORS = ["#c7d6ea", "#8ba3c6", "#5b7cae", "#2a4a86", "#0d1b3e"];
 
 const eduData: Record<string, number[]> = {
   global:  [8,  22, 42, 22, 6 ],

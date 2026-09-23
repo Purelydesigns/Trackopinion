@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Eye, Target, Repeat } from "lucide-react";
 
 const NAVY = "#0d1b3e";
-const BLUE = "#1a6fe8";
+const BLUE = "#3a5d92";
 
 /* ═══════════════════════════════════════════════════════════
    1. Concept Testing — monadic scorecard
@@ -24,7 +24,7 @@ export function ConceptScorecard() {
       <span
         aria-hidden
         className="pointer-events-none absolute -inset-6 rounded-[2rem] blur-3xl opacity-60"
-        style={{ background: "radial-gradient(60% 60% at 40% 30%, rgba(26,111,232,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 60% at 40% 30%, rgba(13,27,62,0.12), transparent 70%)" }}
       />
 
       <motion.div
@@ -139,7 +139,7 @@ export function AdAttentionVisual() {
       <span
         aria-hidden
         className="pointer-events-none absolute -inset-6 rounded-[2rem] blur-3xl opacity-60"
-        style={{ background: "radial-gradient(60% 60% at 60% 30%, rgba(26,111,232,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 60% at 60% 30%, rgba(13,27,62,0.12), transparent 70%)" }}
       />
 
       <motion.div

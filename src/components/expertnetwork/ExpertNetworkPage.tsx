@@ -408,7 +408,7 @@ export default function ExpertNetworkPage() {
                       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                     />
                     {/* Industry Managers 22% */}
-                    <motion.circle cx="60" cy="60" r="46" fill="none" stroke="#3b82f6" strokeWidth="14"
+                    <motion.circle cx="60" cy="60" r="46" fill="none" stroke="#8ba3c6" strokeWidth="14"
                       strokeDasharray={`${2 * Math.PI * 46 * 0.22} ${2 * Math.PI * 46}`}
                       strokeDashoffset={`${-2 * Math.PI * 46 * 0.64}`}
                       strokeLinecap="round"
@@ -437,7 +437,7 @@ export default function ExpertNetworkPage() {
                 <div className="space-y-3">
                   {[
                     { label: "Expert Panels", pct: "64%", color: "#ffffff" },
-                    { label: "Industry Managers", pct: "22%", color: "#3b82f6" },
+                    { label: "Industry Managers", pct: "22%", color: "#8ba3c6" },
                     { label: "Academia", pct: "14%", color: "rgba(255,255,255,0.25)" },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">
@@ -471,7 +471,7 @@ export default function ExpertNetworkPage() {
                       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                     />
                     {/* Americas 35% */}
-                    <motion.circle cx="60" cy="60" r="46" fill="none" stroke="#3b82f6" strokeWidth="14"
+                    <motion.circle cx="60" cy="60" r="46" fill="none" stroke="#8ba3c6" strokeWidth="14"
                       strokeDasharray={`${2 * Math.PI * 46 * 0.35} ${2 * Math.PI * 46}`}
                       strokeDashoffset={`${-2 * Math.PI * 46 * 0.38}`}
                       strokeLinecap="round"
@@ -500,7 +500,7 @@ export default function ExpertNetworkPage() {
                 <div className="space-y-3">
                   {[
                     { label: "Europe / EMEA", pct: "38%", color: "#ffffff" },
-                    { label: "Americas", pct: "35%", color: "#3b82f6" },
+                    { label: "Americas", pct: "35%", color: "#8ba3c6" },
                     { label: "Asia Pacific", pct: "27%", color: "rgba(255,255,255,0.25)" },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">

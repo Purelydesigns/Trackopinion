@@ -60,15 +60,15 @@ function LiquidCircle({ pct }: { pct: number }) {
         </clipPath>
         {/* Water gradient: lighter at surface, richer at depth */}
         <linearGradient id="water-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stopColor="#4a8fe0" />
-          <stop offset="100%" stopColor="#0d3f9e" />
+          <stop offset="0%"   stopColor="#6f8fbf" />
+          <stop offset="100%" stopColor="#1d3566" />
         </linearGradient>
       </defs>
 
       {/* outer dot ring */}
       {dots.map((dot, i) => (
         <circle key={i} cx={dot.x} cy={dot.y} r="2"
-          fill={i % 3 === 0 ? "#93b8d8" : "#c4d8ec"} />
+          fill={i % 3 === 0 ? "#8ba3c6" : "#c7d6ea"} />
       ))}
 
       {/* dark background circle — matches section bg so no bubble highlight */}
@@ -82,7 +82,7 @@ function LiquidCircle({ pct }: { pct: number }) {
           animate={{ x: [0, -waveW] }}
           transition={{ duration: 2.6, repeat: Infinity, ease: "linear" }}
         >
-          <path d={path1} fill="#1a6fe8" />
+          <path d={path1} fill="#3a5d92" />
         </motion.g>
 
         {/* wave 2 — deeper shade for layered depth */}
@@ -90,7 +90,7 @@ function LiquidCircle({ pct }: { pct: number }) {
           animate={{ x: [0, -waveW] }}
           transition={{ duration: 3.8, repeat: Infinity, ease: "linear" }}
         >
-          <path d={path2} fill="#4a8fe0" />
+          <path d={path2} fill="#6f8fbf" />
         </motion.g>
       </g>
 
@@ -118,9 +118,9 @@ const features = [
     icon: Clock,
     title: "Real-time survey delivery",
     desc: "Instant reach to mobile & broadband panelists",
-    bg: "bg-blue-50",
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-500",
+    bg: "bg-highlight",
+    iconBg: "bg-highlight",
+    iconColor: "text-primary",
   },
   {
     icon: CheckCircle,
@@ -192,9 +192,9 @@ export default function PanelReach({ marketId }: { marketId: string }) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
                 className="rounded-2xl px-5 py-4 border"
-                style={{ background: "rgba(26,111,232,0.1)", borderColor: "rgba(26,111,232,0.25)" }}
+                style={{ background: "rgba(13,27,62,0.1)", borderColor: "rgba(13,27,62,0.25)" }}
               >
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-400 mb-1">Coverage Score</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-white/70 mb-1">Coverage Score</p>
                 <div className="flex items-end gap-2">
                   <span className="text-3xl font-bold text-white">{pct}%</span>
                   <span className="text-xs text-slate-400 mb-1 font-normal">digital reach</span>
@@ -202,7 +202,7 @@ export default function PanelReach({ marketId }: { marketId: string }) {
                 <div className="mt-2 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
                   <motion.div
                     className="h-full rounded-full"
-                    style={{ background: "linear-gradient(90deg, #1a6fe8, #60a5fa)" }}
+                    style={{ background: "linear-gradient(90deg, #2a4a86, #6f8fbf)" }}
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
@@ -217,7 +217,7 @@ export default function PanelReach({ marketId }: { marketId: string }) {
               {[1, 2, 3].map((n) => (
                 <motion.div
                   key={n}
-                  className="absolute rounded-full border border-blue-400/20"
+                  className="absolute rounded-full border border-white/20"
                   style={{ width: 290 + n * 44, height: 290 + n * 44 }}
                   animate={{ scale: [1, 1.04, 1], opacity: [0.4, 0.15, 0.4] }}
                   transition={{ duration: 2.8 + n * 0.6, repeat: Infinity, ease: "easeInOut", delay: n * 0.4 }}
@@ -230,7 +230,7 @@ export default function PanelReach({ marketId }: { marketId: string }) {
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl px-5 py-4 border"
                 style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-400 mb-2">Market Snapshot</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-white/70 mb-2">Market Snapshot</p>
                 <p className="text-sm text-slate-300 font-normal leading-relaxed">
                   The liquid fill represents real-time internet penetration for the selected market panel.
                   Switch markets above to see data update live.
@@ -271,7 +271,7 @@ export default function PanelReach({ marketId }: { marketId: string }) {
                 <div className="flex gap-1 h-2 rounded-full overflow-hidden">
                   <motion.div
                     className="rounded-l-full"
-                    style={{ background: "#1a6fe8" }}
+                    style={{ background: "#3a5d92" }}
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
@@ -279,7 +279,7 @@ export default function PanelReach({ marketId }: { marketId: string }) {
                   <div className="flex-1 rounded-r-full" style={{ background: "rgba(255,255,255,0.1)" }} />
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="text-[11px] text-blue-400 font-semibold">Online {pct}%</span>
+                  <span className="text-[11px] text-white/70 font-semibold">Online {pct}%</span>
                   <span className="text-[11px] text-slate-500 font-medium">Offline {(100 - pct).toFixed(1)}%</span>
                 </div>
               </motion.div>
