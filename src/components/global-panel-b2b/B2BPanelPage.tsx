@@ -6,6 +6,8 @@ import { ChevronDown, ShieldCheck, BadgeCheck, Briefcase, Network, UserCheck, Ha
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ProcessSteps, { type ProcessStep } from "@/components/shared/ProcessSteps";
+import GlobalReach from "@/components/about/GlobalReach";
+import { PANEL_COUNTRIES } from "@/lib/mapCountries";
 import {
   b2bMarkets, TOTAL_PANELISTS, recruitmentStrategy, validationCriteria,
   fraudDetection, panelAttributes, type Slice,
@@ -253,6 +255,14 @@ export default function B2BPanelPage() {
         primaryCta={{ label: "Request B2B Sample", href: "/contact-us" }}
         secondaryCta={{ label: "Talk to an Expert", href: "/contact-us" }}
         minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
+      />
+
+      {/* ════════ MAP ════════ */}
+      <GlobalReach
+        heading="27 Markets in Our B2B Reach"
+        description="Validated decision-makers and professionals across every major business region — the footprint behind the market-level data below."
+        pins={PANEL_COUNTRIES}
+        sectionClassName="bg-white py-16"
       />
 
       {/* ════════ MARKET SNAPSHOT ════════ */}

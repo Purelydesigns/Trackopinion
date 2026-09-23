@@ -6,6 +6,8 @@ import PanelDemographics from "./PanelDemographics";
 import PanelStats from "./PanelStats";
 import PanelEducation from "./PanelEducation";
 import PanelReach from "./PanelReach";
+import GlobalReach from "@/components/about/GlobalReach";
+import { PANEL_COUNTRIES } from "@/lib/mapCountries";
 import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 export default function GlobalPanelPage() {
@@ -31,6 +33,15 @@ export default function GlobalPanelPage() {
       <PanelStats        marketId={marketId} />
       <PanelEducation    marketId={marketId} />
       <PanelReach        marketId={marketId} />
+
+      {/* ════════ MAP ════════ */}
+      <GlobalReach
+        heading="27 Markets in Our Consumer Reach"
+        description="Verified consumer panelists across every major region — so a study can run in one market or twenty-seven without changing partners."
+        pins={PANEL_COUNTRIES}
+        sectionClassName="bg-white py-16"
+      />
+
       <SolutionEnquiryForm />
 
     </main>

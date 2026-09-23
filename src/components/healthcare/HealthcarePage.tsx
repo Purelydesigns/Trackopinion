@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-;
 import GlobalReach from "@/components/about/GlobalReach";
+import { HEALTHCARE_COUNTRIES } from "@/lib/mapCountries";
 import PanelSpecialties from "./PanelSpecialties";
 import LatestReadsSection from "../shared/LatestReadsSection";
 import FaqAccordion from "../shared/FaqAccordion";
@@ -131,6 +131,7 @@ export default function HealthcarePage() {
       <GlobalReach
         heading="30+ Countries in Our Global Reach"
         description="Panel members available in all major countries and continents for healthcare market research. Partnership with local panel providers increases our bandwidth and diversifies online market research."
+        pins={HEALTHCARE_COUNTRIES}
       />
 
       {/* ════════ CAPABILITIES ════════ */}

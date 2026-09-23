@@ -11,6 +11,7 @@ import FaqAccordion from "../shared/FaqAccordion";
 import ProcessSteps, { ProcessStep } from "../shared/ProcessSteps";
 import { FileText, Users, BarChart3, ClipboardCheck } from "lucide-react";
 import { faqs } from "./faqs";
+import { CATI_COUNTRIES } from "@/lib/mapCountries";
 import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ── Data ── */
@@ -153,6 +154,7 @@ export default function CatiPage() {
       <GlobalReach
         heading="CATI Reach"
         description="CATI is a cost-effective online user interview process. You can collect qualitative and quantitative data fast. Fine-tune your questionnaires with logical jumps and filter outcomes with control questions."
+        pins={CATI_COUNTRIES}
       />
 
       {/* ════════ HOW CATI WORKS ════════ */}
