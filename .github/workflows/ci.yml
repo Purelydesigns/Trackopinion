@@ -13,7 +13,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Must stay >= 22.22.2. jsdom 30 (via isomorphic-dompurify, used to
+          # sanitize CMS HTML in src/lib/blog.ts) pulls in undici 8, which does
+          # `require('node:worker_threads').markAsUncloneable` at module load.
+          # That function does not exist before Node 22.10, so on Node 20 the
+          # build died with "webidl.util.markAsUncloneable is not a function"
+          # the moment any route touched the sanitizer.
+          node-version-file: .nvmrc
           cache: npm
 
       - run: npm ci
