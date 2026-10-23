@@ -57,7 +57,7 @@ export default function FloatingCards({ cards }: { cards: [FloatCard, FloatCard,
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1.5">{cards[0].eyebrow}</p>
           <p className="text-base font-bold text-gray-800 leading-snug">{cards[0].title}</p>
-          {cards[0].sub && <p className="text-xs text-gray-400 mt-1">{cards[0].sub}</p>}
+          {cards[0].sub && <p className="text-xs text-gray-600 mt-1">{cards[0].sub}</p>}
           <MiniBarChart />
         </motion.div>
       </motion.div>
@@ -76,8 +76,8 @@ export default function FloatingCards({ cards }: { cards: [FloatCard, FloatCard,
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1.5">{cards[1].eyebrow}</p>
           <p className="text-base font-bold text-gray-800 leading-snug">{cards[1].title}</p>
-          {cards[1].sub && <p className="text-xs text-gray-400 mt-1">{cards[1].sub}</p>}
-          <span className="inline-block mt-2.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full px-3 py-1">
+          {cards[1].sub && <p className="text-xs text-gray-600 mt-1">{cards[1].sub}</p>}
+          <span className="inline-block mt-2.5 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full py-1">
             Results
           </span>
         </motion.div>
@@ -97,7 +97,7 @@ export default function FloatingCards({ cards }: { cards: [FloatCard, FloatCard,
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1.5">{cards[2].eyebrow}</p>
           <p className="text-base font-bold text-gray-800 leading-snug">{cards[2].title}</p>
-          {cards[2].sub && <p className="text-xs text-gray-400 mt-1">{cards[2].sub}</p>}
+          {cards[2].sub && <p className="text-xs text-gray-600 mt-1">{cards[2].sub}</p>}
           <div className="flex gap-2 mt-4">
             <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#6f8fbf] inline-block" />

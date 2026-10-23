@@ -244,7 +244,7 @@ export default function ApplySection() {
                     disabled={!canContinue}
                     className={`w-full mt-6 inline-flex items-center justify-center gap-2 font-bold py-4 rounded-lg text-sm transition-all duration-200
                       ${canContinue
-                        ? "bg-accent text-white hover:opacity-90"
+                        ? "bg-white text-primary hover:bg-white/90"
                         : "bg-white/10 text-white/30 cursor-not-allowed"
                       }`}
                   >

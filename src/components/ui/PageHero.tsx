@@ -89,14 +89,14 @@ export default function PageHero({
             {primaryCta.href ? (
               <Link
                 href={primaryCta.href}
-                className="inline-flex items-center gap-2 bg-accent hover:opacity-90 text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
+                className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-primary font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
               >
                 {primaryCta.label} <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
               <button
                 onClick={primaryCta.onClick}
-                className="inline-flex items-center gap-2 bg-accent hover:opacity-90 text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
+                className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-primary font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-sm"
               >
                 {primaryCta.label} <ArrowRight className="w-4 h-4" />
               </button>

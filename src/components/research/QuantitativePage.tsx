@@ -2,7 +2,7 @@
 
 import {
   ClipboardList, PhoneCall, Globe, FileSpreadsheet,
-  Layers, Workflow, PieChart, FileText, Users, LineChart,
+  BadgeCheck, Filter, PieChart, Smile, ScanSearch, ShieldCheck,
 } from "lucide-react";
 import ResearchDeepLayout, { type ResearchDeepContent } from "./ResearchDeepLayout";
 
@@ -10,9 +10,9 @@ const content: ResearchDeepContent = {
   hero: {
     breadcrumb: [{ name: "Research Services" }, { name: "Quantitative" }],
     badge: "Quantitative Market Research",
-    heading: <>Numbers Through Online Surveys &amp; CATI Interviews</>,
+    heading: <>Measure What Matters With the Right People Behind the Data</>,
     description:
-      "Know what the audience thinks about your offerings. As a quantitative market research agency in India, we amplify your business decision-making capabilities.",
+      "Quantitative research is most useful when the sample, methodology, and execution are built around the research question. Track Opinion supports research teams in measuring behaviors, attitudes, preferences, and change at scale while keeping audience relevance, feasibility, and data quality at the center of the study.",
     primaryCta: { label: "Start a Research Project", href: "/contact-us" },
     secondaryCta: { label: "Explore Methods", href: "#methods" },
   },
@@ -22,16 +22,15 @@ const content: ResearchDeepContent = {
     heading: <>Numbers Through Online Surveys<br />And CATI Interviews</>,
     description:
       "Know what the audience thinks about your offerings. As a quantitative market research agency in India, we amplify your business decision-making capabilities.",
-    subheading: "What's Quantitative Market Research?",
+    subheading: "One Research Question. The Right Route to the Answer.",
     paragraphs: [
-      "Quantitative market research companies aid in gaining stats from users about their preferences, pain points, and needs. You can also assess market gaps, trends, and competition.",
-      "Track Opinion uses diverse methods such as online and offline surveys, CATI, and web-enabled interviews, among many others.",
+      "No single route ensures the best reach to every audience. Track Opinion executes an established methodology or recommends an appropriate data-collection route based on the target audience, geography, research objective, incidence, and timeline.",
     ],
     items: [
-      { icon: ClipboardList,    label: "Online Surveys",         desc: "Structured questionnaires fielded at scale" },
-      { icon: FileSpreadsheet,  label: "Offline Surveys",        desc: "Field data collection where reach demands it" },
-      { icon: PhoneCall,        label: "CATI Interviews",        desc: "Computer-assisted telephone interviewing" },
-      { icon: Globe,            label: "Web-Enabled Interviews", desc: "Remote interviews across global markets" },
+      { icon: ClipboardList,    label: "Online & Mobile Surveys",         desc: "Reach profiled consumers and professional audiences through structured digital research." },
+      { icon: PhoneCall,        label: "CATI",        desc: "Interviewer-led telephone research where direct contact or controlled interviewing adds value." },
+      { icon: FileSpreadsheet,  label: "Face-to-Face Research",        desc: "Quantitative data collection through intercepts, street interviews, and other location-based fieldwork." },
+      { icon: Globe,            label: "Hybrid & Mixed-Mode", desc: "Combine online, offline, and telephonic methods when audience accessibility or study design calls for more than one route." },
     ],
     radarLabel: "Quantitative Coverage Map",
     radarDims: [
@@ -45,76 +44,103 @@ const content: ResearchDeepContent = {
   },
 
   moreThanNumbers: {
-    heading: <>What&apos;s Quantitative Market Research?</>,
+    heading: <>From Everyday Consumers to Specialist Decision-Makers</>,
     paragraphs: [
-      "Quantitative market research companies aid in gaining stats from users about their preferences, pain points, and needs. You can also assess market gaps, trends, and competition.",
-      "Track Opinion uses diverse methods such as online and offline surveys, CATI, and web-enabled interviews, among many others.",
+      "Broad reach matters. Relevant reach matters more.",
+      "Track Opinion's panel resources target beyond broad demographics, using characteristics relevant to the research.",
     ],
-    bullets: [
-      "Stats on user preferences, pain points, and needs",
-      "Assess market gaps, trends, and competition",
-      "Online and offline surveys, CATI, and web-enabled interviews",
-    ],
+    // The three audience types are the floating cards; repeating them as bullets
+    // would say the same thing twice in one view.
+    bullets: [],
     cards: [
-      { eyebrow: "Survey",    title: "Online & Offline Surveys" },
-      { eyebrow: "CATI",      title: "Telephone Interviews", sub: "Computer-assisted..." },
-      { eyebrow: "Reporting", title: "Reporting Insights" },
+      {
+        eyebrow: "Consumer",
+        title: "Consumer Audiences",
+        sub: "Demographic, behavioral, interest, category, and purchase-related targeting.",
+      },
+      {
+        eyebrow: "B2B",
+        title: "Business Professionals",
+        sub: "Industry, function, job level, company characteristics, and decision-making responsibility.",
+      },
+      {
+        eyebrow: "Specialist",
+        title: "Specialist & Hard-to-Reach Audiences",
+        sub: "Study-specific approaches for narrower and lower-incidence populations.",
+      },
     ],
   },
 
   benefits: {
     label: "Benefits",
-    heading: <>Benefits of Quantitative<br />Research</>,
+    heading: <>Know What Is Realistic Before Fieldwork Begins</>,
     paragraphs: [
-      "As a quantitative research agency, we help you dig facts about your users' perceptions, market insights, and competitors' performance.",
-      "By relying on demographic-based outcomes, refine your services, improve your products, and communicate better with users. Also, explore new territories, customer segments, and ideas using quantitative market research.",
+      "Feasibility should inform the research design, not become a problem discovered after launch.",
     ],
-    ctaLabel: "Discuss Your Research →",
+    ctaLabel: "Discover Your Research →",
     ctaHref: "/contact-us",
     centerLabel: "Insights",
     orbitNodes: [
       {
-        label: ["User", "Perceptions"],
+        label: ["Audience"],
         angle: -90,
-        icons: ["M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2", "M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"],
+        icons: ["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"],
       },
-      { label: ["Market"],      angle: 195, icons: ["M23 6l-9.5 9.5-5-5L1 18", "M17 6h6v6"] },
-      { label: ["Competitors"], angle: -20, icons: ["M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"] },
-      { label: ["Demographics"], angle: 122, icons: ["M18 20V10", "M12 20V4", "M6 20v-6"] },
       {
-        label: ["Segments"],
-        angle: 50,
-        icons: ["M21.21 15.89A10 10 0 1 1 8 2.83", "M22 12A10 10 0 0 0 12 2v10z"],
+        label: ["Geography"],
+        angle: -18,
+        icons: ["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z", "M2 12h20", "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"],
+      },
+      {
+        label: ["Incidence", "& Sample"],
+        angle: 54,
+        icons: ["M22 3H2l8 9.46V19l4 2v-8.54L22 3z"],
+      },
+      {
+        label: ["Timeline"],
+        angle: 126,
+        icons: ["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z", "M12 6v6l4 2"],
+      },
+      {
+        label: ["Method"],
+        angle: 198,
+        icons: ["M6 3v12", "M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z", "M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z", "M18 9a9 9 0 0 1-9 9"],
       },
     ],
   },
 
   whyChoose: {
     label: "What Sets Us Apart",
-    heading: <>Why Choose Track Opinion for Quantitative Research?</>,
+    heading: <>Quality Isn&apos;t a Final Check. It Runs Through the Research.</>,
     description:
-      "Six reasons why leading brands, consulting firms, and agencies trust us for their quantitative market research.",
+      "Data quality depends on whether respondents are authentic, relevant to the study, appropriately represent the population, and able to participate meaningfully.",
     cards: [
-      { icon: Workflow,  title: "Process Oriented",      desc: "You don't get only data. You get a process-driven team that executes end-to-end quantitative market research." },
-      { icon: PieChart,  title: "Customer Segmentation", desc: "Segment customers well that suit your sample requirements with legit panel profiles fulfilling survey prerequisites." },
-      { icon: Layers,    title: "Highly Detailed",       desc: "Get holistic research — from understanding the project to designing surveys, programming them for distribution, data collection, and reporting." },
-      { icon: Users,     title: "Population",            desc: "Whether B2C or B2B industry, our thorough vetting selects panelists with the necessary experience having apt psychographic and demographic data." },
-      { icon: FileText,  title: "Questionnaire Designs", desc: "Receive a tailored approach in the survey designs and questions with the nuances only an experienced quantitative research agency understands." },
-      { icon: LineChart, title: "Reporting Insights",    desc: "Collect and transform crude data into valuable insights that leverage your business decisions. Use our reporting capabilities to share and utilize opinions." },
+      { icon: BadgeCheck,  title: "Authenticity",                 desc: "Identity and survey-level controls, including verification, geolocation validation, duplicate detection, device fingerprinting, and IP/VPN controls." },
+      { icon: Filter,      title: "Relevance",                    desc: "Profiling and study-specific screening help ensure respondents meet the required research criteria." },
+      { icon: PieChart,    title: "Representation",               desc: "Sample and quota structures help ensure the intended groups are represented within the research." },
+      { icon: Smile,       title: "Respondent Experience",        desc: "Questionnaire design, survey logic, and mobile accessibility support more considered participation." },
+      { icon: ScanSearch,  title: "Survey-Level Quality",         desc: "Attention checks, speeding, and straight-lining detection, together with fieldwork monitoring." },
+      { icon: ShieldCheck, title: "Audience-Specific Validation", desc: "Additional professional, company, role, or healthcare-specific validation can be applied wherever relevant." },
     ],
   },
 
   projectManagement: {
-    label: "How We Work",
-    heading: <>Our Survey Process</>,
+    label: "Flexible Research Support",
+    heading: <>Choose the Level of Research Support You Need</>,
     description:
-      "From screening the right panelists to making sure the survey gets completed — four steps that protect your response quality.",
+      "From audience access to end-to-end execution, choose the level of service that fits your research requirements.",
     steps: [
-      { num: 1, label: "", title: "Phone Screening and Validation", quote: '', desc: "We select panel members based on initial phone screening and by validating their profiles and suitability." },
-      { num: 2, label: "", title: "Send Our Survey Link", quote: '', desc: "Send survey links from various channels such as app notifications, emails, website forms, and other ways that embed links safely." },
-      { num: 3, label: "", title: "Phone and Email Follow-ups", quote: '', desc: "The number of responses matters. We regularly tap users for updates and engagement throughout the project lifecycle." },
-      { num: 4, label: "", title: "Ensure Survey Completion", quote: '', desc: "More than participation, the completion rate matters. And we ensure a higher number of clicks on the submit button." },
+      { num: 1, label: "", quote: "", title: "Audience / Sample Only",          desc: "Access the required consumer, B2B, or specialist audience against agreed targeting and sample criteria." },
+      { num: 2, label: "", quote: "", title: "Sample + Fieldwork",              desc: "Audience recruitment, fieldwork management, quota monitoring, and relevant quality controls." },
+      { num: 3, label: "", quote: "", title: "Programming + Fieldwork",         desc: "Questionnaire setup, scripting, logic, branching, multilingual setup, and fieldwork execution." },
+      { num: 4, label: "", quote: "", title: "End-to-End Quantitative Support", desc: "Research planning through sampling, fieldwork, quality control, data processing, analysis, and reporting." },
     ],
+  },
+
+  enquiry: {
+    heading: "Need Quantitative Research Built Around Your Audience?",
+    intro:
+      "Tell us whom you need to reach, where you need to reach them, and what you need to measure. We can assess feasibility, recommend an appropriate data-collection route, and build the level of execution around your research requirements.",
   },
 };
 

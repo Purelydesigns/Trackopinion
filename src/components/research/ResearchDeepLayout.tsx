@@ -46,11 +46,13 @@ export interface ResearchDeepContent {
     label: string;
     heading: React.ReactNode;
     description: string;
-    subheading: string;
-    paragraphs: string[];
+    /** Lead-in above the method tiles. Omit when the section header says enough. */
+    subheading?: string;
+    paragraphs?: string[];
     items: { icon: LucideIcon; label: string; desc: string }[];
-    radarLabel: string;
-    radarDims: RadarDim[];
+    /** Omit both to drop the right-hand column; the tiles then span the row. */
+    radarLabel?: string;
+    radarDims?: RadarDim[];
     /** Replaces the radar chart when the page has artwork of its own. */
     visual?: React.ReactNode;
   };
@@ -91,6 +93,12 @@ export interface ResearchDeepContent {
     description: string;
     steps: { num: number; label: string; title: string; quote: string; desc: string }[];
   };
+  /** Overrides the enquiry form's own copy. Omit to keep the site-wide default. */
+  enquiry?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+  };
 }
 
 /* Literal classes so Tailwind keeps them in the build */
@@ -125,7 +133,7 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
   // anchored outward from the outer ring, and longer ones ("Data Security",
   // "Confidentiality") ran past the edge and were clipped mid-word.
   return (
-    <svg viewBox="-60 0 500 380" className="w-full max-w-sm">
+    <svg viewBox="-70 -10 520 400" className="w-full max-w-lg">
       <defs>
         <radialGradient id="rfill" cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stopColor="#0d1b3e" stopOpacity="0.25" />
@@ -162,7 +170,7 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
       {dims.map((d, i) => {
         const p = radarPt(d.angle, MAX_R * 0.5);
         return (
-          <text key={i} x={p.x} y={p.y + 3} textAnchor="middle" fontSize="7" fill="#cbd5e1"
+          <text key={i} x={p.x} y={p.y + 3} textAnchor="middle" fontSize="9" fill="#cbd5e1"
             style={{ fontFamily: "system-ui" }}>
             50%
           </text>
@@ -206,11 +214,11 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
             viewport={{ once: true }}
             transition={{ delay: 0.4 + i * 0.08 }}
           >
-            <text x={p.x} y={p.y - 4} textAnchor={anchor} fontSize="11" fontWeight="700" fill="#0d1b3e"
+            <text x={p.x} y={p.y - 6} textAnchor={anchor} fontSize="15" fontWeight="700" fill="#0d1b3e"
               style={{ fontFamily: "system-ui, sans-serif" }}>
               {d.label}
             </text>
-            <text x={p.x} y={p.y + 9} textAnchor={anchor} fontSize="9" fontWeight="600" fill="#0d1b3e"
+            <text x={p.x} y={p.y + 12} textAnchor={anchor} fontSize="12" fontWeight="600" fill="#0d1b3e"
               style={{ fontFamily: "system-ui, sans-serif" }}>
               {Math.round(d.value * 100)}%
             </text>
@@ -307,7 +315,9 @@ export default function ResearchDeepLayout({
    */
   faqs?: Faq[];
 }) {
-  const { hero, methods, moreThanNumbers, advantages, benefits, whyChoose, projectManagement } = content;
+  const { hero, methods, moreThanNumbers, advantages, benefits, whyChoose, projectManagement, enquiry } = content;
+
+  const hasMethodsVisual = Boolean(methods.visual || methods.radarDims);
 
   return (
     <main>
@@ -332,16 +342,23 @@ export default function ResearchDeepLayout({
             align="center"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* The right-hand column is optional. With no radar and no artwork
+              the tiles take the full row instead of sitting in a half-width
+              column with empty space beside them. */}
+          <div className={hasMethodsVisual ? "grid grid-cols-1 sm:grid-cols-2 gap-4" : ""}>
             <div>
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-primary mb-3">{methods.subheading}</h3>
-                {methods.paragraphs.map((p, i) => (
-                  <p key={i} className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">{p}</p>
-                ))}
-              </div>
+              {(methods.subheading || methods.paragraphs?.length) && (
+                <div className="mb-8">
+                  {methods.subheading && (
+                    <h3 className="text-xl font-bold text-primary mb-3">{methods.subheading}</h3>
+                  )}
+                  {methods.paragraphs?.map((p, i) => (
+                    <p key={i} className="text-base leading-8 font-medium flex-1 mb-2 text-gray-600">{p}</p>
+                  ))}
+                </div>
+              )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${hasMethodsVisual ? "" : "lg:grid-cols-4"}`}>
                 {methods.items.map((m, i) => {
                   const Icon = m.icon;
                   return (
@@ -367,14 +384,18 @@ export default function ResearchDeepLayout({
             </div>
 
             {/* Radar */}
-            <div className="flex flex-col items-center justify-center py-4 gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                  {methods.radarLabel}
-                </span>
+            {hasMethodsVisual && (
+              <div className="flex flex-col items-center justify-center py-4 gap-4">
+                {methods.radarLabel && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+                      {methods.radarLabel}
+                    </span>
+                  </div>
+                )}
+                {methods.visual ?? (methods.radarDims && <RadarChart dims={methods.radarDims} />)}
               </div>
-              {methods.visual ?? <RadarChart dims={methods.radarDims} />}
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -623,7 +644,7 @@ export default function ResearchDeepLayout({
 
       {faqs && faqs.length > 0 && <FaqAccordion faqs={faqs} />}
 
-      <SolutionEnquiryForm />
+      <SolutionEnquiryForm {...enquiry} />
 
       <LatestReadsSection />
     </main>

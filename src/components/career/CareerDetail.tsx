@@ -204,7 +204,7 @@ export default function CareerDetail({ job }: { job: Job }) {
                   <p className="text-white/60 text-xs leading-6 mb-5">Fill the form below and our HR team will get back within 5 business days.</p>
                   <a
                     href="#apply"
-                    className="inline-flex items-center justify-center gap-2 w-full bg-accent hover:opacity-90 text-white font-bold px-6 py-3.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-white hover:bg-white/90 text-primary font-bold px-6 py-3.5 rounded-lg text-sm transition-all duration-200 hover:-translate-y-0.5"
                   >
                     Apply Now <ArrowRight className="w-4 h-4" />
                   </a>
