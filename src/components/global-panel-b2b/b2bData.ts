@@ -701,10 +701,6 @@ export const panelAttributes = [
     items: ["Digital Marketers", "Insurance Agents", "Lawyers", "CPA", "Stylists", "Machinist", "Chemist/Scientist", "Graphic Designer", "Social Media", "Influencer", "Plumber", "Carpenter", "General Contractor", "Auto Mechanic", "Driver", "Electrician", "Factory/Warehouse Worker"],
   },
   {
-    group: "Government / Military",
-    items: ["Law Enforcement", "Military/Defence", "National Guard", "Medical", "Indian Foreign Service"],
-  },
-  {
     group: "ITDM / IT Roles",
     items: ["Developer", "Data Centre", "Cloud Computing", "Business Intelligence", "Big Data Analytics"],
   },

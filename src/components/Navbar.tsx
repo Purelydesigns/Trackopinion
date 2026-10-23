@@ -23,6 +23,9 @@ const solutions = [
     children: [
       { label: "B2B Panel", icon: Building2, desc: "785,500 validated professionals", href: "/solutions/global-panel/b2b" },
       { label: "B2C Panel", icon: Users,     desc: "50M+ profiled consumers",         href: "/solutions/global-panel/b2c" },
+      // Also listed as a top-level solution. Deliberately in both places: it is
+      // a panel as well as a specialism, so it should be findable either way.
+      { label: "Healthcare Research", icon: HeartPulse, desc: "Medical & pharma audience research", href: "/solutions/healthcare" },
     ],
   },
   {

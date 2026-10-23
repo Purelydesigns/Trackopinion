@@ -2,42 +2,19 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, ShieldCheck, BadgeCheck, Network, UserCheck, Handshake, Activity, Search, X, Globe2, Users } from "lucide-react";
+import { ChevronDown, ShieldCheck, BadgeCheck, Search, X, Globe2, Users } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SiteCard from "@/components/ui/SiteCard";
-import ProcessSteps, { type ProcessStep } from "@/components/shared/ProcessSteps";
-import GlobalReach from "@/components/about/GlobalReach";
 import LatestReadsSection from "@/components/shared/LatestReadsSection";
 import { PANEL_COUNTRIES } from "@/lib/mapCountries";
 import {
-  b2bMarkets, TOTAL_PANELISTS, recruitmentStrategy, validationCriteria,
+  b2bMarkets, TOTAL_PANELISTS, validationCriteria,
   fraudDetection, panelAttributes, type Slice,
 } from "./b2bData";
 import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 const NAVY = "#0d1b3e";
-
-/* Recruitment strategy as an interactive timeline. Sub-lines are condensed
-   from the deck's own sentences, which become the detail-card bodies. */
-const RECRUIT_SUBLINES = [
-  "LinkedIn and relevant industry forums",
-  "Existing relationships in business networks",
-  "Trusted professional organizations",
-  "Updates and participation monitoring",
-];
-
-const recruitmentSteps: ProcessStep[] = recruitmentStrategy.map((r, i) => ({
-  num: String(i + 1).padStart(2, "0"),
-  label: r.label,
-  desc: RECRUIT_SUBLINES[i] ?? "",
-  icon: [<Network key="a" className="w-6 h-6" />, <UserCheck key="b" className="w-6 h-6" />,
-         <Handshake key="c" className="w-6 h-6" />, <Activity key="d" className="w-6 h-6" />][i],
-  detail: {
-    title: `Step ${String(i + 1).padStart(2, "0")} — ${r.label}`,
-    body: r.desc,
-  },
-}));
 
 /* Trim noisy precision: 38.97 -> 39, 31.9 -> 31.9 stays readable at 1dp */
 const fmt = (n: number) => `${Number(n.toFixed(1))}%`;
@@ -392,66 +369,6 @@ export default function B2BPanelPage() {
         minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
       />
 
-      {/* ════════ MAP ════════ */}
-      <GlobalReach
-        heading="27 Markets in Our B2B Reach"
-        description="Validated decision-makers and professionals across every major business region — the footprint behind the market-level data below."
-        pins={PANEL_COUNTRIES}
-        sectionClassName="bg-section py-16"
-      />
-
-      {/* ════════ STATS BANNER ════════ */}
-      <section className="bg-white py-16">
-        <div className="site-container px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="rounded-3xl overflow-hidden"
-            style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
-          >
-            <div className="px-10 py-12">
-              <SectionHeader
-                label="B2B Panel Network"
-                heading={<>A panel built for business research, validated end to end</>}
-                description=""
-                theme="dark"
-              />
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {[
-                  // Compact, like the healthcare banner's "711K+" — the exact
-                  // figure is spelled out in the hero badge, and at phone width
-                  // "785,500" is wider than its own tile.
-                  { icon: Users,       value: `${Math.floor(TOTAL_PANELISTS / 1000)}K+`, label: "Active B2B Panelists" },
-                  { icon: Globe2,      value: `${PANEL_COUNTRIES.length}`,           label: "Markets Covered"      },
-                  { icon: ShieldCheck, value: `${validationCriteria.length}`,        label: "Validation Gates"     },
-                  { icon: BadgeCheck,  value: `${fraudDetection.length}`,            label: "Fraud Checks"         },
-                ].map((stat, i) => {
-                  const Icon = stat.icon;
-                  return (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * i, duration: 0.5 }}
-                      className="flex flex-col items-center text-center rounded-2xl py-7 px-4"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
-                    >
-                      <Icon className="w-5 h-5 text-white/70 mb-3" strokeWidth={1.8} />
-                      <p className="text-white font-black text-3xl sm:text-4xl mb-2 tabular-nums">{stat.value}</p>
-                      <p className="text-white/50 text-xs font-semibold uppercase tracking-wider leading-5">{stat.label}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* ════════ PANEL COMPOSITION ════════ */}
       <section className="pt-24 pb-20 bg-section">
         <div className="site-container px-6">
@@ -606,125 +523,6 @@ export default function B2BPanelPage() {
         </div>
       </section>
 
-      {/* ════════ RECRUITMENT — shared ProcessSteps, same as CATI ════════ */}
-      <ProcessSteps
-        steps={recruitmentSteps}
-        label="Recruitment"
-        heading="How We Build the Panel"
-        description="A long-term recruitment strategy that brings verified professionals onto the panel — and keeps them engaged."
-        sectionClassName="bg-white py-20"
-      />
-
-      {/* ════════ VALIDATION ════════ */}
-      <section className="py-20 bg-section">
-        <div className="site-container px-6">
-          <SectionHeader
-            label="Validation Architecture"
-            heading={<>How We Verify Every Panelist</>}
-            description="Seven gates every panelist passes before they reach your study — each with a defined criterion and the method we use to prove it."
-            theme="light"
-            align="center"
-          />
-
-          {/* Editorial rows — the same numeral / title / copy layout the
-              research pages use for their advantages. */}
-          <div className="mt-12 border-t border-gray-200">
-            {validationCriteria.map((c, i) => (
-              <motion.div
-                key={c.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.06 * i, duration: 0.5, ease: "easeOut" }}
-                className="group relative border-b border-gray-200"
-              >
-                {/* hover wash */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: "linear-gradient(90deg, rgba(13,27,62,0.05), transparent 60%)" }}
-                />
-
-                <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,300px)_1fr] gap-x-10 gap-y-5 py-12">
-                  {/* Numeral */}
-                  <div className="hidden lg:block">
-                    <span
-                      className="font-black leading-none text-primary/[0.07] group-hover:text-primary/[0.14] transition-colors duration-300 tabular-nums"
-                      style={{ fontSize: 68 }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  {/* Title + icon */}
-                  <div className="flex items-start gap-4">
-                    <span className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-9 h-9 text-white" strokeWidth={1.5} />
-                    </span>
-                    <div>
-                      <span className="lg:hidden block text-xs font-black text-primary/25 mb-1 tabular-nums">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="text-primary font-extrabold text-2xl leading-tight">{c.title}</h3>
-                      <p className="text-gray-500 text-base leading-7 font-medium mt-3">{c.criteria}</p>
-                    </div>
-                  </div>
-
-                  {/* How we verify */}
-                  <div className="flex flex-col gap-4">
-                    <p className="text-gray-700 text-lg leading-9 font-medium">{c.validation}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════ FRAUD DETECTION ════════ */}
-      <section className="py-20 bg-primary overflow-hidden">
-        <div className="site-container px-6">
-          <SectionHeader
-            label="Data Integrity"
-            heading={<>Fraud Detection System</>}
-            description="Ten layers of protection that keep fraudulent and duplicate responses out of your dataset."
-            theme="dark"
-            align="center"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            {fraudDetection.map((f, i) => (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.06 * (i % 3), duration: 0.5 }}
-              >
-                <motion.div
-                  whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.3)" }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="flex flex-col h-full rounded-2xl overflow-hidden"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1.5px dashed rgba(255,255,255,0.15)",
-                  }}
-                >
-                  <div className="h-1.5 bg-white" />
-                  <div className="p-7 flex flex-col flex-1">
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center mb-5 text-primary font-bold text-sm bg-white tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <h3 className="text-white font-bold text-base leading-snug mb-2">{f.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed font-normal">{f.desc}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ════════ PANEL ATTRIBUTES ════════ */}
       <section className="py-20 bg-white">
         <div className="site-container px-6">
@@ -800,6 +598,58 @@ export default function B2BPanelPage() {
               <button onClick={() => setAttrQuery("")} className="underline hover:text-primary">Clear filter</button>
             </p>
           )}
+        </div>
+      </section>
+
+      {/* ════════ STATS BANNER ════════ */}
+      <section className="bg-section py-16">
+        <div className="site-container px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="rounded-3xl overflow-hidden"
+            style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d1b3e 50%, #112254 100%)" }}
+          >
+            <div className="px-10 py-12">
+              <SectionHeader
+                label="B2B Panel Network"
+                heading={<>A panel built for business research, validated end to end</>}
+                description=""
+                theme="dark"
+              />
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  // Compact, like the healthcare banner's "711K+" — the exact
+                  // figure is spelled out in the hero badge, and at phone width
+                  // "785,500" is wider than its own tile.
+                  { icon: Users,       value: `${Math.floor(TOTAL_PANELISTS / 1000)}K+`, label: "Active B2B Panelists" },
+                  { icon: Globe2,      value: `${PANEL_COUNTRIES.length}`,           label: "Markets Covered"      },
+                  { icon: ShieldCheck, value: `${validationCriteria.length}`,        label: "Validation Gates"     },
+                  { icon: BadgeCheck,  value: `${fraudDetection.length}`,            label: "Fraud Checks"         },
+                ].map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i, duration: 0.5 }}
+                      className="flex flex-col items-center text-center rounded-2xl py-7 px-4"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                    >
+                      <Icon className="w-5 h-5 text-white/70 mb-3" strokeWidth={1.8} />
+                      <p className="text-white font-black text-3xl sm:text-4xl mb-2 tabular-nums">{stat.value}</p>
+                      <p className="text-white/50 text-xs font-semibold uppercase tracking-wider leading-5">{stat.label}</p>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
