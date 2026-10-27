@@ -6,13 +6,13 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 const certs = [
-  { label: "ESOMAR Corporate", src: "/certification/ESOMAR_corporate2025_RGB.png" },
+  { label: "ESOMAR Corporate", src: "/certification/esomar_corporate2026.png" },
   { label: "GDPR Compliant", src: "/certification/GDPR.png" },
-  { label: "Insights Association", src: "/certification/insights-association-logo-v2.png" },
-  { label: "ISO 27001 Intercert", src: "/certification/iso 27001.png" },
-  { label: "MRSI", src: "/certification/MRSI.png" },
+  { label: "Insights Association", src: "/certification/insights_association.png" },
+  { label: "ISO 27001 Intercert", src: "/certification/iso_27001.png" },
+  { label: "MRSI", src: "/certification/MRSI_corporate_member.png" },
   { label: "QUIRK'S Media", src: "/certification/Quirks.png" },
-  { label: "HIPAA Compliance", src: "/certification/HIPAA.png" },
+  { label: "HIPAA Compliance", src: "/certification/hipaa_compliant.png" },
 ];
 
 /**

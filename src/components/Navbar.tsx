@@ -33,7 +33,7 @@ const solutions = [
     icon: FlaskConical,
     href: "/solutions/research-services",
     desc: "Full-service qualitative & quantitative research",
-    color: "bg-purple-50 text-purple-600",
+    color: "bg-primary/5 text-primary",
     children: [
       { label: "Qualitative",           icon: Users,    desc: "Focus groups & IDIs",         href: "/solutions/research-services/qualitative"  },
       { label: "Quantitative",          icon: BarChart3, desc: "Surveys & statistical data",  href: "/solutions/research-services/quantitative" },
@@ -61,7 +61,7 @@ const solutions = [
     icon: PhoneCall,
     href: "/solutions/cati-solutions",
     desc: "Computer-assisted telephone interviewing",
-    color: "bg-green-50 text-green-600",
+    color: "bg-primary/5 text-primary",
     children: [],
   },
   {
@@ -69,7 +69,7 @@ const solutions = [
     icon: HeartPulse,
     href: "/solutions/healthcare",
     desc: "Medical & pharma audience research",
-    color: "bg-red-50 text-red-600",
+    color: "bg-primary/5 text-primary",
     children: [],
   },
   {
@@ -77,7 +77,7 @@ const solutions = [
     icon: UserSearch,
     href: "/solutions/expert-network",
     desc: "Reach vetted industry specialists",
-    color: "bg-amber-50 text-amber-600",
+    color: "bg-primary/5 text-primary",
     children: [],
   },
   {
@@ -85,7 +85,7 @@ const solutions = [
     icon: FileCode2,
     href: "/solutions/scrip8",
     desc: "Scripting & programming platform",
-    color: "bg-slate-50 text-slate-600",
+    color: "bg-primary/5 text-primary",
     children: [],
   },
 ];

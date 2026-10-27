@@ -5,6 +5,7 @@ import {
   BadgeCheck, Filter, PieChart, Smile, ScanSearch, ShieldCheck,
 } from "lucide-react";
 import ResearchDeepLayout, { type ResearchDeepContent } from "./ResearchDeepLayout";
+import { SampleFlow } from "./visuals/QuantitativeVisuals";
 
 const content: ResearchDeepContent = {
   hero: {
@@ -32,7 +33,9 @@ const content: ResearchDeepContent = {
       { icon: FileSpreadsheet,  label: "Face-to-Face Research",        desc: "Quantitative data collection through intercepts, street interviews, and other location-based fieldwork." },
       { icon: Globe,            label: "Hybrid & Mixed-Mode", desc: "Combine online, offline, and telephonic methods when audience accessibility or study design calls for more than one route." },
     ],
-    radarLabel: "Quantitative Coverage Map",
+    visual: <SampleFlow />,
+    /* Kept, but not rendered while `visual` is set — the layout prefers the
+       artwork. Here so the radar is one line away if it is ever wanted back. */
     radarDims: [
       { label: "Preferences",  value: 0.88, angle: -90  },
       { label: "Pain Points",  value: 0.82, angle: -30  },
