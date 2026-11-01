@@ -10,13 +10,10 @@ const content: EnterpriseContent = {
     breadcrumb: [{ name: "Enterprise Solution" }, { name: "Brand Image Study" }],
     badge: "Brand Tracker Study",
     heading: <>Track The Shifts That Shape Your Brand</>,
-    description: (
-      <>
-        Brand health rarely changes unilaterally. Awareness can surge while consideration drops. A campaign can advance recall numbers without preference soaring.
-        <br /><br />
-        Track Opinion enables research and marketing teams in tracking and measuring these shifts methodically across markets, audience segments, and waves, so that data fluctuations can be understood in the context of the market, not confused with changes in how the research was conducted.
-      </>
-    ),
+    description: [
+      "Brand health rarely changes unilaterally. Awareness can surge while consideration drops. A campaign can advance recall numbers without preference soaring.",
+      "Track Opinion enables research and marketing teams in tracking and measuring these shifts methodically across markets, audience segments, and waves, so that data fluctuations can be understood in the context of the market, not confused with changes in how the research was conducted.",
+    ],
     primaryCta: { label: "Discuss Your Brand Tracking Study", href: "/contact-us" },
     secondaryCta: { label: "Request Feasibility", href: "#capabilities" },
   },

@@ -17,7 +17,8 @@ export interface EnterpriseContent {
     breadcrumb: { name: string; href?: string }[];
     badge: string;
     heading: ReactNode;
-    description: string;
+    /** One paragraph, or an array for several. */
+    description: string | string[];
     primaryCta: { label: string; href: string };
     secondaryCta: { label: string; href: string };
   };
@@ -147,7 +148,10 @@ export default function EnterprisePageLayout({
       {sections.map((sec, i) => {
         const flip = i % 2 === 1;
         return (
-          <section key={sec.heading} className={`py-20 ${flip ? "bg-section" : "bg-white"}`}>
+          /* overflow-hidden: the visual panels carry a decorative -inset-6
+             glow that reaches past the container and put a 20px horizontal
+             scrollbar on the page. */
+          <section key={sec.heading} className={`py-20 overflow-hidden ${flip ? "bg-section" : "bg-white"}`}>
             <div className="site-container px-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 

@@ -154,8 +154,8 @@ export default function GlobalReach({
       <div className={cardMode ? "" : "site-container px-6"}>
         <SectionHeader
           label=""
-          heading={<>{heading ?? "Global Reach"}</>}
-          description={description ?? "Take your research experience to a higher level with 4.5 million active panel members worldwide and our team's caliber and expertise."}
+          heading={<>{heading ?? "Global reach. Research expertise. One trusted partner."}</>}
+          description={description ?? "Leverage our network of 4.85 million active panelists and experienced teams to drive meaningful research outcomes."}
           theme="light"
         />
       </div>

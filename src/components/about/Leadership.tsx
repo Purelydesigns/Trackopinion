@@ -10,12 +10,12 @@ import "swiper/css/navigation";
 import SectionHeader from "../ui/SectionHeader";
 
 const leaders = [
-  { name: "Jack Smith",  title: "Chairman",      img: "https://i.pravatar.cc/150?img=11" },
-  { name: "Jack Smith",  title: "Vice Chairman", img: "https://i.pravatar.cc/150?img=12" },
-  { name: "Jack Smith",  title: "Vice Chairman", img: "https://i.pravatar.cc/150?img=13" },
-  { name: "Jack Smith",  title: "Vice Chairman", img: "https://i.pravatar.cc/150?img=14" },
-  { name: "Jack Smith",  title: "Vice Chairman", img: "https://i.pravatar.cc/150?img=15" },
-  { name: "Jack Smith",  title: "Vice Chairman", img: "https://i.pravatar.cc/150?img=16" },
+  { name: "Piyush Khurana",  title: "Founder & CEO",      img: "/Leadership/Piyush_Khurana.png" },
+  { name: "Sunjit Saluja",  title: "Director – Research Operations", img: "/Leadership/Sunjit_Saluja.png" },
+  { name: "Phillip Coote",  title: "SVP Business Development(US & Europe)", img: "/Leadership/Phillip_Coote.png" },
+  { name: "Dewesh Singh",  title: "Associate Director – Client Services", img: "/Leadership/Dewesh_Singh.png" },
+  { name: "Gandharv Jain",  title: "Associate Director – Client Services", img: "/Leadership/Gandharv_Jain.png" },
+  { name: "Puja Diwan",  title: "Director – HR & Training", img: "/Leadership/Puja_Diwan.png" },
 ];
 
 export default function Leadership() {
@@ -77,7 +77,6 @@ export default function Leadership() {
                           width={96}
                           height={96}
                           className="w-full h-full object-cover"
-                          unoptimized
                         />
                       </div>
                     </div>

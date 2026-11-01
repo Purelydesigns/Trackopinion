@@ -8,18 +8,18 @@ import SectionHeader from "../ui/SectionHeader";
 const features = [
   {
     Icon: BadgeCheck,
-    title: "Proof of quality",
-    desc: "Check any pro's work samples, client reviews, and identity verification.",
+    title: "Quality-Focused Research",
+    desc: "We prioritize relevant respondent profiles, reliable data, and appropriate quality checks to ensure research aligns with study objectives.",
   },
   {
     Icon: DollarSign,
-    title: "No cost until you hire",
-    desc: "Interview potential fits for your job, negotiate rates, and only pay for work you approve.",
+    title: "Flexible and Transparent Engagement",
+    desc: "We understand project requirements, agree on clear deliverables, and offer flexible solutions with transparency in scope and engagement terms.",
   },
   {
     Icon: ShieldCheck,
-    title: "Safe and secure",
-    desc: "Focus on your work knowing we help protect your data and privacy. We're here with 24/7 support if you need it.",
+    title: "Responsible and Secure Data Handling",
+    desc: "We prioritize privacy, confidentiality, and responsible data handling, following applicable requirements and agreed project protocols.",
   },
 ];
 
@@ -42,11 +42,15 @@ export default function WhyBusinesses() {
 
             <SectionHeader
               label=""
-              heading={<>Why businesses turn to Track Opinion</>}
-              description=""
+              heading={<>Why Businesses Turn to Track Opinion</>}
+              description="Choosing the right research partner is key to obtaining reliable insights and making informed decisions. At Track Opinion, we focus on understanding client objectives, reaching relevant audiences, and delivering research solutions tailored to project needs."
               theme="light"
               align="left"
+              className="!mb-0"
             />
+            <h3 className="text-xl font-extrabold mb-5">
+              Our approach is guided by three core principles:
+            </h3>
             <div className="space-y-7">
               {features.map(({ Icon, title, desc }, i) => (
                 <motion.div

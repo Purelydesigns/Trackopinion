@@ -80,7 +80,7 @@ export default function OpengraphImage() {
             Global Market Research &amp; Online Panel
           </div>
           <div style={{ fontSize: 28, color: "rgba(255,255,255,0.72)", maxWidth: 820 }}>
-            4.5 million panel members. 60+ languages. End-to-end custom research.
+            4.85 million panel members. 60+ languages. End-to-end custom research.
           </div>
         </div>
 

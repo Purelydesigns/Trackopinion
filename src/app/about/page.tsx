@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: "https://www.trackopinion.com/about",
     title: "About Us | Track Opinion®",
     description:
-      "Learn about Track Opinion® — our vision, mission, leadership team, and global reach across 60+ languages and 4.5 million panel members.",
+      "Learn about Track Opinion® — our vision, mission, leadership team, and global reach across 60+ languages and 4.85 million panel members.",
   },
 };
 

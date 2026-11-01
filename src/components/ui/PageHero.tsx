@@ -15,7 +15,10 @@ interface Cta {
 interface PageHeroProps {
   badge: string;
   heading: ReactNode;          // supports <span> for italic/colored word
-  description: string;
+  /** One paragraph, or an array for several. Prefer the array over embedding
+      <br /><br /> in JSX: that renders one paragraph with a gap in it, and JSX
+      here is not assignable to a plain string anyway. */
+  description: string | string[];
   primaryCta: Cta;
   secondaryCta?: Cta;
   video?: string;              // defaults to /video/banner.mp4
@@ -79,10 +82,15 @@ export default function PageHero({
             {heading}
           </h1>
 
-          {/* Description */}
-          <p className="text-white/70 text-base sm:text-lg leading-8 mb-10 max-w-xl">
-            {description}
-          </p>
+          {/* Description — one <p> per paragraph, so the gap between them is
+              real spacing rather than a pair of <br />s inside a single block. */}
+          <div className="mb-10 max-w-xl flex flex-col gap-5">
+            {(Array.isArray(description) ? description : [description]).map((para, i) => (
+              <p key={i} className="text-white/70 text-base sm:text-lg leading-8">
+                {para}
+              </p>
+            ))}
+          </div>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">

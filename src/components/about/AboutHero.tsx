@@ -6,17 +6,15 @@ export default function AboutHero() {
   return (
     <PageHero
       breadcrumb="About Us"
-      badge="Global Research Firm · Est. 2009"
+      badge="Global Market Research Firm | Established in 2009"
       heading={
         <>
-          Track Opinion:<br />
-          Redefining Excellence<br />
-          in{" "}Market Research
+          Track Opinion: Redefining Excellence in Market Research
         </>
       }
-      description="Track Opinion® is a global market research and outsourcing firm headquartered in India. Established in 2009, we specialize in end-to-end custom research services for consulting firms, global corporations, and SMBs."
+      description="We offer end-to-end B2B, B2C and health care studies via online and offline methods. With a proprietary scripting platform, advanced analytics and multilingual expertise, we deliver insights that drive confident decisions."
       primaryCta={{ label: "Get in Touch", href: "/contact-us" }}
-      secondaryCta={{ label: "Our Panel", href: "/solutions/global-panel" }}
+      secondaryCta={{ label: "Explore Our Panel", href: "/solutions/global-panel" }}
       minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
     />
   );
