@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { BadgeCheck, DollarSign, ShieldCheck, Star, Moon } from "lucide-react";
+import { BadgeCheck, DollarSign, ShieldCheck, Globe, Users, Handshake } from "lucide-react";
 import SectionHeader from "../ui/SectionHeader";
 
 const features = [
@@ -20,6 +20,25 @@ const features = [
     Icon: ShieldCheck,
     title: "Responsible and Secure Data Handling",
     desc: "We prioritize privacy, confidentiality, and responsible data handling, following applicable requirements and agreed project protocols.",
+  },
+];
+
+/** The dark card beside the feature list. */
+const highlights = [
+  {
+    Icon: Globe,
+    title: "Global Research Perspective",
+    desc: "Supporting research requirements across different markets and audience segments, subject to project feasibility and availability.",
+  },
+  {
+    Icon: Users,
+    title: "Consumer, B2B and Healthcare Audiences",
+    desc: "Research support designed around consumer opinions, professional perspectives, and healthcare-related audience requirements.",
+  },
+  {
+    Icon: Handshake,
+    title: "Client-Focused Approach",
+    desc: "We work closely with clients to understand their objectives, plan suitable research approaches, and align deliverables with their expectations.",
   },
 ];
 
@@ -80,32 +99,24 @@ export default function WhyBusinesses() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-primary rounded-2xl p-8 text-white flex flex-col justify-between min-h-[420px]"
+            className="bg-primary rounded-2xl p-8 text-white flex flex-col min-h-[420px]"
           >
-            <h3 className="text-2xl sm:text-3xl font-extrabold leading-snug">
-              Redefine Excellence<br />in Market Research
+            <h3 className="text-2xl sm:text-3xl font-extrabold leading-snug mb-8">
+              Redefining Excellence in Market Research
             </h3>
 
-            <div className="space-y-7 mt-auto">
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                  <Star className="w-5 h-5 text-primary fill-primary" />
+            <div className="space-y-7">
+              {highlights.map(({ Icon, title, desc }) => (
+                <div key={title} className="flex gap-4 items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold leading-snug text-base">{title}</p>
+                    <p className="text-white/80 text-base leading-7 font-medium mt-1">{desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-2xl font-bold leading-tight">4.9/5</p>
-                  <p className="text-white/80 text-base font-medium mt-1">Clients rate professionals on Upwork</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                  <Moon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-xl font-bold leading-tight">Award winner</p>
-                  <p className="text-white/80 text-base font-medium mt-1">2021 Best Software Awards</p>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
 

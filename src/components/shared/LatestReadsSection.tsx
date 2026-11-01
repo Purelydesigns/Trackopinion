@@ -35,22 +35,22 @@ interface Props {
 
 const defaultPosts: LatestRead[] = [
   {
-    category: "Advertising",
-    title: "How a Global Brand Doubled Campaign ROI with Concept Testing",
+    //category: "Advertising",
+    title: "One of Ukraine's leading beverage manufacturers",
     excerpt:
-      "By testing three creative directions with 1,200 target consumers across five markets, our client refined messaging before launch — saving 40% of media spend.",
+      "As a market leader in the beverage industry in our home country, understanding the dynamic Indian market is critical to our regional growth strategy. We partnered with Track Opinion for a comprehensive study on the Carbonated Soft Drinks (CSD) and Energy Drinks (ED) category, and the results exceeded our expectations.",
   },
   {
-    category: "FMCG",
-    title: "Unlocking 3 New Market Opportunities for an FMCG Giant",
+    // category: "FMCG",
+    title: "Matthias Gitschell Director – Audience Measurement Ipsos UK",
     excerpt:
-      "A 12-market segmentation study identified three high-value consumer clusters — unlocking $200M in addressable revenue for our client.",
+      "We are working with Track Opinion since now 7 years already. They are contributing a significant part of hard-to-reach respondents for one our major media surveys run across more than 30 markets globally. They are able to source Senior Business Executives for all markets included in the survey and we have always been ....",
   },
   {
-    category: "Automobile",
-    title: "EV Purchase Intent Tracker Across 8 Key Markets",
+    // category: "Automobile",
+    title: "Teppei Yamashita Managing Director K&L Communications India Pvt. Ltd.",
     excerpt:
-      "A quarterly tracking study monitoring EV consideration, barriers and brand preference among 4,800 auto-intenders across three consecutive waves.",
+      "Track Opinion has supported us greatly to conduct a thorough survey to assess some of the online creatives which was requested by our client. TO has asked for detailed questions before diving into the planning of the survey, helped to customize each form of the survey so that it will be easily understood by the participants.",
   },
 ];
 

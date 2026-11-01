@@ -141,9 +141,9 @@ const content: ResearchDeepContent = {
   },
 
   enquiry: {
-    heading: "Need Quantitative Research Built Around Your Audience?",
+    heading: "Tell us what you need to find out",
     intro:
-      "Tell us whom you need to reach, where you need to reach them, and what you need to measure. We can assess feasibility, recommend an appropriate data-collection route, and build the level of execution around your research requirements.",
+      "Pick the services you're interested in and share a little about the project. We reply within one working day.",
   },
 };
 
