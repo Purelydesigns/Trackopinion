@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SiteCard from "@/components/ui/SiteCard";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -18,6 +18,7 @@ export interface LatestRead {
 }
 
 interface Props {
+  /** Supply a list to pin the cards; left out, the newest posts are fetched. */
   posts?: LatestRead[];
   /** Small uppercase line above the heading */
   label?: string;
@@ -33,29 +34,8 @@ interface Props {
   viewAllLabel?: string;
 }
 
-const defaultPosts: LatestRead[] = [
-  {
-    //category: "Advertising",
-    title: "One of Ukraine's leading beverage manufacturers",
-    excerpt:
-      "As a market leader in the beverage industry in our home country, understanding the dynamic Indian market is critical to our regional growth strategy. We partnered with Track Opinion for a comprehensive study on the Carbonated Soft Drinks (CSD) and Energy Drinks (ED) category, and the results exceeded our expectations.",
-  },
-  {
-    // category: "FMCG",
-    title: "Matthias Gitschell Director – Audience Measurement Ipsos UK",
-    excerpt:
-      "We are working with Track Opinion since now 7 years already. They are contributing a significant part of hard-to-reach respondents for one our major media surveys run across more than 30 markets globally. They are able to source Senior Business Executives for all markets included in the survey and we have always been ....",
-  },
-  {
-    // category: "Automobile",
-    title: "Teppei Yamashita Managing Director K&L Communications India Pvt. Ltd.",
-    excerpt:
-      "Track Opinion has supported us greatly to conduct a thorough survey to assess some of the online creatives which was requested by our client. TO has asked for detailed questions before diving into the planning of the survey, helped to customize each form of the survey so that it will be easily understood by the participants.",
-  },
-];
-
 export default function LatestReadsSection({
-  posts = defaultPosts,
+  posts,
   label = "Latest Reads",
   heading = <>Explore Our Resources</>,
   description = "Expert-written articles on qualitative research, consumer insights, and market research best practices.",
@@ -68,7 +48,30 @@ export default function LatestReadsSection({
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const items = limit ? posts.slice(0, limit) : posts;
+  /* `null` while the newest posts are still on their way, so the grid can show
+     placeholders instead of collapsing and shoving the page around. A caller
+     that passes `posts` skips the request entirely. */
+  const [fetched, setFetched] = useState<LatestRead[] | null>(null);
+  const count = limit ?? 3;
+
+  useEffect(() => {
+    if (posts) return;
+
+    const controller = new AbortController();
+    fetch(`/api/blogs/latest?limit=${count}`, { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`Upstream ${res.status}`))))
+      .then((data: LatestRead[]) => setFetched(data))
+      .catch((err: Error) => {
+        // An aborted request is this effect cleaning up, not a failure.
+        if (err.name === "AbortError") return;
+        console.error("[LatestReadsSection] could not load posts:", err.message);
+        setFetched([]);
+      });
+
+    return () => controller.abort();
+  }, [posts, count]);
+
+  const items = posts ? (limit ? posts.slice(0, limit) : posts) : fetched;
 
   return (
     <section ref={ref} className="bg-section py-10">
@@ -83,7 +86,16 @@ export default function LatestReadsSection({
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {items.map((post, i) => (
+          {items === null &&
+            Array.from({ length: count }).map((_, i) => (
+              <div
+                key={i}
+                className="h-64 rounded-2xl bg-white/70 border border-gray-100 animate-pulse"
+                aria-hidden
+              />
+            ))}
+
+          {items?.map((post, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}

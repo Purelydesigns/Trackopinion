@@ -8,9 +8,9 @@ export default function SuccessStories() {
       label="Compilation of Our Success Stories"
       heading={<>Research that moved the needle</>}
       description="Expert-written articles on qualitative research, consumer insights, and market research best practices."
-      linkLabel="Read case study →"
-      linkHref="/case-studies"
-      viewAllHref="/case-studies"
+      linkLabel="Read more →"
+      linkHref="/resources"
+      viewAllHref="/resources"
     />
   );
 }
