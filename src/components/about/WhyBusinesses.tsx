@@ -28,7 +28,10 @@ export default function WhyBusinesses() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="bg-section py-10">
+    /* overflow-hidden: both cards animate in from an x offset, so until the
+       section scrolls into view the right-hand one hangs past the container
+       and puts a few pixels of horizontal scroll on the page. */
+    <section className="bg-section py-10 overflow-hidden">
       <div className="site-container px-6">
         <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 items-stretch" ref={ref}>
 

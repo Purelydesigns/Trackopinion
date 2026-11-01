@@ -8,6 +8,7 @@ import GlobalReach from "@/components/about/GlobalReach";
 import Leadership from "@/components/about/Leadership";
 import WhyBusinesses from "@/components/about/WhyBusinesses";
 import Testimonials from "@/components/Testimonials";
+import { PANEL_COUNTRIES } from "@/lib/mapCountries";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -50,7 +51,9 @@ export default function AboutPage() {
         <VisionMission />
         <SpecializedSectors />
         <OurValues />
-        <GlobalReach />
+        {/* Same footprint as the B2C/B2B panel maps — one list in
+            lib/mapCountries keeps the pins consistent across pages. */}
+        <GlobalReach pins={PANEL_COUNTRIES} />
         <Leadership />
         <WhyBusinesses />
         <Testimonials />
