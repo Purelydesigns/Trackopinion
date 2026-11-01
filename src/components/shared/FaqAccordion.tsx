@@ -21,11 +21,14 @@ export interface Faq {
  */
 export default function FaqAccordion({
   faqs,
+  label,
   heading = "Have a Question? Contact Us",
   /** Tone for pages with a dark background. */
   variant = "light",
 }: {
   faqs: Faq[];
+  /** Small uppercase eyebrow above the heading. */
+  label?: string;
   heading?: string;
   variant?: "light" | "dark";
 }) {
@@ -45,6 +48,15 @@ export default function FaqAccordion({
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
+          {label && (
+            <span
+              className={`block text-sm font-bold uppercase tracking-widest mb-2 ${
+                dark ? "text-white/60" : "text-primary"
+              }`}
+            >
+              {label}
+            </span>
+          )}
           <h2
             className={`text-2xl sm:text-3xl font-bold ${dark ? "text-white" : "text-gray-900"}`}
           >

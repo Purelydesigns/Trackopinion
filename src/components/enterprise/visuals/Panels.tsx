@@ -13,11 +13,14 @@ export function VisualPanel({
   eyebrow,
   title,
   chip,
+  note,
   children,
 }: {
   eyebrow: string;
   title: string;
   chip?: ReactNode;
+  /** Caption under the artwork — say so here when the numbers are made up. */
+  note?: string;
   children: ReactNode;
 }) {
   return (
@@ -46,6 +49,11 @@ export function VisualPanel({
           )}
         </div>
         {children}
+        {note && (
+          <p className="mt-5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+            {note}
+          </p>
+        )}
       </motion.div>
     </div>
   );

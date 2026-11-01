@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp, Flag, Eye, Building2, Megaphone, Target } from "lucide-react";
+import { TrendingUp, Flag, Eye, Building2, Megaphone, Target, Scale, ClipboardCheck } from "lucide-react";
 import EnterprisePageLayout, { type EnterpriseContent } from "./EnterprisePageLayout";
 import { faqs } from "@/components/brandtracker/faqs";
 import { BrandFunnel, PerceptionMap } from "./visuals/BrandVisuals";
@@ -40,9 +40,6 @@ const content: EnterpriseContent = {
       paragraphs: [
         "A brand can be widely recognized but still not considered. It can attract trial without rising subscriptions. Or it can continue to impress the existing customers while losing relevance, and eventually recall, with prospects.",
         "Track your brand funnel from awareness and familiarity through intermediate stages up to usage and loyalty. Find how the users progress and where the momentum is lost.",
-        "Design note: Retain/adapt the existing funnel visual. Avoid decorative percentages unless clearly labelled as illustrative.",
-      ],
-      bullets: [
       ],
       visual: <BrandFunnel />,
     },
@@ -52,29 +49,75 @@ const content: EnterpriseContent = {
       paragraphs: [
         "Brand perception is shaped by product experience, communication, customer interactions, and the wider category context. Tracking helps reveal which factors are gaining weight, how those perceptions differ among audiences, and where competitors are winning or vice versa.",
         "Measure trust, quality, value, innovation, and category-specific drivers alongside competitive benchmarks. Fully understand what makes the brand distinctive, not just how it is seen.",
-        "Design note: Retain/adapt the existing perception map. The visual should explain brand associations and competitive differences, not repeat the funnel.",
-      ],
-      bullets: [
       ],
       visual: <PerceptionMap />,
     },
   ],
 
   methods: {
-    label: "Learnings From a Brand Image Study",
-    heading: <>A Brand Tracker Study Can Reveal Several Parameters About Your Brand Persona</>,
-    description: "Six parameters every wave of a brand tracker should measure.",
+    label: "Audience & Sample Design",
+    heading: <>The Right Trend Starts With The Right Audience</>,
+    description: [
+      "A tracker can look stable overall while changes—both positive and negative—are happening silently among prospects, existing users, lapsed customers, and individual markets. Your measurement should happen along the right grains for full realization.",
+      "Vet the population that matters, maintain approved sample parameters across waves, and validate respondent fit so fluctuations in the trend are less likely to be driven by changes in who answered.",
+    ],
     items: [
-      { num: "01", title: "Brand Awareness",       desc: "Measure to what extent prospects, regular users, and churned customers know your brand." },
-      { num: "02", title: "Brand Recall Value",    desc: "Know if users can recall and recognize your brand name from the logo or tagline and locate you among peers." },
-      { num: "03", title: "Quality and Trust",     desc: "Learn how many consumers trust your offerings and brand's quality and can act as your mouthpiece." },
-      { num: "04", title: "Brand Recommendations", desc: "Find out if loyal users recommend your products and mention the underlying benefits." },
-      { num: "05", title: "Competitor's Comparison", desc: "Assess how users and the industry compare you with your peers and place you among the rivals." },
-      { num: "06", title: "Employer's Persona",    desc: "Measure how the job market, employees, and job seekers perceive you as a workplace." },
+      { icon: Target,         title: "Define the right population", desc: "Align the sample with people whose perceptions are relevant to the decision—category users, prospects, customers, lapsed users, professionals, or specialist audiences." },
+      { icon: Scale,          title: "Keep the sample comparable",  desc: "Maintain agreed demographic, geographic, and behavioral parameters so movement is not unintentionally created by a shift in who responded." },
+      { icon: ClipboardCheck, title: "Validate respondent fit",     desc: "Use profiling, screening, and study-appropriate quality controls to support eligibility and data integrity." },
     ],
   },
+
+  cardBands: [
+    {
+    label: "Wave-to-Wave Consistency",
+    heading: <>Make Change in the Market Easier to Separate From Change in the Method</>,
+    description: [
+      "Tracking depends on comparison. If the audience mix, questionnaire, methodology, or fieldwork rules shift unintentionally, the trend becomes harder to interpret.",
+      "Track Opinion supports repeatable execution around agreed parameters while allowing controlled evolution when the program genuinely needs to change.",
+    ],
+    // steps: ["Wave 1", "Wave 2", "Wave 3"],
+    items: [
+      { title: "Stable core measures",      desc: "Protect the questions, definitions, and KPIs used to read movement over time." },
+      { title: "Consistent audience design", desc: "Maintain agreed target, sample, and quota parameters across waves." },
+      { title: "Controlled execution",      desc: "Keep methodology and fieldwork rules aligned while monitoring sample composition and quality." },
+      { title: "Documented evolution",      desc: "When the tracker needs to change, precisely record and assess the adjustment so its potential effect on comparability is understood." },
+    ],
+    },
+
+    {
+      label: "Global Execution & Flexible Support",
+      heading: <>One Tracking Framework. Multiple Market Realities</>,
+      description: [
+        "Global comparability doesn't equate to identical execution in every market. It requires a common measurement logic, disciplined core specifications, and controlled local adaptation when market conditions genuinely differ.",
+        "Whether you're building a new tracker or transitioning an established program, Track Opinion can support audience and sample, programming and fieldwork, data and reporting, and broader end-to-end tracking coordination.",
+      ],
+      items: [
+        { title: "Audience & Sample",          desc: "Reach the agreed target population through appropriate audience access, screening, and sampling." },
+        { title: "Programming & Fieldwork",    desc: "Get survey setup, scripting, fieldwork management, and quality control against agreed specifications." },
+        { title: "Data & Reporting",           desc: "Receive processing, analysis outputs, and reporting requirements agreed for the program with Track Opinion." },
+        { title: "End-to-End Tracking Support", desc: "Coordinate repeat waves, markets, and research workstreams according to your operating model and scope with our support." },
+      ],
+      /* Capability labels only — no figures or certifications, which the brief
+         allows solely when verified and approved internally. */
+      strip: [
+        "Audience Access",
+        "Feasibility Before Fieldwork",
+        "Respondent Validation",
+        "Repeatable Execution",
+        "Multi-Market Coordination",
+      ],
+    },
+  ],
 };
 
 export default function BrandImageContent() {
-  return <EnterprisePageLayout content={content} faqs={faqs} />;
+  return (
+    <EnterprisePageLayout
+      content={content}
+      faqs={faqs}
+      faqLabel="Brand Tracking FAQs"
+      faqHeading="Questions Research Teams Often Ask"
+    />
+  );
 }

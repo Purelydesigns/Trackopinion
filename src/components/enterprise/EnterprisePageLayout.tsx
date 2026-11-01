@@ -1,13 +1,14 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SiteCard from "@/components/ui/SiteCard";
 import LatestReadsSection from "@/components/shared/LatestReadsSection";
 import FaqAccordion, { type Faq } from "@/components/shared/FaqAccordion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 
 /* ═══════════════ Content types ═══════════════ */
@@ -34,16 +35,31 @@ export interface EnterpriseContent {
     label: string;
     heading: string;
     paragraphs: string[];
-    bullets: string[];
+    /** Optional — a section that carries none renders no list at all. */
+    bullets?: string[];
     visual: ReactNode;
   }[];
-  /** Navy numbered-card band */
+  /** Navy card band — numbered, or icon-led where the cards are not a sequence */
   methods: {
     label: string;
     heading: ReactNode;
-    description: string;
-    items: { num: string; title: string; desc: string }[];
+    /** One paragraph, or an array for several. */
+    description: string | string[];
+    /** Each card shows its `icon` when it has one, otherwise its `num`. */
+    items: { num?: string; icon?: LucideIcon; title: string; desc: string }[];
   };
+  /** Optional bands of cards, in order, between the navy band and the FAQs. */
+  cardBands?: {
+    label: string;
+    heading: ReactNode;
+    /** One paragraph, or an array for several. */
+    description: string | string[];
+    /** Optional run of steps shown as pills above the cards, e.g. Wave 1 → Wave 2 → Wave 3. */
+    steps?: string[];
+    /** Optional strip of short proof points under the cards. */
+    strip?: string[];
+    items: { title: string; desc: string }[];
+  }[];
 }
 
 /* Literal classes so Tailwind keeps them in the build */
@@ -60,6 +76,8 @@ const METHOD_COLS: Record<number, string> = {
 export default function EnterprisePageLayout({
   content,
   faqs,
+  faqLabel,
+  faqHeading,
 }: {
   content: EnterpriseContent;
   /**
@@ -67,8 +85,17 @@ export default function EnterprisePageLayout({
    * valid when the questions are visible on the page.
    */
   faqs?: Faq[];
+  /** Override the FAQ block's eyebrow and heading; it has its own defaults. */
+  faqLabel?: string;
+  faqHeading?: string;
 }) {
-  const { hero, capabilities, sections, methods } = content;
+  const { hero, capabilities, sections, methods, cardBands } = content;
+
+  /* A single-string standfirst stays inside SectionHeader, exactly as the
+     other enterprise pages render it. Several paragraphs get their own
+     centred block underneath, which SectionHeader has no slot for. */
+  const methodsLead = typeof methods.description === "string" ? methods.description : undefined;
+  const methodsParagraphs = Array.isArray(methods.description) ? methods.description : null;
 
   return (
     <main className="bg-white">
@@ -186,6 +213,7 @@ export default function EnterprisePageLayout({
                     </p>
                   ))}
 
+                  {sec.bullets && sec.bullets.length > 0 && (
                   <ul className="flex flex-col gap-3 mt-1">
                     {sec.bullets.map((b, j) => (
                       <motion.li
@@ -201,6 +229,7 @@ export default function EnterprisePageLayout({
                       </motion.li>
                     ))}
                   </ul>
+                  )}
                 </motion.div>
 
               </div>
@@ -215,15 +244,26 @@ export default function EnterprisePageLayout({
           <SectionHeader
             label={methods.label}
             heading={methods.heading}
-            description={methods.description}
+            description={methodsLead}
             theme="dark"
             align="center"
+            className={methodsParagraphs ? "!mb-6" : ""}
           />
+
+          {methodsParagraphs && (
+            <div className="mx-auto text-center flex flex-col gap-4">
+              {methodsParagraphs.map((para, i) => (
+                <p key={i} className="text-white/60 text-base leading-8 font-medium">
+                  {para}
+                </p>
+              ))}
+            </div>
+          )}
 
           <div className={`grid grid-cols-1 ${METHOD_COLS[methods.items.length] ?? "sm:grid-cols-3"} gap-6 mt-10`}>
             {methods.items.map((m, i) => (
               <motion.div
-                key={m.num}
+                key={m.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -241,7 +281,7 @@ export default function EnterprisePageLayout({
                   <div className="h-1.5 bg-white" />
                   <div className="p-8 flex flex-col flex-1 items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary font-bold text-lg bg-white">
-                      {m.num}
+                      {m.icon ? <m.icon className="w-6 h-6" strokeWidth={2} /> : m.num}
                     </div>
                     <h3 className="text-white font-bold text-lg leading-snug mb-3">{m.title}</h3>
                     <p className="text-slate-400 text-sm leading-relaxed font-normal">{m.desc}</p>
@@ -253,7 +293,89 @@ export default function EnterprisePageLayout({
         </div>
       </section>
 
-      {faqs && faqs.length > 0 && <FaqAccordion faqs={faqs} />}
+      {cardBands?.map((band, b) => (
+        /* Alternating so two bands in a row stay visually separate. */
+        <section key={band.label} className={`py-20 ${b % 2 === 0 ? "bg-section" : "bg-white"}`}>
+          <div className="site-container px-6">
+            <SectionHeader
+              label={band.label}
+              heading={band.heading}
+              theme="light"
+              align="center"
+              className="!mb-6"
+            />
+
+            <div className="mx-auto text-center flex flex-col gap-4">
+              {(Array.isArray(band.description) ? band.description : [band.description]).map((para, i) => (
+                <p key={i} className="text-gray-600 text-base leading-8 font-medium">
+                  {para}
+                </p>
+              ))}
+            </div>
+
+            {band.steps && band.steps.length > 0 && (
+              <div className="flex items-center justify-center flex-wrap gap-3 mt-8">
+                {band.steps.map((step, i) => (
+                  <Fragment key={step}>
+                    <span className="rounded-full border border-primary/15 bg-white px-5 py-2 text-sm font-bold text-primary shadow-sm">
+                      {step}
+                    </span>
+                    {i < band.steps!.length - 1 && (
+                      <ArrowRight className="w-4 h-4 text-primary/40 shrink-0" aria-hidden />
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 mt-10">
+              {band.items.map((c, i) => (
+                <motion.div
+                  key={c.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.08 * i, duration: 0.45 }}
+                  className="h-full"
+                >
+                  <SiteCard className="h-full">
+                    <div className="p-7 flex flex-col h-full">
+                      <h3 className="text-primary font-bold text-lg leading-snug mb-2">{c.title}</h3>
+                      <p className="text-gray-600 text-base leading-8 font-medium">{c.desc}</p>
+                    </div>
+                  </SiteCard>
+                </motion.div>
+              ))}
+            </div>
+
+            {band.strip && band.strip.length > 0 && (
+              /* Ticker. The list is rendered twice and the track slides by
+                 exactly half its width, so the loop has no visible seam; the
+                 second copy is decorative and hidden from screen readers. */
+              <div className="mt-10 overflow-hidden">
+                <div className="flex w-max animate-marquee-ltr hover:[animation-play-state:paused] motion-reduce:animate-none">
+                  {[0, 1].map((copy) => (
+                    <div key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
+                      {band.strip!.map((point) => (
+                        <span
+                          key={point}
+                          className="whitespace-nowrap border-l border-primary/15 px-6 text-sm font-bold uppercase tracking-wider text-primary/70"
+                        >
+                          {point}
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {faqs && faqs.length > 0 && (
+        <FaqAccordion faqs={faqs} label={faqLabel} heading={faqHeading} />
+      )}
 
       <SolutionEnquiryForm />
 
