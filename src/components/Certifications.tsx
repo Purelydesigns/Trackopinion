@@ -10,13 +10,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const certs = [
-  { label: "ISO 27001",            src: "/certification/iso 27001.png"                  },
-  { label: "HIPAA Compliance",     src: "/certification/hipaa.png"                      },
-  { label: "ESOMAR Corporate",     src: "/certification/ESOMAR_corporate2025_RGB.png"   },
-  { label: "GDPR Compliant",       src: "/certification/GDPR.png"                       },
-  { label: "Insights Association", src: "/certification/insights-association-logo-v2.png" },
-  { label: "MRSI",                 src: "/certification/MRSI.png"                       },
-  { label: "QUIRK'S Media",        src: "/certification/Quirks.png"                     },
+  { label: "ESOMAR Corporate", src: "/certification/esomar_corporate2026.png" },
+  { label: "Insights Association", src: "/certification/insights_association.png" },
+  { label: "GDPR Compliant", src: "/certification/GDPR1.png" },
+  { label: "ISO 27001 Intercert", src: "/certification/iso_27001.png" },
+  { label: "MRSI", src: "/certification/MRSI_corporate_member.png" },
+  { label: "QUIRK'S Media", src: "/certification/Quirks.png" },
+  { label: "HIPAA Compliance", src: "/certification/hipaa_compliant.png" },
 ];
 
 export default function Certifications() {

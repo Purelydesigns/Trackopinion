@@ -69,6 +69,13 @@ const defaultTestimonials: Testimonial[] = [
       "Overall, I would recommend Track Opinion to anyone looking for a reliable market research company.",
     ],
   },
+  {
+    name: "Founder & Director",
+    org: "Global Market Research Firm United Kingdom",
+    review: [
+      "We’ve had a great experience working with the Track Opinion team across both multi-market surveys and B2B qualitative recruitment projects. The quality of respondents has consistently been impressive, and it’s clear the team genuinely cares about getting things right. Their communication is excellent, they’re proactive in flagging potential challenges and always come forward with practical solutions. They’re friendly, approachable and genuinely easy to work with. A reliable partner that we would happily recommend!",
+    ],
+  },
 ];
 
 /**

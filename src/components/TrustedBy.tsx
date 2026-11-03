@@ -40,15 +40,15 @@ export default function TrustedBy({
   return (
     <section className="bg-section py-10">
 
-      <SectionHeader
+      {/* <SectionHeader
         label=""
         heading={<>{heading}</>}
         description=""
         theme="light"
-      />
+      /> */}
 
       {/* ── Slider ── */}
-      <div className="site-container px-6 relative">
+      {/* <div className="site-container px-6 relative">
 
         <button
           id={prevId}
@@ -100,7 +100,7 @@ export default function TrustedBy({
           ))}
         </Swiper>
         </div>
-      </div>
+      </div> */}
 
       {/* ── World tagline ── */}
       {showWorldTagline && <div className="mt-12 relative overflow-hidden bg-section">
@@ -115,11 +115,10 @@ export default function TrustedBy({
         />
         <div className="relative site-container px-6 py-34 text-center">
           <p className="text-primary font-extrabold uppercase mb-4 text-lg">
-            We Work for Clients Around the World
+            Global Reach. Local Market Understanding.
           </p>
           <p className="text-gray-500 font-bold mx-auto leading-8 text-lg sm:text-xl md:text-2xl">
-            Global reach for market research in all major languages
-            <br /> with translation facilities.
+            Connecting businesses with the right audiences <br></br>across 27+ countries and 50+ languages.
           </p>
         </div>
       </div>}

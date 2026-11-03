@@ -159,7 +159,7 @@ export default function ExpertNetworkPage() {
                                  text-primary/[0.06] group-hover:text-primary/[0.12] transition-colors duration-300 tabular-nums"
                       style={{ fontSize: 110 }}
                     >
-                      {String(i + 1).padStart(2, "0")}
+                      {/* {String(i + 1).padStart(2, "0")} */}
                     </span>
 
                     <div className="relative flex flex-col flex-1">

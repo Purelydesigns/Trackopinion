@@ -4,12 +4,32 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionHeader from "./ui/SectionHeader";
+import SiteCard from "./ui/SiteCard";
+
+const reasons = [
+  {
+    title: "Data Integrity & Quality Assurance",
+    desc: "We uphold data integrity through rigorous respondent validation, technology-enabled fraud prevention, and structured quality checks at every stage of the research process, ensuring reliable and trustworthy data.",
+  },
+  {
+    title: "Access to Hard-to-Reach Audiences",
+    desc: "From niche consumer segments to specialized B2B decision-makers and healthcare professionals, we connect you with the audiences that matter.",
+  },
+  {
+    title: "Integrated Research Expertise",
+    desc: "Bring together quantitative, qualitative, CATI, expert networks, and advanced analytics through one experienced research partner.",
+  },
+  {
+    title: "Research-Led Thinking",
+    desc: "We go beyond execution to understand business challenges, identify the right research approach, and deliver insights that answer critical business questions.",
+  },
+];
 
 const stats = [
-  { value: 3,   suffix: "k+", label: "Complete Project"    },
-  { value: 500, suffix: "+",  label: "Team Worker"         },
-  { value: 6,   suffix: "+",  label: "Years of Experience" },
-  { value: 60,  suffix: "+",  label: "Language Spoken"     },
+  { value: 50,   suffix: "k+", label: "Projects per Year"    },
+  { value: 150, suffix: "+",  label: "Team Members"         },
+  { value: 17,   suffix: "+",  label: "Years of Experience" },
+  { value: 50,  suffix: "+",  label: "Languages Supported"     },
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -43,15 +63,15 @@ export default function WhyUs() {
 
       <SectionHeader
         label=""
-        heading={<>Why Us?</>}
-        description="Our Online Panel Stats"
+        heading={<>Why Track Opinion?</>}
+        description="Built on Experience. Driven by Integrity."
         theme="light"
         className="!mb-0"
       />
 
       {/* ── Stats bar ── */}
       <div className="bg-primary py-12">
-        <div className="max-w-3xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div className="mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -63,6 +83,28 @@ export default function WhyUs() {
                 <Counter value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="text-white/90 text-base font-medium tracking-wide">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Reasons ── */}
+      <div className="site-container px-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {reasons.map((reason, i) => (
+            <motion.div
+              key={reason.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 * i, duration: 0.5 }}
+              className="h-full"
+            >
+              <SiteCard className="h-full">
+                <div className="p-7 flex flex-col h-full">
+                  <h3 className="text-primary font-bold text-lg leading-snug mb-2">{reason.title}</h3>
+                  <p className="text-gray-600 text-base leading-8 font-medium">{reason.desc}</p>
+                </div>
+              </SiteCard>
             </motion.div>
           ))}
         </div>

@@ -6,39 +6,39 @@ import SectionHeader from "./ui/SectionHeader";
 
 const items = [
   {
-    title: "Data Collection",
+    title: "Research Strategy & Consulting ",
     content:
-      "Critical data captured via phone, online surveys, CATI and in-person interviews. Your preferred method — we deliver, in 30+ markets with native-language support and real-time quota management.",
+      "We translate business challenges into focused research strategies, identifying the right objectives, audiences, and methodologies to generate meaningful insights.",
     link: "Explore Global Panel",
   },
   {
-    title: "Survey Programming",
+    title: "Global Audience Intelligence",
     content:
-      "Professional survey programming with advanced logic, skip patterns, and multi-language support. Hosted on our platform or yours.",
+      "Reach beyond mainstream audiences with access to 4.85 million active panelists worldwide, including niche consumer segments, B2B decision-makers, and healthcare professionals.",
     link: "Explore Survey Tools",
   },
   {
-    title: "Data Processing & Analytics",
+    title: "Quantitative & Qualitative Research",
     content:
-      "Comprehensive data processing, cleaning, weighting, and analytics to transform raw responses into decision-ready insights.",
+      "Explore markets, measure consumer behaviour, and understand decision-making through online surveys, CATI, CAPI, IDIs, FGDs, and other research methodologies.",
     link: "Explore Analytics",
   },
   {
-    title: "Translation Services",
+    title: "Market & Brand Intelligence",
     content:
-      "Expert translation across 60+ languages by native speakers — surveys, reports, discussion guides, and more.",
+      "Understand brand performance, consumer preferences, usage patterns, competitive positioning, and evolving market dynamics through U&A studies, brand tracking, and competitive intelligence.",
     link: "Explore Languages",
   },
   {
-    title: "Desk Research",
+    title: "Product & Go-to-Market Research",
     content:
-      "In-depth secondary research leveraging industry databases, reports, and public sources to complement your primary work.",
+      "Evaluate product concepts, packaging, pricing, and market opportunities. Build a stronger foundation for product launches, market entry, and business expansion.",
     link: "Explore Research",
   },
   {
-    title: "Project Management",
+    title: "Expert Network & Advanced Analytics",
     content:
-      "End-to-end project management ensuring timely delivery, quality control, and seamless communication across all research phases.",
+      "Connect with industry specialists and decision-makers while leveraging advanced analytics, statistical modelling, and segmentation to uncover deeper business insights.",
     link: "Explore Services",
   },
 ];
@@ -46,18 +46,17 @@ const items = [
 const tags = [
   { label: "Quantitative", filled: true },
   { label: "Qualitative",  filled: false },
-  { label: "36 Countries", filled: true },
-  { label: "Healthcare",   filled: false },
-  { label: "B2B",          filled: false },
-  { label: "Consumer",     filled: false },
-  { label: "CATI",         filled: false },
-  { label: "Online",       filled: false },
+  { label: "Healthcare", filled: false },
+  { label: "B2B",   filled: false },
+  { label: "Consumer",          filled: false },
+  { label: "CATI",     filled: false },
+  { label: "Online",         filled: false },
 ];
 
 const stats = [
-  { num: "15+",  label: "Years" },
+  { num: "17+",  label: "Years" },
   { num: "100+", label: "Clients" },
-  { num: "20K+", label: "Projects" },
+  { num: "50K+", label: "Projects per Year" },
 ];
 
 function AccordionItem({
@@ -127,10 +126,8 @@ export default function WhatWeDo() {
 
             <SectionHeader
               label="What We Do"
-              heading={<>Empowering Decision<br />
-              Making with{" "}
-              Track Opinion</>}
-              description="End-to-end custom research services delivered by experts — so you can focus on the decision, not the data."
+              heading={<>Empowering Business Decisions Through Market Research</>}
+              description="We turn complex business questions into actionable insights through research expertise, access to niche audiences, and data-driven intelligence. From understanding markets to identifying growth opportunities, we help businesses make confident decisions."
               theme="light"
               align="left"
               className="!mb-0"
@@ -155,12 +152,12 @@ export default function WhatWeDo() {
                 <div className="bg-primary rounded-2xl p-8 mb-4">
                   <p className="flex items-center gap-2 text-white/50 text-xs font-bold uppercase tracking-widest mb-6">
                     <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
-                    Track Opinion · Research Engine
+                    TRACK OPINION · RESEARCH & INTELLIGENCE
                   </p>
 
                   <div className="mb-6">
                     <p className="text-white font-extrabold leading-none" style={{ fontSize: "clamp(3rem,8vw,4.5rem)" }}>
-                      4.5<span className="text-white/70 font-bold text-4xl ml-1">Mn</span>
+                      4.85<span className="text-white/70 font-bold text-4xl ml-1">Mn</span>
                     </p>
                     <p className="text-white/70 text-sm font-medium mt-2">Active panelists worldwide</p>
                   </div>

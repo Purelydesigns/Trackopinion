@@ -31,6 +31,8 @@ const contentSecurityPolicy = [
   "font-src 'self' data: https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
   "media-src 'self'",
+  // The D-U-N-S Registered seal in the footer is an iframe served by D&B.
+  "frame-src https://dunsregistered.dnb.com",
   "connect-src 'self' https://cdn-cookieyes.com https://log.cookieyes.com https://cdn.jsdelivr.net",
   "frame-ancestors 'none'",
   "base-uri 'self'",
