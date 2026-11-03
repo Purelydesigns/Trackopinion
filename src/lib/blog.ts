@@ -2,6 +2,11 @@ import { unstable_cache } from "next/cache";
 import DOMPurify from "isomorphic-dompurify";
 import { apiBaseUrl } from "@/lib/api";
 import { toBlogSlug } from "@/lib/blogSlug";
+import { formatDate, limitWords, stripHtml } from "@/lib/blogText";
+
+/* Re-exported so existing importers keep working; they live in blogText so a
+   caller can use them without pulling jsdom in through this module. */
+export { formatDate, limitWords, stripHtml };
 
 /**
  * Server-side blog data access.
@@ -75,28 +80,6 @@ interface RawPost {
   description?: string;
 }
 
-export function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&[a-z]+;/gi, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export function limitWords(text: string, max: number): string {
-  const words = text.split(" ").filter(Boolean);
-  return words.length <= max ? text : words.slice(0, max).join(" ") + "…";
-}
-
-/** Render an ISO date as dd.mm.yyyy, matching the design. */
-export function formatDate(iso: string): string {
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "";
-  return d
-    .toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" })
-    .replace(/\//g, ".");
-}
 
 /**
  * Allow the formatting a CMS editor needs and nothing else. Scripts, event

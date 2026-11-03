@@ -1,59 +1,82 @@
 import { NextResponse } from "next/server";
-import { clampInt } from "@/lib/api";
-import { formatDate, getAllPosts } from "@/lib/blog";
+import { apiBaseUrl, clampInt, logAndDescribe, upstreamJson } from "@/lib/api";
+import { toBlogSlug } from "@/lib/blogSlug";
+import { formatDate, limitWords, stripHtml } from "@/lib/blogText";
 
 /**
- * The newest posts, in the order the resources index shows them, shaped for
- * the "Explore Our Resources" teaser.
+ * The newest posts, shaped for the "Explore Our Resources" teaser.
  *
  * That teaser sits inside client components on a dozen pages, so it cannot
- * call `getAllPosts` itself. This route does it server-side and hands back the
- * handful of fields a card needs — no article bodies.
- */
-
-/**
- * Dynamic, because the handler reads `limit` off the request. It previously
- * carried `export const revalidate = 3600` as well, and a route that asks to
- * be revalidated on a timer while reading the request is a contradiction Next
- * resolves by throwing — which is why this answered 500 in production while
- * dev, which is lenient about it, looked fine.
+ * load posts itself. This route does it server-side and hands back the handful
+ * of fields a card needs.
  *
- * Nothing is lost by dropping it: the expensive part is the upstream paging in
- * `getAllPosts`, and that is wrapped in `unstable_cache` with its own one-hour
- * window, so this still hits the CMS at most once an hour.
+ * It deliberately does NOT go through `getAllPosts`. That walks the whole
+ * archive behind `unstable_cache` and imports the HTML sanitiser, and on
+ * Vercel this route answered 500 in half a second — before its own error
+ * handling could run — while `/api/blogs`, which is a plain `upstreamJson`
+ * call, served the same CMS fine. A teaser needs three posts, not a hundred,
+ * so it now asks for one small page over the proven path.
  */
 export const dynamic = "force-dynamic";
+
+/** Shape of the upstream list rows, as much of it as a card needs. */
+interface RawPost {
+  blogsId?: number;
+  id?: number;
+  header?: string;
+  title?: string;
+  blogTitle?: string;
+  fromDt?: string;
+  publishDate?: string;
+  createdAt?: string;
+  blogTags?: string;
+  tags?: string;
+  category?: string;
+  content?: string;
+  body?: string;
+  subHeader?: string;
+  description?: string;
+}
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const limit = clampInt(searchParams.get("limit"), { min: 1, max: 12, fallback: 3 });
 
-    const all = await getAllPosts();
+    const json = (await upstreamJson(`${apiBaseUrl()}/api/Blog/blogList`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pageNumber: 1, pageSize: limit }),
+      cache: "no-store",
+    })) as { data?: { item1?: RawPost[] } };
 
-    /* `getAllPosts` answers an upstream failure with an empty list so a page
-       never dies with it, which leaves this route unable to tell "no posts"
-       from "could not reach the CMS". Say so in the server log, or the teaser
-       just renders empty and the deployment gives no clue why. */
-    if (all.length === 0) {
-      console.error(
-        "[api/blogs/latest] no posts returned — check API_BASE_URL is set in this environment and that the CMS is reachable from it",
-      );
-    }
+    const posts = (json?.data?.item1 ?? [])
+      .map((raw) => {
+        const title = raw.header ?? raw.title ?? raw.blogTitle ?? "";
+        // No title means no stable slug, so no reachable URL.
+        if (!title.trim()) return null;
 
-    const posts = all.slice(0, limit).map((post) => ({
-      title: post.title,
-      excerpt: post.excerpt,
-      category: post.category,
-      date: formatDate(post.date),
-      href: `/resources/${post.slug}`,
-    }));
+        const plain = stripHtml(
+          (raw.content ?? raw.body ?? "") || raw.subHeader || raw.description || "",
+        );
+        const date = raw.fromDt ?? raw.publishDate ?? raw.createdAt ?? "";
+
+        return {
+          title,
+          excerpt: limitWords(plain, 60),
+          category: raw.blogTags ?? raw.tags ?? raw.category ?? "General",
+          date: formatDate(date),
+          href: `/resources/${toBlogSlug(title)}`,
+        };
+      })
+      .filter((post) => post !== null)
+      .slice(0, limit);
 
     return NextResponse.json(posts);
   } catch (err) {
     /* A teaser in the footer of every page must not be able to serve a 500.
        Answer with an empty list and let the section render without cards. */
-    console.error("[api/blogs/latest] failed:", err instanceof Error ? err.message : err);
+    logAndDescribe("blogs/latest", err);
     return NextResponse.json([]);
   }
 }
