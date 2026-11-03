@@ -10,31 +10,50 @@ import { formatDate, getAllPosts } from "@/lib/blog";
  * call `getAllPosts` itself. This route does it server-side and hands back the
  * handful of fields a card needs — no article bodies.
  */
-export const revalidate = 3600;
+
+/**
+ * Dynamic, because the handler reads `limit` off the request. It previously
+ * carried `export const revalidate = 3600` as well, and a route that asks to
+ * be revalidated on a timer while reading the request is a contradiction Next
+ * resolves by throwing — which is why this answered 500 in production while
+ * dev, which is lenient about it, looked fine.
+ *
+ * Nothing is lost by dropping it: the expensive part is the upstream paging in
+ * `getAllPosts`, and that is wrapped in `unstable_cache` with its own one-hour
+ * window, so this still hits the CMS at most once an hour.
+ */
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const limit = clampInt(searchParams.get("limit"), { min: 1, max: 12, fallback: 3 });
+  try {
+    const { searchParams } = new URL(req.url);
+    const limit = clampInt(searchParams.get("limit"), { min: 1, max: 12, fallback: 3 });
 
-  const all = await getAllPosts();
+    const all = await getAllPosts();
 
-  /* `getAllPosts` answers an upstream failure with an empty list so a page
-     never dies with it, which leaves this route unable to tell "no posts" from
-     "could not reach the CMS". Say so in the server log, or the teaser just
-     renders empty and the deployment gives no clue why. */
-  if (all.length === 0) {
-    console.error(
-      "[api/blogs/latest] no posts returned — check API_BASE_URL is set in this environment and that the CMS is reachable from it",
-    );
+    /* `getAllPosts` answers an upstream failure with an empty list so a page
+       never dies with it, which leaves this route unable to tell "no posts"
+       from "could not reach the CMS". Say so in the server log, or the teaser
+       just renders empty and the deployment gives no clue why. */
+    if (all.length === 0) {
+      console.error(
+        "[api/blogs/latest] no posts returned — check API_BASE_URL is set in this environment and that the CMS is reachable from it",
+      );
+    }
+
+    const posts = all.slice(0, limit).map((post) => ({
+      title: post.title,
+      excerpt: post.excerpt,
+      category: post.category,
+      date: formatDate(post.date),
+      href: `/resources/${post.slug}`,
+    }));
+
+    return NextResponse.json(posts);
+  } catch (err) {
+    /* A teaser in the footer of every page must not be able to serve a 500.
+       Answer with an empty list and let the section render without cards. */
+    console.error("[api/blogs/latest] failed:", err instanceof Error ? err.message : err);
+    return NextResponse.json([]);
   }
-
-  const posts = all.slice(0, limit).map((post) => ({
-    title: post.title,
-    excerpt: post.excerpt,
-    category: post.category,
-    date: formatDate(post.date),
-    href: `/resources/${post.slug}`,
-  }));
-
-  return NextResponse.json(posts);
 }

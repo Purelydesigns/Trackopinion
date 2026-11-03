@@ -42,6 +42,17 @@ export const FALLBACK_IMAGE = "/images/blog-fallback.svg";
 /** Cache window for blog data. Posts change rarely; an hour is plenty. */
 const REVALIDATE_SECONDS = 3600;
 
+/**
+ * Give up on a slow CMS rather than hang.
+ *
+ * The list is paged, so several of these run back to back; without a bound,
+ * one stalled connection sits on undici's 10s default and can outlast the
+ * serverless function itself, which the platform then answers with a 500. A
+ * timeout here throws instead, which the callers already turn into an empty
+ * list and a page that still renders.
+ */
+const UPSTREAM_TIMEOUT_MS = 6000;
+
 /* ── Upstream shape ── */
 interface RawPost {
   blogsId?: number;
@@ -158,6 +169,7 @@ const loadSummaries = unstable_cache(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pageNumber, pageSize }),
         cache: "no-store",
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
       });
       if (!res.ok) throw new Error(`Upstream ${res.status}`);
 
@@ -215,7 +227,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const res = await fetch(
       `${apiBaseUrl()}/api/Blog/blogDetails?id=${encodeURIComponent(String(summary.id))}`,
-      { headers: { accept: "*/*" }, next: { revalidate: REVALIDATE_SECONDS } },
+      {
+        headers: { accept: "*/*" },
+        next: { revalidate: REVALIDATE_SECONDS },
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      },
     );
     if (!res.ok) throw new Error(`Upstream ${res.status}`);
 

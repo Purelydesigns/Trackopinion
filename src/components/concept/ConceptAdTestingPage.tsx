@@ -415,10 +415,11 @@ export default function ConceptAdTestingPage() {
                   <div className="h-1.5 bg-white" />
 
                   <div className="p-7 flex flex-col flex-1">
-                    {/* The question the card answers */}
-                    <div className="flex items-center gap-4 mb-6">
-                      <span className="w-10 h-10 rounded-full bg-white text-primary font-bold flex items-center justify-center shrink-0">
-                        {i + 1}
+                    {/* The question the card answers — numbered badge above a
+                        centred title, matching the numbered bands elsewhere. */}
+                    <div className="flex flex-col items-center text-center mb-6">
+                      <span className="w-12 h-12 rounded-full bg-white text-primary font-bold text-lg flex items-center justify-center mb-4 tabular-nums">
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-white font-bold text-lg leading-snug">{row.question}</h3>
                     </div>
@@ -506,14 +507,22 @@ export default function ConceptAdTestingPage() {
               </SiteCard>
             </motion.div>
 
-            {/* Where it applies */}
+            {/* Where it applies.
+
+                The wrapper takes the row's full height so the panel inside has
+                somewhere to travel; the panel itself is only as tall as its
+                content and sticks while the longer list scrolls past. Stretched
+                to the row, it left a tall empty block under the industries. */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-primary rounded-2xl p-8 text-white flex flex-col"
+              className="h-full"
             >
+            {/* No transform on the sticky element itself: an entrance offset
+                left here shifts where it pins, by its own y value. */}
+            <div className="sticky top-24 bg-primary rounded-2xl p-8 text-white">
               <p className="text-[11px] font-bold uppercase tracking-widest text-white/50 mb-2">
                 Where It Applies
               </p>
@@ -538,6 +547,7 @@ export default function ConceptAdTestingPage() {
                   [CONFIRM]
                 </span>
               </div> */}
+            </div>
             </motion.div>
           </div>
         </div>
