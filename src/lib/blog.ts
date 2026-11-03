@@ -1,5 +1,3 @@
-import { unstable_cache } from "next/cache";
-import DOMPurify from "isomorphic-dompurify";
 import { apiBaseUrl } from "@/lib/api";
 import { toBlogSlug } from "@/lib/blogSlug";
 import { formatDate, limitWords, stripHtml } from "@/lib/blogText";
@@ -58,6 +56,58 @@ const REVALIDATE_SECONDS = 3600;
  */
 const UPSTREAM_TIMEOUT_MS = 6000;
 
+/**
+ * The list endpoint is fast but unreliable.
+ *
+ * Measured against the live CMS: a page of 25 posts, 4.3MB, came back in 1.5s,
+ * while a one-post page immediately afterwards hung for 21 seconds and
+ * returned nothing at all. A single attempt is therefore a coin flip, and when
+ * it loses `getAllPosts` returns an empty list — which is how /resources came
+ * to prerender as "No blog posts yet" while the same code served posts
+ * locally minutes earlier.
+ *
+ * So: a bounded wait, and retries, because the next attempt usually works.
+ */
+const LIST_TIMEOUT_MS = 12000;
+const LIST_ATTEMPTS = 3;
+
+async function fetchListPage(
+  pageNumber: number,
+  pageSize: number,
+): Promise<{ item1?: RawPost[]; item2?: number }> {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= LIST_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(`${apiBaseUrl()}/api/Blog/blogList`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pageNumber, pageSize }),
+        /* `revalidate`, never `no-store`: a no-store fetch marks the route
+           dynamic, and during static generation that throws
+           DynamicServerError — which `getAllPosts` then caught and turned into
+           an empty list. A page of this list runs past the 2MB cache limit and
+           is refused with a build-log warning; that is noise, not failure. */
+        next: { revalidate: REVALIDATE_SECONDS },
+        signal: AbortSignal.timeout(LIST_TIMEOUT_MS),
+      });
+      if (!res.ok) throw new Error(`Upstream ${res.status}`);
+
+      const json = (await res.json()) as { data?: { item1?: RawPost[]; item2?: number } };
+      return json?.data ?? {};
+    } catch (err) {
+      lastError = err;
+      console.error(
+        `[lib/blog] list page ${pageNumber} attempt ${attempt}/${LIST_ATTEMPTS} failed:`,
+        err instanceof Error ? err.message : err,
+      );
+      if (attempt < LIST_ATTEMPTS) await new Promise((r) => setTimeout(r, 400 * attempt));
+    }
+  }
+
+  throw lastError;
+}
+
 /* ── Upstream shape ── */
 interface RawPost {
   blogsId?: number;
@@ -86,7 +136,22 @@ interface RawPost {
  * handlers, iframes and `javascript:` URLs are stripped before the HTML ever
  * reaches `dangerouslySetInnerHTML`.
  */
-function sanitize(html: string): string {
+async function sanitize(html: string): Promise<string> {
+  if (!html) return "";
+
+  /* Imported here rather than at module scope. It pulls in jsdom, which needs
+     Node >= 22.10 and is the heaviest thing this file touches; at the top it
+     loads for the post list too, where no HTML is sanitised, and a failure
+     takes down every blog path before any error handling runs. */
+  let DOMPurify;
+  try {
+    DOMPurify = (await import("isomorphic-dompurify")).default;
+  } catch (err) {
+    // Never fall back to returning the raw HTML.
+    console.error("[lib/blog] sanitiser unavailable:", err instanceof Error ? err.message : err);
+    return "";
+  }
+
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS: [
       "p", "br", "hr", "strong", "b", "em", "i", "u", "s",
@@ -135,63 +200,70 @@ function normalise(raw: RawPost): BlogSummary | null {
  * collide. The first post wins and later collisions get a `-2`, `-3` suffix so
  * each post keeps a reachable, stable URL.
  *
- * The upstream list endpoint returns each post's full HTML body, so a page of
- * ten can run to several megabytes — past Next's 2MB per-entry limit, which
- * silently disables caching for the whole blog. The fetches below are therefore
- * uncached, and `unstable_cache` stores the *derived* result instead: the same
- * revalidate window, over data small enough to actually cache.
+ * The upstream list returns each post's full HTML body, so one page runs to
+ * several megabytes — past Next's 2MB cache-entry limit. This used to sit
+ * inside `unstable_cache` so the small derived result could be cached instead,
+ * but that combination worked locally and failed on Vercel, where every path
+ * through this module answered 500 at request time while the plain
+ * `upstreamJson` routes served the same CMS fine. The caching now happens in
+ * `getAllPosts`, in plain memory.
  */
-const loadSummaries = unstable_cache(
-  async (): Promise<BlogSummary[]> => {
-    const pageSize = 25;
-    const collected: RawPost[] = [];
+async function loadSummaries(): Promise<BlogSummary[]> {
+  const pageSize = 25;
+  const collected: RawPost[] = [];
 
-    for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
-      const res = await fetch(`${apiBaseUrl()}/api/Blog/blogList`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pageNumber, pageSize }),
-        cache: "no-store",
-        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-      });
-      if (!res.ok) throw new Error(`Upstream ${res.status}`);
+  for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
+    const data = await fetchListPage(pageNumber, pageSize);
+    const items = data.item1 ?? [];
+    const total = data.item2 ?? 0;
 
-      const json = (await res.json()) as { data?: { item1?: RawPost[]; item2?: number } };
-      const items = json?.data?.item1 ?? [];
-      const total = json?.data?.item2 ?? 0;
+    collected.push(...items);
+    // Stop on an empty page too — a wrong `total` must not spin the loop.
+    if (items.length === 0 || collected.length >= total) break;
+  }
 
-      collected.push(...items);
-      // Stop on an empty page too — a wrong `total` must not spin the loop.
-      if (items.length === 0 || collected.length >= total) break;
-    }
+  const seen = new Map<string, number>();
+  const posts: BlogSummary[] = [];
 
-    const seen = new Map<string, number>();
-    const posts: BlogSummary[] = [];
+  for (const raw of collected) {
+    const post = normalise(raw);
+    if (!post) continue;
 
-    for (const raw of collected) {
-      const post = normalise(raw);
-      if (!post) continue;
+    const count = seen.get(post.slug) ?? 0;
+    seen.set(post.slug, count + 1);
+    if (count > 0) post.slug = `${post.slug}-${count + 1}`;
 
-      const count = seen.get(post.slug) ?? 0;
-      seen.set(post.slug, count + 1);
-      if (count > 0) post.slug = `${post.slug}-${count + 1}`;
+    posts.push(post);
+  }
 
-      posts.push(post);
-    }
+  return posts;
+}
 
-    return posts;
-  },
-  ["blog-summaries"],
-  { revalidate: REVALIDATE_SECONDS, tags: ["blog"] },
-);
+/* Derived summaries, held per server instance for the revalidate window.
+   This is what `unstable_cache` used to do, minus the framework API that
+   proved fragile in production: the payload is the stripped-down list, a miss
+   costs one walk of the archive, and a cold instance simply refetches. */
+let memo: { at: number; posts: BlogSummary[] } | null = null;
 
 /** Every post, without article bodies. Used by the index, sitemap and routing. */
 export async function getAllPosts(): Promise<BlogSummary[]> {
+  if (memo && Date.now() - memo.at < REVALIDATE_SECONDS * 1000) return memo.posts;
+
   try {
-    return await loadSummaries();
+    const posts = await loadSummaries();
+    memo = { at: Date.now(), posts };
+    return posts;
   } catch (err) {
     // An upstream outage must not take a page down with it.
     console.error("[lib/blog] getAllPosts failed:", err instanceof Error ? err.message : err);
+
+    /* Stale beats empty. Returning [] here is what printed "No blog posts yet"
+       on a prerendered page and then cached it for an hour; last known good is
+       worse than fresh but far better than pretending the blog is empty. */
+    if (memo) {
+      console.error("[lib/blog] serving the last known list instead");
+      return memo.posts;
+    }
     return [];
   }
 }
@@ -221,7 +293,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     const json = (await res.json()) as { data?: RawPost } | RawPost;
     const raw = ("data" in json ? json.data : json) as RawPost | undefined;
 
-    return { ...summary, content: sanitize(raw?.content ?? raw?.body ?? "") };
+    return { ...summary, content: await sanitize(raw?.content ?? raw?.body ?? "") };
   } catch (err) {
     console.error("[lib/blog] getPostBySlug failed:", err instanceof Error ? err.message : err);
     // The post exists — render it with what the summary already gave us rather
