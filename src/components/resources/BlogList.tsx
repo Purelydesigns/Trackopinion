@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo, useCallback } from "react";
+import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Search, SlidersHorizontal, Calendar, X } from "lucide-react";
@@ -19,11 +19,42 @@ const BLUR_PLACEHOLDER =
  * Every post is supplied by the server page, so search, category filtering and
  * pagination all run over the complete set. Filtering only the current page —
  * as this previously did — makes the search box quietly useless past page one.
+ *
+ * The posts come from `/api/blogs/summaries` on mount, the way the careers
+ * page loads its openings. They used to be fetched by the server page and
+ * passed in, which put them in the initial HTML but also tied the whole index
+ * to the build: one flaky upstream response at build time baked an empty page
+ * and cached it for an hour. Fetching here cannot do that — a bad response
+ * means one slow load, not an empty page served to everyone.
  */
-export default function BlogList({ posts }: { posts: BlogSummary[] }) {
+export default function BlogList({ posts: initialPosts }: { posts?: BlogSummary[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showFilter, setShowFilter] = useState(false);
+  const [loaded, setLoaded] = useState<BlogSummary[] | null>(initialPosts ?? null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (initialPosts) return;
+
+    const controller = new AbortController();
+    fetch("/api/blogs/summaries", { signal: controller.signal })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((data: BlogSummary[]) => setLoaded(Array.isArray(data) ? data : []))
+      .catch((err: Error) => {
+        if (err.name === "AbortError") return;
+        console.error("[BlogList] could not load posts:", err.message);
+        setLoaded([]);
+        setFailed(true);
+      });
+
+    return () => controller.abort();
+  }, [initialPosts]);
+
+  const loading = loaded === null;
+  /* Memoised: a fresh `[]` on every render would change the identity of the
+     dependency the filtering memos below read. */
+  const posts = useMemo(() => loaded ?? [], [loaded]);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
@@ -216,7 +247,17 @@ export default function BlogList({ posts }: { posts: BlogSummary[] }) {
               {/* Empty state */}
               {visible.length === 0 && (
                 <div className="py-24 text-center text-gray-400 text-sm">
-                  {hasActiveFilter ? (
+                  {loading ? (
+                    "Loading posts…"
+                  ) : failed ? (
+                    <>
+                      <span className="font-semibold text-gray-500">
+                        Posts could not be loaded.
+                      </span>
+                      <br />
+                      Please refresh to try again.
+                    </>
+                  ) : hasActiveFilter ? (
                     <>
                       <span className="font-semibold text-gray-500">
                         No posts match your search.

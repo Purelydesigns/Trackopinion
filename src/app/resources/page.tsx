@@ -3,7 +3,6 @@ import { OG_IMAGE } from "@/lib/seo";
 import { Suspense } from "react";
 import BlogList from "@/components/resources/BlogList";
 import JsonLd, { SITE_URL } from "@/components/seo/JsonLd";
-import { getAllPosts } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -31,16 +30,16 @@ const blogSchema = {
   publisher: { "@id": `${SITE_URL}/#organization` },
 };
 
-export default async function ResourcesPage() {
-  // Fetched here so the posts are in the server-rendered HTML and the client
-  // component can search and paginate across all of them at once.
-  const posts = await getAllPosts();
-
+export default function ResourcesPage() {
+  /* The list loads itself from /api/blogs/summaries, the way the careers page
+     loads its openings. Fetching here instead put the posts in the initial
+     HTML, but it also meant one flaky upstream response during the build baked
+     an empty page — "No blog posts yet" — and served it for an hour. */
   return (
     <>
       <JsonLd data={blogSchema} />
       <Suspense>
-        <BlogList posts={posts} />
+        <BlogList />
       </Suspense>
     </>
   );
