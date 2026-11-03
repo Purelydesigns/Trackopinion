@@ -103,7 +103,7 @@ export default function TrustedBy({
       </div> */}
 
       {/* ── World tagline ── */}
-      {showWorldTagline && <div className="mt-12 relative overflow-hidden bg-section">
+      {showWorldTagline && <div className="relative overflow-hidden bg-section">
         <Image
           src="/images/map.png"
           alt=""

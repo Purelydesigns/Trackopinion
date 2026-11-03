@@ -71,7 +71,7 @@ export default function WhyUs() {
 
       {/* ── Stats bar ── */}
       <div className="bg-primary py-12">
-        <div className="mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div className="site-container px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
