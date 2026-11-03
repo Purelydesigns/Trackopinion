@@ -28,6 +28,7 @@ const content: ResearchDeepContent = {
     secondaryCta: { label: "See the Builder", href: "#methods" },
   },
 
+  illustrationNote: "Illustration only",
   methods: {
     label: "Intelligence Built Into Every Step",
     heading: (

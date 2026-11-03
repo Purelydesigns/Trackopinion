@@ -46,6 +46,7 @@ const content: ResearchDeepContent = {
     ],
   },
 
+  illustrationNote: "Illustration only",
   moreThanNumbers: {
     heading: <>From Everyday Consumers to Specialist Decision-Makers</>,
     paragraphs: [

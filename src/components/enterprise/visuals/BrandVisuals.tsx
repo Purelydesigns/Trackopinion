@@ -15,7 +15,7 @@ const funnel = [
 
 export function BrandFunnel() {
   return (
-    <VisualPanel eyebrow="Brand Health" title="Perception Funnel" chip={<><Filter className="w-3.5 h-3.5" /> vs category</>} note="Illustrative figures — not data from a live study">
+    <VisualPanel eyebrow="Brand Health" title="Perception Funnel" chip={<><Filter className="w-3.5 h-3.5" /> vs category</>}>
       <div className="flex flex-col gap-2.5">
         {funnel.map((s, i) => (
           <motion.div
@@ -63,7 +63,7 @@ export function PerceptionMap() {
   const py = (v: number) => H - pad - (v / 100) * (H - pad * 2);
 
   return (
-    <VisualPanel eyebrow="Competitive Position" title="Perception Map" chip={<><Crosshair className="w-3.5 h-3.5" /> n = 2,400</>} note="Illustrative figures — not data from a live study">
+    <VisualPanel eyebrow="Competitive Position" title="Perception Map" chip={<><Crosshair className="w-3.5 h-3.5" /> n = 2,400</>}>
       {/* Capped and centred. Left to fill the panel the quadrant rendered
           450px tall, which put the card 300px past the text beside it. */}
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full block max-w-[420px] mx-auto">

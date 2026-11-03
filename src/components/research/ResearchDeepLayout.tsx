@@ -51,16 +51,29 @@ export interface ResearchDeepContent {
     paragraphs?: string[];
     items: { icon: LucideIcon; label: string; desc: string }[];
     /** Omit both to drop the right-hand column; the tiles then span the row. */
+    /** Overrides the page-level caption; `false` prints none. */
+    illustrationNote?: string | false;
     radarLabel?: string;
     radarDims?: RadarDim[];
     /** Replaces the radar chart when the page has artwork of its own. */
     visual?: React.ReactNode;
   };
   /** Floating-cards + bullets split. Omit to hide the section. */
+  /**
+   * Caption printed under every graphic on the page, for artwork whose
+   * figures and labels are drawn rather than measured. Omit it and no
+   * caption renders.
+   *
+   * Each graphic can override it: a string of its own, or `false` where the
+   * figures are real and a disclaimer would undersell them.
+   */
+  illustrationNote?: string;
   moreThanNumbers?: {
     heading: React.ReactNode;
     paragraphs: string[];
     bullets: string[];
+    /** Overrides the page-level caption; `false` prints none. */
+    illustrationNote?: string | false;
     cards: [FloatCard, FloatCard, FloatCard];
     /** Replaces the floating cards when the page has artwork of its own. */
     visual?: React.ReactNode;
@@ -78,6 +91,8 @@ export interface ResearchDeepContent {
     paragraphs: string[];
     ctaLabel: string;
     ctaHref: string;
+    /** Overrides the page-level caption; `false` prints none. */
+    illustrationNote?: string | false;
     centerLabel: string;
     orbitNodes: OrbitNode[];
   };
@@ -232,6 +247,16 @@ function RadarChart({ dims }: { dims: RadarDim[] }) {
   );
 }
 
+/* ═══════════════ Illustration caption ═══════════════ */
+function IllustrationNote({ note }: { note?: string }) {
+  if (!note) return null;
+  return (
+    <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-gray-400">
+      {note}
+    </p>
+  );
+}
+
 /* ═══════════════ Orbital diagram ═══════════════ */
 function OrbitalDiagram({ nodes: nodeData, centerLabel }: { nodes: OrbitNode[]; centerLabel: string }) {
   const cx = 220, cy = 230, orbitR = 152, nodeR = 56;
@@ -315,7 +340,12 @@ export default function ResearchDeepLayout({
    */
   faqs?: Faq[];
 }) {
-  const { hero, methods, moreThanNumbers, advantages, benefits, whyChoose, projectManagement, enquiry } = content;
+  const { hero, methods, moreThanNumbers, advantages, benefits, whyChoose, projectManagement, enquiry, illustrationNote } = content;
+
+  /** A graphic's own setting wins; `false` means print nothing under it. */
+  const noteFor = (override?: string | false) =>
+    override === false ? undefined : override ?? illustrationNote;
+
 
   const hasMethodsVisual = Boolean(methods.visual || methods.radarDims);
 
@@ -394,6 +424,7 @@ export default function ResearchDeepLayout({
                   </div>
                 )}
                 {methods.visual ?? (methods.radarDims && <RadarChart dims={methods.radarDims} />)}
+                <IllustrationNote note={noteFor(methods.illustrationNote)} />
               </div>
             )}
           </div>
@@ -410,6 +441,7 @@ export default function ResearchDeepLayout({
               viewport={{ once: true }} transition={{ duration: 0.5 }}
             >
               {moreThanNumbers.visual ?? <FloatingCards cards={moreThanNumbers.cards} />}
+              <IllustrationNote note={noteFor(moreThanNumbers.illustrationNote)} />
             </motion.div>
 
             <motion.div
@@ -557,6 +589,7 @@ export default function ResearchDeepLayout({
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
             >
               <OrbitalDiagram nodes={benefits.orbitNodes} centerLabel={benefits.centerLabel} />
+              <IllustrationNote note={noteFor(benefits.illustrationNote)} />
             </motion.div>
           </div>
         </div>

@@ -204,7 +204,7 @@ const reportContents = [
   { title: "Executive summary" },
   { title: "Method and sample" },
   { title: "Side-by-side concept or creative comparison" },
-  { title: "Audience differences", note: "Where the sample supports it" },
+  { title: "Audience differences (Where the sample supports it)" },
   { title: "Open-ended themes" },
   { title: "Recommendations and next steps" },
 ];
@@ -457,12 +457,12 @@ export default function ConceptAdTestingPage() {
         label="The Process"
         heading={<>How We Design the Study</>}
         description="Six steps from the decision you need to make to the findings you can act on."
-        sectionClassName="bg-section py-20"
+        sectionClassName="bg-section py-20 pb-10"
         footnote="Specialist methods on request: eye tracking, facial expression measurement, in-store aisle testing."
       />
 
       {/* ════════ YOUR REPORT AND WHERE IT APPLIES ════════ */}
-      <section className="bg-section py-20">
+      <section className="bg-section py-10">
         <div className="site-container px-6">
 
           <SectionHeader
@@ -495,12 +495,7 @@ export default function ConceptAdTestingPage() {
                       <span className="w-9 h-9 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center shrink-0 tabular-nums">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <div>
-                        <p className="text-primary font-bold text-base leading-snug">{item.title}</p>
-                        {item.note && (
-                          <p className="text-gray-600 text-sm mt-0.5">{item.note}</p>
-                        )}
-                      </div>
+                      <p className="text-primary font-bold text-base leading-snug">{item.title}</p>
                     </div>
                   ))}
                 </div>

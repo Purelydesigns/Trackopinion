@@ -26,7 +26,7 @@ const reasons = [
 ];
 
 const stats = [
-  { value: 50,   suffix: "k+", label: "Projects per Year"    },
+  { value: 50,   suffix: "K+", label: "Projects per Year"    },
   { value: 150, suffix: "+",  label: "Team Members"         },
   { value: 17,   suffix: "+",  label: "Years of Experience" },
   { value: 50,  suffix: "+",  label: "Languages Supported"     },

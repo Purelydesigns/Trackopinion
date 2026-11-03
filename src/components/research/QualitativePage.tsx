@@ -44,6 +44,7 @@ const content: ResearchDeepContent = {
     ],
   },
 
+  illustrationNote: "Illustration only",
   moreThanNumbers: {
     heading: <>More Than Numbers</>,
     paragraphs: [

@@ -100,6 +100,9 @@ export function ConceptScorecard() {
             );
           })}
         </div>
+        <p className="mt-5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+          Illustration only
+        </p>
       </motion.div>
     </div>
   );
@@ -281,6 +284,9 @@ export function AdAttentionVisual() {
             );
           })}
         </div>
+        <p className="mt-5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+          Illustration only
+        </p>
       </motion.div>
     </div>
   );

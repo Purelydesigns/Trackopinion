@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 /**
  * Scrip8-specific sections that the shared research layout has no slot for:
@@ -25,14 +26,14 @@ export function CustomerStories() {
       {/* ════════ CUSTOMER STORIES ════════ */}
       <section className="bg-white py-20">
         <div className="site-container px-6">
-          <motion.div {...fadeUp()} className="flex items-end justify-between mb-12">
-            <div>
-              <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Customer Stories</p>
-              <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
-                Real results from{" "}
-                <span className="italic font-normal text-primary">real research teams</span>
-              </h2>
-            </div>
+          <motion.div {...fadeUp()} className="flex items-end justify-between mb-12 gap-6">
+            <SectionHeader
+              label="Customer Stories"
+              heading={<>Real Results From Real Research Teams</>}
+              theme="light"
+              align="left"
+              className="!mb-0"
+            />
             <Link href="/case-studies" className="text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all whitespace-nowrap">
               View all case studies →
             </Link>
@@ -138,15 +139,15 @@ function PricingSection() {
   return (
     <section className="bg-white py-24">
       <div className="site-container px-6">
-        <motion.div {...fadeUp()} className="text-center mb-10">
-          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Pricing</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
-            Simple, transparent{" "}
-            <span className="italic font-normal text-primary">pricing</span>
-          </h2>
-          <p className="text-base leading-8 font-medium text-gray-900 max-w-md mx-auto">
-            Start free. Scale when you&apos;re ready. No hidden fees, no surprise overages.
-          </p>
+        <motion.div {...fadeUp()} className="mb-10">
+          <SectionHeader
+            label="Pricing"
+            heading={<>Simple, Transparent Pricing</>}
+            description="Start free. Scale when you're ready. No hidden fees, no surprise overages."
+            theme="light"
+            align="center"
+            className="!mb-0"
+          />
         </motion.div>
 
         {/* Toggle */}

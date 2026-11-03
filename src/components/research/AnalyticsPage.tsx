@@ -24,6 +24,7 @@ const content: ResearchDeepContent = {
     secondaryCta: { label: "See What We Do", href: "#methods" },
   },
 
+  illustrationNote: "Illustration only",
   methods: {
     label: "Numbers That Lead to Strategies",
     heading: (

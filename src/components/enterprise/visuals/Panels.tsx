@@ -13,13 +13,16 @@ export function VisualPanel({
   eyebrow,
   title,
   chip,
-  note,
+  note = "Illustration only",
   children,
 }: {
   eyebrow: string;
   title: string;
   chip?: ReactNode;
-  /** Caption under the artwork — say so here when the numbers are made up. */
+  /**
+   * Caption under the artwork. Every panel here draws its figures rather than
+   * measuring them, so this defaults on; pass an empty string to drop it.
+   */
   note?: string;
   children: ReactNode;
 }) {

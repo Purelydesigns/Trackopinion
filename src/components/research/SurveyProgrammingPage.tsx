@@ -18,6 +18,7 @@ const content: ResearchDeepContent = {
     secondaryCta: { label: "Explore Features", href: "#methods" },
   },
 
+  illustrationNote: "Illustration only",
   methods: {
     label: "Survey Programming",
     heading: <>Customized Survey Designing With<br />Advanced Features At Your Fingertips</>,
