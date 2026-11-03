@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 
@@ -33,6 +33,8 @@ interface Props {
   description?: string;
   /** Section background + padding, e.g. "bg-white py-20" */
   sectionClassName?: string;
+  /** Optional line under the detail card, for a caveat or an aside. */
+  footnote?: string;
 }
 
 export default function ProcessSteps({
@@ -41,6 +43,7 @@ export default function ProcessSteps({
   heading,
   description,
   sectionClassName = "bg-[#f3efe9] py-24",
+  footnote,
 }: Props) {
   const [active, setActive] = useState(0);
   const current = steps[active];
@@ -110,14 +113,19 @@ export default function ProcessSteps({
           </div>
         </div>
 
-        {/* Detail card */}
+        {/* Detail card.
+
+            This sat inside `AnimatePresence mode="wait"`, which holds the
+            incoming child back until the outgoing one finishes exiting. That
+            exit never completed here, so picking a step moved the rail but
+            left the panel on step one for good. Changing `key` remounts the
+            card and replays the enter animation, which is all the crossfade
+            needed. */}
         <div className="">
-          <AnimatePresence mode="wait">
             <motion.div
               key={active}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex gap-6"
             >
@@ -137,8 +145,11 @@ export default function ProcessSteps({
                 )}
               </div>
             </motion.div>
-          </AnimatePresence>
         </div>
+
+        {footnote && (
+          <p className="mt-6 text-center text-gray-500 text-sm leading-relaxed">{footnote}</p>
+        )}
 
       </div>
     </section>

@@ -1,20 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Eye, Target, Repeat } from "lucide-react";
+import {
+  Eye,
+  GitCompare,
+  Lightbulb,
+  MessageSquareQuote,
+  Repeat,
+  ShieldAlert,
+  ShoppingCart,
+  Sparkles,
+  Target,
+} from "lucide-react";
 
 const NAVY = "#0d1b3e";
 const BLUE = "#3a5d92";
 
 /* ═══════════════════════════════════════════════════════════
-   1. Concept Testing — monadic scorecard
-   Three concepts scored against each other, winner promoted.
+   1. Concept Testing — what the test measures
+
+   This was a scorecard: three named concepts with scores, a winner
+   badge and footer metrics. Invented numbers in that shape read as a
+   real client result rather than an illustration, so the card now
+   shows what a concept test covers instead of inventing findings.
    ═══════════════════════════════════════════════════════════ */
 
-const concepts = [
-  { id: "A", name: "Concept A", score: 82, winner: true },
-  { id: "B", name: "Concept B", score: 64, winner: false },
-  { id: "C", name: "Concept C", score: 41, winner: false },
+const measures = [
+  { icon: Sparkles,           label: "Appeal & relevance",    question: "Does it matter to them?" },
+  { icon: MessageSquareQuote, label: "Clarity & credibility", question: "Is it understood and believed?" },
+  { icon: GitCompare,         label: "Differentiation",       question: "Is it different from what exists?" },
+  { icon: ShoppingCart,       label: "Purchase interest",     question: "Would they act on it?" },
+  { icon: ShieldAlert,        label: "Barriers",              question: "What holds them back?" },
 ];
 
 export function ConceptScorecard() {
@@ -35,84 +51,54 @@ export function ConceptScorecard() {
         className="relative bg-white rounded-3xl border border-gray-100 shadow-xl p-7"
       >
         {/* Header */}
-        <div className="flex items-center justify-between mb-7">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary/50 mb-1">
-              Monadic Test
-            </p>
-            <p className="text-primary font-extrabold text-lg leading-none">Concept Scorecard</p>
-          </div>
-          <span className="text-[11px] font-semibold text-gray-500 bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5">
-            n = 1,200
-          </span>
+        <div className="mb-6">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-primary/50 mb-1">
+            Concept Testing
+          </p>
+          <p className="text-primary font-extrabold text-lg leading-none">
+            What a Concept Test Measures
+          </p>
         </div>
 
-        {/* Concept rows */}
-        <div className="flex flex-col gap-5">
-          {concepts.map((c, i) => (
-            <motion.div
-              key={c.id}
-              initial={{ opacity: 0, x: -12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.15 + i * 0.12, duration: 0.4 }}
-            >
-              <div className="flex items-center gap-3 mb-2">
+        {/* What goes in — the thing the five lenses below are reading. */}
+        <div className="flex items-center gap-2.5 rounded-xl border border-dashed border-primary/25 bg-[#f8f9fb] px-4 py-3">
+          <Lightbulb className="w-4 h-4 text-primary shrink-0" />
+          <span className="text-primary text-sm font-bold">Your concept, idea or prototype</span>
+        </div>
+
+        {/* The lenses, strung on a single line so they read as one pass
+            through the concept rather than five unrelated ticks. */}
+        <div className="relative mt-5">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-[18px] top-2 bottom-6 w-px"
+            style={{ background: "linear-gradient(180deg, rgba(13,27,62,0.35), rgba(13,27,62,0.08))" }}
+          />
+
+          {measures.map((m, i) => {
+            const Icon = m.icon;
+            return (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 + i * 0.1, duration: 0.4 }}
+                className="relative flex items-start gap-4 pb-5 last:pb-0"
+              >
                 <span
-                  className="w-7 h-7 rounded-lg text-[11px] font-black flex items-center justify-center shrink-0"
-                  style={{
-                    background: c.winner ? NAVY : "#eef0f5",
-                    color: c.winner ? "#fff" : "#6b7280",
-                  }}
+                  className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 ring-4 ring-white"
+                  style={{ background: NAVY }}
                 >
-                  {c.id}
+                  <Icon className="w-4 h-4 text-white" strokeWidth={2.4} />
                 </span>
-                <span className={`text-sm font-semibold ${c.winner ? "text-primary" : "text-gray-500"}`}>
-                  {c.name}
-                </span>
-
-                {c.winner && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white bg-primary rounded-full px-2.5 py-1">
-                    <Check className="w-3 h-3" strokeWidth={3} /> Winner
-                  </span>
-                )}
-
-                <span className="ml-auto text-sm font-black text-primary tabular-nums">{c.score}</span>
-              </div>
-
-              {/* Score bar */}
-              <div className="h-2.5 rounded-full bg-[#eef3f9] overflow-hidden">
-                <motion.div
-                  className="h-2.5 rounded-full"
-                  style={{ background: c.winner ? NAVY : "#c7d6ea" }}
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${c.score}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.25 + i * 0.12, ease: "easeOut" }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Footer metrics */}
-        <div className="grid grid-cols-3 gap-3 mt-7 pt-6 border-t border-gray-100">
-          {[
-            { label: "Purchase Intent", value: "+34%" },
-            { label: "Appeal", value: "4.6/5" },
-            { label: "Uniqueness", value: "78%" },
-          ].map((m, i) => (
-            <motion.div
-              key={m.label}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 + i * 0.08 }}
-            >
-              <p className="text-primary font-extrabold text-base leading-none mb-1">{m.value}</p>
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">{m.label}</p>
-            </motion.div>
-          ))}
+                <div className="pt-1">
+                  <p className="text-primary text-sm font-bold leading-none mb-1.5">{m.label}</p>
+                  <p className="text-gray-500 text-[13px] leading-snug">{m.question}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.div>
     </div>
@@ -124,11 +110,15 @@ export function ConceptScorecard() {
    ═══════════════════════════════════════════════════════════ */
 
 /* Gaze fixations in view order on a 340x212 frame.
-   `weight` drives bloom size + opacity so intensity is readable. */
+   `weight` drives bloom size + opacity so intensity is readable.
+
+   The markers are numbered because view order is what the diagram explains.
+   They carried dwell times too — invented seconds that read as a real
+   eye-tracking result, so those are gone. */
 const fixations = [
-  { x: 96,  y: 118, order: 1, dwell: "1.4s", weight: 1.0,  labelSide: "left"  as const },
-  { x: 232, y: 78,  order: 2, dwell: "0.9s", weight: 0.72, labelSide: "right" as const },
-  { x: 244, y: 160, order: 3, dwell: "0.6s", weight: 0.5,  labelSide: "right" as const },
+  { x: 96,  y: 118, order: 1, weight: 1.0,  labelSide: "left"  as const },
+  { x: 232, y: 78,  order: 2, weight: 0.72, labelSide: "right" as const },
+  { x: 244, y: 160, order: 3, weight: 0.5,  labelSide: "right" as const },
 ];
 
 const GAZE_LEN = 420; // approx path length for the dash animation
@@ -235,10 +225,8 @@ export function AdAttentionVisual() {
                 transition={{ duration: 1.1, delay: 0.55, ease: "easeInOut" }}
               />
 
-              {/* ── Fixation markers + dwell chips ── */}
+              {/* ── Fixation markers ── */}
               {fixations.map((f, i) => {
-                const chipW = 30;
-                const chipX = f.labelSide === "left" ? f.x - 15 - chipW - 4 : f.x + 15 + 4;
                 return (
                   <motion.g
                     key={`f${i}`}
@@ -248,15 +236,6 @@ export function AdAttentionVisual() {
                     transition={{ duration: 0.3, delay: 0.7 + i * 0.22, ease: "backOut" }}
                     style={{ transformOrigin: `${f.x}px ${f.y}px` }}
                   >
-                    {/* dwell chip */}
-                    <rect x={chipX} y={f.y - 9} width={chipW} height="18" rx="9" fill="#ffffff" opacity="0.92" />
-                    <text
-                      x={chipX + chipW / 2} y={f.y + 4}
-                      textAnchor="middle" fontSize="9.5" fontWeight="700" fill={NAVY}
-                    >
-                      {f.dwell}
-                    </text>
-
                     {/* marker */}
                     <circle cx={f.x} cy={f.y} r="13" fill={NAVY} stroke="#ffffff" strokeWidth="2.5" />
                     <text
@@ -282,9 +261,9 @@ export function AdAttentionVisual() {
         {/* Metrics */}
         <div className="grid grid-cols-3 gap-3 mt-6">
           {[
-            { icon: Eye,    label: "Time to Brand", value: "1.4s" },
-            { icon: Target, label: "Brand Recall",  value: "71%" },
-            { icon: Repeat, label: "Ad Cut-Through", value: "+22%" },
+            { icon: Eye,    label: "Message takeout" },
+            { icon: Target, label: "Brand linkage" },
+            { icon: Repeat, label: "Engagement & response" },
           ].map((m, i) => {
             const Icon = m.icon;
             return (
@@ -297,8 +276,7 @@ export function AdAttentionVisual() {
                 className="rounded-xl border border-gray-100 bg-[#f8f9fb] px-3 py-3"
               >
                 <Icon className="w-4 h-4 text-primary mb-2" />
-                <p className="text-primary font-extrabold text-base leading-none mb-1">{m.value}</p>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">{m.label}</p>
+                <p className="text-primary font-bold text-sm leading-snug">{m.label}</p>
               </motion.div>
             );
           })}

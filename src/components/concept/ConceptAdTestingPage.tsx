@@ -2,9 +2,20 @@
 
 ;
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import {
+  Check,
+  CheckCircle2,
+  ClipboardPen,
+  Lightbulb,
+  ShieldCheck,
+  Target,
+  Users,
+  Workflow,
+} from "lucide-react";
+import ProcessSteps, { type ProcessStep } from "../shared/ProcessSteps";
 import PageHero from "../ui/PageHero";
 import SectionHeader from "../ui/SectionHeader";
+import SiteCard from "../ui/SiteCard";
 import LatestReadsSection from "../shared/LatestReadsSection";
 import FaqAccordion from "../shared/FaqAccordion";
 import { ConceptScorecard, AdAttentionVisual } from "./ConceptVisuals";
@@ -14,8 +25,14 @@ import SolutionEnquiryForm from "@/components/solutions/SolutionEnquiryForm";
 /* ── Capability cards with relevant icons ── */
 const capabilities = [
   {
-    title: "Concept Testing",
-    desc: "Test your product idea at an early stage in development. Avoid expensive setbacks by obtaining users' input before investing in marketing, ads, and sales.",
+    title: "Product Concept Testing",
+    desc: "Evaluate early product, service, or design ideas before moving them further into development.",
+    bullets: [
+      "Appeal and relevance",
+      "Clarity and credibility",
+      "Differentiation from current alternatives",
+      "Purchase interest and barriers",
+    ],
     icon: (
       <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 6a12 12 0 0 1 8 20.8V30a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-3.2A12 12 0 0 1 24 6z" />
@@ -29,8 +46,32 @@ const capabilities = [
     ),
   },
   {
-    title: "Ad Testing",
-    desc: "Dodge expensive marketing failures. Test your advert design with a handful of sample users and tweak your ad before you actually launch it.",
+    title: "Product, Packaging, & Proposition Evaluation",
+    desc: "Assess the factors that oversee how an offer is understood: descriptions, claims, packaging routes, feature combinations, or price perceptions.",
+    bullets: [
+      "What your audience notices first",
+      "How claims and packaging shape expectations",
+      "Points of confusion and perceived trade-offs",
+      "Fair comparison of alternatives",
+    ],
+    icon: (
+      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M24 4 42 13v22L24 44 6 35V13Z" />
+        <path d="M6 13l18 9 18-9" />
+        <line x1="24" y1="22" x2="24" y2="44" />
+        <path d="M15 8.5 33 17.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Creative & Advertising Testing",
+    desc: "Evaluate ads before launch or while creative is still in development.",
+    bullets: [
+      "Message takeout and brand linkage",
+      "Relevance and credibility",
+      "Engagement and response",
+      "What to change before rollout",
+    ],
     icon: (
       <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 16h6l18-8v32L14 32H8a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" />
@@ -39,101 +80,144 @@ const capabilities = [
       </svg>
     ),
   },
-  {
-    title: "Relaunch Testing",
-    desc: "Planning to relaunch a product or service? Find a panel that suits your target audience, and test your remodeled product, design, idea, or packaging.",
-    icon: (
-      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M40 24a16 16 0 1 1-3.5-10" />
-        <polyline points="40 10 40 24 26 24" />
-      </svg>
-    ),
-  },
-  {
-    title: "GTM Strategy",
-    desc: "Define your go-to-market approach by testing the concept and ads. Learn what resonated with potential users and what needs tweaking before marketing.",
-    icon: (
-      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 44 L24 20 L38 8 L38 32 Z" />
-        <path d="M24 20 L10 14 L24 8" />
-        <line x1="10" y1="14" x2="10" y2="38" />
-        <line x1="10" y1="38" x2="24" y2="44" />
-        <circle cx="24" cy="44" r="2" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    title: "Risk Mitigation",
-    desc: "Testing your product at the early stages of ideation, designing, and development helps you curb potential risks and failure points and plan for mitigation.",
-    icon: (
-      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 4L6 12v14c0 10 8 18 18 20 10-2 18-10 18-20V12Z" />
-        <polyline points="16 24 21 29 32 18" />
-      </svg>
-    ),
-  },
-  {
-    title: "Market Fit",
-    desc: "Know what the industry needs to fill the existing gaps. Use the feedback from concept testing research and make your product more fit for the users.",
-    icon: (
-      <svg viewBox="0 0 48 48" className="w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="24" cy="24" r="20" />
-        <circle cx="24" cy="24" r="12" />
-        <circle cx="24" cy="24" r="4" />
-        <line x1="24" y1="4" x2="24" y2="12" />
-        <line x1="24" y1="36" x2="24" y2="44" />
-        <line x1="4" y1="24" x2="12" y2="24" />
-        <line x1="36" y1="24" x2="44" y2="24" />
-      </svg>
-    ),
-  },
 ];
 
 const contentSections = [
   {
     label: "Concept Testing",
-    heading: "What's Product Concept Testing?",
+    heading: "What concept testing helps you decide?",
     paragraphs: [
-      "Toying with an idea to build something new or unique? Concept testing in new product development can help you achieve a viable product by assessing its potential for commercial success.",
-      "You test your product at various stages. Descriptive writing, concept designs, and working prototypes are some artifacts you share with a selective audience and seek their input.",
+      "Concept testing shows how your audience reacts to an idea while it can still be modified. You share a written concept, visual, or prototype with your target audience and learn what they notice, what they appreciate, and what holds them back.",
     ],
     bullets: [
-      "Descriptive writing, concept designs and working prototypes",
-      "Feedback via surveys, focus group meetings and interviews",
-      "Weeds out the superfluous before you invest at scale",
+      "Which ideas merit further development and which need refinement",
+      "Whether the proposition is understood and believed",
+      "What makes it different from what’s already available",
     ],
   },
   {
     label: "Ad Testing",
-    heading: "Why Creative Ad Testing?",
+    heading: "Understand what your ad communicates, not just whether it’s liked",
     paragraphs: [
-      "Developing a novel idea or relaunching an old product? Define a go-to-market strategy with us by testing your creative ads.",
-      "Analyze with a panel how your fresh idea will be perceived. Or test your product's renewed packaging or enhancements in the aisles.",
+      "Test scripts, storyboards, rough cuts, or finished creative to learn what your audience notices and remembers, whether the message reflects your brand, and which elements to refine before rollout.",
     ],
     bullets: [
-      "Well-executed ad surveys with eye tracking and facial recognition",
-      "Test packaging and enhancements in the aisles",
-      "Find target-market engagement before going full throttle",
+      "Test scripts and storyboards early before production starts",
+      "Measure message takeout, brand linkage, relevance, and credibility",
+      "Learn which elements work and which need polishing for effective marketing",
     ],
   },
 ];
 
-const methods = [
+/* The worked example, as a table: a research question, what the study reads
+   to answer it, and what the answer is good for. */
+const workedExample = [
   {
-    num: "1",
-    title: "Recognize Emotions",
-    desc: "Analyze users' hidden emotions such as twitch of the lips, wide eyes, and furrowed brows using facial expression measurement.",
+    question: "Which is clearer?",
+    examines: "Understanding of the benefit and promise",
+    use: "Rewrite unclear wording before launch",
   },
   {
-    num: "2",
-    title: "Track Eye Movements",
-    desc: "Track the gaze of users, movements of pupils, and their dilation, and learn their initial responses to your ads and new products.",
+    question: "Which feels more relevant?",
+    examines: "Appeal and fit with the need or occasion",
+    use: "Prioritize the best-fit proposition",
   },
   {
-    num: "3",
-    title: "Test Aisle Attraction",
-    desc: "Place your product in a store and discover the responses for the packaging, its placement, pricing, and branding.",
+    question: "What creates hesitation?",
+    examines: "Credibility concerns, missing information, trade-offs",
+    use: "Address the barrier in the next iteration",
   },
+  {
+    question: "Does the brand come through?",
+    examines: "Attribution and fit with positioning",
+    use: "Strengthen brand cues if weak",
+  },
+];
+
+/* How a concept or ad study is put together. `desc` is the line under the
+   rail, `detail.body` the full sentence once a step is opened. */
+const designSteps: ProcessStep[] = [
+  {
+    num: "01",
+    label: "Define the decision and priorities",
+    desc: "What the study has to settle",
+    icon: <Target className="w-6 h-6" />,
+    detail: {
+      title: "Step 01 — Define the decision and priorities",
+      body: "Clarify the objective, whether it is selection, refinement, launch readiness, creative optimization, or identifying next steps.",
+    },
+  },
+  {
+    num: "02",
+    label: "Identify the audience",
+    desc: "Who the respondents are",
+    icon: <Users className="w-6 h-6" />,
+    detail: {
+      title: "Step 02 — Identify the audience",
+      body: "Define respondents by category use, needs, behaviour, or geography.",
+    },
+  },
+  {
+    num: "03",
+    label: "Select the research method",
+    desc: "Qualitative, quantitative, or staged",
+    icon: <Workflow className="w-6 h-6" />,
+    detail: {
+      title: "Step 03 — Select the research method",
+      body: "Determine the right qualitative, quantitative, or staged approach.",
+    },
+  },
+  {
+    num: "04",
+    label: "Prepare the stimulus and questionnaire",
+    desc: "Neutral stimuli and measures",
+    icon: <ClipboardPen className="w-6 h-6" />,
+    detail: {
+      title: "Step 04 — Prepare the stimulus and questionnaire",
+      body: "Develop neutral, relevant stimuli and measures aligned with the research objectives.",
+    },
+  },
+  {
+    num: "05",
+    label: "Collect and quality-check data",
+    desc: "Eligibility, sample, response patterns",
+    icon: <ShieldCheck className="w-6 h-6" />,
+    detail: {
+      title: "Step 05 — Collect and quality-check data",
+      body: "Validate respondent eligibility, sample quality, and response patterns.",
+    },
+  },
+  {
+    num: "06",
+    label: "Interpret the findings",
+    desc: "Strengths, barriers, and next steps",
+    icon: <Lightbulb className="w-6 h-6" />,
+    detail: {
+      title: "Step 06 — Interpret the findings",
+      body: "Identify strengths, barriers, and actionable insights, including what the evidence supports and where further testing may help.",
+    },
+  },
+];
+
+/* What lands at the end of a study, and the categories it is run in. */
+const reportContents = [
+  { title: "Executive summary" },
+  { title: "Method and sample" },
+  { title: "Side-by-side concept or creative comparison" },
+  { title: "Audience differences", note: "Where the sample supports it" },
+  { title: "Open-ended themes" },
+  { title: "Recommendations and next steps" },
+];
+
+const industries = [
+  "FMCG",
+  "Personal care",
+  "Consumer durables",
+  "Retail and e-commerce",
+  "Technology",
+  "Financial services",
+  "Healthcare-related products",
+  "B2B",
 ];
 
 export default function ConceptAdTestingPage() {
@@ -143,15 +227,15 @@ export default function ConceptAdTestingPage() {
 
       <PageHero
           breadcrumb={[{ name: "Enterprise Solution" }, { name: "Product Concept & Ad Testing" }]}
-          badge="Product Concept And Ad-Testing"
+          badge="Product Concept & Creative Ad Testing"
           heading={
             <>
-              Product Concept &amp; Creative Ad Testing
+              Test the idea before you take it to market
             </>
           }
-          description="Translate your message to connect better with your target audience before going to market. Validate ideas, ads, and packaging with real users — before you invest at scale."
-          primaryCta={{ label: "Explore More", href: "/contact-us" }}
-          secondaryCta={{ label: "See Capabilities", href: "#capabilities" }}
+          description="Understand how your audience responds to a product concept, proposition, or advertising idea before you commit to wider development or campaign spend. We help you reach the right people to ask the right questions and turn their feedback into a practical business plan."
+          primaryCta={{ label: "Discuss Your Project", href: "/contact-us" }}
+          secondaryCta={{ label: "Explore Testing Options", href: "#capabilities" }}
           minHeight="min-h-[600px] sm:min-h-[720px] lg:min-h-[840px]"
         />
 
@@ -160,9 +244,9 @@ export default function ConceptAdTestingPage() {
         <div className="site-container px-6">
 
           <SectionHeader
-              label="Product Viability and Ad Testing"
-              heading={<>Numbers that lead your idea to a product <br></br>with creative ad testing</>}
-              description="Convert ideas into profitable products. Transform products into brand icons. Use our world-class product concept testing."
+              label="What We Test"
+              heading={<>Choose the right test for the decisions <br></br>you need to make</>}
+              description="A concept that sounds appealing may lack a clear point of difference. An advertisement may attract attention without communicating the message or linking it to the brand. A precise test depends on what you need to decide and how far your product or campaign has progressed."
               theme="light"
               align="center"
             />
@@ -185,7 +269,7 @@ export default function ConceptAdTestingPage() {
                   style={{ background: "linear-gradient(90deg, rgba(13,27,62,0.05), transparent 60%)" }}
                 />
 
-                <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,300px)_1fr] gap-x-10 gap-y-5 py-12">
+                <div className="relative grid grid-cols-1 lg:grid-cols-[100px_minmax(0,400px)_1fr] gap-x-10 gap-y-5 py-12">
                   {/* Numeral */}
                   <div className="hidden lg:block">
                     <span
@@ -214,6 +298,15 @@ export default function ConceptAdTestingPage() {
                   {/* Copy */}
                   <div className="flex flex-col gap-4">
                     <p className="text-gray-700 text-lg leading-9 font-medium">{cap.desc}</p>
+
+                    <ul className="flex flex-col gap-2">
+                      {cap.bullets.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <CheckCircle2 size={17} className="text-primary shrink-0 mt-2" />
+                          <span className="text-gray-600 text-base leading-8 font-medium">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </motion.div>
@@ -226,7 +319,10 @@ export default function ConceptAdTestingPage() {
       {contentSections.map((sec, i) => {
         const flip = i % 2 === 1;
         return (
-          <section key={i} className={`py-20 ${flip ? "bg-section" : "bg-white"}`}>
+          /* overflow-hidden: these columns animate in from an x offset and the
+             visual panels carry a decorative -inset-6 glow, both of which reach
+             past the container and put horizontal scroll on the page. */
+          <section key={i} className={`py-20 overflow-hidden ${flip ? "bg-section" : "bg-white"}`}>
             <div className="site-container px-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -291,21 +387,17 @@ export default function ConceptAdTestingPage() {
         <div className="site-container px-6">
 
           <SectionHeader
-            label="Our Methods"
-            heading={
-              <>
-                Track Opinion offers technology-backed solutions for concept testing research and creative ad testing service in India
-              </>
-            }
-            description="Unique Product Concept Testing and Creative Ad Testing Methods."
+            label="How the Study Works"
+            heading={<>What a Concept and Ad Test Helps You Answer</>}
+            description="Four research questions, what each one examines, and how to act on the result."
             theme="dark"
             align="center"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
-            {methods.map((m, i) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+            {workedExample.map((row, i) => (
               <motion.div
-                key={m.num}
+                key={row.question}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -314,38 +406,140 @@ export default function ConceptAdTestingPage() {
                 <motion.div
                   whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.3)" }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="flex flex-col h-full rounded-2xl overflow-hidden text-center"
+                  className="flex flex-col h-full rounded-2xl overflow-hidden"
                   style={{
                     background: "rgba(255,255,255,0.04)",
                     border: "1.5px dashed rgba(255,255,255,0.15)",
                   }}
                 >
-                  {/* Blue top accent bar */}
-                  <div className="h-1.5" style={{ background: "linear-gradient(90deg, #fff, #fff)" }} />
+                  <div className="h-1.5 bg-white" />
 
-                  <div className="p-8 flex flex-col flex-1 items-center">
-                    {/* Step number bubble */}
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary font-bold text-lg bg-white"
-                    >
-                      {m.num}
+                  <div className="p-7 flex flex-col flex-1">
+                    {/* The question the card answers */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="w-10 h-10 rounded-full bg-white text-primary font-bold flex items-center justify-center shrink-0">
+                        {i + 1}
+                      </span>
+                      <h3 className="text-white font-bold text-lg leading-snug">{row.question}</h3>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-white font-bold text-lg leading-snug mb-3">
-                      {m.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-slate-400 text-sm leading-relaxed font-normal">
-                      {m.desc}
-                    </p>
+                    {/* What it reads, and what the answer is good for */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 border-t border-white/10 pt-5">
+                      {[
+                        { label: "What the study examines", value: row.examines },
+                        { label: "How it can be used", value: row.use },
+                      ].map((col) => (
+                        <div key={col.label}>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-white/45 mb-1.5">
+                            {col.label}
+                          </p>
+                          <p className="text-slate-300 text-sm leading-relaxed font-normal">{col.value}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
             ))}
           </div>
 
+          <p className="mt-8 text-center text-slate-400 text-xs leading-relaxed">
+            Illustrative scenario, not a Track Opinion case study or a claim of measured
+            commercial impact.
+          </p>
+        </div>
+      </section>
+
+      {/* ════════ HOW WE DESIGN THE STUDY ════════ */}
+      <ProcessSteps
+        steps={designSteps}
+        label="The Process"
+        heading={<>How We Design the Study</>}
+        description="Six steps from the decision you need to make to the findings you can act on."
+        sectionClassName="bg-section py-20"
+        footnote="Specialist methods on request: eye tracking, facial expression measurement, in-store aisle testing."
+      />
+
+      {/* ════════ YOUR REPORT AND WHERE IT APPLIES ════════ */}
+      <section className="bg-section py-20">
+        <div className="site-container px-6">
+
+          <SectionHeader
+            label="Your Report and Where It Applies"
+            heading={<>What Your Report Includes</>}
+            theme="light"
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 mt-10 items-stretch">
+
+            {/* Contents */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <SiteCard className="h-full">
+                <div className="p-8 flex flex-col h-full">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-primary/50 mb-5">
+                    Inside Your Report
+                  </p>
+
+                  {reportContents.map((item, i) => (
+                    <div
+                      key={item.title}
+                      className={`flex items-center gap-4 py-4 ${i > 0 ? "border-t border-gray-100" : ""}`}
+                    >
+                      <span className="w-9 h-9 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center shrink-0 tabular-nums">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <p className="text-primary font-bold text-base leading-snug">{item.title}</p>
+                        {item.note && (
+                          <p className="text-gray-600 text-sm mt-0.5">{item.note}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </SiteCard>
+            </motion.div>
+
+            {/* Where it applies */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-primary rounded-2xl p-8 text-white flex flex-col"
+            >
+              <p className="text-[11px] font-bold uppercase tracking-widest text-white/50 mb-2">
+                Where It Applies
+              </p>
+              <h3 className="text-xl font-extrabold leading-snug mb-6">
+                Used across these industries
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                {industries.map((industry) => (
+                  <div key={industry} className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-white/60 shrink-0 mt-0.5" strokeWidth={3} />
+                    <span className="text-white/85 text-sm leading-snug">{industry}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* <div className="mt-auto pt-8">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-white/50 mb-2">
+                  Markets Covered
+                </p>
+                <span className="inline-flex items-center rounded-md border border-white/25 px-3 py-1.5 text-sm font-bold">
+                  [CONFIRM]
+                </span>
+              </div> */}
+            </motion.div>
+          </div>
         </div>
       </section>
 

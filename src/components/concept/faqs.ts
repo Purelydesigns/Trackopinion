@@ -2,19 +2,27 @@
    server component (for FAQPage JSON-LD) can import it. */
 export const faqs = [
   {
-    q: "Why are product Concepts and creative ad testing important for your business?",
-    a: "Product concept and creative ad testing saves your effort, time, and money.\n\nWhether you're launching a new product, relaunching or rebranding an existing solution, or planning to start a marketing campaign, a lot of money is at stake. Instead of going blind to the market with your product or ad, you can gauge responses to your ads and products. This saves you from several setbacks, gives you the opportunity to fix shortcomings pointed out by your users, and opens the gate to enhance it within time.",
+    q: "Concept testing vs product testing? ",
+    a: "Concept testing evaluates the idea, often before a finished product exists. Product testing evaluates the product or the experience it delivers. Some projects use both in a sequence.",
   },
   {
-    q: "When should I conduct product concept testing?",
-    a: "Product concept testing should be conducted as early as possible in the product development lifecycle — ideally before investing heavily in design, engineering, or marketing. Key moments include: after identifying a new product idea, after creating initial prototypes or design concepts, before finalizing packaging or branding, and before launching a major marketing campaign.",
+    q: "Can concept testing predict sales? ",
+    a: "It can inform decisions, but it can’t guarantee market performance. Sales forecasting needs validated models, benchmarks, and commercial data.",
   },
   {
-    q: "What metrics are used in creative ad testing?",
-    a: "Creative ad testing uses metrics such as recall (how well audiences remember the ad), comprehension (how clearly the message is understood), persuasion (how effectively it changes intent), emotional response (measured via facial coding or biometrics), attention (eye-tracking heatmaps), and brand linkage (association with the intended brand).",
+    q: "Can we test multiple concepts in one study? ",
+    a: "Yes, when the design supports a fair comparison. We account for respondent fatigue and order effects.",
   },
   {
-    q: "How do I choose the right sample size for testing?",
-    a: "Sample size depends on your research objectives, the number of concepts you're testing, and the subgroups you need to analyze. For monadic concept tests, a minimum of 150–200 respondents per concept is recommended to detect meaningful differences. For ad pre-testing, 100–150 respondents per ad is a common starting point. We help you define the right sample during our project consultation phase.",
+    q: "Can we test ads before the final video exists?",
+    a: "Often. We can evaluate scripts, storyboards, or rough cuts, then test finished creative if needed.",
+  },
+  {
+    q: "How long does a study take? ",
+    a: "It depends on audience incidence, markets, number of concepts, stimulus readiness, and reporting. Typical range: [CONFIRM].",
+  },
+  {
+    q: "When should we consider testing?",
+    a: "When you need to prioritize ideas, refine a claim or pack, prepare a launch or repositioning, compare creative routes, or understand why an ad isn’t landing.",
   },
 ];
